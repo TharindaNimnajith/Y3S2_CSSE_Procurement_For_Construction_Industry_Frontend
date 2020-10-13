@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Table} from 'react-bootstrap';
 import moment from 'moment';
-import sessions from '../../constants/data';
 import {proxy} from '../../conf'
 
 type TimetableGeneratorProps = {

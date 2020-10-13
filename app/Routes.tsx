@@ -1,6 +1,6 @@
-import React from 'react';
-import {Route, Switch} from 'react-router-dom';
-import App from './containers/App';
+import React from 'react'
+import {Route, Switch} from 'react-router-dom'
+import App from './containers/App'
 import routes from './constants/routes.json'
 import HomePage from './containers/HomePage'
 import WorkingDaysHoursView from './Pages/WorkingDaysHours/WorkingDaysAndHoursView'
@@ -46,13 +46,13 @@ import SubjectsStatisticsPage from './Pages/SubjectsStatistics/subjects-statisti
 import RoomsUnavailabilityPage from './Pages/RoomsUnavailability/rooms-unavailability-page'
 import AddRoomsPage from './Pages/AddRooms/add-rooms-page'
 import AssignRoomsForSessionsPage from './Pages/AssignRoomsForSessions/assign-rooms-for-sessions-page'
-import TimetableScreen from './Pages/TimetableGenerate/TimetableScreen';
+import TimetableScreen from './Pages/TimetableGenerate/TimetableScreen'
 import ParallelCategoryPage from './Pages/ParallelCategory/parallelCategoryPage'
-import SessionsAddView from './Pages/Sessions/sessionsAddView';
-import SessionsListView from './Pages/Sessions/sessionsListView';
+import SessionsAddView from './Pages/Sessions/sessionsAddView'
+import SessionsListView from './Pages/Sessions/sessionsListView'
 
 const LazyCounterPage = React.lazy(() =>
-  import('./containers/CounterPage')
+  import('./containers/HomePage')
 )
 
 const CounterPage = (props: Record<string, any>) => (
@@ -65,7 +65,6 @@ export default function Routes() {
   return (
     <App>
       <Switch>
-
         <Route path={routes.COUNTER}
                component={CounterPage}/>
         <Route path={routes.WORKING_DAYS_AND_HOURS_VIEW}
