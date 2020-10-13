@@ -2,13 +2,11 @@
 import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import {RadioButton, RadioGroup} from 'react-radio-buttons';
-import CheckboxGroup from 'react-checkbox-group';
+import {Col, Container, Form, Row} from 'react-bootstrap';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import styles from './parallelSessions.css';
-import {setNotAvailables} from './parallelSessionsSlice';
+import {setEditingParallelSessionId, setParallelSessions} from './parallelSessionsSlice';
 import {setRoomUnavailability, setUnavailableRoom} from '../RoomsUnavailability/rooms-unavailability-slice'
 import {setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom} from '../Rooms/rooms-slice'
 import {
@@ -21,8 +19,6 @@ import {
 import {proxy} from '../../conf';
 import TwoSessionAdd from './twoSessionAdd.tsx';
 import ThreeSessionAdd from './threeSessionAdd.tsx';
-import { selectCount } from '../WorkingDaysHours/workingDaysHoursSlice';
-import {setParallelSessions,setEditParallelSession,setEditingParallelSessionId,setEditingParallelSession} from './parallelSessionsSlice';
 
 //const categoryList = ['(A,B,C)', '(E,F)', '(H,J)'];
 
@@ -48,10 +44,10 @@ const ParallelSessionsPage: React.FC = () => {
   dispatch(setRoomUnavailability(false))
   dispatch(setUnavailableRoom(null))
 
-  const [lecturer, setLecturer] =useState<boolean | null>(false);
-  const [session, setSession] =useState<boolean | null>(false);
-  const [two, setTwo] =useState<boolean | null>(false);
-  const [three, setThree] =useState<boolean | null>(false);
+  const [lecturer, setLecturer] = useState<boolean | null>(false);
+  const [session, setSession] = useState<boolean | null>(false);
+  const [two, setTwo] = useState<boolean | null>(false);
+  const [three, setThree] = useState<boolean | null>(false);
   const [categoryList, setCategoryList1] = useState<any>([]);
 
   const [days, setDays] = useState<string[] | null>(null);
@@ -76,15 +72,13 @@ const ParallelSessionsPage: React.FC = () => {
   });
   const [ccount, setCCount] = useState<any>(null);
   const [category, setCategory] = useState<string>('');
-  const categoryList1:{any} [] =[];
-
-
+  const categoryList1: { any } [] = [];
 
 
   useEffect(() => {
     fetchData();
 
-  },[]);
+  }, []);
 
   const fetchData = async () => {
 
@@ -104,9 +98,7 @@ const ParallelSessionsPage: React.FC = () => {
       console.log(responseData.category);
 
 
-     setCategoryList1(responseData.category);
-
-
+      setCategoryList1(responseData.category);
 
 
       if (!responseData) {
@@ -133,7 +125,7 @@ const ParallelSessionsPage: React.FC = () => {
 
     getCategoryCount(catid);
     //getSubjectCat(catid);
- };
+  };
 
   const getCategoryCount = async (cid) => {
     console.log(category)
@@ -144,21 +136,21 @@ const ParallelSessionsPage: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"category":cid})
+        body: JSON.stringify({"category": cid})
       })
       const responseData = await response.json()
-     console.log(responseData);
+      console.log(responseData);
 
-     var count = responseData.categoryCount;
-     if(count === 2){
-       setTwo(true);
-       setThree(false);
+      var count = responseData.categoryCount;
+      if (count === 2) {
+        setTwo(true);
+        setThree(false);
 
-     }
-     if(count === 3){
-       setTwo(false);
-       setThree(true);
-     }
+      }
+      if (count === 3) {
+        setTwo(false);
+        setThree(true);
+      }
 
     } catch (errors) {
 
@@ -168,9 +160,9 @@ const ParallelSessionsPage: React.FC = () => {
   }
 
 
-  const  getSubjectCat = async (cid) => {
+  const getSubjectCat = async (cid) => {
 
-   var scode:{res:any} [] = [];
+    var scode: { res: any } [] = [];
 
     try {
 
@@ -179,20 +171,20 @@ const ParallelSessionsPage: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"category":cid})
+        body: JSON.stringify({"category": cid})
       })
       const responseData = await response.json()
-     console.log(responseData);
-     responseData.map((res:any) =>{
-       console.log(res.subjectCode)
-       var code =res.subjectCode;
-       scode.push(code);
-       return scode;
+      console.log(responseData);
+      responseData.map((res: any) => {
+        console.log(res.subjectCode)
+        var code = res.subjectCode;
+        scode.push(code);
+        return scode;
 
-     })
+      })
 
-     console.log(scode);
-     dispatch(setParallelSessions(scode));
+      console.log(scode);
+      dispatch(setParallelSessions(scode));
 
     } catch (errors) {
 
@@ -208,7 +200,6 @@ const ParallelSessionsPage: React.FC = () => {
     }
     return null;
   };
-
 
 
   return (
@@ -240,41 +231,40 @@ const ParallelSessionsPage: React.FC = () => {
         }}
       >
         <Row className="mt-2 mb-3 justify-content-md-center">
-        <Col xs={12} md={4} className="mt-auto">
-              <p>Select a Category</p>
-            </Col>
-            <Col xs={3} md={4}>
-              <Form className="">
-                <Form.Group controlId="formBasicEmail">
+          <Col xs={12} md={4} className="mt-auto">
+            <p>Select a Category</p>
+          </Col>
+          <Col xs={3} md={4}>
+            <Form className="">
+              <Form.Group controlId="formBasicEmail">
 
-                  <Form.Control
-                    as="select"
-                    defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
-                    value={category}
-                    onChange={handleCategory}
-                  >
-                    <option>Select</option>
-                    {categoryList?.map((category, index) => (
-                      <option>{category}</option>
-                    ))}
-                  </Form.Control>
+                <Form.Control
+                  as="select"
+                  defaultValue="Choose..."
+                  style={{borderWidth: '2.5px'}}
+                  value={category}
+                  onChange={handleCategory}
+                >
+                  <option>Select</option>
+                  {categoryList?.map((category, index) => (
+                    <option>{category}</option>
+                  ))}
+                </Form.Control>
 
-                </Form.Group>
-              </Form>
-            </Col>
-            <Col xs={3} md={2}/>
+              </Form.Group>
+            </Form>
+          </Col>
+          <Col xs={3} md={2}/>
         </Row>
 
 
-
         {two && (
-            <TwoSessionAdd/>
+          <TwoSessionAdd/>
         )
         }
 
         {three && (
-            <ThreeSessionAdd/>
+          <ThreeSessionAdd/>
         )
         }
 

@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
-import { session } from 'electron';
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import NavBar from '../../components/NavBar/NavBar';
 import styles from './sessions.css';
-import { setSessions } from './sessionsSlice';
-import {
-  setRoomUnavailability,
-  setUnavailableRoom
-} from '../RoomsUnavailability/rooms-unavailability-slice';
-import {
-  setEditingRoom,
-  setEditingRoomId,
-  setEditRoom,
-  setExistingRoom
-} from '../Rooms/rooms-slice';
+import {setSessions} from './sessionsSlice';
+import {setRoomUnavailability, setUnavailableRoom} from '../RoomsUnavailability/rooms-unavailability-slice';
+import {setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom} from '../Rooms/rooms-slice';
 import {
   setEditBuilding,
   setEditingBuilding,
@@ -23,13 +14,13 @@ import {
   setExistingBuilding,
   setExistingRoomsForBuilding
 } from '../Buildings/buildings-slice';
-import { proxy } from '../../conf';
+import {proxy} from '../../conf';
 
 const Session = (props: any) => (
   <tr>
     <td>{props.session.sessionId}</td>
     <td>{
-      props.session.lecturers.map((item) => item.lecturerRef + ', ') }</td>
+      props.session.lecturers.map((item) => item.lecturerRef + ', ')}</td>
     <td>{props.session.subjectCodeRef}</td>
     <td>{props.session.subjectRef}</td>
     <td>{props.session.tagRef}</td>
@@ -229,7 +220,7 @@ const SessionsListView: React.FC = () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ id })
+          body: JSON.stringify({id})
         }
       );
 
@@ -254,17 +245,17 @@ const SessionsListView: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
 
-    if(e.target.value === 'reset'){
+    if (e.target.value === 'reset') {
 
       return setSessionsObject(sessionsStore.sessions);
     }
     setLoading(true);
-    setsessionS({ ...sessionS, subGroupRef: e.target.value });
+    setsessionS({...sessionS, subGroupRef: e.target.value});
 
     const temp = sessionsStore.sessions.filter((data) => {
       // console.log(data.lecturers[0]);
       // console.log(e.target.value);
-      return ((data.lecturers[0].lecturerRef) === (e.target.value ))
+      return ((data.lecturers[0].lecturerRef) === (e.target.value))
     });
     // console.log(sessionsObject);
     // console.log(temp);
@@ -275,17 +266,17 @@ const SessionsListView: React.FC = () => {
   const handleChangeSubjectSearch = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if(e.target.value === 'reset'){
+    if (e.target.value === 'reset') {
 
       return setSessionsObject(sessionsStore.sessions);
     }
     setLoading(true);
-    setsessionS({ ...sessionS, subGroupRef: e.target.value });
+    setsessionS({...sessionS, subGroupRef: e.target.value});
 
     const temp = sessionsStore.sessions.filter((data) => {
       // console.log(data.lecturers[0]);
       // console.log(e.target.value);
-      return ((data.subjectRef) === (e.target.value ))
+      return ((data.subjectRef) === (e.target.value))
     });
     // console.log(sessionsObject);
     // console.log(temp);
@@ -294,17 +285,17 @@ const SessionsListView: React.FC = () => {
   };
 
   const handleChangeGroupSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(e.target.value === 'reset'){
+    if (e.target.value === 'reset') {
 
       return setSessionsObject(sessionsStore.sessions);
     }
     setLoading(true);
-    setsessionS({ ...sessionS, subGroupRef: e.target.value });
+    setsessionS({...sessionS, subGroupRef: e.target.value});
 
     const temp = sessionsStore.sessions.filter((data) => {
       // console.log(data.lecturers[0]);
       // console.log(e.target.value);
-      return ((data.groupRef) === (e.target.value ))
+      return ((data.groupRef) === (e.target.value))
     });
     // console.log(sessionsObject);
     // console.log(temp);
@@ -315,17 +306,17 @@ const SessionsListView: React.FC = () => {
   const handleChangeSubGroupSearch = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if(e.target.value === 'reset'){
+    if (e.target.value === 'reset') {
 
       return setSessionsObject(sessionsStore.sessions);
     }
     setLoading(true);
-    setsessionS({ ...sessionS, subGroupRef: e.target.value });
+    setsessionS({...sessionS, subGroupRef: e.target.value});
 
     const temp = sessionsStore.sessions.filter((data) => {
       // console.log(data.lecturers[0]);
       // console.log(e.target.value);
-      return ((data.subGroupRef) === (e.target.value ))
+      return ((data.subGroupRef) === (e.target.value))
     });
     // console.log(sessionsObject);
     // console.log(temp);
@@ -347,7 +338,7 @@ const SessionsListView: React.FC = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#37474F' }}>
+    <div style={{backgroundColor: '#37474F'}}>
       <NavBar/>
 
       <Row className="text-center mb-5">
@@ -355,7 +346,7 @@ const SessionsListView: React.FC = () => {
           xs={12}
           md={12}
           className="p-3"
-          style={{ backgroundColor: '#343a40', color: '#fff' }}
+          style={{backgroundColor: '#343a40', color: '#fff'}}
         >
           <h3>Session Details</h3>
         </Col>

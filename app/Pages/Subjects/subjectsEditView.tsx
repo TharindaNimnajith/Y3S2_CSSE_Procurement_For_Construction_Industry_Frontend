@@ -144,7 +144,7 @@ const SubjectsEdit: React.FC = () => {
       numberOfTutorialHours,
       numberOfLabHours,
       numberOfEvaluationHours,
-      label : subjectName + '(' + subjectCode+ ')'
+      label: subjectName + '(' + subjectCode + ')'
     };
 
     console.log('22222222222222222222222222222222222');
@@ -179,7 +179,6 @@ const SubjectsEdit: React.FC = () => {
     }
     return null;
   };
-
 
 
   const handleChangeSubjectCode = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -219,8 +218,6 @@ const SubjectsEdit: React.FC = () => {
     setNumberOfEvaluationHours(e.target.value);
 
   };
-
-
 
 
   return (

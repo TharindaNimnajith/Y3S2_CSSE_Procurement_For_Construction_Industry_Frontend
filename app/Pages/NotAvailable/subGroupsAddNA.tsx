@@ -23,7 +23,6 @@ const SubGroupsAddNA: React.FC = () => {
   const [group1List, setGroup1List] = useState<any>([]);
 
 
-
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
@@ -39,10 +38,10 @@ const SubGroupsAddNA: React.FC = () => {
   const [id1, setId1] = useState<string>('');
 
 
-  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday', 'Sunday'];
+  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 
-  const [unavailability, setUnavailability] = useState<{ day: string, startTime: string, endTime: string  }>({});
+  const [unavailability, setUnavailability] = useState<{ day: string, startTime: string, endTime: string }>({});
 
   const [groupsObject, setGroupsObject] = useState<any>(null);
   const [workingTimePerDay1, setWorkingTimePerDay1] = useState<{
@@ -115,15 +114,13 @@ const SubGroupsAddNA: React.FC = () => {
 
     if (existUnavaialability) {
       exist = 1;
-    }
-
-    else{
+    } else {
       exist = 0;
     }
 
-  if (exist === 1) {
-    handleShow();
-  }
+    if (exist === 1) {
+      handleShow();
+    }
   }
 
   const handleSubmit = async () => {
@@ -133,31 +130,26 @@ const SubGroupsAddNA: React.FC = () => {
     var etime;
 
 
-
-   if(workingTimePerDay2.minutes  <= 9 && workingTimePerDay2.minutes!== '00'){
-    emin2 = '0' + workingTimePerDay2.minutes;
-   }
-   else{
-     emin2 = workingTimePerDay2.minutes;
-   }
-
-
-
-   if(workingTimePerDay1.minutes <= 9 && workingTimePerDay1.minutes!== '00'){
-     emin1 = '0' + workingTimePerDay1.minutes;
+    if (workingTimePerDay2.minutes <= 9 && workingTimePerDay2.minutes !== '00') {
+      emin2 = '0' + workingTimePerDay2.minutes;
+    } else {
+      emin2 = workingTimePerDay2.minutes;
     }
-    else{
+
+
+    if (workingTimePerDay1.minutes <= 9 && workingTimePerDay1.minutes !== '00') {
+      emin1 = '0' + workingTimePerDay1.minutes;
+    } else {
       emin1 = workingTimePerDay1.minutes;
     }
 
 
-
-     stime = workingTimePerDay1.hours+':'+ emin1 ;
-     etime = workingTimePerDay2.hours+':'+ emin2;
+    stime = workingTimePerDay1.hours + ':' + emin1;
+    etime = workingTimePerDay2.hours + ':' + emin2;
 
     //  setUnavailability({day:day, startTime: stime , endTime : etime});
 
-    if ((id1.trim() === '') && (day.trim() === '') && (stime.trim() === '00:00') &&  (etime.trim() === '00:00')){
+    if ((id1.trim() === '') && (day.trim() === '') && (stime.trim() === '00:00') && (etime.trim() === '00:00')) {
       errors_ = 'Please select  values for all fields.'
       setError(true)
       setLoading(false)
@@ -171,13 +163,12 @@ const SubGroupsAddNA: React.FC = () => {
         setError(true)
         setLoading(false)
 
-      }else if (stime.trim() === '00:00') {
+      } else if (stime.trim() === '00:00') {
         errors_ = 'Please select a start time.'
         setError(true)
         setLoading(false)
 
-      }
-      else if (etime.trim() === '00:00') {
+      } else if (etime.trim() === '00:00') {
         errors_ = 'Please select a end time.'
         setError(true)
         setLoading(false)
@@ -186,23 +177,22 @@ const SubGroupsAddNA: React.FC = () => {
     }
 
 
+    //   if (existUnavaialability) {
+    //     exist = 1;
+    //   }
 
-      //   if (existUnavaialability) {
-      //     exist = 1;
-      //   }
+    //   else{
+    //     exist = 0;
+    //   }
 
-      //   else{
-      //     exist = 0;
-      //   }
-
-      // if (exist === 1) {
-      //   handleShow();
-      // }
+    // if (exist === 1) {
+    //   handleShow();
+    // }
 
 
-      if ((id1.trim() != '') && (day.trim() != '') && (stime.trim() != '00:00') &&  (etime.trim() != '00:00')){
+    if ((id1.trim() != '') && (day.trim() != '') && (stime.trim() != '00:00') && (etime.trim() != '00:00')) {
       const finalObjectGroup = {
-      unavailability :{day:day, startTime: stime , endTime : etime}
+        unavailability: {day: day, startTime: stime, endTime: etime}
       };
 
 
@@ -226,9 +216,7 @@ const SubGroupsAddNA: React.FC = () => {
       }
 
 
-
-     }
-
+    }
 
 
   };
@@ -270,14 +258,12 @@ const SubGroupsAddNA: React.FC = () => {
   // }
 
 
-
   // if(workingTimePerDay1.minutes <= 9){
   //   emin1 = '0' + workingTimePerDay1.minutes;
   //  }
   //  else{
   //    emin1 = workingTimePerDay1.minutes;
   //  }
-
 
 
   //  var stime = workingTimePerDay1.hours+':'+ emin1 ;
@@ -296,13 +282,12 @@ const SubGroupsAddNA: React.FC = () => {
   };
 
 
-
   const handleDay = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-       setError(false)
-       setDay(e.target.value);
+    setError(false)
+    setDay(e.target.value);
 
-     };
+  };
 
 
   const handleChangeHour1 = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -341,9 +326,9 @@ const SubGroupsAddNA: React.FC = () => {
         }
       })
       const responseData = await response.json()
-     console.log(responseData.unavailability[0].day);
+      console.log(responseData.unavailability[0].day);
 
-      if(responseData.unavailability[0].day){
+      if (responseData.unavailability[0].day) {
         setExistUnavaialability(true);
       }
 
@@ -358,7 +343,7 @@ const SubGroupsAddNA: React.FC = () => {
 
 
   return (
-   <div
+    <div
       style={{
         backgroundColor: '#37474F'
       }}
@@ -373,7 +358,8 @@ const SubGroupsAddNA: React.FC = () => {
         <Modal.Header closeButton>
           <Modal.Title>Warning!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>This sub group already has a not available time. If you want you can replace that or keep it as it is.</Modal.Body>
+        <Modal.Body>This sub group already has a not available time. If you want you can replace that or keep it as it
+          is.</Modal.Body>
         <Modal.Footer>
           <Button variant='danger'
                   onClick={handleClose}
@@ -460,109 +446,104 @@ const SubGroupsAddNA: React.FC = () => {
           </Row>
 
 
+          <Row className="mt-3 mb-3 justify-content-md-center">
+            <Col xs={12} md={4}>
+              <p>Start Time</p>
+            </Col>
+            <Col xs={12} md={6}>
+              <Row>
+                <Col xs={12} md={5}>
+                  <Form.Group controlId="formGridEmail">
+                    <Form.Control
+                      style={{
+                        width: '60px',
+                        display: 'inline',
+                        marginLeft: '10px'
+                      }}
+                      type="number"
+                      value={workingTimePerDay1.hours}
+                      onChange={handleChangeHour1}
+                      placeholder="Hours"
+                      min="0"
+                      max="23"
+                    />
+                    <Form.Label>Hours</Form.Label>
+
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={7}>
+                  <Form.Group controlId="formGridPassword">
+                    <Form.Control
+                      style={{
+                        width: '60px',
+                        display: 'inline',
+                        marginLeft: '10px'
+                      }}
+                      type="number"
+                      value={workingTimePerDay1.minutes}
+                      onChange={handleChangeMinutes1}
+                      placeholder="Minutes"
+                      min="0"
+                      max="59"
+                    />
+                    <Form.Label>Minutes</Form.Label>
+
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={3} md={0}/>
+          </Row>
+
 
           <Row className="mt-3 mb-3 justify-content-md-center">
-              <Col xs={12} md={4}>
-                <p>Start Time</p>
-              </Col>
-              <Col xs={12} md={6}>
-                <Row>
-                  <Col xs={12} md={5}>
-                    <Form.Group controlId="formGridEmail">
+            <Col xs={12} md={4}>
+              <p>End Time</p>
+            </Col>
+            <Col xs={12} md={6}>
+              <Row>
+                <Col xs={12} md={5}>
+                  <Form.Group controlId="formGridEmail">
                     <Form.Control
-                        style={{
-                          width: '60px',
-                          display: 'inline',
-                          marginLeft: '10px'
-                        }}
-                        type="number"
-                        value={workingTimePerDay1.hours}
-                        onChange={handleChangeHour1}
-                        placeholder="Hours"
-                        min="0"
-                        max="23"
-                      />
-                      <Form.Label>Hours</Form.Label>
+                      style={{
+                        width: '60px',
+                        display: 'inline',
+                        marginLeft: '10px'
+                      }}
+                      type="number"
+                      value={workingTimePerDay2.hours}
+                      onChange={handleChangeHour2}
+                      placeholder="Hours"
+                      min="0"
+                      max="23"
+                    />
+                    <Form.Label>Hours</Form.Label>
 
-                    </Form.Group>
-                  </Col>
-                  <Col xs={12} md={7}>
-                    <Form.Group controlId="formGridPassword">
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={7}>
+                  <Form.Group controlId="formGridPassword">
                     <Form.Control
-                        style={{
-                          width: '60px',
-                          display: 'inline',
-                          marginLeft: '10px'
-                        }}
-                        type="number"
-                        value={workingTimePerDay1.minutes}
-                        onChange={handleChangeMinutes1}
-                        placeholder="Minutes"
-                        min="0"
-                        max="59"
-                      />
-                      <Form.Label>Minutes</Form.Label>
+                      style={{
+                        width: '60px',
+                        display: 'inline',
+                        marginLeft: '10px'
+                      }}
+                      type="number"
+                      value={workingTimePerDay2.minutes}
+                      onChange={handleChangeMinutes2}
+                      placeholder="Minutes"
+                      min="0"
+                      max="59"
+                    />
+                    <Form.Label>Minutes</Form.Label>
 
-                    </Form.Group>
-                  </Col>
-                </Row>
-              </Col>
-              <Col xs={3} md={0}/>
-            </Row>
-
-
-            <Row className="mt-3 mb-3 justify-content-md-center">
-              <Col xs={12} md={4}>
-                <p>End Time</p>
-              </Col>
-              <Col xs={12} md={6}>
-                <Row>
-                  <Col xs={12} md={5}>
-                    <Form.Group controlId="formGridEmail">
-                    <Form.Control
-                        style={{
-                          width: '60px',
-                          display: 'inline',
-                          marginLeft: '10px'
-                        }}
-                        type="number"
-                        value={workingTimePerDay2.hours}
-                        onChange={handleChangeHour2}
-                        placeholder="Hours"
-                        min="0"
-                        max="23"
-                      />
-                      <Form.Label>Hours</Form.Label>
-
-                    </Form.Group>
-                  </Col>
-                  <Col xs={12} md={7}>
-                    <Form.Group controlId="formGridPassword">
-                    <Form.Control
-                        style={{
-                          width: '60px',
-                          display: 'inline',
-                          marginLeft: '10px'
-                        }}
-                        type="number"
-                        value={workingTimePerDay2.minutes}
-                        onChange={handleChangeMinutes2}
-                        placeholder="Minutes"
-                        min="0"
-                        max="59"
-                      />
-                      <Form.Label>Minutes</Form.Label>
-
-                    </Form.Group>
-                  </Col>
-                </Row>
-              </Col>
-              <Col xs={3} md={0}/>
-            </Row>
-
-
-
-
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={3} md={0}/>
+          </Row>
 
 
           <Row className="mt-2 mb-2 justify-content-md-center">
@@ -583,14 +564,13 @@ const SubGroupsAddNA: React.FC = () => {
           </Row>
 
 
-
-  <Row className="mt-2 mb-2 justify-content-md-center">
+          <Row className="mt-2 mb-2 justify-content-md-center">
             <Col xs={12} md={8}/>
             <Col xs={3} md={2}/>
 
             <Col xs={3} md={2}>
-            <a
-                style={{width: '150px', fontSize: '1.3em', color:'red'}}
+              <a
+                style={{width: '150px', fontSize: '1.3em', color: 'red'}}
                 onClick={handleSubmit1}
               >
                 Exist One

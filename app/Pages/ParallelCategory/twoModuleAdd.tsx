@@ -5,13 +5,10 @@ import {Button, Col, Container, Form, Modal, Row, Spinner} from 'react-bootstrap
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
 import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './parallelCategory.css';
 import routes from '../../constants/routes.json';
-import NavBar from '../../components/NavBar/NavBar';
-import {setParallelCategorys} from './parallelCategorySlice';
 import {proxy} from '../../conf';
 
 
@@ -44,17 +41,15 @@ const TwoModuleAdd: React.FC = () => {
   const [id2, setId2] = useState<string>('');
   const [id3, setId3] = useState<string>('');
 
-  const [subjectName1,setSubjectName1] = useState<number | null>(null);
-  const [subjectName2,setSubjectName2] = useState<number | null>(null);
-  const [subjectName3,setSubjectName3] = useState<number | null>(null);
+  const [subjectName1, setSubjectName1] = useState<number | null>(null);
+  const [subjectName2, setSubjectName2] = useState<number | null>(null);
+  const [subjectName3, setSubjectName3] = useState<number | null>(null);
 
-  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday', 'Sunday'];
+  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   const durationList = [1, 2, 3];
   const [categoryCount, setCategoryCount] = useState<number | null>(null);
   const [category, setCategory] = useState<string>('');
-
-
 
 
   const [modulesObject, setModulesObject] = useState<any>(null);
@@ -107,12 +102,11 @@ const TwoModuleAdd: React.FC = () => {
 
   const handleSubmit = async () => {
 
-    var cid = ('('+String(subjectName1) + ','+ String(subjectName2)+')');
+    var cid = ('(' + String(subjectName1) + ',' + String(subjectName2) + ')');
     console.log(cid);
 
 
-
-    if ((id1.trim() === '') && (id2.trim() === '') ) {
+    if ((id1.trim() === '') && (id2.trim() === '')) {
       errors_ = 'Please select  values for all fields.'
       setError(true)
       setLoading(false)
@@ -134,23 +128,21 @@ const TwoModuleAdd: React.FC = () => {
     }
 
 
-        if (category1 || category2) {
-          exist = 1;
-        }
+    if (category1 || category2) {
+      exist = 1;
+    } else {
+      exist = 0;
+    }
 
-        else{
-          exist = 0;
-        }
-
-      if (exist === 1) {
-        handleShow();
-      }
+    if (exist === 1) {
+      handleShow();
+    }
 
 
-   if ((id1.trim() != '') && (id2.trim() != '')&&(category1=== false) && (category2=== false)) {
+    if ((id1.trim() != '') && (id2.trim() != '') && (category1 === false) && (category2 === false)) {
       const finalObjectGroup = {
-      category : cid,
-      categoryCount : 2
+        category: cid,
+        categoryCount: 2
       };
 
       console.log(finalObjectGroup);
@@ -227,8 +219,6 @@ const TwoModuleAdd: React.FC = () => {
   };
 
 
-
-
   const getModule1 = async (id: string) => {
     console.log(id);
     setLoading(true)
@@ -243,7 +233,7 @@ const TwoModuleAdd: React.FC = () => {
       setSubjectName1(responseData.subjectName);
 
 
-      if(responseData.category){
+      if (responseData.category) {
         setCategory1(true);
       }
 
@@ -268,7 +258,7 @@ const TwoModuleAdd: React.FC = () => {
       const responseData = await response.json()
       setSubjectName2(responseData.subjectName);
 
-      if(responseData.category){
+      if (responseData.category) {
         setCategory2(true);
       }
 
@@ -348,7 +338,8 @@ const TwoModuleAdd: React.FC = () => {
                   >
                     <option>Select</option>
                     {module1List?.map((module, index) => (
-                      <option value={module._id}>{module.offeredYear}.{module.offeredSemester}-{module.subjectName}({module.subjectCode})</option>
+                      <option
+                        value={module._id}>{module.offeredYear}.{module.offeredSemester}-{module.subjectName}({module.subjectCode})</option>
                     ))}
                   </Form.Control>
 
@@ -374,7 +365,8 @@ const TwoModuleAdd: React.FC = () => {
                   >
                     <option>Select</option>
                     {module2List?.map((module, index) => (
-                      <option value={module._id}>{module.offeredYear}.{module.offeredSemester}-{module.subjectName}({module.subjectCode})</option>
+                      <option
+                        value={module._id}>{module.offeredYear}.{module.offeredSemester}-{module.subjectName}({module.subjectCode})</option>
                     ))}
                   </Form.Control>
 
@@ -383,9 +375,6 @@ const TwoModuleAdd: React.FC = () => {
             </Col>
             <Col xs={3} md={2}></Col>
           </Row>
-
-
-
 
 
           <Row className="mt-2 mb-2 justify-content-md-center">

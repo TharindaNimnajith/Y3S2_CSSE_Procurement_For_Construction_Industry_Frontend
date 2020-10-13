@@ -11,13 +11,10 @@ import {useDispatch} from 'react-redux';
 import styles from './consecutiveSessions.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setConsecutiveSessions} from './consecutiveSessionsSlice';
 import {proxy} from '../../conf';
 import CheckboxGroup from 'react-checkbox-group';
-import { session } from 'electron';
 
 let errors_: string = ''
-
 
 
 var exist = 0;
@@ -49,16 +46,14 @@ const ConsecutiveSessionsAdd: React.FC = () => {
 
   const [id2, setId2] = useState<string>('');
 
-  const [sessionId1,setSessionId1] = useState<number | null>(null);
-  const [sessionId2,setSessionId2] = useState<number | null>(null);
+  const [sessionId1, setSessionId1] = useState<number | null>(null);
+  const [sessionId2, setSessionId2] = useState<number | null>(null);
 
-  const [subjectCodeRef1,setSubjectCodeRef1] = useState<number | null>(null);
-  const [subjectCodeRef2,setSubjectCodeRef2] = useState<number | null>(null);
+  const [subjectCodeRef1, setSubjectCodeRef1] = useState<number | null>(null);
+  const [subjectCodeRef2, setSubjectCodeRef2] = useState<number | null>(null);
 
-  const [groupRef1,setGroupRef1] = useState<number | null>(null);
-  const [groupRef2,setGroupRef2] = useState<number | null>(null);
-
-
+  const [groupRef1, setGroupRef1] = useState<number | null>(null);
+  const [groupRef2, setGroupRef2] = useState<number | null>(null);
 
 
   const [sessionsObject, setSessionsObject] = useState<any>(null);
@@ -66,14 +61,13 @@ const ConsecutiveSessionsAdd: React.FC = () => {
   useEffect(() => {
     getSessions1();
 
-    if(s1 && s2){
+    if (s1 && s2) {
       getSessions2();
-    }
-    else{
+    } else {
       getSessions3();
     }
 
-  },[]);
+  }, []);
 
   // useEffect(() => {
   //  // fetchData();
@@ -143,7 +137,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"tagRef": "Tutorial" , "subjectCodeRef": s1, "groupRef": s2})
+        body: JSON.stringify({"tagRef": "Tutorial", "subjectCodeRef": s1, "groupRef": s2})
       })
       const responseData = await response.json();
       setSession2List(responseData);
@@ -199,14 +193,12 @@ const ConsecutiveSessionsAdd: React.FC = () => {
     console.log(id2)
     console.log(consecutiveId1)
     console.log(consecutiveId2)
-    var sid = parseInt(String(sessionId1) + ''+ String(sessionId2));
+    var sid = parseInt(String(sessionId1) + '' + String(sessionId2));
 
 
-    if(isSameRoomTrue.trim() != ''){
+    if (isSameRoomTrue.trim() != '') {
       sameRoom = true;
-    }
-
-    else sameRoom = false;
+    } else sameRoom = false;
 
     if ((id1.trim() === '') && (id2.trim() === '')) {
       errors_ = 'Please select  values for all fields.'
@@ -230,24 +222,22 @@ const ConsecutiveSessionsAdd: React.FC = () => {
     }
 
 
-        if (consecutiveId1 || consecutiveId2) {
-          exist = 1;
-        }
+    if (consecutiveId1 || consecutiveId2) {
+      exist = 1;
+    } else {
+      exist = 0;
+    }
 
-        else{
-          exist = 0;
-        }
-
-      if (exist === 1) {
-        handleShow();
-      }
+    if (exist === 1) {
+      handleShow();
+    }
 
 
     if ((id1.trim() != '') && (id2.trim() != '') && (consecutiveId1 === false) && (consecutiveId2 === false)) {
       const finalObjectGroup = {
         isConsecutive,
-        consecutiveId:sid,
-        isSameRoom :sameRoom
+        consecutiveId: sid,
+        isSameRoom: sameRoom
 
       };
 
@@ -290,8 +280,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
         console.log(errors)
       }
 
-     }
-
+    }
 
 
   };
@@ -323,8 +312,6 @@ const ConsecutiveSessionsAdd: React.FC = () => {
     //getSessionALec();
 
     //getSessions2();
-
-
 
 
   };
@@ -359,15 +346,14 @@ const ConsecutiveSessionsAdd: React.FC = () => {
       // setSubjectCodeRef1(responseData.subjectCodeRef);
       // setGroupRef1(responseData.groupRef);
 
-        s1=responseData.subjectCodeRef;
-        s2=responseData.groupRef;
+      s1 = responseData.subjectCodeRef;
+      s2 = responseData.groupRef;
 
-        console.log(s1)
-        console.log(s2)
+      console.log(s1)
+      console.log(s2)
 
 
-
-      if(responseData.consecutiveId){
+      if (responseData.consecutiveId) {
         setConsecutiveId1(true);
       }
 
@@ -394,7 +380,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
       setSubjectCodeRef2(responseData.subjectCodeRef);
       setGroupRef2(responseData.groupRef);
 
-      if(responseData.consecutiveId){
+      if (responseData.consecutiveId) {
         setConsecutiveId2(true);
       }
 
@@ -405,8 +391,6 @@ const ConsecutiveSessionsAdd: React.FC = () => {
       console.log(errors)
     }
   }
-
-
 
 
   return (
@@ -522,32 +506,32 @@ const ConsecutiveSessionsAdd: React.FC = () => {
           </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
-              <Col xs={12} md={2}>
+            <Col xs={12} md={2}>
 
-              </Col>
-              <Col xs={2} md={6}>
-
-
-                <CheckboxGroup
-                  name="setIsSameRoom"
-                  value={isSameRoomTrue}
-                  onChange={setIsSameRoomTrue}
-                >
-                  {(Checkbox) => (
-                    <>
-
-                        <label className="mr-sm-2 mr-md-3" >
-                          <Checkbox value="require"/> require for the same room also
-                        </label>
-
-                    </>
-                  )}
-                </CheckboxGroup>
-              </Col>
-              <Col xs={12} md={4}/>
+            </Col>
+            <Col xs={2} md={6}>
 
 
-            </Row>
+              <CheckboxGroup
+                name="setIsSameRoom"
+                value={isSameRoomTrue}
+                onChange={setIsSameRoomTrue}
+              >
+                {(Checkbox) => (
+                  <>
+
+                    <label className="mr-sm-2 mr-md-3">
+                      <Checkbox value="require"/> require for the same room also
+                    </label>
+
+                  </>
+                )}
+              </CheckboxGroup>
+            </Col>
+            <Col xs={12} md={4}/>
+
+
+          </Row>
           <Row className="mt-2 mb-2 justify-content-md-center">
             <Col xs={12} md={2}/>
             <Col xs={3} md={6}>

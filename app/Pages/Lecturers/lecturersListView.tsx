@@ -14,7 +14,7 @@ import {
   setExistingBuilding,
   setExistingRoomsForBuilding
 } from '../Buildings/buildings-slice';
-import { proxy } from '../../conf';
+import {proxy} from '../../conf';
 
 const Lecturer = (props: any) => (
   <tr>
@@ -130,12 +130,11 @@ const LecturersListView: React.FC = () => {
       var startTime;
       var endTime;
 
-      if(lecturer.unavailability[0]){
+      if (lecturer.unavailability[0]) {
         day = lecturer.unavailability[0].day;
         startTime = lecturer.unavailability[0].startTime;
-        endTime = lecturer.unavailability[0].endTime ;
-      }
-    else{
+        endTime = lecturer.unavailability[0].endTime;
+      } else {
         day = " ";
         startTime = " ";
         endTime = " ";

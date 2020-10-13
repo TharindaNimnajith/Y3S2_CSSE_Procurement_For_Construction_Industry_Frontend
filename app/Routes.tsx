@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import App from './containers/App';
 import routes from './constants/routes.json'
 import HomePage from './containers/HomePage'
@@ -136,13 +136,13 @@ export default function Routes() {
                component={ConsecutiveSessionsAdd}/>
         <Route path={routes.NOT_AVAILABLE_TIMES}
                component={NotAvailablesPage}/>
-       <Route path={routes.PARALLEL_SESSIONS}
+        <Route path={routes.PARALLEL_SESSIONS}
                component={ParallelSessionsPage}/>
-       <Route path={routes.CATEGORY}
+        <Route path={routes.CATEGORY}
                component={ParallelCategoryPage}/>
-               <Route path={routes.CONSECUTIVE_SESSIONS1}
+        <Route path={routes.CONSECUTIVE_SESSIONS1}
                component={ConsecutiveSessionsAdd1}/>
-         <Route path={routes.PARALLEL_SESSIONS1}
+        <Route path={routes.PARALLEL_SESSIONS1}
                component={ParallelSessionsPage1}/>
         <Route path={routes.BUILDINGS}
                component={BuildingsPage}/>

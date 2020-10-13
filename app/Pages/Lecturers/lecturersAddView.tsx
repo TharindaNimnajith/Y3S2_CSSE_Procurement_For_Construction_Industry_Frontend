@@ -12,7 +12,7 @@ import styles from './lecturers.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import {setLecturers} from './lecturersSlice';
-import { proxy } from '../../conf';
+import {proxy} from '../../conf';
 
 // noinspection DuplicatedCode
 const LecturersAdd: React.FC = () => {

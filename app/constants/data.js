@@ -16,7 +16,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janith Gamage']
+    lecturers: ['Janith Gamage']
   },
   {
     subjectRef: 'ICS',
@@ -34,7 +34,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'N3E'
 
   },
@@ -54,7 +54,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Wednesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'A502'
   },
   {
@@ -73,7 +73,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Friday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'A502'
   },
   {
@@ -92,7 +92,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Wednesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'A502'
   },
   {
@@ -111,7 +111,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Roshan Gamage'],
+    lecturers: ['Roshan Gamage'],
     roomRef: 'A502'
   },
   {
@@ -130,7 +130,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Friday',
-    lecturers:['Roshan Gamage'],
+    lecturers: ['Roshan Gamage'],
     roomRef: 'A502'
   },
   {
@@ -149,7 +149,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Roshan Gamage'],
+    lecturers: ['Roshan Gamage'],
     roomRef: 'A502'
   },
   {
@@ -168,7 +168,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Wednesday',
-    lecturers:['Roshan Gamage'],
+    lecturers: ['Roshan Gamage'],
     roomRef: 'A502'
   },
   {
@@ -187,7 +187,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Roshan Gamage'],
+    lecturers: ['Roshan Gamage'],
     roomRef: 'A502'
   },
   {
@@ -206,7 +206,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Friday',
-    lecturers:['Kavindu Gamage'],
+    lecturers: ['Kavindu Gamage'],
     roomRef: 'Auditorium'
   },
   {
@@ -225,7 +225,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Kavindu Gamage'],
+    lecturers: ['Kavindu Gamage'],
     roomRef: 'Auditorium'
   },
   {
@@ -244,7 +244,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Kavindu Gamage'],
+    lecturers: ['Kavindu Gamage'],
     roomRef: 'Auditorium'
   },
   {
@@ -263,7 +263,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Wednesday',
-    lecturers:['Kavindu Gamage'],
+    lecturers: ['Kavindu Gamage'],
     roomRef: 'Auditorium'
   },
   {
@@ -282,7 +282,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Friday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'Auditorium'
   },
   {
@@ -301,7 +301,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'Auditorium'
   },
   {
@@ -320,7 +320,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Friday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'D301'
   },
   {
@@ -339,7 +339,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'D301'
   },
   {
@@ -358,7 +358,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Friday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'D301'
   },
   {
@@ -377,7 +377,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'D301'
   },
   {
@@ -396,7 +396,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Thursday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'D301'
   },
   {
@@ -415,7 +415,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'D301'
   },
   {
@@ -434,7 +434,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Thursday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'D301'
   },
   {
@@ -453,7 +453,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'D301'
   },
   {
@@ -472,7 +472,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janaka Gamage'],
+    lecturers: ['Janaka Gamage'],
     roomRef: 'A502'
   },
   {
@@ -491,7 +491,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Thursday',
-    lecturers:['Kodagoda'],
+    lecturers: ['Kodagoda'],
     roomRef: 'A502'
   },
   {
@@ -510,7 +510,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Kasun Gamage'],
+    lecturers: ['Kasun Gamage'],
     roomRef: 'A502'
   },
   {
@@ -529,7 +529,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Kasun Gamage'],
+    lecturers: ['Kasun Gamage'],
     roomRef: 'A502'
   },
   {
@@ -548,7 +548,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Kasun Gamage'],
+    lecturers: ['Kasun Gamage'],
     roomRef: 'A502'
   },
   {
@@ -567,7 +567,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'A502'
   },
   {
@@ -586,7 +586,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'N3E'
   },
   {
@@ -605,7 +605,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'N3E'
   },
   {
@@ -624,7 +624,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'N3E'
   },
   {
@@ -643,7 +643,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'B405-Pclab'
   },
   {
@@ -662,7 +662,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'B405-Pclab'
   },
   {
@@ -681,7 +681,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Wednesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'N3E'
   },
   {
@@ -700,7 +700,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'B405-Pclab'
   },
   {
@@ -719,7 +719,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'N3E'
   },
   {
@@ -738,7 +738,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Monday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'B405-Pclab'
   },
   {
@@ -757,7 +757,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'N3E'
   },
   {
@@ -776,7 +776,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Thursday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'B405-Pclab'
   },
   {
@@ -795,7 +795,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Tuesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'N3E'
   },
   {
@@ -814,7 +814,7 @@ const sessions = [
     studentCount: 60,
     duration: '2',
     day: 'Wednesday',
-    lecturers:['Janith Gamage'],
+    lecturers: ['Janith Gamage'],
     roomRef: 'N3E'
   },
 

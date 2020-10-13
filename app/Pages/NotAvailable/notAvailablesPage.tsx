@@ -1,14 +1,10 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Redirect} from 'react-router-dom';
+import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import {RadioButton, RadioGroup} from 'react-radio-buttons';
-import CheckboxGroup from 'react-checkbox-group';
-import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import styles from './notAvailables.css';
-import {setNotAvailables} from './notAvailablesSlice';
 import {setRoomUnavailability, setUnavailableRoom} from '../RoomsUnavailability/rooms-unavailability-slice'
 import {setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom} from '../Rooms/rooms-slice'
 import {
@@ -18,7 +14,6 @@ import {
   setExistingBuilding,
   setExistingRoomsForBuilding
 } from '../Buildings/buildings-slice';
-import {proxy} from '../../conf';
 import SessionsAddNA from './sessionsAddNA.tsx';
 import LecturersAddNA from './lecturersAddNA.tsx';
 import GroupsAddNA from './groupsAddNA.tsx';
@@ -42,16 +37,15 @@ const NotAvailablesPage: React.FC = () => {
   dispatch(setRoomUnavailability(false))
   dispatch(setUnavailableRoom(null))
 
-  const [lecturer, setLecturer] =useState<boolean | null>(false);
-  const [session, setSession] =useState<boolean | null>(false);
-  const [group, setGroup] =useState<boolean | null>(false);
-  const [subGroup, setSubGroup] =useState<boolean | null>(false);
+  const [lecturer, setLecturer] = useState<boolean | null>(false);
+  const [session, setSession] = useState<boolean | null>(false);
+  const [group, setGroup] = useState<boolean | null>(false);
+  const [subGroup, setSubGroup] = useState<boolean | null>(false);
 
 
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(
     false
   );
-
 
 
   const handleRole = (value: string) => {
@@ -149,12 +143,12 @@ const NotAvailablesPage: React.FC = () => {
         </Row>
 
         {lecturer && (
-            <LecturersAddNA/>
+          <LecturersAddNA/>
         )
         }
 
         {session && (
-            <SessionsAddNA/>
+          <SessionsAddNA/>
         )
         }
 

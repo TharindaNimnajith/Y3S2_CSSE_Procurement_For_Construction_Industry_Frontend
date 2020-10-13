@@ -277,7 +277,7 @@ const GroupsEdit: React.FC = () => {
     var sub = e.target.value;
 
     if (groupOne.group <= 9) {
-      var id = 'Y' + year + '.S' + sem  + '.0' + groupforId + '.' + sub + '(' + pro + ')';
+      var id = 'Y' + year + '.S' + sem + '.0' + groupforId + '.' + sub + '(' + pro + ')';
     } else {
       var id = 'Y' + year + '.S' + sem + '.' + groupforId + '.' + sub + '(' + pro + ')';
     }

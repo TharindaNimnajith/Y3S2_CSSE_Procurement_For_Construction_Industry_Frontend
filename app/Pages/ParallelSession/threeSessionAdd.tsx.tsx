@@ -5,16 +5,13 @@ import {Button, Col, Container, Form, Modal, Row, Spinner} from 'react-bootstrap
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
 import {Redirect} from 'react-router-dom';
-import {useDispatch,useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './parallelSessions.css';
 import routes from '../../constants/routes.json';
-import NavBar from '../../components/NavBar/NavBar';
 
 import {proxy} from '../../conf';
-import CheckboxGroup from 'react-checkbox-group';
-import {setParallelSessions,setEditParallelSession,setEditingParallelSessionId,setEditingParallelSession} from './parallelSessionsSlice';
 
 let errors_: string = ''
 
@@ -32,8 +29,6 @@ const ThreeSessionAdd: React.FC = (props) => {
       editingParallelSessionId: string
     }) => state.parallelSessions.editingParallelSessionId
   );
-
-
 
 
   const parallelSessions = useSelector(
@@ -66,9 +61,9 @@ const ThreeSessionAdd: React.FC = (props) => {
   const [id2, setId2] = useState<string>('');
   const [id3, setId3] = useState<string>('');
 
-  const [sessionId1,setSessionId1] = useState<number | null>(null);
-  const [sessionId2,setSessionId2] = useState<number | null>(null);
-  const [sessionId3,setSessionId3] = useState<number | null>(null);
+  const [sessionId1, setSessionId1] = useState<number | null>(null);
+  const [sessionId2, setSessionId2] = useState<number | null>(null);
+  const [sessionId3, setSessionId3] = useState<number | null>(null);
 
   const [workingTimePerDay1, setWorkingTimePerDay1] = useState<{
     hours: string;
@@ -77,7 +72,7 @@ const ThreeSessionAdd: React.FC = (props) => {
     hours: '00',
     minutes: '00'
   });
-  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday', 'Sunday'];
+  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   const durationList = [1, 2, 3];
   const [duration, setDuration] = useState<number | null>(null);
@@ -99,26 +94,26 @@ const ThreeSessionAdd: React.FC = (props) => {
     // getSessions3(props.scode3);
 
     getSubjectCat(editingParallelSessionId);
-  },[]);
+  }, []);
 
-  const  getSubjectCat = async (cid) => {
+  const getSubjectCat = async (cid) => {
 
-    var scode:{res:any} [] = [];
+    var scode: { res: any } [] = [];
 
-     try {
+    try {
 
-       const response = await fetch(`${proxy}/parallelSessions/getSubjectCat`, {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json'
-         },
-         body: JSON.stringify({"category":cid})
-       })
-       const responseData = await response.json()
+      const response = await fetch(`${proxy}/parallelSessions/getSubjectCat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"category": cid})
+      })
+      const responseData = await response.json()
       console.log(responseData);
-      responseData.map((res:any) =>{
+      responseData.map((res: any) => {
         console.log(res.subjectCode)
-        var code =res.subjectCode;
+        var code = res.subjectCode;
         scode.push(code);
         return scode;
 
@@ -130,12 +125,12 @@ const ThreeSessionAdd: React.FC = (props) => {
       console.log(scode);
       //dispatch(setParallelSessions(scode));
 
-     } catch (errors) {
+    } catch (errors) {
 
 
-       console.log(errors)
-     }
-   }
+      console.log(errors)
+    }
+  }
 
 
   const getSessions1 = async (cid) => {
@@ -147,7 +142,7 @@ const ThreeSessionAdd: React.FC = (props) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"subjectCodeRef":cid})
+        body: JSON.stringify({"subjectCodeRef": cid})
       })
       const responseData = await response.json();
       setSession1List(responseData);
@@ -173,7 +168,7 @@ const ThreeSessionAdd: React.FC = (props) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"subjectCodeRef":cid})
+        body: JSON.stringify({"subjectCodeRef": cid})
       })
       const responseData = await response.json();
       setSession2List(responseData);
@@ -199,7 +194,7 @@ const ThreeSessionAdd: React.FC = (props) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"subjectCodeRef":cid})
+        body: JSON.stringify({"subjectCodeRef": cid})
       })
       const responseData = await response.json();
       setSession3List(responseData);
@@ -235,7 +230,7 @@ const ThreeSessionAdd: React.FC = (props) => {
 
   const handleSubmit = async () => {
 
-    var cid = parseInt(String(sessionId1) + ''+ String(sessionId2)+ ''+ String(sessionId3));
+    var cid = parseInt(String(sessionId1) + '' + String(sessionId2) + '' + String(sessionId3));
     console.log(cid);
 
     var emin1;
@@ -243,21 +238,19 @@ const ThreeSessionAdd: React.FC = (props) => {
     var etime;
 
 
-   if(workingTimePerDay1.minutes <= 9 && workingTimePerDay1.minutes!== '00'){
-     emin1 = '0' + workingTimePerDay1.minutes;
-    }
-    else{
+    if (workingTimePerDay1.minutes <= 9 && workingTimePerDay1.minutes !== '00') {
+      emin1 = '0' + workingTimePerDay1.minutes;
+    } else {
       emin1 = workingTimePerDay1.minutes;
     }
 
 
+    stime = workingTimePerDay1.hours + ':' + emin1;
+    etime = String(parseInt(workingTimePerDay1.hours) + parseInt(duration)) + ':' + emin1;
 
-     stime = workingTimePerDay1.hours+':'+ emin1 ;
-     etime = String(parseInt(workingTimePerDay1.hours)+parseInt(duration))+':'+ emin1;
+    console.log(etime);
 
-     console.log(etime);
-
-    if ((id1.trim() === '') && (id2.trim() === '') && (id3.trim() === '')&& (day.trim() === '')&& (stime.trim() === '00:00') &&  (etime.trim() === '00:00') && (duration === null) ) {
+    if ((id1.trim() === '') && (id2.trim() === '') && (id3.trim() === '') && (day.trim() === '') && (stime.trim() === '00:00') && (etime.trim() === '00:00') && (duration === null)) {
       errors_ = 'Please select  values for all fields.'
       setError(true)
       setLoading(false)
@@ -275,25 +268,22 @@ const ThreeSessionAdd: React.FC = (props) => {
         setError(true)
         setLoading(false)
 
-      }else if (id3.trim() === '') {
+      } else if (id3.trim() === '') {
         errors_ = 'Please select session3.'
         setError(true)
         setLoading(false)
 
-      }
-      else if (day.trim() === '') {
+      } else if (day.trim() === '') {
         errors_ = 'Please select a day.'
         setError(true)
         setLoading(false)
 
-      }
-      else if (stime.trim() === '') {
+      } else if (stime.trim() === '') {
         errors_ = 'Please select a start time.'
         setError(true)
         setLoading(false)
 
-      }
-      else if (duration === null ) {
+      } else if (duration === null) {
         errors_ = 'Please select a duration.'
         setError(true)
         setLoading(false)
@@ -302,30 +292,28 @@ const ThreeSessionAdd: React.FC = (props) => {
     }
 
 
-        if (parallelId1 || parallelId2 || parallelId3) {
-          exist = 1;
-        }
+    if (parallelId1 || parallelId2 || parallelId3) {
+      exist = 1;
+    } else {
+      exist = 0;
+    }
 
-        else{
-          exist = 0;
-        }
-
-      if (exist === 1) {
-        handleShow();
-      }
+    if (exist === 1) {
+      handleShow();
+    }
 
 
-    if ((id1.trim() != '') && (id2.trim() != '') && (id3.trim() != '')&& (day.trim() != '')&& (stime.trim() != '00:00') &&  (etime.trim() != '00:00') && (duration != null)  && (parallelId1 === false) && (parallelId2 === false)&& (parallelId3 === false)) {
+    if ((id1.trim() != '') && (id2.trim() != '') && (id3.trim() != '') && (day.trim() != '') && (stime.trim() != '00:00') && (etime.trim() != '00:00') && (duration != null) && (parallelId1 === false) && (parallelId2 === false) && (parallelId3 === false)) {
       const finalObjectGroup = {
         duration,
         day,
-        startTime :stime,
-        endTime :etime,
+        startTime: stime,
+        endTime: etime,
         isParallel,
-        parallelId:cid
+        parallelId: cid
       };
 
- console.log(finalObjectGroup);
+      console.log(finalObjectGroup);
       try {
 
         const response = await fetch(`${proxy}/parallelSessions/addParallelSession/` + id1, {
@@ -383,8 +371,7 @@ const ThreeSessionAdd: React.FC = (props) => {
         console.log(errors)
       }
 
-     }
-
+    }
 
 
   };
@@ -434,9 +421,7 @@ const ThreeSessionAdd: React.FC = (props) => {
   };
 
 
-
-
- const handleDay = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDay = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     setError(false)
     setDay(e.target.value);
@@ -444,27 +429,26 @@ const ThreeSessionAdd: React.FC = (props) => {
   };
 
 
-const handleChangeHour1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeHour1 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
- setError(false)
- setWorkingTimePerDay1({...workingTimePerDay1, hours: e.target.value});
-};
+    setError(false)
+    setWorkingTimePerDay1({...workingTimePerDay1, hours: e.target.value});
+  };
 
-const handleChangeMinutes1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeMinutes1 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
- setError(false)
- setWorkingTimePerDay1({...workingTimePerDay1, minutes: e.target.value});
-};
+    setError(false)
+    setWorkingTimePerDay1({...workingTimePerDay1, minutes: e.target.value});
+  };
 
 
-
-const handleChangeDuration = (e: React.ChangeEvent<HTMLInputElement>) => {
-  setError(false)
-  const val = parseInt(e.target.value);
-  //setDuration(val);
-  setDuration(e.target.value);
-  setIsParallel(true);
-};
+  const handleChangeDuration = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError(false)
+    const val = parseInt(e.target.value);
+    //setDuration(val);
+    setDuration(e.target.value);
+    setIsParallel(true);
+  };
 
   const getSession1 = async (id: string) => {
     setLoading(true)
@@ -479,7 +463,7 @@ const handleChangeDuration = (e: React.ChangeEvent<HTMLInputElement>) => {
       setSessionId1(responseData.sessionId);
       console.log(responseData.sessionId);
 
-      if(responseData.parallelId){
+      if (responseData.parallelId) {
         setParallelId1(true);
       }
 
@@ -504,7 +488,7 @@ const handleChangeDuration = (e: React.ChangeEvent<HTMLInputElement>) => {
       const responseData = await response.json()
       setSessionId2(responseData.sessionId);
 
-      if(responseData.parallelId){
+      if (responseData.parallelId) {
         setParallelId2(true);
       }
 
@@ -528,7 +512,7 @@ const handleChangeDuration = (e: React.ChangeEvent<HTMLInputElement>) => {
       const responseData = await response.json()
       setSessionId3(responseData.sessionId);
 
-      if(responseData.parallelId){
+      if (responseData.parallelId) {
         setParallelId3(true);
       }
 
@@ -698,57 +682,56 @@ const handleChangeDuration = (e: React.ChangeEvent<HTMLInputElement>) => {
           </Row>
 
 
+          <Row className="mt-3 mb-3 justify-content-md-center">
+            <Col xs={12} md={4}>
+              <p>Start Time</p>
+            </Col>
+            <Col xs={12} md={6}>
+              <Row>
+                <Col xs={12} md={5}>
+                  <Form.Group controlId="formGridEmail">
+                    <Form.Control
+                      style={{
+                        width: '60px',
+                        display: 'inline',
+                        marginLeft: '10px'
+                      }}
+                      type="number"
+                      value={workingTimePerDay1.hours}
+                      onChange={handleChangeHour1}
+                      placeholder="Hours"
+                      min="0"
+                      max="23"
+                    />
+                    <Form.Label>Hours</Form.Label>
+
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={7}>
+                  <Form.Group controlId="formGridPassword">
+                    <Form.Control
+                      style={{
+                        width: '60px',
+                        display: 'inline',
+                        marginLeft: '10px'
+                      }}
+                      type="number"
+                      value={workingTimePerDay1.minutes}
+                      onChange={handleChangeMinutes1}
+                      placeholder="Minutes"
+                      min="0"
+                      max="59"
+                    />
+                    <Form.Label>Minutes</Form.Label>
+
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={3} md={0}/>
+          </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
-              <Col xs={12} md={4}>
-                <p>Start Time</p>
-              </Col>
-              <Col xs={12} md={6}>
-                <Row>
-                  <Col xs={12} md={5}>
-                    <Form.Group controlId="formGridEmail">
-                    <Form.Control
-                        style={{
-                          width: '60px',
-                          display: 'inline',
-                          marginLeft: '10px'
-                        }}
-                        type="number"
-                        value={workingTimePerDay1.hours}
-                        onChange={handleChangeHour1}
-                        placeholder="Hours"
-                        min="0"
-                        max="23"
-                      />
-                      <Form.Label>Hours</Form.Label>
-
-                    </Form.Group>
-                  </Col>
-                  <Col xs={12} md={7}>
-                    <Form.Group controlId="formGridPassword">
-                    <Form.Control
-                        style={{
-                          width: '60px',
-                          display: 'inline',
-                          marginLeft: '10px'
-                        }}
-                        type="number"
-                        value={workingTimePerDay1.minutes}
-                        onChange={handleChangeMinutes1}
-                        placeholder="Minutes"
-                        min="0"
-                        max="59"
-                      />
-                      <Form.Label>Minutes</Form.Label>
-
-                    </Form.Group>
-                  </Col>
-                </Row>
-              </Col>
-              <Col xs={3} md={0}/>
-            </Row>
-
-            <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
               <p>Duration</p>
             </Col>

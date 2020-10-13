@@ -44,10 +44,8 @@ const ConsecutiveSessionsAdd: React.FC = () => {
 
   const [id2, setId2] = useState<string>('');
 
-  const [sessionId1,setSessionId1] = useState<number | null>(null);
-  const [sessionId2,setSessionId2] = useState<number | null>(null);
-
-
+  const [sessionId1, setSessionId1] = useState<number | null>(null);
+  const [sessionId2, setSessionId2] = useState<number | null>(null);
 
 
   const [sessionsObject, setSessionsObject] = useState<any>(null);
@@ -105,14 +103,12 @@ const ConsecutiveSessionsAdd: React.FC = () => {
 
   const handleSubmit = async () => {
     var sameRoom;
-    var sid = parseInt(String(sessionId1) + ''+ String(sessionId2));
+    var sid = parseInt(String(sessionId1) + '' + String(sessionId2));
 
 
-    if(isSameRoomTrue.trim() != ''){
+    if (isSameRoomTrue.trim() != '') {
       sameRoom = true;
-    }
-
-    else sameRoom = false;
+    } else sameRoom = false;
 
     if ((id1.trim() === '') && (id2.trim() === '')) {
       errors_ = 'Please select  values for all fields.'
@@ -136,24 +132,22 @@ const ConsecutiveSessionsAdd: React.FC = () => {
     }
 
 
-        if (consecutiveId1 || consecutiveId2) {
-          exist = 1;
-        }
+    if (consecutiveId1 || consecutiveId2) {
+      exist = 1;
+    } else {
+      exist = 0;
+    }
 
-        else{
-          exist = 0;
-        }
-
-      if (exist === 1) {
-        handleShow();
-      }
+    if (exist === 1) {
+      handleShow();
+    }
 
 
     if ((id1.trim() != '') && (id2.trim() != '') && (consecutiveId1 === false) && (consecutiveId2 === false)) {
       const finalObjectGroup = {
         isConsecutive,
-        consecutiveId:sid,
-        isSameRoom :sameRoom
+        consecutiveId: sid,
+        isSameRoom: sameRoom
 
       };
 
@@ -196,8 +190,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
         console.log(errors)
       }
 
-     }
-
+    }
 
 
   };
@@ -254,7 +247,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
       setSessionId1(responseData.sessionId);
       console.log(responseData.sessionId);
 
-      if(responseData.consecutiveId){
+      if (responseData.consecutiveId) {
         setConsecutiveId1(true);
       }
 
@@ -279,7 +272,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
       const responseData = await response.json()
       setSessionId2(responseData.sessionId);
 
-      if(responseData.consecutiveId){
+      if (responseData.consecutiveId) {
         setConsecutiveId2(true);
       }
 
@@ -403,32 +396,32 @@ const ConsecutiveSessionsAdd: React.FC = () => {
           </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
-              <Col xs={12} md={2}>
+            <Col xs={12} md={2}>
 
-              </Col>
-              <Col xs={2} md={6}>
-
-
-                <CheckboxGroup
-                  name="setIsSameRoom"
-                  value={isSameRoomTrue}
-                  onChange={setIsSameRoomTrue}
-                >
-                  {(Checkbox) => (
-                    <>
-
-                        <label className="mr-sm-2 mr-md-3" >
-                          <Checkbox value="require"/> require for the same room also
-                        </label>
-
-                    </>
-                  )}
-                </CheckboxGroup>
-              </Col>
-              <Col xs={12} md={4}/>
+            </Col>
+            <Col xs={2} md={6}>
 
 
-            </Row>
+              <CheckboxGroup
+                name="setIsSameRoom"
+                value={isSameRoomTrue}
+                onChange={setIsSameRoomTrue}
+              >
+                {(Checkbox) => (
+                  <>
+
+                    <label className="mr-sm-2 mr-md-3">
+                      <Checkbox value="require"/> require for the same room also
+                    </label>
+
+                  </>
+                )}
+              </CheckboxGroup>
+            </Col>
+            <Col xs={12} md={4}/>
+
+
+          </Row>
           <Row className="mt-2 mb-2 justify-content-md-center">
             <Col xs={12} md={2}/>
             <Col xs={3} md={6}>

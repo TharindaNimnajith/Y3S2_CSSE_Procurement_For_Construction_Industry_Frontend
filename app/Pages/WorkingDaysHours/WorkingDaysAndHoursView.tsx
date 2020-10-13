@@ -138,8 +138,8 @@ const WorkingDaysHoursView: React.FC = () => {
                 <tr>
                   <td>Start Time & End Time</td>
                   <td>
-                   Start time -  {workingDaysAndHoursObject.workingTimePerDay.startTime}
-                    and End time -  {workingDaysAndHoursObject.workingTimePerDay.endTime}{' '}
+                    Start time - {workingDaysAndHoursObject.workingTimePerDay.startTime}
+                    and End time - {workingDaysAndHoursObject.workingTimePerDay.endTime}{' '}
                   </td>
                 </tr>
                 <tr>

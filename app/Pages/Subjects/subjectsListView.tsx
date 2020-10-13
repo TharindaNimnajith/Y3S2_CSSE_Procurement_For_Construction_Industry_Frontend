@@ -14,7 +14,7 @@ import {
   setExistingBuilding,
   setExistingRoomsForBuilding
 } from '../Buildings/buildings-slice'
-import { proxy } from '../../conf';
+import {proxy} from '../../conf';
 
 const Subject = (props: any) => (
   <tr>

@@ -456,7 +456,7 @@ const GroupsAdd: React.FC = () => {
     const groupforId = val.toString();
 
     if (val <= 9) {
-      var groId = 'Y' + year + '.S' + sem  + '.0' + groupforId + '(' + pro + ')';
+      var groId = 'Y' + year + '.S' + sem + '.0' + groupforId + '(' + pro + ')';
     } else {
       var groId = 'Y' + year + '.S' + sem + '.' + groupforId + '(' + pro + ')';
     }

@@ -1,18 +1,18 @@
 /* eslint-disable */
-import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import { Redirect } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import {Redirect} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './sessions.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import { setSessions } from './sessionsSlice';
-import { proxy } from '../../conf';
+import {setSessions} from './sessionsSlice';
+import {proxy} from '../../conf';
 
 // noinspection DuplicatedCode
 const SessionsAdd: React.FC = () => {
@@ -281,7 +281,7 @@ const SessionsAdd: React.FC = () => {
   };
 
   const handleLecturerArray = () => {
-    setLecturers([...lecturers, { lecturerRef: lecturerObject }]);
+    setLecturers([...lecturers, {lecturerRef: lecturerObject}]);
   };
 
   // const handleChangeLecturers = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -348,7 +348,7 @@ const SessionsAdd: React.FC = () => {
           xs={12}
           md={12}
           className="p-3"
-          style={{ backgroundColor: '#343a40', color: '#fff' }}
+          style={{backgroundColor: '#343a40', color: '#fff'}}
         >
           <h3>Add Session</h3>
         </Col>
@@ -372,7 +372,7 @@ const SessionsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{ borderWidth: '2.5px' }}
+                    style={{borderWidth: '2.5px'}}
                     value={lecturerObject}
                     onChange={handleChangeLecturers}
                   >
@@ -395,14 +395,14 @@ const SessionsAdd: React.FC = () => {
             {/*  <Col xs={0} md={9}/>*/}
             <Col xs={12} md={2}>
               <Button
-                style={{ width: '100px', fontSize: '0.9em' }}
+                style={{width: '100px', fontSize: '0.9em'}}
                 onClick={handleLecturerArray}
               >
                 Add Lecturer
               </Button>
             </Col>
           </Row>
-          <Row style={{ textAlign: 'left' }}>
+          <Row style={{textAlign: 'left'}}>
             <Col md={5}></Col>
             {/*  <Col xs={2} md={6}>*/}
             <Col md={6} style={{
@@ -414,7 +414,7 @@ const SessionsAdd: React.FC = () => {
 
                   lecturers.length > 0 && lecturers.map((item, index) => {
                     console.log(item);
-                    return (<lable style={{ border: '1px solid white', padding: '10px' }}
+                    return (<lable style={{border: '1px solid white', padding: '10px'}}
                                    key={index}> {item.lecturerRef}  </lable>);
                   })
                 }
@@ -431,7 +431,7 @@ const SessionsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{ borderWidth: '2.5px' }}
+                    style={{borderWidth: '2.5px'}}
                     value={subjectRef}
                     onChange={handleChangeSubjectRef}
                   >
@@ -459,7 +459,7 @@ const SessionsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{ borderWidth: '2.5px' }}
+                    style={{borderWidth: '2.5px'}}
                     value={subjectCodeRef}
                     onChange={handleChangeSubjectCodeRef}
                   >
@@ -488,7 +488,7 @@ const SessionsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{ borderWidth: '2.5px' }}
+                    style={{borderWidth: '2.5px'}}
                     value={tagRef}
                     onChange={handleChangeTagRef}
                   >
@@ -517,7 +517,7 @@ const SessionsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{ borderWidth: '2.5px' }}
+                    style={{borderWidth: '2.5px'}}
                     value={groupRef}
                     onChange={handleChangeGroupRef}
                   >
@@ -546,7 +546,7 @@ const SessionsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{ borderWidth: '2.5px' }}
+                    style={{borderWidth: '2.5px'}}
                     value={subGroupRef}
                     onChange={handleChangeSubGroupRef}
                   >
@@ -574,7 +574,7 @@ const SessionsAdd: React.FC = () => {
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control
                     type="number"
-                    style={{ borderWidth: '2.5px' }}
+                    style={{borderWidth: '2.5px'}}
                     value={studentCount}
                     onChange={handleChangeStudentCount}
                     placeholder="ex:- 60"
@@ -593,7 +593,7 @@ const SessionsAdd: React.FC = () => {
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control
                     type="text"
-                    style={{ borderWidth: '2.5px' }}
+                    style={{borderWidth: '2.5px'}}
                     value={duration}
                     onChange={handleChangeDuration}
                     placeholder="ex:-03"
@@ -603,7 +603,7 @@ const SessionsAdd: React.FC = () => {
             </Col>
             <Col xs={3} md={3}/>
           </Row>
-          <Row style={{ textAlign: 'center' }}>
+          <Row style={{textAlign: 'center'}}>
             <Col md={12}>{error && <p className={` ${styles.workingDaysHoursError}`} style={{
               fontSize: '19px',
               textShadow: '1px 0 0 red, -1px 0 0 red, 0 1px 0 red, 0 -1px 0 red, 1px 1px red, -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red'
@@ -614,7 +614,7 @@ const SessionsAdd: React.FC = () => {
             <Col xs={0} md={9}/>
             <Col xs={12} md={2}>
               <Button
-                style={{ width: '160px', fontSize: '1.3em' }}
+                style={{width: '160px', fontSize: '1.3em'}}
                 onClick={handleSubmit}
               >
                 Add Session
