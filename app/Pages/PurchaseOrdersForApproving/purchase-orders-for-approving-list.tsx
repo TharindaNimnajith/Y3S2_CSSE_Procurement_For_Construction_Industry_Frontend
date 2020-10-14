@@ -3,8 +3,6 @@ import { Table, Modal, Button, Spinner } from 'react-bootstrap';
 import { FaBan, FaCheck } from 'react-icons/fa';
 import { proxy } from '../../conf';
 
-let errors_: string = '';
-
 const PurchaseOrdersForApprovingList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   // const [refresh, setRefresh] = useState<boolean>(true);
@@ -29,7 +27,6 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
       setOrdersList(responseData);
       setLoading(false);
     } catch (errors) {
-      errors_ = errors;
       setLoading(false);
       console.log(errors);
     }
@@ -85,69 +82,47 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
   }, [orders]);
 
   const handleApproved = async () => {
-    console.log('approved');
+    setLoading(true);
+    try {
+      const response = await fetch(`${proxy}/order/editOrderStatus`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          orderId: orderId,
+          status: 'pApproved'
+        })
+      });
+      await response.json();
+      setLoading(false);
+    } catch (errors) {
+      setLoading(false);
+      console.log(errors);
+    }
     setShowApproved(false);
-    // setLoading(true);
-    // try {
-    //   const response = await fetch(`${proxy}/roomsForOrders/addRoomForOrder`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       orderId,
-    //       room
-    //     })
-    //   });
-    //   const responseData = await response.json();
-    //   if (responseData.exists) {
-    //     errors_ = responseData.message;
-    //     // alert(errors_)
-    //     let errorNotification = new Notification('Error!', {
-    //       body: errors_
-    //     });
-    //     // @ts-ignore
-    //     errorNotification.show();
-    //   }
-    //   setLoading(false);
-    // } catch (errors) {
-    //   errors_ = errors;
-    //   setLoading(false);
-    //   console.log(errors);
-    // }
   };
 
   const handleRejected = async () => {
-    console.log('rejected');
+    setLoading(true);
+    try {
+      const response = await fetch(`${proxy}/order/editOrderStatus`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          orderId: orderId,
+          status: 'pRejected'
+        })
+      });
+      await response.json();
+      setLoading(false);
+    } catch (errors) {
+      setLoading(false);
+      console.log(errors);
+    }
     setShowRejected(false);
-    // setLoading(true);
-    // try {
-    //   const response = await fetch(`${proxy}/roomsForOrders/addRoomForOrder`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       orderId,
-    //       room
-    //     })
-    //   });
-    //   const responseData = await response.json();
-    //   if (responseData.exists) {
-    //     errors_ = responseData.message;
-    //     // alert(errors_)
-    //     let errorNotification = new Notification('Error!', {
-    //       body: errors_
-    //     });
-    //     // @ts-ignore
-    //     errorNotification.show();
-    //   }
-    //   setLoading(false);
-    // } catch (errors) {
-    //   errors_ = errors;
-    //   setLoading(false);
-    //   console.log(errors);
-    // }
   };
 
   // const getPossibleRoomsForOrder = async (id: string) => {
