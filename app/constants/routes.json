@@ -47,5 +47,6 @@
   "ROOMS_UNAVAILABILITY": "/rooms-unavailability",
   "ADD_ROOMS": "/add-rooms",
   "ASSIGN_ROOMS_FOR_SESSIONS": "/assign-rooms-for-sessions",
-  "GENERATE_TIMETABLES": "/generate-timetables"
+  "GENERATE_TIMETABLES": "/generate-timetables",
+  "INVENTORY": "/inventory"
 }

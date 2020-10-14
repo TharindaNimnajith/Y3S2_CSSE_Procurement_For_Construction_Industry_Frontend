@@ -50,6 +50,7 @@ import TimetableScreen from './Pages/TimetableGenerate/TimetableScreen'
 import ParallelCategoryPage from './Pages/ParallelCategory/parallelCategoryPage'
 import SessionsAddView from './Pages/Sessions/sessionsAddView'
 import SessionsListView from './Pages/Sessions/sessionsListView'
+import InventoryPage from './Pages/Inventory/inventory-page'
 
 const LazyCounterPage = React.lazy(() =>
   import('./containers/HomePage')
@@ -161,6 +162,8 @@ export default function Routes() {
                component={AssignRoomsForSessionsPage}/>
         <Route path={routes.GENERATE_TIMETABLES}
                component={TimetableScreen}/>
+        <Route path={routes.INVENTORY}
+               component={InventoryPage}/>
         <Route path={routes.HOME}
                component={HomePage}/>
       </Switch>

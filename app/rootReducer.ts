@@ -23,6 +23,7 @@ import consecutiveSessionsReducer from './Pages/ConsecutiveSession/consecutiveSe
 import notAvailablesReducer from './Pages/NotAvailable/notAvailablesSlice'
 import parallelSessionsReducer from './Pages/ParallelSession/ParallelSessionsSlice'
 import parallelCategorysReducer from './Pages/ParallelCategory/ParallelCategorySlice'
+import inventoryReducer from './Pages/Inventory/inventory-slice'
 
 export default function createRootReducer(history: History) {
   return combineReducers({
@@ -48,6 +49,7 @@ export default function createRootReducer(history: History) {
     notAvailables: notAvailablesReducer,
     parallelSessions: parallelSessionsReducer,
     parallelCategorys: parallelCategorysReducer,
-    sessions: sessionsReducer
+    sessions: sessionsReducer,
+    inventory: inventoryReducer
   })
 }

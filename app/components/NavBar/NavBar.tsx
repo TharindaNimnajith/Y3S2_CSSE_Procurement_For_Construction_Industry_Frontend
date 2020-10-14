@@ -242,6 +242,11 @@ const NavBar: React.FC = () => {
               Generate Timetables
             </Nav.Link>
           </NavLink>
+          <NavLink to={routes.INVENTORY}>
+            <Nav.Link href='#inventory'>
+              Stock
+            </Nav.Link>
+          </NavLink>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
