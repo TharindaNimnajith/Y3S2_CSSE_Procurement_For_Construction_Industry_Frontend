@@ -52,6 +52,11 @@ import SessionsAddView from './Pages/Sessions/sessionsAddView';
 import SessionsListView from './Pages/Sessions/sessionsListView';
 import InventoryPage from './Pages/Inventory/inventory-page';
 import PurchaseOrdersForApprovingPage from './Pages/PurchaseOrdersForApproving/purchase-orders-for-approving-page';
+import DeliveryConfirmedOrdersList from './Pages/DeliveryManager/delivery-confirmed-orders-list';
+import DeliveryRejectedOrdersList from './Pages/DeliveryManager/delivery-rejected-orders-list';
+import OrdersForDeliveryConfirmedList from './Pages/DeliveryManager/orders-for-delivery-confirmed-list';
+import MakePayment from './Pages/DeliveryManager/makePayment';
+import PaymentList from './Pages/DeliveryManager/paymentList';
 
 const LazyCounterPage = React.lazy(() =>
   import('./containers/HomePage')
@@ -166,7 +171,19 @@ export default function Routes() {
         <Route path={routes.INVENTORY}
                component={InventoryPage} />
         <Route path={routes.PURCHASE_ORDERS_FOR_APPROVING}
-               component={PurchaseOrdersForApprovingPage} />
+           component={PurchaseOrdersForApprovingPage} />
+
+               <Route path={routes.PENDING_DM_LIST}
+               component={OrdersForDeliveryConfirmedList} />
+               <Route path={routes.CONFIRMED_DM_LIST}
+               component={DeliveryConfirmedOrdersList} />
+               <Route path={routes.REJECTED_DM_LIST}
+               component={DeliveryRejectedOrdersList} />
+               <Route path={routes.MAKE_PAYMENT}
+               component={MakePayment} />
+                <Route path={routes.PAYMENT_LIST}
+               component={PaymentList} />
+
         <Route path={routes.HOME}
                component={HomePage} />
       </Switch>

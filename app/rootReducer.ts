@@ -24,6 +24,7 @@ import notAvailablesReducer from './Pages/NotAvailable/notAvailablesSlice';
 import parallelSessionsReducer from './Pages/ParallelSession/ParallelSessionsSlice';
 import parallelCategorysReducer from './Pages/ParallelCategory/ParallelCategorySlice';
 import inventoryReducer from './Pages/Inventory/inventory-slice';
+import orderDMReducer from './Pages/DeliveryManager/orderDM-slice';
 import purchaseOrdersForApprovingReducer from './Pages/PurchaseOrdersForApproving/purchase-orders-for-approving-slice';
 
 export default function createRootReducer(history: History) {
@@ -52,6 +53,8 @@ export default function createRootReducer(history: History) {
     parallelCategorys: parallelCategorysReducer,
     sessions: sessionsReducer,
     inventory: inventoryReducer,
-    purchaseOrdersForApproving: purchaseOrdersForApprovingReducer
+    purchaseOrdersForApproving: purchaseOrdersForApprovingReducer,
+    orderDM:orderDMReducer
+
   });
 }

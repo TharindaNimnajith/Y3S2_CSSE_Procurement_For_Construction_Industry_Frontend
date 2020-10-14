@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import routes from '../../constants/routes.json';
 
 const NavBar: React.FC = () => {
@@ -248,6 +248,48 @@ const NavBar: React.FC = () => {
           <NavLink to={routes.PURCHASE_ORDERS_FOR_APPROVING}>
             <Nav.Link href='#purchase_orders_for_approving'>
               Purchase Orders for Approval
+            </Nav.Link>
+          </NavLink>
+          <NavDropdown title='Delivery Order Details'
+                       id='collasible-nav-dropdown'>
+            <NavDropdown.Item href='#batches/pendingDM'>
+              <NavLink to={routes.PENDING_DM_LIST}>
+                <Nav.Link href='#pendingDM'
+                          style={{
+                            color: 'black'
+                          }}>
+                  Pending Orders
+                </Nav.Link>
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item href='#batches/confirmedDM'>
+              <NavLink to={routes.CONFIRMED_DM_LIST}>
+                <Nav.Link href='#confirmedDM'
+                          style={{
+                            color: 'black'
+                          }}>
+                  Confirmed Orders
+                </Nav.Link>
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item href='#batches/rejectedDM'>
+              <NavLink to={routes.REJECTED_DM_LIST}>
+                <Nav.Link href='#rejectedDM'
+                          style={{
+                            color: 'black'
+                          }}>
+                  Rejected Orders
+                </Nav.Link>
+              </NavLink>
+            </NavDropdown.Item>
+
+          </NavDropdown>
+
+          <NavLink to={routes.PAYMENT_LIST}>
+            <Nav.Link href='#paymentList'>
+              Payment Details
             </Nav.Link>
           </NavLink>
         </Nav>
