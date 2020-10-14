@@ -1,38 +1,38 @@
-import React, {useEffect, useState} from 'react'
-import {Button, Form, Modal, Spinner, Table} from 'react-bootstrap'
-import {FaEdit, FaPlusCircle} from 'react-icons/fa'
-import {proxy} from '../../conf'
+import React, { useEffect, useState } from 'react';
+import { Button, Form, Modal, Spinner, Table } from 'react-bootstrap';
+import { FaEdit, FaPlusCircle } from 'react-icons/fa';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 
 const AssignSessionsForRoomsList: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false)
-  const [refresh, setRefresh] = useState<boolean>(true)
-  const [show, setShow] = useState<boolean>(false)
-  const [sessionId, setSessionId] = useState<string>('')
-  const [room, setRoom] = useState<string>('')
-  const [sessions, setSessionsList] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(false);
+  const [refresh, setRefresh] = useState<boolean>(true);
+  const [show, setShow] = useState<boolean>(false);
+  const [sessionId, setSessionId] = useState<string>('');
+  const [room, setRoom] = useState<string>('');
+  const [sessions, setSessionsList] = useState<any>([]);
   // const [rooms, setRoomsList] = useState<any>([])
-  const [possibleRooms, setPossibleRoomsList] = useState<any>([])
+  const [possibleRooms, setPossibleRoomsList] = useState<any>([]);
 
   const getSessions = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/roomsForSessions/roomsForSessions`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      setSessionsList(responseData)
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setSessionsList(responseData);
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   // const getRooms = async () => {
   //   try {
@@ -54,37 +54,37 @@ const AssignSessionsForRoomsList: React.FC = () => {
   // }
 
   const setPossibleRoomsForSessions = async () => {
-    setRefresh(false)
+    setRefresh(false);
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/roomsForSessions/setPossibleRoomsForSessions`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      await response.json()
-      setLoading(false)
+      });
+      await response.json();
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   useEffect(() => {
     getSessions().then(() => {
-    })
+    });
     // getRooms().then(() => {
     // })
     if (refresh) {
       setPossibleRoomsForSessions().then(() => {
-      })
+      });
     }
-  }, [sessions])
+  }, [sessions]);
 
   const editSession = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/roomsForSessions/addRoomForSession`, {
         method: 'POST',
@@ -95,74 +95,74 @@ const AssignSessionsForRoomsList: React.FC = () => {
           sessionId,
           room
         })
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       if (responseData.exists) {
-        errors_ = responseData.message
+        errors_ = responseData.message;
         // alert(errors_)
         let errorNotification = new Notification('Error!', {
           body: errors_
-        })
+        });
         // @ts-ignore
-        errorNotification.show()
+        errorNotification.show();
       }
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getPossibleRoomsForSession = async (id: string) => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/roomsForSessions/getPossibleRoomsForSession/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       // if (responseData.length === 0)
       //   setPossibleRoomsList(rooms)
       // else
-      setPossibleRoomsList(responseData)
-      setLoading(false)
+      setPossibleRoomsList(responseData);
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const handleChangeRoom = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    setRoom(e.target.value)
-    setLoading(false)
-  }
+    setLoading(true);
+    setRoom(e.target.value);
+    setLoading(false);
+  };
 
   const handleClose = () => {
-    setLoading(true)
-    setShow(false)
-    setLoading(false)
-  }
+    setLoading(true);
+    setShow(false);
+    setLoading(false);
+  };
 
   const handleSubmit = () => {
-    setLoading(true)
-    editSession().then(() => setShow(false))
-    setLoading(false)
-  }
+    setLoading(true);
+    editSession().then(() => setShow(false));
+    setLoading(false);
+  };
 
   const handleShow = (sessionId: string, roomRef: any) => {
-    setLoading(true)
-    setRoom(roomRef)
-    setSessionId(sessionId)
+    setLoading(true);
+    setRoom(roomRef);
+    setSessionId(sessionId);
     getPossibleRoomsForSession(sessionId).then(() => {
-    })
-    setShow(true)
-    setLoading(false)
-  }
+    });
+    setShow(true);
+    setLoading(false);
+  };
 
   return (
     <div>
@@ -192,7 +192,7 @@ const AssignSessionsForRoomsList: React.FC = () => {
                   <Form.Control type='text'
                                 value={sessionId}
                                 disabled
-                                size='lg'/>
+                                size='lg' />
                 </Form.Group>
               </Form.Row>
               <Form.Row style={{
@@ -214,7 +214,7 @@ const AssignSessionsForRoomsList: React.FC = () => {
                                   value={room.roomName}>
                             {room.roomName}
                           </option>
-                        )
+                        );
                       })
                     }
                   </Form.Control>
@@ -244,7 +244,7 @@ const AssignSessionsForRoomsList: React.FC = () => {
                        style={{
                          textAlign: 'center',
                          marginLeft: '50%'
-                       }}/>
+                       }} />
             )
           }
         </Modal>
@@ -335,7 +335,7 @@ const AssignSessionsForRoomsList: React.FC = () => {
                 borderBottom: 'solid darkblue 1px',
                 borderRight: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px'
-              }}/>
+              }} />
           </thead>
           <tbody>
           {
@@ -414,7 +414,7 @@ const AssignSessionsForRoomsList: React.FC = () => {
                                   backgroundColor: 'transparent',
                                   border: 'none'
                                 }}>
-                          <FaEdit size={20}/>
+                          <FaEdit size={20} />
                         </button>
                       ) : (
                         <button onClick={() => handleShow(session.sessionId, null)}
@@ -423,13 +423,13 @@ const AssignSessionsForRoomsList: React.FC = () => {
                                   backgroundColor: 'transparent',
                                   border: 'none'
                                 }}>
-                          <FaPlusCircle size={20}/>
+                          <FaPlusCircle size={20} />
                         </button>
                       )
                     }
                   </td>
                 </tr>
-              )
+              );
             })
           }
           </tbody>
@@ -450,7 +450,7 @@ const AssignSessionsForRoomsList: React.FC = () => {
         {/*}*/}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AssignSessionsForRoomsList
+export default AssignSessionsForRoomsList;

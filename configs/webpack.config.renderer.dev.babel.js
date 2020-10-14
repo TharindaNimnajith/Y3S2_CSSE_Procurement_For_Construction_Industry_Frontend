@@ -1,31 +1,31 @@
-import path from 'path'
-import fs from 'fs'
-import webpack from 'webpack'
-import chalk from 'chalk'
-import {merge} from 'webpack-merge'
-import {execSync, spawn} from 'child_process'
-import baseConfig from './webpack.config.base'
-import CheckNodeEnv from '../internals/scripts/CheckNodeEnv'
+import path from 'path';
+import fs from 'fs';
+import webpack from 'webpack';
+import chalk from 'chalk';
+import { merge } from 'webpack-merge';
+import { execSync, spawn } from 'child_process';
+import baseConfig from './webpack.config.base';
+import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
 if (process.env.NODE_ENV === 'production') {
-  CheckNodeEnv('development')
+  CheckNodeEnv('development');
 }
 
-const port = process.env.PORT || 1212
-const publicPath = `http://localhost:${port}/dist`
-const dll = path.join(__dirname, '..', 'dll')
-const manifest = path.resolve(dll, 'renderer.json')
+const port = process.env.PORT || 1212;
+const publicPath = `http://localhost:${port}/dist`;
+const dll = path.join(__dirname, '..', 'dll');
+const manifest = path.resolve(dll, 'renderer.json');
 const requiredByDLLConfig = module.parent.filename.includes(
   'webpack.config.renderer.dev.dll'
-)
+);
 
 if (!requiredByDLLConfig && !(fs.existsSync(dll) && fs.existsSync(manifest))) {
   console.log(
     chalk.black.bgYellow.bold(
       'The DLL files are missing. Sit back while we build them for you with "yarn build-dll"'
     )
-  )
-  execSync('yarn build-dll')
+  );
+  execSync('yarn build-dll');
 }
 
 export default merge(baseConfig, {
@@ -203,7 +203,7 @@ export default merge(baseConfig, {
     inline: true,
     lazy: false,
     hot: true,
-    headers: {'Access-Control-Allow-Origin': '*'},
+    headers: { 'Access-Control-Allow-Origin': '*' },
     contentBase: path.join(__dirname, 'dist'),
     watchOptions: {
       aggregateTimeout: 300,
@@ -216,15 +216,15 @@ export default merge(baseConfig, {
     },
     before() {
       if (process.env.START_HOT) {
-        console.log('Starting Main Process...')
+        console.log('Starting Main Process...');
         spawn('npm', ['run', 'start-main-dev'], {
           shell: true,
           env: process.env,
           stdio: 'inherit'
         })
           .on('close', (code) => process.exit(code))
-          .on('error', (spawnError) => console.error(spawnError))
+          .on('error', (spawnError) => console.error(spawnError));
       }
     }
   }
-})
+});

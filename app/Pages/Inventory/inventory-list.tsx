@@ -254,6 +254,17 @@ const InventoryList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
+            Item Id
+          </th>
+          <th style={{
+            borderBottom: 'solid darkblue 1px',
+            borderLeft: 'solid darkblue 1px',
+            borderTop: 'solid darkblue 1px',
+            textAlign: 'center',
+            fontSize: 'large',
+            fontWeight: 'lighter',
+            color: 'white'
+          }}>
             Item Name
           </th>
           <th style={{
@@ -339,6 +350,11 @@ const InventoryList: React.FC = () => {
             inventories.inventories && inventories.inventories.map((inventory: any) => {
               return (
                 <tr key={inventory._id}>
+                  <td style={{
+                    textAlign: 'center'
+                  }}>
+                    {inventory.itemId}
+                  </td>
                   <td style={{
                     textAlign: 'center'
                   }}>

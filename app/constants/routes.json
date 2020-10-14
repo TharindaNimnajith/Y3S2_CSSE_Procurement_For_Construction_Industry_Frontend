@@ -48,5 +48,6 @@
   "ADD_ROOMS": "/add-rooms",
   "ASSIGN_ROOMS_FOR_SESSIONS": "/assign-rooms-for-sessions",
   "GENERATE_TIMETABLES": "/generate-timetables",
-  "INVENTORY": "/inventory"
+  "INVENTORY": "/inventory",
+  "PURCHASE_ORDERS_FOR_APPROVING": "/purchase_orders_for_approving"
 }

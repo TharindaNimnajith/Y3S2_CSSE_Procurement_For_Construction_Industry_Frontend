@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const setAssignRoomsForSessionsSlice = createSlice({
   name: 'assignRoomsForSessions',
@@ -7,11 +7,11 @@ const setAssignRoomsForSessionsSlice = createSlice({
   },
   reducers: {
     setSessions: (state, action: any) => {
-      state.sessions = action.payload
+      state.sessions = action.payload;
     }
   }
-})
+});
 
-export const {setSessions} = setAssignRoomsForSessionsSlice.actions
+export const { setSessions } = setAssignRoomsForSessionsSlice.actions;
 
-export default setAssignRoomsForSessionsSlice.reducer
+export default setAssignRoomsForSessionsSlice.reducer;

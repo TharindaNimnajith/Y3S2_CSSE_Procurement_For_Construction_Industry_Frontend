@@ -1,13 +1,13 @@
-import webpack from 'webpack'
-import path from 'path'
-import {merge} from 'webpack-merge'
-import baseConfig from './webpack.config.base'
-import {dependencies} from '../package.json'
-import CheckNodeEnv from '../internals/scripts/CheckNodeEnv'
+import webpack from 'webpack';
+import path from 'path';
+import { merge } from 'webpack-merge';
+import baseConfig from './webpack.config.base';
+import { dependencies } from '../package.json';
+import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
-CheckNodeEnv('development')
+CheckNodeEnv('development');
 
-const dist = path.join(__dirname, '..', 'dll')
+const dist = path.join(__dirname, '..', 'dll');
 
 export default merge(baseConfig, {
   context: path.join(__dirname, '..'),
@@ -43,4 +43,4 @@ export default merge(baseConfig, {
       }
     })
   ]
-})
+});
