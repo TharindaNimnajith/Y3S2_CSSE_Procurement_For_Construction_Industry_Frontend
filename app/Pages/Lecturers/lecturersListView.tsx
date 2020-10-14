@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {Button, Col, Container, Row, Table} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import NavBar from '../../components/NavBar/NavBar';
 import styles from './lecturers.css';
-import {setLecturers} from './lecturersSlice';
-import {setRoomUnavailability, setUnavailableRoom} from '../RoomsUnavailability/rooms-unavailability-slice';
-import {setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom} from '../Rooms/rooms-slice';
+import { setLecturers } from './lecturersSlice';
+import { setRoomUnavailability, setUnavailableRoom } from '../RoomsUnavailability/rooms-unavailability-slice';
+import { setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom } from '../Rooms/rooms-slice';
 import {
   setEditBuilding,
   setEditingBuilding,
@@ -14,7 +14,7 @@ import {
   setExistingBuilding,
   setExistingRoomsForBuilding
 } from '../Buildings/buildings-slice';
-import {proxy} from '../../conf';
+import { proxy } from '../../conf';
 
 const Lecturer = (props: any) => (
   <tr>
@@ -31,7 +31,7 @@ const Lecturer = (props: any) => (
     <td>{props.endTime}</td>
     <td>
       <Link to={'/editLecturer/' + props.lecturer._id}>edit</Link> |{' '}
-      <p style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={() => {
+      <p style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => {
         props.handleDelete(props.lecturer._id);
       }}>
         delete
@@ -103,7 +103,7 @@ const LecturersListView: React.FC = () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({id: id})
+          body: JSON.stringify({ id: id })
         }
       );
 
@@ -135,9 +135,9 @@ const LecturersListView: React.FC = () => {
         startTime = lecturer.unavailability[0].startTime;
         endTime = lecturer.unavailability[0].endTime;
       } else {
-        day = " ";
-        startTime = " ";
-        endTime = " ";
+        day = ' ';
+        startTime = ' ';
+        endTime = ' ';
       }
 
       return (
@@ -154,14 +154,14 @@ const LecturersListView: React.FC = () => {
   };
 
   return (
-    <div style={{backgroundColor: '#37474F'}}>
-      <NavBar/>
+    <div style={{ backgroundColor: '#37474F' }}>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Lecturer Details</h3>
         </Col>

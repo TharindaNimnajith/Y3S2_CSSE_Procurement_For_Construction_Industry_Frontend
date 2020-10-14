@@ -1,20 +1,20 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Modal, Row, Spinner} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Modal, Row, Spinner } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './consecutiveSessions.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {proxy} from '../../conf';
+import { proxy } from '../../conf';
 import CheckboxGroup from 'react-checkbox-group';
 
-let errors_: string = ''
+let errors_: string = '';
 
 
 var exist = 0;
@@ -29,7 +29,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
   const [session2List, setSession2List] = useState<any>([]);
 
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
@@ -113,8 +113,8 @@ const ConsecutiveSessionsAdd: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"tagRef": "Lecture"})
-      })
+        body: JSON.stringify({ 'tagRef': 'Lecture' })
+      });
       const responseData = await response.json();
       setSession1List(responseData);
 
@@ -122,7 +122,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
     } catch (errors) {
 
 
-      console.log(errors)
+      console.log(errors);
     }
 
   };
@@ -137,8 +137,8 @@ const ConsecutiveSessionsAdd: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"tagRef": "Tutorial", "subjectCodeRef": s1, "groupRef": s2})
-      })
+        body: JSON.stringify({ 'tagRef': 'Tutorial', 'subjectCodeRef': s1, 'groupRef': s2 })
+      });
       const responseData = await response.json();
       setSession2List(responseData);
 
@@ -146,7 +146,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
     } catch (errors) {
 
 
-      console.log(errors)
+      console.log(errors);
     }
 
   };
@@ -161,14 +161,14 @@ const ConsecutiveSessionsAdd: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"tagRef": "Tutorial"})
-      })
+        body: JSON.stringify({ 'tagRef': 'Tutorial' })
+      });
       const responseData = await response.json();
       setSession2List(responseData);
 
 
     } catch (errors) {
-      console.log(errors)
+      console.log(errors);
     }
 
   };
@@ -187,12 +187,12 @@ const ConsecutiveSessionsAdd: React.FC = () => {
 
   const handleSubmit = async () => {
     var sameRoom;
-    console.log(sessionId1)
-    console.log(sessionId2)
-    console.log(id1)
-    console.log(id2)
-    console.log(consecutiveId1)
-    console.log(consecutiveId2)
+    console.log(sessionId1);
+    console.log(sessionId2);
+    console.log(id1);
+    console.log(id2);
+    console.log(consecutiveId1);
+    console.log(consecutiveId2);
     var sid = parseInt(String(sessionId1) + '' + String(sessionId2));
 
 
@@ -201,22 +201,22 @@ const ConsecutiveSessionsAdd: React.FC = () => {
     } else sameRoom = false;
 
     if ((id1.trim() === '') && (id2.trim() === '')) {
-      errors_ = 'Please select  values for all fields.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please select  values for all fields.';
+      setError(true);
+      setLoading(false);
 
 
     } else {
       if (id1.trim() === '') {
-        errors_ = 'Please select session1 .'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select session1 .';
+        setError(true);
+        setLoading(false);
 
 
       } else if (id2.trim() === '') {
-        errors_ = 'Please select session2.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select session2.';
+        setError(true);
+        setLoading(false);
 
       }
     }
@@ -250,15 +250,15 @@ const ConsecutiveSessionsAdd: React.FC = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(finalObjectGroup)
-        })
-        const responseData = await response.json()
-        console.log(responseData)
+        });
+        const responseData = await response.json();
+        console.log(responseData);
         setRenderRedirectTo(true);
 
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
 
       try {
@@ -269,15 +269,15 @@ const ConsecutiveSessionsAdd: React.FC = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(finalObjectGroup)
-        })
-        const responseData = await response.json()
-        console.log(responseData)
+        });
+        const responseData = await response.json();
+        console.log(responseData);
         setRenderRedirectTo1(true);
 
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
 
     }
@@ -288,7 +288,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo && renderRedirectTo1) {
-      return <Redirect to={routes.SESSIONS_LIST}/>;
+      return <Redirect to={routes.SESSIONS_LIST} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -296,16 +296,16 @@ const ConsecutiveSessionsAdd: React.FC = () => {
 
   const renderRedirectGro = () => {
     if (renderRedirectToGro) {
-      return <Redirect to={routes.GROUPS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
   };
   const handleSession1 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     setCon(true);
     setId1(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
     setConsecutiveId1(false);
     getSession1(e.target.value);
 
@@ -318,10 +318,10 @@ const ConsecutiveSessionsAdd: React.FC = () => {
 
   const handleSession2 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
+    setError(false);
     setId2(e.target.value);
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2")
-    console.log(e.target.value)
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2');
+    console.log(e.target.value);
     setConsecutiveId2(false);
     getSession2(e.target.value);
 
@@ -332,15 +332,15 @@ const ConsecutiveSessionsAdd: React.FC = () => {
   };
 
   const getSession1 = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/sessions/getSessions/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       setSessionId1(responseData.sessionId);
       console.log(responseData.sessionId);
       // setSubjectCodeRef1(responseData.subjectCodeRef);
@@ -349,8 +349,8 @@ const ConsecutiveSessionsAdd: React.FC = () => {
       s1 = responseData.subjectCodeRef;
       s2 = responseData.groupRef;
 
-      console.log(s1)
-      console.log(s2)
+      console.log(s1);
+      console.log(s2);
 
 
       if (responseData.consecutiveId) {
@@ -358,24 +358,24 @@ const ConsecutiveSessionsAdd: React.FC = () => {
       }
 
 
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getSession2 = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/sessions/getSessions/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       setSessionId2(responseData.sessionId);
       setSubjectCodeRef2(responseData.subjectCodeRef);
       setGroupRef2(responseData.groupRef);
@@ -384,13 +384,13 @@ const ConsecutiveSessionsAdd: React.FC = () => {
         setConsecutiveId2(true);
       }
 
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
 
   return (
@@ -403,7 +403,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
 
       {renderRedirect()}
 
-      <NavBar/>
+      <NavBar />
       <Modal show={show}
              onHide={handleClose}
       >
@@ -427,7 +427,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
                      style={{
                        textAlign: 'center',
                        marginLeft: '50%'
-                     }}/>
+                     }} />
           )
         }
       </Modal>
@@ -436,7 +436,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Add Consecutive Session</h3>
         </Col>
@@ -463,7 +463,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={id1}
                     onChange={handleSession1}
                   >
@@ -476,7 +476,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={2}/>
+            <Col xs={3} md={2} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -489,7 +489,7 @@ const ConsecutiveSessionsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={id2}
                     onChange={handleSession2}
                   >
@@ -521,29 +521,29 @@ const ConsecutiveSessionsAdd: React.FC = () => {
                   <>
 
                     <label className="mr-sm-2 mr-md-3">
-                      <Checkbox value="require"/> require for the same room also
+                      <Checkbox value="require" /> require for the same room also
                     </label>
 
                   </>
                 )}
               </CheckboxGroup>
             </Col>
-            <Col xs={12} md={4}/>
+            <Col xs={12} md={4} />
 
 
           </Row>
           <Row className="mt-2 mb-2 justify-content-md-center">
-            <Col xs={12} md={2}/>
+            <Col xs={12} md={2} />
             <Col xs={3} md={6}>
               <Button
-                style={{width: '150px', fontSize: '1.3em'}}
+                style={{ width: '150px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Add
               </Button>
             </Col>
 
-            <Col xs={12} md={4}/>
+            <Col xs={12} md={4} />
           </Row>
 
 

@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import {Redirect} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './tags.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setEditingTag, setEditingTagId, setEditTag} from './tagsSlice';
-import {proxy} from '../../conf'
+import { setEditingTag, setEditingTagId, setEditTag } from './tagsSlice';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 
 const TagsEdit: React.FC = () => {
   const dispatch = useDispatch();
@@ -46,15 +46,15 @@ const TagsEdit: React.FC = () => {
     console.log(id);
 
     if (tag.name.trim() === '' && tag.tagToken.trim() === '') {
-      errors_ = 'Please enter a value for the tag name and tag token.'
-      setError(true)
+      errors_ = 'Please enter a value for the tag name and tag token.';
+      setError(true);
     } else {
       if (tag.name.trim() === '') {
-        errors_ = 'Please enter a value for the tag name.'
-        setError(true)
+        errors_ = 'Please enter a value for the tag name.';
+        setError(true);
       } else if (tag.tagToken.trim() === '') {
-        errors_ = 'Please enter a value for the tag token.'
-        setError(true)
+        errors_ = 'Please enter a value for the tag token.';
+        setError(true);
       }
     }
 
@@ -65,7 +65,7 @@ const TagsEdit: React.FC = () => {
 
     console.log(finalObjectWithID);
     if (tag.name.trim() !== '' && tag.tagToken.trim() !== '') {
-      setError(false)
+      setError(false);
 
       try {
         const response = await fetch(
@@ -94,19 +94,19 @@ const TagsEdit: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.TAGS_LIST_VIEW}/>;
+      return <Redirect to={routes.TAGS_LIST_VIEW} />;
     }
     return null;
   };
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
-    setTag({...tag, name: e.target.value});
+    setError(false);
+    setTag({ ...tag, name: e.target.value });
   };
 
   const handleChangeTagToken = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
-    setTag({...tag, tagToken: e.target.value});
+    setError(false);
+    setTag({ ...tag, tagToken: e.target.value });
   };
 
   return (
@@ -116,13 +116,13 @@ const TagsEdit: React.FC = () => {
         height: '100vh'
       }}>
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Edit Tag</h3>
         </Col>
@@ -148,7 +148,7 @@ const TagsEdit: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={tag.name}
                     onChange={handleChangeName}
                     placeholder="ex:- Lecture"
@@ -158,7 +158,7 @@ const TagsEdit: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -171,7 +171,7 @@ const TagsEdit: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={tag.tagToken}
                     onChange={handleChangeTagToken}
                     placeholder="ex:- Lec"
@@ -182,16 +182,16 @@ const TagsEdit: React.FC = () => {
             <Col xs={3} md={3}></Col>
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
-            <Col xs={12} md={3}/>
+            <Col xs={12} md={3} />
             <Col xs={3} md={7}>
               <Button
-                style={{width: '160px', fontSize: '1.3em'}}
+                style={{ width: '160px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Edit Tag
               </Button>
             </Col>
-            <Col xs={12} md={2}/>
+            <Col xs={12} md={2} />
           </Row>
           {
             error && (

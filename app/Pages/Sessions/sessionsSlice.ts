@@ -1,18 +1,18 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
-import {RootState} from '../../store';
+import { RootState } from '../../store';
 
 const setSessionsSlice = createSlice({
   name: 'sessions',
-  initialState: {sessions: []},
+  initialState: { sessions: [] },
   reducers: {
     setSessions: (state, action: any) => {
       state.sessions = action.payload;
-    },
-  },
+    }
+  }
 });
 
-export const {setSessions} = setSessionsSlice.actions;
+export const { setSessions } = setSessionsSlice.actions;
 
 export default setSessionsSlice.reducer;
 

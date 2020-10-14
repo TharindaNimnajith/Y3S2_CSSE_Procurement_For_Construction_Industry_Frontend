@@ -1,5 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {RootState} from '../../store';
+import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../store';
 
 const setGroupsSlice = createSlice({
   name: 'groups',
@@ -53,17 +53,17 @@ const setGroupsSlice = createSlice({
   }
 });
 
-export const {setGroups} = setGroupsSlice.actions;
-export const {setSubGroups} = setGroupsSlice.actions;
-export const {setEditGroup} = setGroupsSlice.actions;
-export const {setEditingGroupId} = setGroupsSlice.actions;
-export const {setEditingGroup} = setGroupsSlice.actions;
-export const {setShowGroup} = setGroupsSlice.actions;
-export const {setShowingGroupId} = setGroupsSlice.actions;
-export const {setShowingGroup} = setGroupsSlice.actions;
-export const {setShowSubGroup} = setGroupsSlice.actions;
-export const {setShowingSubGroupId} = setGroupsSlice.actions;
-export const {setShowingSubGroup} = setGroupsSlice.actions;
+export const { setGroups } = setGroupsSlice.actions;
+export const { setSubGroups } = setGroupsSlice.actions;
+export const { setEditGroup } = setGroupsSlice.actions;
+export const { setEditingGroupId } = setGroupsSlice.actions;
+export const { setEditingGroup } = setGroupsSlice.actions;
+export const { setShowGroup } = setGroupsSlice.actions;
+export const { setShowingGroupId } = setGroupsSlice.actions;
+export const { setShowingGroup } = setGroupsSlice.actions;
+export const { setShowSubGroup } = setGroupsSlice.actions;
+export const { setShowingSubGroupId } = setGroupsSlice.actions;
+export const { setShowingSubGroup } = setGroupsSlice.actions;
 
 export default setGroupsSlice.reducer;
 

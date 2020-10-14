@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 
 const setParallelCategorysSlice = createSlice({
@@ -25,10 +25,10 @@ const setParallelCategorysSlice = createSlice({
   }
 });
 
-export const {setParallelCategorys} = setParallelCategorysSlice.actions;
-export const {setEditParallelCategory} = setParallelCategorysSlice.actions;
-export const {setEditingParallelCategoryId} = setParallelCategorysSlice.actions;
-export const {setEditingParallelCategory} = setParallelCategorysSlice.actions;
+export const { setParallelCategorys } = setParallelCategorysSlice.actions;
+export const { setEditParallelCategory } = setParallelCategorysSlice.actions;
+export const { setEditingParallelCategoryId } = setParallelCategorysSlice.actions;
+export const { setEditingParallelCategory } = setParallelCategorysSlice.actions;
 
 export default setParallelCategorysSlice.reducer;
 

@@ -1,10 +1,10 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
-import {RootState} from '../../store';
+import { RootState } from '../../store';
 
 const setWorkingDaysHoursSlice = createSlice({
   name: 'workingDaysHours',
-  initialState: {workingDaysHours: {}},
+  initialState: { workingDaysHours: {} },
   reducers: {
     setWorkingDaysHours: (state, action: any) => {
       state.workingDaysHours = action.payload;
@@ -12,7 +12,7 @@ const setWorkingDaysHoursSlice = createSlice({
   }
 });
 
-export const {setWorkingDaysHours} = setWorkingDaysHoursSlice.actions;
+export const { setWorkingDaysHours } = setWorkingDaysHoursSlice.actions;
 
 export default setWorkingDaysHoursSlice.reducer;
 

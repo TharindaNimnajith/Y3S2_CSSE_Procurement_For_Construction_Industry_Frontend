@@ -1,20 +1,20 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './groupNums.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setGroupNums} from './groupNumsSlice';
-import {proxy} from '../../conf'
+import { setGroupNums } from './groupNumsSlice';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 // noinspection DuplicatedCode
 const GroupNumsAdd: React.FC = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const GroupNumsAdd: React.FC = () => {
 
 
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
   const [groupNum, setGroupNum] = useState<string>('');
@@ -87,12 +87,12 @@ const GroupNumsAdd: React.FC = () => {
 
 
     if (isNaN(Number(finalObject.groupNum.trim()))) {
-      errors_ = 'Please enter a numerical value for the group number.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please enter a numerical value for the group number.';
+      setError(true);
+      setLoading(false);
     }
     if (!isNaN(Number(finalObject.groupNum.trim()))) {
-      setError(false)
+      setError(false);
       try {
 
         const response = await fetch(
@@ -124,14 +124,14 @@ const GroupNumsAdd: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.GROUPNUMS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPNUMS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
   };
 
   const handleChangeGroupNum = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     setGroupNum(e.target.value);
   };
 
@@ -140,18 +140,18 @@ const GroupNumsAdd: React.FC = () => {
     <div
       style={{
         backgroundColor: '#37474F',
-        height: '100vh',
+        height: '100vh'
       }}
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Add Group Number</h3>
         </Col>
@@ -177,7 +177,7 @@ const GroupNumsAdd: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupNum}
                     onChange={handleChangeGroupNum}
                     placeholder="ex:- 1"
@@ -187,20 +187,20 @@ const GroupNumsAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
             <Col xs={3} md={10}>
               <Button
-                style={{width: '220px', fontSize: '1.3em'}}
+                style={{ width: '220px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Add Group Number
               </Button>
             </Col>
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
           </Row>
 
           {

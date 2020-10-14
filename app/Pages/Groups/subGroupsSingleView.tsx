@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import {Redirect} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from './groups.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
@@ -15,21 +15,21 @@ const SubGroupsSingleView: React.FC = () => {
       groups: any
       showingSubGroupId: string
     }) => state.groups.showingSubGroupId
-  )
+  );
 
   const showingSubGroup = useSelector(
     (state: {
       groups: any
       showingSubGroupId: any
     }) => state.groups.showingSubGroup
-  )
+  );
 
   const showingGroup = useSelector(
     (state: {
       groups: any
       showingGroupId: any
     }) => state.groups.showingGroup
-  )
+  );
   const [groupOne, setGroupOne] = useState<{
     academicYear: number,
     academicSemester: number,
@@ -49,7 +49,7 @@ const SubGroupsSingleView: React.FC = () => {
     groupId: showingGroup.groupId,
     subGroups: showingGroup.subGroups,
     availableSubGroup: showingGroup.availableSubGroup
-  })
+  });
 
   const [groupSub, setGroupSub] = useState<{
 
@@ -59,7 +59,7 @@ const SubGroupsSingleView: React.FC = () => {
     subGroup: showingSubGroup.subGroup,
     subGroupId: showingSubGroup.subGroupId
 
-  })
+  });
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
 
 
@@ -69,12 +69,12 @@ const SubGroupsSingleView: React.FC = () => {
 
 
   const handleSubmit = async () => {
-    setRenderRedirectTo(true)
-  }
+    setRenderRedirectTo(true);
+  };
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.GROUPS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPS_LIST_VIEW} />;
     }
     return null;
   };
@@ -90,13 +90,13 @@ const SubGroupsSingleView: React.FC = () => {
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>{groupSub.subGroupId} Sub Group Details</h3>
         </Col>
@@ -124,7 +124,7 @@ const SubGroupsSingleView: React.FC = () => {
                     disabled
                     type="text"
 
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.academicYear}
 
                   >
@@ -133,7 +133,7 @@ const SubGroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4} className="mt-auto">
@@ -147,7 +147,7 @@ const SubGroupsSingleView: React.FC = () => {
                     disabled
                     type="text"
 
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.academicSemester}
 
                   >
@@ -156,7 +156,7 @@ const SubGroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4} className="mt-auto">
@@ -170,7 +170,7 @@ const SubGroupsSingleView: React.FC = () => {
                     disabled
                     type="text"
 
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.academicYearAndSemester}
 
                   >
@@ -179,7 +179,7 @@ const SubGroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -192,7 +192,7 @@ const SubGroupsSingleView: React.FC = () => {
                   <Form.Control
                     disabled
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.programme}
 
                   >
@@ -216,7 +216,7 @@ const SubGroupsSingleView: React.FC = () => {
                     disabled
                     type="text"
 
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.group}
 
                   >
@@ -225,7 +225,7 @@ const SubGroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
@@ -240,7 +240,7 @@ const SubGroupsSingleView: React.FC = () => {
                     disabled
                     type="text"
 
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.groupId}
 
                   >
@@ -249,7 +249,7 @@ const SubGroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -263,7 +263,7 @@ const SubGroupsSingleView: React.FC = () => {
                   <Form.Control
                     disabled
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupSub.subGroup}
 
                   >
@@ -272,7 +272,7 @@ const SubGroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -285,7 +285,7 @@ const SubGroupsSingleView: React.FC = () => {
                   <Form.Control
                     disabled
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupSub.subGroupId}
 
                   >
@@ -298,11 +298,11 @@ const SubGroupsSingleView: React.FC = () => {
           </Row>
 
           <Row className="mt-2 mb-2 justify-content-md-center">
-            <Col xs={12} md={10}/>
+            <Col xs={12} md={10} />
             <Col xs={3} md={2}>
               <Button
                 className="pull-right"
-                style={{width: '80px', fontSize: '1.0em'}}
+                style={{ width: '80px', fontSize: '1.0em' }}
                 onClick={handleSubmit}
               >
                 OK

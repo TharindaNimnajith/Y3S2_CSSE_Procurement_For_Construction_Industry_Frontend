@@ -1,21 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import {NavLink, Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {Button, Col, Container, Row, Table} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { NavLink, Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import NavBar from '../../components/NavBar/NavBar';
 import routes from '../../constants/routes.json';
 import styles from './programs.css';
-import {setEditingProgram, setEditingProgramId, setEditProgram, setPrograms} from './programsSlice';
-import {setRoomUnavailability, setUnavailableRoom} from '../RoomsUnavailability/rooms-unavailability-slice'
-import {setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom} from '../Rooms/rooms-slice'
+import { setEditingProgram, setEditingProgramId, setEditProgram, setPrograms } from './programsSlice';
+import { setRoomUnavailability, setUnavailableRoom } from '../RoomsUnavailability/rooms-unavailability-slice';
+import { setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom } from '../Rooms/rooms-slice';
 import {
   setEditBuilding,
   setEditingBuilding,
   setEditingBuildingId,
   setExistingBuilding,
   setExistingRoomsForBuilding
-} from '../Buildings/buildings-slice'
-import {proxy} from '../../conf'
+} from '../Buildings/buildings-slice';
+import { proxy } from '../../conf';
 
 const Program = (props: any) => (
   <tr>
@@ -24,7 +24,7 @@ const Program = (props: any) => (
     <td>
       <Button onClick={() => {
         props.handleEdit(props.program._id);
-      }} style={{width: '160px', fontSize: '1.3em'}}>
+      }} style={{ width: '160px', fontSize: '1.3em' }}>
         edit
       </Button>
       <Button
@@ -40,7 +40,7 @@ const Program = (props: any) => (
         }}>
         <NavLink
           to={routes.PROGRAMS_LIST_VIEW}
-          style={{color: '#fff'}}>
+          style={{ color: '#fff' }}>
           delete
         </NavLink>
       </Button>
@@ -49,21 +49,21 @@ const Program = (props: any) => (
 );
 
 const ProgramsListView: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  dispatch(setEditRoom(false))
-  dispatch(setEditingRoomId(''))
-  dispatch(setEditingRoom(null))
-  dispatch(setExistingRoom(false))
+  dispatch(setEditRoom(false));
+  dispatch(setEditingRoomId(''));
+  dispatch(setEditingRoom(null));
+  dispatch(setExistingRoom(false));
 
-  dispatch(setEditBuilding(false))
-  dispatch(setEditingBuildingId(''))
-  dispatch(setEditingBuilding(null))
-  dispatch(setExistingBuilding(false))
-  dispatch(setExistingRoomsForBuilding(false))
+  dispatch(setEditBuilding(false));
+  dispatch(setEditingBuildingId(''));
+  dispatch(setEditingBuilding(null));
+  dispatch(setExistingBuilding(false));
+  dispatch(setExistingRoomsForBuilding(false));
 
-  dispatch(setRoomUnavailability(false))
-  dispatch(setUnavailableRoom(null))
+  dispatch(setRoomUnavailability(false));
+  dispatch(setUnavailableRoom(null));
 
   const [programsObject, setProgramsObject] = useState<any>([]);
   const [renderEdit, setRenderEdit] = useState<boolean | null>(false);
@@ -112,7 +112,7 @@ const ProgramsListView: React.FC = () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({id})
+          body: JSON.stringify({ id })
         }
       );
 
@@ -142,34 +142,34 @@ const ProgramsListView: React.FC = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
-          },
+          }
 
         }
       );
 
-      const responseData = await response.json()
+      const responseData = await response.json();
 
-      console.log("me edit eken passe data-------------------------");
+      console.log('me edit eken passe data-------------------------');
       console.log(responseData);
 
 
-      dispatch(setEditingProgramId(id))
-      dispatch(setEditingProgram(responseData))
-      dispatch(setEditProgram(true))
+      dispatch(setEditingProgramId(id));
+      dispatch(setEditingProgram(responseData));
+      dispatch(setEditProgram(true));
 
       setRenderEdit(true);
 
     } catch (errors) {
-      const errors_ = errors
+      const errors_ = errors;
 
-      console.log(errors)
+      console.log(errors);
     }
 
   };
 
   const renderEditTo = () => {
     if (renderEdit) {
-      return <Redirect to={routes.PROGRAMS_EDIT}/>;
+      return <Redirect to={routes.PROGRAMS_EDIT} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -177,21 +177,21 @@ const ProgramsListView: React.FC = () => {
 
   const programList = () => {
     return programsObject.map(program => {
-      return <Program program={program} handleDelete={handleDelete} handleEdit={handleEdit} key={program._id}/>;
+      return <Program program={program} handleDelete={handleDelete} handleEdit={handleEdit} key={program._id} />;
     });
   };
 
   return (
-    <div style={{backgroundColor: '#37474F', height: '100vh'}}>
+    <div style={{ backgroundColor: '#37474F', height: '100vh' }}>
       {renderEditTo()}
 
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Programme List</h3>
         </Col>
@@ -207,10 +207,10 @@ const ProgramsListView: React.FC = () => {
         >
           <Row className="mt-3 mb-4 justify-content-md-left">
             <Col xs={12} md={12} className="mt-auto">
-              <Button style={{width: '240px', fontSize: '1.2em'}}>
+              <Button style={{ width: '240px', fontSize: '1.2em' }}>
                 <NavLink
                   to={routes.PROGRAMS_ADD}
-                  style={{color: '#fff'}}
+                  style={{ color: '#fff' }}
                 >
                   Add New Programme
                 </NavLink>

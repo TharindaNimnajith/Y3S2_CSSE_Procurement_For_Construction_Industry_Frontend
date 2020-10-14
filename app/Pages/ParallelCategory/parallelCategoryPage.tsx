@@ -1,13 +1,13 @@
 /* eslint-disable */
-import React, {useState} from 'react';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {Col, Container, Form, Row} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import styles from './parallelCategory.css';
-import {setRoomUnavailability, setUnavailableRoom} from '../RoomsUnavailability/rooms-unavailability-slice'
-import {setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom} from '../Rooms/rooms-slice'
+import { setRoomUnavailability, setUnavailableRoom } from '../RoomsUnavailability/rooms-unavailability-slice';
+import { setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom } from '../Rooms/rooms-slice';
 import {
   setEditBuilding,
   setEditingBuilding,
@@ -26,19 +26,19 @@ const moduleList = [2, 3];
 const ParallelCategoryPage: React.FC = () => {
   const dispatch = useDispatch();
 
-  dispatch(setEditRoom(false))
-  dispatch(setEditingRoomId(''))
-  dispatch(setEditingRoom(null))
-  dispatch(setExistingRoom(false))
+  dispatch(setEditRoom(false));
+  dispatch(setEditingRoomId(''));
+  dispatch(setEditingRoom(null));
+  dispatch(setExistingRoom(false));
 
-  dispatch(setEditBuilding(false))
-  dispatch(setEditingBuildingId(''))
-  dispatch(setEditingBuilding(null))
-  dispatch(setExistingBuilding(false))
-  dispatch(setExistingRoomsForBuilding(false))
+  dispatch(setEditBuilding(false));
+  dispatch(setEditingBuildingId(''));
+  dispatch(setEditingBuilding(null));
+  dispatch(setExistingBuilding(false));
+  dispatch(setExistingRoomsForBuilding(false));
 
-  dispatch(setRoomUnavailability(false))
-  dispatch(setUnavailableRoom(null))
+  dispatch(setRoomUnavailability(false));
+  dispatch(setUnavailableRoom(null));
 
 
   const [two, setTwo] = useState<boolean | null>(false);
@@ -76,7 +76,7 @@ const ParallelCategoryPage: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.TAGS_LIST_VIEW}/>;
+      return <Redirect to={routes.TAGS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -92,13 +92,13 @@ const ParallelCategoryPage: React.FC = () => {
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Add Module for Category</h3>
         </Col>
@@ -122,7 +122,7 @@ const ParallelCategoryPage: React.FC = () => {
                 <Form.Control
                   as="select"
                   defaultValue="Choose..."
-                  style={{borderWidth: '2.5px'}}
+                  style={{ borderWidth: '2.5px' }}
                   value={module}
                   onChange={handleModule}
                 >
@@ -135,17 +135,17 @@ const ParallelCategoryPage: React.FC = () => {
               </Form.Group>
             </Form>
           </Col>
-          <Col xs={3} md={2}/>
+          <Col xs={3} md={2} />
         </Row>
 
 
         {two && (
-          <TwoModuleAdd/>
+          <TwoModuleAdd />
         )
         }
 
         {three && (
-          <ThreeModuleAdd/>
+          <ThreeModuleAdd />
         )
         }
 

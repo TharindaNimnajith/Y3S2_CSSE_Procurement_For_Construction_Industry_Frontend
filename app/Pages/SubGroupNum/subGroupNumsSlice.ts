@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 
 const setSubGroupNumsSlice = createSlice({
@@ -25,10 +25,10 @@ const setSubGroupNumsSlice = createSlice({
   }
 });
 
-export const {setSubGroupNums} = setSubGroupNumsSlice.actions;
-export const {setEditSubGroupNum} = setSubGroupNumsSlice.actions;
-export const {setEditingSubGroupNumId} = setSubGroupNumsSlice.actions;
-export const {setEditingSubGroupNum} = setSubGroupNumsSlice.actions;
+export const { setSubGroupNums } = setSubGroupNumsSlice.actions;
+export const { setEditSubGroupNum } = setSubGroupNumsSlice.actions;
+export const { setEditingSubGroupNumId } = setSubGroupNumsSlice.actions;
+export const { setEditingSubGroupNum } = setSubGroupNumsSlice.actions;
 
 export default setSubGroupNumsSlice.reducer;
 

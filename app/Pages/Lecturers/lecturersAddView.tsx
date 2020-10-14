@@ -1,18 +1,18 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './lecturers.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setLecturers} from './lecturersSlice';
-import {proxy} from '../../conf';
+import { setLecturers } from './lecturersSlice';
+import { proxy } from '../../conf';
 
 // noinspection DuplicatedCode
 const LecturersAdd: React.FC = () => {
@@ -113,7 +113,7 @@ const LecturersAdd: React.FC = () => {
 
   const renderRedirectToView = () => {
     if (lecturersObject) {
-      return <Redirect to={routes.LECTURERS_LIST_VIEW}/>;
+      return <Redirect to={routes.LECTURERS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -174,7 +174,7 @@ const LecturersAdd: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.LECTURERS_LIST_VIEW}/>;
+      return <Redirect to={routes.LECTURERS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -222,13 +222,13 @@ const LecturersAdd: React.FC = () => {
     >
       {renderRedirectToView()}
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Add Lecturer</h3>
         </Col>
@@ -251,7 +251,7 @@ const LecturersAdd: React.FC = () => {
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control
                     type="number"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={employeeId}
                     onChange={handleChangeEmployeeId}
                     placeholder="ex:- 000001"
@@ -259,7 +259,7 @@ const LecturersAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -270,7 +270,7 @@ const LecturersAdd: React.FC = () => {
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={lecturerName}
                     onChange={handleChangeLecturerName}
                     placeholder="ex:- Kasun Bandara"
@@ -289,7 +289,7 @@ const LecturersAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={faculty}
                     onChange={handleChangeFaculty}
                   >
@@ -301,7 +301,7 @@ const LecturersAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -313,7 +313,7 @@ const LecturersAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={department}
                     onChange={handleChangeDepartment}
                   >
@@ -325,7 +325,7 @@ const LecturersAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -337,7 +337,7 @@ const LecturersAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={center}
                     onChange={handleChangeCenter}
                   >
@@ -354,7 +354,7 @@ const LecturersAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -366,7 +366,7 @@ const LecturersAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={building}
                     onChange={handleChangeBuilding}
                   >
@@ -386,7 +386,7 @@ const LecturersAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -398,7 +398,7 @@ const LecturersAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={level}
                     onChange={handleChangeLevel}
                   >
@@ -414,9 +414,9 @@ const LecturersAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
-          <Row style={{textAlign: 'center'}}>
+          <Row style={{ textAlign: 'center' }}>
             <Col md={12}>{error && <p className={` ${styles.workingDaysHoursError}`} style={{
               fontSize: '19px',
               textShadow: '1px 0 0 red, -1px 0 0 red, 0 1px 0 red, 0 -1px 0 red, 1px 1px red, -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red'
@@ -424,10 +424,10 @@ const LecturersAdd: React.FC = () => {
           </Row>
 
           <Row className="mb-2 justify-content-md-center">
-            <Col xs={0} md={9}/>
+            <Col xs={0} md={9} />
             <Col xs={12} md={2}>
               <Button
-                style={{width: '160px', fontSize: '1.3em'}}
+                style={{ width: '160px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Add Lecturer

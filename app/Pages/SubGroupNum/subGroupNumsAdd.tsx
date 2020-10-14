@@ -1,20 +1,20 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './subGroupNums.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setSubGroupNums} from './subGroupNumsSlice';
-import {proxy} from '../../conf'
+import { setSubGroupNums } from './subGroupNumsSlice';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 
 
 // noinspection DuplicatedCode
@@ -25,7 +25,7 @@ const SubGroupNumsAdd: React.FC = () => {
 
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
   const [subGroupNum, setSubGroupNum] = useState<string>('');
@@ -88,12 +88,12 @@ const SubGroupNumsAdd: React.FC = () => {
     console.log('22222222222222222222222222222222222');
     console.log(finalObject);
     if (isNaN(Number(subGroupNum.trim()))) {
-      errors_ = 'Please enter a numerical value for the sub group number.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please enter a numerical value for the sub group number.';
+      setError(true);
+      setLoading(false);
     }
     if (!isNaN(Number(subGroupNum.trim()))) {
-      setError(false)
+      setError(false);
 
       try {
         const response = await fetch(
@@ -123,16 +123,16 @@ const SubGroupNumsAdd: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.SUBGROUPNUMS_LIST_VIEW}/>;
+      return <Redirect to={routes.SUBGROUPNUMS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
   };
 
   const handleChangeSubGroupNum = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     setSubGroupNum(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
 
 
@@ -140,19 +140,19 @@ const SubGroupNumsAdd: React.FC = () => {
     <div
       style={{
         backgroundColor: '#37474F',
-        height: '100vh',
+        height: '100vh'
 
       }}
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Add Sub Group Number</h3>
         </Col>
@@ -178,7 +178,7 @@ const SubGroupNumsAdd: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={subGroupNum}
                     onChange={handleChangeSubGroupNum}
                     placeholder="ex:- 1"
@@ -188,20 +188,20 @@ const SubGroupNumsAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
             <Col xs={3} md={10}>
               <Button
-                style={{width: '250px', fontSize: '1.3em'}}
+                style={{ width: '250px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Add Sub Group Number
               </Button>
             </Col>
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
           </Row>
 
           {

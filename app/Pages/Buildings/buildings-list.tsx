@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {Button, Card, CardColumns, Form, Modal, Row, Spinner} from 'react-bootstrap'
-import {FaEdit, FaTrashAlt} from 'react-icons/fa'
-import {proxy} from '../../conf'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Card, CardColumns, Form, Modal, Row, Spinner } from 'react-bootstrap';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { proxy } from '../../conf';
 import {
   setBuildings,
   setCenters,
@@ -11,167 +11,167 @@ import {
   setEditingBuildingId,
   setExistingBuilding,
   setExistingRoomsForBuilding
-} from './buildings-slice'
+} from './buildings-slice';
 
-let errors_: string = ''
+let errors_: string = '';
 
 const BuildingsList: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let buildingList = useSelector(
     (state: {
       buildings: any
     }) => state.buildings.buildings
-  )
+  );
 
   const existingRoomsForBuilding = useSelector(
     (state: {
       buildings: any
       existingRoomsForBuilding: boolean
     }) => state.buildings.existingRoomsForBuilding
-  )
+  );
 
-  const [loading, setLoading] = useState<boolean>(false)
-  const [show, setShow] = useState<boolean>(false)
-  const [deleteId, setDeleteId] = useState<string>('')
-  const [centers, setCentersList] = useState<any>([])
-  const [buildings, setBuildingsList] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
+  const [deleteId, setDeleteId] = useState<string>('');
+  const [centers, setCentersList] = useState<any>([]);
+  const [buildings, setBuildingsList] = useState<any>([]);
   const [building, setBuilding] = useState<{
     buildingName: string,
     centerName: string
   }>({
     buildingName: '',
     centerName: ''
-  })
+  });
 
   const getBuildings = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/buildings/searchBuildings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(building)
-      })
-      const responseData = await response.json()
-      setBuildingsList(responseData)
-      await dispatch(setBuildings(responseData))
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setBuildingsList(responseData);
+      await dispatch(setBuildings(responseData));
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getCenters = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/centers/centers`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      setCentersList(responseData)
-      await dispatch(setCenters(responseData))
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setCentersList(responseData);
+      await dispatch(setCenters(responseData));
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   useEffect(() => {
     getCenters().then(() => {
-    })
+    });
     getBuildings().then(() => {
-    })
-  }, [buildings])
+    });
+  }, [buildings]);
 
   const handleChangeBuildingNameSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    setBuilding({...building, buildingName: e.target.value})
-    setLoading(false)
-  }
+    setLoading(true);
+    setBuilding({ ...building, buildingName: e.target.value });
+    setLoading(false);
+  };
 
   const handleChangeCenterNameSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    setBuilding({...building, centerName: e.target.value})
-    setLoading(false)
-  }
+    setLoading(true);
+    setBuilding({ ...building, centerName: e.target.value });
+    setLoading(false);
+  };
 
   const handleClose = () => {
-    setLoading(true)
-    setShow(false)
-    setLoading(false)
-  }
+    setLoading(true);
+    setShow(false);
+    setLoading(false);
+  };
 
   const handleDelete = () => {
-    setLoading(true)
-    deleteBuilding(deleteId).then(() => setShow(false))
-    setLoading(false)
-  }
+    setLoading(true);
+    deleteBuilding(deleteId).then(() => setShow(false));
+    setLoading(false);
+  };
 
   const handleShow = (id: string) => {
-    setLoading(true)
-    setShow(true)
-    setDeleteId(id)
-    setLoading(false)
-  }
+    setLoading(true);
+    setShow(true);
+    setDeleteId(id);
+    setLoading(false);
+  };
 
   const editBuilding = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/buildings/buildings/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      await dispatch(setExistingRoomsForBuilding(false))
-      await dispatch(setExistingBuilding(false))
-      await dispatch(setEditingBuildingId(id))
-      await dispatch(setEditingBuilding(responseData))
-      await dispatch(setEditBuilding(true))
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      await dispatch(setExistingRoomsForBuilding(false));
+      await dispatch(setExistingBuilding(false));
+      await dispatch(setEditingBuildingId(id));
+      await dispatch(setEditingBuilding(responseData));
+      await dispatch(setEditBuilding(true));
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const deleteBuilding = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/buildings/buildings/` + id, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      await dispatch(setExistingRoomsForBuilding(false))
+      });
+      const responseData = await response.json();
+      await dispatch(setExistingRoomsForBuilding(false));
       if (responseData.roomsExist) {
-        errors_ = responseData.message
-        await dispatch(setExistingRoomsForBuilding(true))
+        errors_ = responseData.message;
+        await dispatch(setExistingRoomsForBuilding(true));
       }
-      buildingList = buildingList.filter((building: any) => building._id !== id)
-      await dispatch(setBuildings(buildingList))
-      await dispatch(setEditBuilding(false))
-      await dispatch(setExistingBuilding(false))
-      setLoading(false)
+      buildingList = buildingList.filter((building: any) => building._id !== id);
+      await dispatch(setBuildings(buildingList));
+      await dispatch(setEditBuilding(false));
+      await dispatch(setExistingBuilding(false));
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   return (
     <div>
@@ -184,7 +184,7 @@ const BuildingsList: React.FC = () => {
                             value={building.buildingName}
                             onChange={handleChangeBuildingNameSearch}
                             placeholder='Search by Name'
-                            title='Search by building name.'/>
+                            title='Search by building name.' />
             </Form.Group>
             <Form.Group controlId='formLocatedCenter'
                         style={{
@@ -203,7 +203,7 @@ const BuildingsList: React.FC = () => {
                               value={center.centerName}>
                         {center.centerName}
                       </option>
-                    )
+                    );
                   })
                 }
               </Form.Control>
@@ -243,7 +243,7 @@ const BuildingsList: React.FC = () => {
                        style={{
                          textAlign: 'center',
                          marginLeft: '50%'
-                       }}/>
+                       }} />
             )
           }
         </Modal>
@@ -281,7 +281,7 @@ const BuildingsList: React.FC = () => {
                                 border: 'none',
                                 marginLeft: '23%'
                               }}>
-                        <FaEdit size={25}/>
+                        <FaEdit size={25} />
                       </button>
                       <button onClick={() => handleShow(building._id)}
                               style={{
@@ -290,7 +290,7 @@ const BuildingsList: React.FC = () => {
                                 border: 'none',
                                 marginLeft: '23%'
                               }}>
-                        <FaTrashAlt size={25}/>
+                        <FaTrashAlt size={25} />
                       </button>
                       {
                         loading && (
@@ -298,13 +298,13 @@ const BuildingsList: React.FC = () => {
                                    style={{
                                      textAlign: 'center',
                                      marginLeft: '50%'
-                                   }}/>
+                                   }} />
                         )
                       }
                     </Row>
                   </Card.Body>
                 </Card>
-              )
+              );
             })
           }
         </CardColumns>
@@ -324,7 +324,7 @@ const BuildingsList: React.FC = () => {
         )
       }
     </div>
-  )
-}
+  );
+};
 
-export default BuildingsList
+export default BuildingsList;

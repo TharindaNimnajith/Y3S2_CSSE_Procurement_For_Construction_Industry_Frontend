@@ -1,242 +1,242 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux'
-import {Button, Col, Form, Modal, Row, Spinner} from 'react-bootstrap'
-import Select from 'react-select'
-import {proxy} from '../../conf'
-import {setGroups, setLecturers, setRooms, setSubGroups, setSubjects, setTags} from './add-rooms-slice'
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, Col, Form, Modal, Row, Spinner } from 'react-bootstrap';
+import Select from 'react-select';
+import { proxy } from '../../conf';
+import { setGroups, setLecturers, setRooms, setSubGroups, setSubjects, setTags } from './add-rooms-slice';
 
-let errors_: string = ''
+let errors_: string = '';
 
-let tagData: any = []
-let subjectData: any = []
-let lecturerData: any = []
-let groupData: any = []
-let subGroupData: any = []
+let tagData: any = [];
+let subjectData: any = [];
+let lecturerData: any = [];
+let groupData: any = [];
+let subGroupData: any = [];
 
 const AddRoomsForm: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState<boolean>(false)
-  const [show, setShow] = useState<boolean>(false)
-  const [message, setMessage] = useState<string>('')
-  const [rooms, setRoomsList] = useState<any>([])
-  const [disabled, setDisabled] = useState<boolean>(true)
-  const [possibleRoomsObject, setPossibleRoomsObject] = useState<any>([])
-  const [possibleRooms, setPossibleRooms] = useState<any>([])
-  const [tagDisabled, setTagDisabled] = useState<boolean>(true)
-  const [subjectDisabled, setSubjectDisabled] = useState<boolean>(true)
-  const [subjectTagDisabled, setSubjectTagDisabled] = useState<boolean>(true)
-  const [lecturerDisabled, setLecturerDisabled] = useState<boolean>(true)
-  const [groupDisabled, setGroupDisabled] = useState<boolean>(true)
-  const [subGroupDisabled, setSubGroupDisabled] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
+  const [rooms, setRoomsList] = useState<any>([]);
+  const [disabled, setDisabled] = useState<boolean>(true);
+  const [possibleRoomsObject, setPossibleRoomsObject] = useState<any>([]);
+  const [possibleRooms, setPossibleRooms] = useState<any>([]);
+  const [tagDisabled, setTagDisabled] = useState<boolean>(true);
+  const [subjectDisabled, setSubjectDisabled] = useState<boolean>(true);
+  const [subjectTagDisabled, setSubjectTagDisabled] = useState<boolean>(true);
+  const [lecturerDisabled, setLecturerDisabled] = useState<boolean>(true);
+  const [groupDisabled, setGroupDisabled] = useState<boolean>(true);
+  const [subGroupDisabled, setSubGroupDisabled] = useState<boolean>(true);
   const [tag, setTag] = useState<{
     label: string
   }>({
     label: 'Select Tag'
-  })
+  });
   const [subject, setSubject] = useState<{
     label: string
   }>({
     label: 'Select Subject'
-  })
+  });
   const [subjectTag, setSubjectTag] = useState<{
     label: string
   }>({
     label: 'Select Tag'
-  })
+  });
   const [lecturer, setLecturer] = useState<{
     label: string
   }>({
     label: 'Select Lecturer'
-  })
+  });
   const [group, setGroup] = useState<{
     label: string
   }>({
     label: 'Select Group'
-  })
+  });
   const [subGroup, setSubGroup] = useState<{
     label: string
   }>({
     label: 'Select Sub Group'
-  })
+  });
 
   const getRooms = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/addRooms/rooms`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      setRoomsList(responseData)
-      await dispatch(setRooms(responseData))
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setRoomsList(responseData);
+      await dispatch(setRooms(responseData));
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getTags = async () => {
-    tagData = []
+    tagData = [];
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/addRooms/tags`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      await dispatch(setTags(responseData))
+      });
+      const responseData = await response.json();
+      await dispatch(setTags(responseData));
       for (let i = 0; i < responseData.length; i++) {
         tagData = [...tagData,
           {
             value: responseData[i].name,
             label: responseData[i].name
           }
-        ]
+        ];
       }
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getSubjects = async () => {
-    subjectData = []
+    subjectData = [];
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/addRooms/subjects`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      await dispatch(setSubjects(responseData))
+      });
+      const responseData = await response.json();
+      await dispatch(setSubjects(responseData));
       for (let i = 0; i < responseData.length; i++) {
         subjectData = [...subjectData,
           {
             value: responseData[i].subjectCode,
             label: responseData[i].subjectCode
           }
-        ]
+        ];
       }
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getLecturers = async () => {
-    lecturerData = []
+    lecturerData = [];
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/addRooms/lecturers`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      await dispatch(setLecturers(responseData))
+      });
+      const responseData = await response.json();
+      await dispatch(setLecturers(responseData));
       for (let i = 0; i < responseData.length; i++) {
         lecturerData = [...lecturerData,
           {
             value: responseData[i].lecturerName,
             label: responseData[i].lecturerName
           }
-        ]
+        ];
       }
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getGroups = async () => {
-    groupData = []
+    groupData = [];
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/addRooms/groups`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      await dispatch(setGroups(responseData))
+      });
+      const responseData = await response.json();
+      await dispatch(setGroups(responseData));
       for (let i = 0; i < responseData.length; i++) {
         groupData = [...groupData,
           {
             value: responseData[i].groupId,
             label: responseData[i].groupId
           }
-        ]
+        ];
       }
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getSubGroups = async () => {
-    subGroupData = []
+    subGroupData = [];
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/addRooms/subGroups`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      await dispatch(setSubGroups(responseData))
+      });
+      const responseData = await response.json();
+      await dispatch(setSubGroups(responseData));
       for (let i = 0; i < responseData.length; i++) {
         subGroupData = [...subGroupData,
           {
             value: responseData[i].subGroupId,
             label: responseData[i].subGroupId
           }
-        ]
+        ];
       }
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   useEffect(() => {
     getTags().then(() => {
-    })
+    });
     getSubjects().then(() => {
-    })
+    });
     getLecturers().then(() => {
-    })
+    });
     getGroups().then(() => {
-    })
+    });
     getSubGroups().then(() => {
-    })
+    });
     getRooms().then(() => {
-    })
-  }, [possibleRooms])
+    });
+  }, [possibleRooms]);
 
   const getPossibleRoomsByTag = async (tag: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/addRooms/getPossibleRoomsByTag`, {
         method: 'POST',
@@ -246,20 +246,20 @@ const AddRoomsForm: React.FC = () => {
         body: JSON.stringify({
           tag
         })
-      })
-      const responseData = await response.json()
-      setPossibleRooms(responseData.possibleRooms)
-      setPossibleRoomsObject(responseData.possibleRoomsObject)
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setPossibleRooms(responseData.possibleRooms);
+      setPossibleRoomsObject(responseData.possibleRoomsObject);
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getPossibleRoomsBySubjectAndTag = async (subject: string, tag: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/addRooms/getPossibleRoomsBySubjectAndTag`, {
         method: 'POST',
@@ -270,20 +270,20 @@ const AddRoomsForm: React.FC = () => {
           subject,
           tag
         })
-      })
-      const responseData = await response.json()
-      setPossibleRooms(responseData.possibleRooms)
-      setPossibleRoomsObject(responseData.possibleRoomsObject)
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setPossibleRooms(responseData.possibleRooms);
+      setPossibleRoomsObject(responseData.possibleRoomsObject);
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getPossibleRoomsByLecturer = async (lecturer: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/addRooms/getPossibleRoomsByLecturer`, {
         method: 'POST',
@@ -293,20 +293,20 @@ const AddRoomsForm: React.FC = () => {
         body: JSON.stringify({
           lecturer
         })
-      })
-      const responseData = await response.json()
-      setPossibleRooms(responseData.possibleRooms)
-      setPossibleRoomsObject(responseData.possibleRoomsObject)
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setPossibleRooms(responseData.possibleRooms);
+      setPossibleRoomsObject(responseData.possibleRoomsObject);
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getPossibleRoomsByGroup = async (group: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/addRooms/getPossibleRoomsByGroup`, {
         method: 'POST',
@@ -316,20 +316,20 @@ const AddRoomsForm: React.FC = () => {
         body: JSON.stringify({
           group
         })
-      })
-      const responseData = await response.json()
-      setPossibleRooms(responseData.possibleRooms)
-      setPossibleRoomsObject(responseData.possibleRoomsObject)
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setPossibleRooms(responseData.possibleRooms);
+      setPossibleRoomsObject(responseData.possibleRoomsObject);
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getPossibleRoomsBySubGroup = async (subGroup: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/addRooms/getPossibleRoomsBySubGroup`, {
         method: 'POST',
@@ -339,253 +339,253 @@ const AddRoomsForm: React.FC = () => {
         body: JSON.stringify({
           subGroup
         })
-      })
-      const responseData = await response.json()
-      setPossibleRooms(responseData.possibleRooms)
-      setPossibleRoomsObject(responseData.possibleRoomsObject)
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setPossibleRooms(responseData.possibleRooms);
+      setPossibleRoomsObject(responseData.possibleRoomsObject);
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const handleChangeTag = (e: any) => {
-    setLoading(true)
+    setLoading(true);
     setTag({
       label: e.value
-    })
+    });
     getPossibleRoomsByTag(e.value).then(() => {
-    })
-    setDisabled(false)
-    setLoading(false)
-  }
+    });
+    setDisabled(false);
+    setLoading(false);
+  };
 
   const handleChangeSubject = (e: any) => {
-    setLoading(true)
+    setLoading(true);
     setSubject({
       label: e.value
-    })
+    });
     if (subjectTag.label !== 'Select Tag') {
       getPossibleRoomsBySubjectAndTag(e.value, subjectTag.label).then(() => {
-      })
-      setDisabled(false)
+      });
+      setDisabled(false);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   const handleChangeSubjectTag = (e: any) => {
-    setLoading(true)
+    setLoading(true);
     setSubjectTag({
       label: e.value
-    })
+    });
     if (subject.label !== 'Select Subject') {
       getPossibleRoomsBySubjectAndTag(subject.label, e.value).then(() => {
-      })
-      setDisabled(false)
+      });
+      setDisabled(false);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   const handleChangeLecturer = (e: any) => {
-    setLoading(true)
+    setLoading(true);
     setLecturer({
       label: e.value
-    })
+    });
     getPossibleRoomsByLecturer(e.value).then(() => {
-    })
-    setDisabled(false)
-    setLoading(false)
-  }
+    });
+    setDisabled(false);
+    setLoading(false);
+  };
 
   const handleChangeGroup = (e: any) => {
-    setLoading(true)
+    setLoading(true);
     setGroup({
       label: e.value
-    })
+    });
     getPossibleRoomsByGroup(e.value).then(() => {
-    })
-    setDisabled(false)
-    setLoading(false)
-  }
+    });
+    setDisabled(false);
+    setLoading(false);
+  };
 
   const handleChangeSubGroup = (e: any) => {
-    setLoading(true)
+    setLoading(true);
     setSubGroup({
       label: e.value
-    })
+    });
     getPossibleRoomsBySubGroup(e.value).then(() => {
-    })
-    setDisabled(false)
-    setLoading(false)
-  }
+    });
+    setDisabled(false);
+    setLoading(false);
+  };
 
   const handleSelectTag = () => {
-    setDisabled(true)
-    setPossibleRooms([])
-    setPossibleRoomsObject([])
-    setTagDisabled(false)
-    setSubjectDisabled(true)
-    setSubjectTagDisabled(true)
-    setLecturerDisabled(true)
-    setGroupDisabled(true)
-    setSubGroupDisabled(true)
+    setDisabled(true);
+    setPossibleRooms([]);
+    setPossibleRoomsObject([]);
+    setTagDisabled(false);
+    setSubjectDisabled(true);
+    setSubjectTagDisabled(true);
+    setLecturerDisabled(true);
+    setGroupDisabled(true);
+    setSubGroupDisabled(true);
     setTag({
       label: 'Select Tag'
-    })
+    });
     setSubject({
       label: 'Select Subject'
-    })
+    });
     setSubjectTag({
       label: 'Select Tag'
-    })
+    });
     setLecturer({
       label: 'Select Lecturer'
-    })
+    });
     setGroup({
       label: 'Select Group'
-    })
+    });
     setSubGroup({
       label: 'Select Sub Group'
-    })
-  }
+    });
+  };
 
   const handleSelectSubjectAndTag = () => {
-    setDisabled(true)
-    setPossibleRooms([])
-    setPossibleRoomsObject([])
-    setTagDisabled(true)
-    setSubjectDisabled(false)
-    setSubjectTagDisabled(false)
-    setLecturerDisabled(true)
-    setGroupDisabled(true)
-    setSubGroupDisabled(true)
+    setDisabled(true);
+    setPossibleRooms([]);
+    setPossibleRoomsObject([]);
+    setTagDisabled(true);
+    setSubjectDisabled(false);
+    setSubjectTagDisabled(false);
+    setLecturerDisabled(true);
+    setGroupDisabled(true);
+    setSubGroupDisabled(true);
     setTag({
       label: 'Select Tag'
-    })
+    });
     setSubject({
       label: 'Select Subject'
-    })
+    });
     setSubjectTag({
       label: 'Select Tag'
-    })
+    });
     setLecturer({
       label: 'Select Lecturer'
-    })
+    });
     setGroup({
       label: 'Select Group'
-    })
+    });
     setSubGroup({
       label: 'Select Sub Group'
-    })
-  }
+    });
+  };
 
   const handleSelectLecturer = () => {
-    setDisabled(true)
-    setPossibleRooms([])
-    setPossibleRoomsObject([])
-    setTagDisabled(true)
-    setSubjectDisabled(true)
-    setSubjectTagDisabled(true)
-    setLecturerDisabled(false)
-    setGroupDisabled(true)
-    setSubGroupDisabled(true)
+    setDisabled(true);
+    setPossibleRooms([]);
+    setPossibleRoomsObject([]);
+    setTagDisabled(true);
+    setSubjectDisabled(true);
+    setSubjectTagDisabled(true);
+    setLecturerDisabled(false);
+    setGroupDisabled(true);
+    setSubGroupDisabled(true);
     setTag({
       label: 'Select Tag'
-    })
+    });
     setSubject({
       label: 'Select Subject'
-    })
+    });
     setSubjectTag({
       label: 'Select Tag'
-    })
+    });
     setLecturer({
       label: 'Select Lecturer'
-    })
+    });
     setGroup({
       label: 'Select Group'
-    })
+    });
     setSubGroup({
       label: 'Select Sub Group'
-    })
-  }
+    });
+  };
 
   const handleSelectGroup = () => {
-    setDisabled(true)
-    setPossibleRooms([])
-    setPossibleRoomsObject([])
-    setTagDisabled(true)
-    setSubjectDisabled(true)
-    setSubjectTagDisabled(true)
-    setLecturerDisabled(true)
-    setGroupDisabled(false)
-    setSubGroupDisabled(true)
+    setDisabled(true);
+    setPossibleRooms([]);
+    setPossibleRoomsObject([]);
+    setTagDisabled(true);
+    setSubjectDisabled(true);
+    setSubjectTagDisabled(true);
+    setLecturerDisabled(true);
+    setGroupDisabled(false);
+    setSubGroupDisabled(true);
     setTag({
       label: 'Select Tag'
-    })
+    });
     setSubject({
       label: 'Select Subject'
-    })
+    });
     setSubjectTag({
       label: 'Select Tag'
-    })
+    });
     setLecturer({
       label: 'Select Lecturer'
-    })
+    });
     setGroup({
       label: 'Select Group'
-    })
+    });
     setSubGroup({
       label: 'Select Sub Group'
-    })
-  }
+    });
+  };
 
   const handleSelectSubGroup = () => {
-    setDisabled(true)
-    setPossibleRooms([])
-    setPossibleRoomsObject([])
-    setTagDisabled(true)
-    setSubjectDisabled(true)
-    setSubjectTagDisabled(true)
-    setLecturerDisabled(true)
-    setGroupDisabled(true)
-    setSubGroupDisabled(false)
+    setDisabled(true);
+    setPossibleRooms([]);
+    setPossibleRoomsObject([]);
+    setTagDisabled(true);
+    setSubjectDisabled(true);
+    setSubjectTagDisabled(true);
+    setLecturerDisabled(true);
+    setGroupDisabled(true);
+    setSubGroupDisabled(false);
     setTag({
       label: 'Select Tag'
-    })
+    });
     setSubject({
       label: 'Select Subject'
-    })
+    });
     setSubjectTag({
       label: 'Select Tag'
-    })
+    });
     setLecturer({
       label: 'Select Lecturer'
-    })
+    });
     setGroup({
       label: 'Select Group'
-    })
+    });
     setSubGroup({
       label: 'Select Sub Group'
-    })
-  }
+    });
+  };
 
   const handleRoomsSelect = (e: any, roomName: string) => {
     if (e.target.checked) {
       setPossibleRoomsObject([...possibleRoomsObject, {
         roomRef: roomName
-      }])
-      setPossibleRooms([...possibleRooms, roomName])
+      }]);
+      setPossibleRooms([...possibleRooms, roomName]);
     } else {
-      setPossibleRoomsObject(possibleRoomsObject.filter((room: any) => room.roomRef !== roomName))
-      setPossibleRooms(possibleRooms.filter((room: any) => room !== roomName))
+      setPossibleRoomsObject(possibleRoomsObject.filter((room: any) => room.roomRef !== roomName));
+      setPossibleRooms(possibleRooms.filter((room: any) => room !== roomName));
     }
-  }
+  };
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    setLoading(true)
+    e.preventDefault();
+    setLoading(true);
     if (!tagDisabled && tag.label !== 'Select Tag') {
       try {
         const response = await fetch(`${proxy}/addRooms/addRoomsToTag`, {
@@ -597,14 +597,14 @@ const AddRoomsForm: React.FC = () => {
             'tag': tag.label,
             'possibleRooms': possibleRoomsObject
           })
-        })
-        const responseData = await response.json()
-        setMessage(responseData.message)
-        setLoading(false)
+        });
+        const responseData = await response.json();
+        setMessage(responseData.message);
+        setLoading(false);
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
     } else if (!subjectDisabled && !subjectTagDisabled && subjectTag.label !== 'Select Tag'
       && subject.label !== 'Select Subject') {
@@ -619,14 +619,14 @@ const AddRoomsForm: React.FC = () => {
             'subjectTag': subjectTag.label,
             'possibleRooms': possibleRoomsObject
           })
-        })
-        const responseData = await response.json()
-        setMessage(responseData.message)
-        setLoading(false)
+        });
+        const responseData = await response.json();
+        setMessage(responseData.message);
+        setLoading(false);
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
     } else if (!lecturerDisabled && lecturer.label !== 'Select Lecturer') {
       try {
@@ -639,14 +639,14 @@ const AddRoomsForm: React.FC = () => {
             'lecturer': lecturer.label,
             'possibleRooms': possibleRoomsObject
           })
-        })
-        const responseData = await response.json()
-        setMessage(responseData.message)
-        setLoading(false)
+        });
+        const responseData = await response.json();
+        setMessage(responseData.message);
+        setLoading(false);
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
     } else if (!groupDisabled && group.label !== 'Select Group') {
       try {
@@ -659,14 +659,14 @@ const AddRoomsForm: React.FC = () => {
             'group': group.label,
             'possibleRooms': possibleRoomsObject
           })
-        })
-        const responseData = await response.json()
-        setMessage(responseData.message)
-        setLoading(false)
+        });
+        const responseData = await response.json();
+        setMessage(responseData.message);
+        setLoading(false);
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
     } else if (!subGroupDisabled && subGroup.label !== 'Select Sub Group') {
       try {
@@ -679,63 +679,63 @@ const AddRoomsForm: React.FC = () => {
             'subGroup': subGroup.label,
             'possibleRooms': possibleRoomsObject
           })
-        })
-        const responseData = await response.json()
-        setMessage(responseData.message)
-        setLoading(false)
+        });
+        const responseData = await response.json();
+        setMessage(responseData.message);
+        setLoading(false);
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
     } else {
-      const content = 'Select values from dropdown list properly before submitting and please try again!'
-      setMessage(content)
-      alert(content)
+      const content = 'Select values from dropdown list properly before submitting and please try again!';
+      setMessage(content);
+      alert(content);
     }
-    setPossibleRooms([])
-    setPossibleRoomsObject([])
-    setDisabled(true)
-    setTagDisabled(true)
-    setSubjectDisabled(true)
-    setSubjectTagDisabled(true)
-    setLecturerDisabled(true)
-    setGroupDisabled(true)
-    setSubGroupDisabled(true)
+    setPossibleRooms([]);
+    setPossibleRoomsObject([]);
+    setDisabled(true);
+    setTagDisabled(true);
+    setSubjectDisabled(true);
+    setSubjectTagDisabled(true);
+    setLecturerDisabled(true);
+    setGroupDisabled(true);
+    setSubGroupDisabled(true);
     setTag({
       label: 'Select Tag'
-    })
+    });
     setSubject({
       label: 'Select Subject'
-    })
+    });
     setSubjectTag({
       label: 'Select Tag'
-    })
+    });
     setLecturer({
       label: 'Select Lecturer'
-    })
+    });
     setGroup({
       label: 'Select Group'
-    })
+    });
     setSubGroup({
       label: 'Select Sub Group'
-    })
-    setLoading(false)
-    handleShow()
-  }
+    });
+    setLoading(false);
+    handleShow();
+  };
 
   const handleClose = () => {
-    setLoading(true)
-    setShow(false)
-    setLoading(false)
-    window.location.reload()
-  }
+    setLoading(true);
+    setShow(false);
+    setLoading(false);
+    window.location.reload();
+  };
 
   const handleShow = () => {
-    setLoading(true)
-    setShow(true)
-    setLoading(false)
-  }
+    setLoading(true);
+    setShow(true);
+    setLoading(false);
+  };
 
   return (
     <div style={{
@@ -750,7 +750,7 @@ const AddRoomsForm: React.FC = () => {
                             label='Tag'
                             name='RadioButton'
                             id='tagRadioBtn'
-                            onClick={handleSelectTag}/>
+                            onClick={handleSelectTag} />
                 <div style={{
                   width: '80%',
                   height: '80px',
@@ -769,7 +769,7 @@ const AddRoomsForm: React.FC = () => {
                           isSearchable={true}
                           name='tag'
                           options={tagData}
-                          onChange={tag => handleChangeTag(tag)}/>
+                          onChange={tag => handleChangeTag(tag)} />
                 </div>
               </div>
               <div>
@@ -777,7 +777,7 @@ const AddRoomsForm: React.FC = () => {
                             label='Subject & Tag'
                             name='RadioButton'
                             id='subjectAndTagRadioBtn'
-                            onClick={handleSelectSubjectAndTag}/>
+                            onClick={handleSelectSubjectAndTag} />
                 <div style={{
                   width: '80%',
                   height: '50px',
@@ -796,7 +796,7 @@ const AddRoomsForm: React.FC = () => {
                           isSearchable={true}
                           name='subject'
                           options={subjectData}
-                          onChange={subject => handleChangeSubject(subject)}/>
+                          onChange={subject => handleChangeSubject(subject)} />
                 </div>
                 <div style={{
                   width: '80%',
@@ -816,7 +816,7 @@ const AddRoomsForm: React.FC = () => {
                           isSearchable={true}
                           name='subjectTag'
                           options={tagData}
-                          onChange={subjectTag => handleChangeSubjectTag(subjectTag)}/>
+                          onChange={subjectTag => handleChangeSubjectTag(subjectTag)} />
                 </div>
               </div>
               <div>
@@ -824,7 +824,7 @@ const AddRoomsForm: React.FC = () => {
                             label='Lecturer'
                             name='RadioButton'
                             id='lecturerRadioBtn'
-                            onClick={handleSelectLecturer}/>
+                            onClick={handleSelectLecturer} />
                 <div style={{
                   width: '80%',
                   height: '80px',
@@ -843,7 +843,7 @@ const AddRoomsForm: React.FC = () => {
                           isSearchable={true}
                           name='lecturer'
                           options={lecturerData}
-                          onChange={lecturer => handleChangeLecturer(lecturer)}/>
+                          onChange={lecturer => handleChangeLecturer(lecturer)} />
                 </div>
               </div>
               <div>
@@ -851,7 +851,7 @@ const AddRoomsForm: React.FC = () => {
                             label='Group'
                             name='RadioButton'
                             id='groupRadioBtn'
-                            onClick={handleSelectGroup}/>
+                            onClick={handleSelectGroup} />
                 <div style={{
                   width: '80%',
                   height: '80px',
@@ -870,7 +870,7 @@ const AddRoomsForm: React.FC = () => {
                           isSearchable={true}
                           name='group'
                           options={groupData}
-                          onChange={group => handleChangeGroup(group)}/>
+                          onChange={group => handleChangeGroup(group)} />
                 </div>
               </div>
               <div>
@@ -878,7 +878,7 @@ const AddRoomsForm: React.FC = () => {
                             label='Sub Group'
                             name='RadioButton'
                             id='subGroupRadioBtn'
-                            onClick={handleSelectSubGroup}/>
+                            onClick={handleSelectSubGroup} />
                 <div style={{
                   width: '80%',
                   height: '375px',
@@ -897,7 +897,7 @@ const AddRoomsForm: React.FC = () => {
                           isSearchable={true}
                           name='subGroup'
                           options={subGroupData}
-                          onChange={subGroup => handleChangeSubGroup(subGroup)}/>
+                          onChange={subGroup => handleChangeSubGroup(subGroup)} />
                 </div>
               </div>
               {
@@ -945,7 +945,7 @@ const AddRoomsForm: React.FC = () => {
                            style={{
                              textAlign: 'center',
                              marginLeft: '50%'
-                           }}/>
+                           }} />
                 )
               }
             </Modal>
@@ -969,8 +969,8 @@ const AddRoomsForm: React.FC = () => {
                                   style={{
                                     width: 'max-content',
                                     marginRight: '30px'
-                                  }}/>
-                    )
+                                  }} />
+                    );
                   } else {
                     return (
                       <Form.Check type='checkbox'
@@ -982,8 +982,8 @@ const AddRoomsForm: React.FC = () => {
                                   style={{
                                     width: 'max-content',
                                     marginRight: '30px'
-                                  }}/>
-                    )
+                                  }} />
+                    );
                   }
                 })
               }
@@ -1018,7 +1018,7 @@ const AddRoomsForm: React.FC = () => {
                            style={{
                              textAlign: 'center',
                              marginLeft: '50%'
-                           }}/>
+                           }} />
                 )
               }
             </div>
@@ -1042,7 +1042,7 @@ const AddRoomsForm: React.FC = () => {
         </Row>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddRoomsForm
+export default AddRoomsForm;

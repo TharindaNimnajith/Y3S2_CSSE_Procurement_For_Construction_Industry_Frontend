@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 
 const setParallelSessionsSlice = createSlice({
@@ -25,10 +25,10 @@ const setParallelSessionsSlice = createSlice({
   }
 });
 
-export const {setParallelSessions} = setParallelSessionsSlice.actions;
-export const {setEditParallelSession} = setParallelSessionsSlice.actions;
-export const {setEditingParallelSessionId} = setParallelSessionsSlice.actions;
-export const {setEditingParallelSession} = setParallelSessionsSlice.actions;
+export const { setParallelSessions } = setParallelSessionsSlice.actions;
+export const { setEditParallelSession } = setParallelSessionsSlice.actions;
+export const { setEditingParallelSessionId } = setParallelSessionsSlice.actions;
+export const { setEditingParallelSession } = setParallelSessionsSlice.actions;
 
 export default setParallelSessionsSlice.reducer;
 

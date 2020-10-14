@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 
 const setNotAvailablesSlice = createSlice({
@@ -25,10 +25,10 @@ const setNotAvailablesSlice = createSlice({
   }
 });
 
-export const {setNotAvailables} = setNotAvailablesSlice.actions;
-export const {setEditNotAvailable} = setNotAvailablesSlice.actions;
-export const {setEditingNotAvailableId} = setNotAvailablesSlice.actions;
-export const {setEditingNotAvailable} = setNotAvailablesSlice.actions;
+export const { setNotAvailables } = setNotAvailablesSlice.actions;
+export const { setEditNotAvailable } = setNotAvailablesSlice.actions;
+export const { setEditingNotAvailableId } = setNotAvailablesSlice.actions;
+export const { setEditingNotAvailable } = setNotAvailablesSlice.actions;
 
 export default setNotAvailablesSlice.reducer;
 

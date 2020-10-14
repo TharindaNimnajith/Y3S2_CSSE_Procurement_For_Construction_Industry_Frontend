@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import {Redirect} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './subGroupNums.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setEditingSubGroupNum, setEditingSubGroupNumId, setEditSubGroupNum} from './subGroupNumsSlice';
-import {proxy} from '../../conf'
+import { setEditingSubGroupNum, setEditingSubGroupNumId, setEditSubGroupNum } from './subGroupNumsSlice';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 
 const SubGroupNumsEdit: React.FC = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const SubGroupNumsEdit: React.FC = () => {
   });
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
   const [id, setId] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
 
@@ -54,12 +54,12 @@ const SubGroupNumsEdit: React.FC = () => {
 
     console.log(finalObjectWithID);
     if (isNaN(Number(subGroupNum.subGroupNum.trim()))) {
-      errors_ = 'Please enter a numerical value for the sub group number.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please enter a numerical value for the sub group number.';
+      setError(true);
+      setLoading(false);
     }
     if (!isNaN(Number(subGroupNum.subGroupNum.trim()))) {
-      setError(false)
+      setError(false);
 
       try {
         const response = await fetch(
@@ -88,14 +88,14 @@ const SubGroupNumsEdit: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.SUBGROUPNUMS_LIST_VIEW}/>;
+      return <Redirect to={routes.SUBGROUPNUMS_LIST_VIEW} />;
     }
     return null;
   };
 
   const handleChangeSubGroupNum = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
-    setSubGroupNum({...subGroupNum, subGroupNum: e.target.value});
+    setError(false);
+    setSubGroupNum({ ...subGroupNum, subGroupNum: e.target.value });
   };
 
 
@@ -108,13 +108,13 @@ const SubGroupNumsEdit: React.FC = () => {
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Edit Sub Group Number</h3>
         </Col>
@@ -140,7 +140,7 @@ const SubGroupNumsEdit: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={subGroupNum.subGroupNum}
                     onChange={handleChangeSubGroupNum}
                     placeholder="ex:- 1"
@@ -150,20 +150,20 @@ const SubGroupNumsEdit: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
             <Col xs={3} md={10}>
               <Button
-                style={{width: '250px', fontSize: '1.3em'}}
+                style={{ width: '250px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Edit Sub Group Number
               </Button>
             </Col>
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
           </Row>
 
 

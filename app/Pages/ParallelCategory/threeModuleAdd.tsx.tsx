@@ -1,18 +1,18 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Modal, Row, Spinner} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Modal, Row, Spinner } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './parallelCategory.css';
 import routes from '../../constants/routes.json';
-import {proxy} from '../../conf';
+import { proxy } from '../../conf';
 
 
-let errors_: string = ''
+let errors_: string = '';
 
 
 var exist = 0;
@@ -24,7 +24,7 @@ const ThreeModuleAdd: React.FC = () => {
   const [module3List, setModule3List] = useState<any>([]);
 
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
@@ -107,27 +107,27 @@ const ThreeModuleAdd: React.FC = () => {
 
 
     if ((id1.trim() === '') && (id2.trim() === '') && (id3.trim() === '')) {
-      errors_ = 'Please select  values for all fields.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please select  values for all fields.';
+      setError(true);
+      setLoading(false);
 
 
     } else {
       if (id1.trim() === '') {
-        errors_ = 'Please select module1 .'
-        setError(true)
-        setLoading(false)
-        console.log("1 ")
+        errors_ = 'Please select module1 .';
+        setError(true);
+        setLoading(false);
+        console.log('1 ');
 
       } else if (id2.trim() === '') {
-        errors_ = 'Please select module2.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select module2.';
+        setError(true);
+        setLoading(false);
 
       } else if (id3.trim() === '') {
-        errors_ = 'Please select module3.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select module3.';
+        setError(true);
+        setLoading(false);
 
       }
 
@@ -160,15 +160,15 @@ const ThreeModuleAdd: React.FC = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(finalObjectGroup)
-        })
-        const responseData = await response.json()
-        console.log(responseData)
+        });
+        const responseData = await response.json();
+        console.log(responseData);
         setRenderRedirectTo(true);
 
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
 
       try {
@@ -179,15 +179,15 @@ const ThreeModuleAdd: React.FC = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(finalObjectGroup)
-        })
-        const responseData = await response.json()
-        console.log(responseData)
+        });
+        const responseData = await response.json();
+        console.log(responseData);
         setRenderRedirectTo1(true);
 
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
       try {
 
@@ -197,15 +197,15 @@ const ThreeModuleAdd: React.FC = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(finalObjectGroup)
-        })
-        const responseData = await response.json()
-        console.log(responseData)
+        });
+        const responseData = await response.json();
+        console.log(responseData);
         setRenderRedirectTo2(true);
 
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
     }
 
@@ -215,7 +215,7 @@ const ThreeModuleAdd: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo && renderRedirectTo1 && renderRedirectTo2) {
-      return <Redirect to={routes.SUBJECTS_LIST_VIEW}/>;
+      return <Redirect to={routes.SUBJECTS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -223,7 +223,7 @@ const ThreeModuleAdd: React.FC = () => {
 
 
   const handleModule1 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
 
     setId1(e.target.value);
     setCategory1(false);
@@ -234,7 +234,7 @@ const ThreeModuleAdd: React.FC = () => {
 
   const handleModule2 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
+    setError(false);
     setId2(e.target.value);
     setCategory2(false);
     getModule2(e.target.value);
@@ -243,7 +243,7 @@ const ThreeModuleAdd: React.FC = () => {
 
   const handleModule3 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
+    setError(false);
     setId3(e.target.value);
     setCategory3(false);
     getModule3(e.target.value);
@@ -253,15 +253,15 @@ const ThreeModuleAdd: React.FC = () => {
 
   const getModule1 = async (id: string) => {
     console.log(id);
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/subjects/subjects1/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       setSubjectName1(responseData.subjectName);
 
 
@@ -270,65 +270,65 @@ const ThreeModuleAdd: React.FC = () => {
       }
 
 
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getModule2 = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/subjects/subjects1/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       setSubjectName2(responseData.subjectName);
 
       if (responseData.category) {
         setCategory2(true);
       }
 
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getModule3 = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/subjects/subjects1/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       setSubjectName3(responseData.subjectName);
 
       if (responseData.category) {
         setCategory3(true);
       }
 
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
   return (
     <div
       style={{
-        backgroundColor: '#37474F',
+        backgroundColor: '#37474F'
 
       }}
     >
@@ -359,7 +359,7 @@ const ThreeModuleAdd: React.FC = () => {
                      style={{
                        textAlign: 'center',
                        marginLeft: '50%'
-                     }}/>
+                     }} />
           )
         }
       </Modal>
@@ -386,7 +386,7 @@ const ThreeModuleAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={id1}
                     onChange={handleModule1}
                   >
@@ -400,7 +400,7 @@ const ThreeModuleAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={2}/>
+            <Col xs={3} md={2} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -413,7 +413,7 @@ const ThreeModuleAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={id2}
                     onChange={handleModule2}
                   >
@@ -441,7 +441,7 @@ const ThreeModuleAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={id3}
                     onChange={handleModule3}
                   >
@@ -455,22 +455,22 @@ const ThreeModuleAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={2}/>
+            <Col xs={3} md={2} />
           </Row>
 
 
           <Row className="mt-2 mb-2 justify-content-md-center">
-            <Col xs={12} md={2}/>
+            <Col xs={12} md={2} />
             <Col xs={3} md={6}>
               <Button
-                style={{width: '170px', fontSize: '1.3em'}}
+                style={{ width: '170px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Create Category
               </Button>
             </Col>
 
-            <Col xs={12} md={4}/>
+            <Col xs={12} md={4} />
           </Row>
 
 

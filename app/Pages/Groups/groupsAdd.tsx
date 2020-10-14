@@ -1,24 +1,24 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Modal, Row, Spinner} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Modal, Row, Spinner } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './groups.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setGroups} from './groupsSlice';
+import { setGroups } from './groupsSlice';
 
-import {proxy} from '../../conf'
+import { proxy } from '../../conf';
 //const yearSemList = ['Y1S1', 'Y1S2', 'Y2S1', 'Y2S2', 'Y3S1', 'Y3S2', 'Y4S1', 'Y4S2'];
 //const programList = ['SE', 'CS', 'DS', 'IT'];
 //const groupNumList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 //const subGroupNumList = [1, 2];
-let errors_: string = ''
+let errors_: string = '';
 
 
 var exist = 0;
@@ -31,7 +31,7 @@ const GroupsAdd: React.FC = () => {
   const [programList, setProgramList] = useState<any>([]);
   const [groupNumList, setGroupNumList] = useState<any>([]);
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
@@ -91,7 +91,7 @@ const GroupsAdd: React.FC = () => {
   };
   const renderRedirectToView = () => {
     if (groupsObject) {
-      return <Redirect to={routes.GROUPS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -168,36 +168,36 @@ const GroupsAdd: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    console.log("clicked sub group one222222222222222222222222")
+    console.log('clicked sub group one222222222222222222222222');
 
     if ((academicYearAndSemester === null) && (programme === null) && (group === null)) {
-      errors_ = 'Please select  values for all fields.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please select  values for all fields.';
+      setError(true);
+      setLoading(false);
 
 
     } else {
       if (academicYearAndSemester === null) {
-        errors_ = 'Please select values for the academic year and semster.'
-        setError(true)
-        setLoading(false)
-        console.log("1 ")
+        errors_ = 'Please select values for the academic year and semster.';
+        setError(true);
+        setLoading(false);
+        console.log('1 ');
 
       } else if (programme === null) {
-        errors_ = 'Please select  values for the programme.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select  values for the programme.';
+        setError(true);
+        setLoading(false);
 
       } else if (group === null) {
-        errors_ = 'Please select  values for the group.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select  values for the group.';
+        setError(true);
+        setLoading(false);
 
       }
     }
 
     if (groupId) {
-      setError(false)
+      setError(false);
       const finalObjectGroup = {
         academicYear,
         academicSemester,
@@ -213,7 +213,7 @@ const GroupsAdd: React.FC = () => {
         if (rec.groupId === groupId) {
           exist = 1;
 
-          console.log("This group is already exists")
+          console.log('This group is already exists');
           return;
         }
 
@@ -264,33 +264,33 @@ const GroupsAdd: React.FC = () => {
 
   const handleSubmitSub = async () => {
     if ((academicYearAndSemester === null) && (programme === null) && (group === null)) {
-      errors_ = 'Please select  values for all fields.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please select  values for all fields.';
+      setError(true);
+      setLoading(false);
 
 
     } else {
       if (academicYearAndSemester === null) {
-        errors_ = 'Please select values for the academic year and semster.'
-        setError(true)
-        setLoading(false)
-        console.log("1 ")
+        errors_ = 'Please select values for the academic year and semster.';
+        setError(true);
+        setLoading(false);
+        console.log('1 ');
 
       } else if (programme === null) {
-        errors_ = 'Please select  values for the programme.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select  values for the programme.';
+        setError(true);
+        setLoading(false);
 
       } else if (group === null) {
-        errors_ = 'Please select  values for the group.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select  values for the group.';
+        setError(true);
+        setLoading(false);
 
       }
     }
 
     if (groupId) {
-      setError(false)
+      setError(false);
 
       const finalObjectGroup = {
         academicYear,
@@ -307,7 +307,7 @@ const GroupsAdd: React.FC = () => {
 
         if (rec.groupId === groupId) {
           exist = 1;
-          console.log("This group is already exists")
+          console.log('This group is already exists');
           return;
         }
         exist = 0;
@@ -391,7 +391,7 @@ const GroupsAdd: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo && renderRedirectTo1) {
-      return <Redirect to={routes.GROUPS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -399,13 +399,13 @@ const GroupsAdd: React.FC = () => {
 
   const renderRedirectGro = () => {
     if (renderRedirectToGro) {
-      return <Redirect to={routes.GROUPS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
   };
   const handleChangeAcademicYearAndSemester = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     const val = e.target.value;
     setAcademicYearAndSemester(e.target.value);
 
@@ -440,12 +440,12 @@ const GroupsAdd: React.FC = () => {
   };
 
   const handleChangeProgramme = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     setProgramme(e.target.value);
   };
 
   const handleChangeGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     const val = parseInt(e.target.value);
 
     setGroup(val);
@@ -473,7 +473,7 @@ const GroupsAdd: React.FC = () => {
 
 
     //var subId = 'Y' + year + '.S' + sem + '.' + pro + '.0' + groupforId + '.1';
-    setSubGrouup({subGroup: subNum, subGroupId: subId});
+    setSubGrouup({ subGroup: subNum, subGroupId: subId });
 
 
   };
@@ -505,7 +505,7 @@ const GroupsAdd: React.FC = () => {
 
       {renderRedirect()}
       {renderRedirectGro()}
-      <NavBar/>
+      <NavBar />
       <Modal show={show}
              onHide={handleClose}
       >
@@ -529,7 +529,7 @@ const GroupsAdd: React.FC = () => {
                      style={{
                        textAlign: 'center',
                        marginLeft: '50%'
-                     }}/>
+                     }} />
           )
         }
       </Modal>
@@ -538,7 +538,7 @@ const GroupsAdd: React.FC = () => {
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Add Student Group</h3>
         </Col>
@@ -565,7 +565,7 @@ const GroupsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={academicYearAndSemester}
                     onChange={handleChangeAcademicYearAndSemester}
                   >
@@ -578,7 +578,7 @@ const GroupsAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -591,7 +591,7 @@ const GroupsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={programme}
                     onChange={handleChangeProgramme}
                   >
@@ -619,7 +619,7 @@ const GroupsAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={group}
                     onChange={handleChangeGroup}
                   >
@@ -632,7 +632,7 @@ const GroupsAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           {/* <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -670,10 +670,10 @@ const GroupsAdd: React.FC = () => {
               </Row>
           )*/}
           <Row className="mt-2 mb-2 justify-content-md-center">
-            <Col xs={12} md={2}/>
+            <Col xs={12} md={2} />
             <Col xs={3} md={4}>
               <Button
-                style={{width: '250px', fontSize: '1.3em'}}
+                style={{ width: '250px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Generate a New Group
@@ -681,13 +681,13 @@ const GroupsAdd: React.FC = () => {
             </Col>
             <Col xs={3} md={6}>
               <Button
-                style={{width: '300px', fontSize: '1.3em'}}
+                style={{ width: '300px', fontSize: '1.3em' }}
                 onClick={handleSubmitSub}
               >
                 New Group with Sub Group
               </Button>
             </Col>
-            <Col xs={12} md={2}/>
+            <Col xs={12} md={2} />
           </Row>
 
 

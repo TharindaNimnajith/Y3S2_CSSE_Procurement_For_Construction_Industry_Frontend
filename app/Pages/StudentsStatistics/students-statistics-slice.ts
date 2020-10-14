@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const setStudentsStatisticsSlice = createSlice({
   name: 'studentsStatistics',
@@ -9,19 +9,19 @@ const setStudentsStatisticsSlice = createSlice({
   },
   reducers: {
     setStudentsYearStatistics: (state, action: any) => {
-      state.studentsYearStatistics = action.payload
+      state.studentsYearStatistics = action.payload;
     },
     setStudentsYearSemesterStatistics: (state, action: any) => {
-      state.studentsYearSemesterStatistics = action.payload
+      state.studentsYearSemesterStatistics = action.payload;
     },
     setStudentsYearSemesterProgrammeStatistics: (state, action: any) => {
-      state.studentsYearSemesterProgrammeStatistics = action.payload
+      state.studentsYearSemesterProgrammeStatistics = action.payload;
     }
   }
-})
+});
 
-export const {setStudentsYearStatistics} = setStudentsStatisticsSlice.actions
-export const {setStudentsYearSemesterStatistics} = setStudentsStatisticsSlice.actions
-export const {setStudentsYearSemesterProgrammeStatistics} = setStudentsStatisticsSlice.actions
+export const { setStudentsYearStatistics } = setStudentsStatisticsSlice.actions;
+export const { setStudentsYearSemesterStatistics } = setStudentsStatisticsSlice.actions;
+export const { setStudentsYearSemesterProgrammeStatistics } = setStudentsStatisticsSlice.actions;
 
-export default setStudentsStatisticsSlice.reducer
+export default setStudentsStatisticsSlice.reducer;

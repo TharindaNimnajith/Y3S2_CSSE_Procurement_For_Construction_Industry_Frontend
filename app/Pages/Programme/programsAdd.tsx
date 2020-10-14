@@ -1,20 +1,20 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './programs.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setPrograms} from './programsSlice';
-import {proxy} from '../../conf'
+import { setPrograms } from './programsSlice';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 
 // noinspection DuplicatedCode
 const ProgramsAdd: React.FC = () => {
@@ -24,7 +24,7 @@ const ProgramsAdd: React.FC = () => {
 
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
   const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [name, setName] = useState<string>('');
   const [programToken, setProgramToken] = useState<string>('');
@@ -75,20 +75,20 @@ const ProgramsAdd: React.FC = () => {
 
   const handleSubmit = async () => {
     if (name.trim() === '' && programToken.trim() === '') {
-      errors_ = 'Please enter a value for the programme name and  token.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please enter a value for the programme name and  token.';
+      setError(true);
+      setLoading(false);
 
     } else {
       if (name.trim() === '') {
-        errors_ = 'Please enter a value for the programme  name.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please enter a value for the programme  name.';
+        setError(true);
+        setLoading(false);
 
       } else if (programToken.trim() === '') {
-        errors_ = 'Please enter a value for the programme  token.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please enter a value for the programme  token.';
+        setError(true);
+        setLoading(false);
 
       }
     }
@@ -103,7 +103,7 @@ const ProgramsAdd: React.FC = () => {
     console.log(finalObject);
 
     if (name.trim() !== '' && programToken.trim() !== '') {
-      setError(false)
+      setError(false);
       try {
         const response = await fetch(
           `${proxy}/programs/create`,
@@ -117,7 +117,7 @@ const ProgramsAdd: React.FC = () => {
         );
 
         const responseData = await response.json();
-        console.log(`HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII+${responseData}`)
+        console.log(`HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII+${responseData}`);
         setRenderRedirectTo(true);
         // console.log(responseData.userDetails);
 
@@ -133,19 +133,19 @@ const ProgramsAdd: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.PROGRAMS_LIST_VIEW}/>;
+      return <Redirect to={routes.PROGRAMS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
   };
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     setName(e.target.value);
   };
 
   const handleChangeProgramToken = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     setProgramToken(e.target.value);
 
   };
@@ -155,19 +155,19 @@ const ProgramsAdd: React.FC = () => {
     <div
       style={{
         backgroundColor: '#37474F',
-        height: '100vh',
+        height: '100vh'
 
       }}
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Add Programme</h3>
         </Col>
@@ -193,7 +193,7 @@ const ProgramsAdd: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={name}
                     onChange={handleChangeName}
                     placeholder="ex:-Software Engineering"
@@ -203,7 +203,7 @@ const ProgramsAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -216,7 +216,7 @@ const ProgramsAdd: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={programToken}
                     onChange={handleChangeProgramToken}
                     placeholder="ex:-SE"
@@ -228,16 +228,16 @@ const ProgramsAdd: React.FC = () => {
           </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
             <Col xs={3} md={10}>
               <Button
-                style={{width: '180px', fontSize: '1.3em'}}
+                style={{ width: '180px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Add Programme
               </Button>
             </Col>
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
           </Row>
 
           {

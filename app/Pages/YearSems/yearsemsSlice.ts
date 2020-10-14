@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 
 const setYearSemsSlice = createSlice({
@@ -25,10 +25,10 @@ const setYearSemsSlice = createSlice({
   }
 });
 
-export const {setYearSems} = setYearSemsSlice.actions;
-export const {setEditYearSem} = setYearSemsSlice.actions;
-export const {setEditingYearSemId} = setYearSemsSlice.actions;
-export const {setEditingYearSem} = setYearSemsSlice.actions;
+export const { setYearSems } = setYearSemsSlice.actions;
+export const { setEditYearSem } = setYearSemsSlice.actions;
+export const { setEditingYearSemId } = setYearSemsSlice.actions;
+export const { setEditingYearSem } = setYearSemsSlice.actions;
 
 export default setYearSemsSlice.reducer;
 

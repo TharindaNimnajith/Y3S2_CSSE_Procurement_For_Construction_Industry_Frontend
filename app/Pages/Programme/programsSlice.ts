@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 
 const setProgramsSlice = createSlice({
@@ -25,10 +25,10 @@ const setProgramsSlice = createSlice({
   }
 });
 
-export const {setPrograms} = setProgramsSlice.actions;
-export const {setEditProgram} = setProgramsSlice.actions;
-export const {setEditingProgramId} = setProgramsSlice.actions;
-export const {setEditingProgram} = setProgramsSlice.actions;
+export const { setPrograms } = setProgramsSlice.actions;
+export const { setEditProgram } = setProgramsSlice.actions;
+export const { setEditingProgramId } = setProgramsSlice.actions;
+export const { setEditingProgram } = setProgramsSlice.actions;
 
 export default setProgramsSlice.reducer;
 

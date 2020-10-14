@@ -1,32 +1,32 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux'
-import {Spinner, Table} from 'react-bootstrap'
-import {proxy} from '../../conf'
-import {setStudentsYearSemesterProgrammeStatistics} from './students-statistics-slice'
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Spinner, Table } from 'react-bootstrap';
+import { proxy } from '../../conf';
+import { setStudentsYearSemesterProgrammeStatistics } from './students-statistics-slice';
 
-let errors_: string = ''
-let data: any = []
+let errors_: string = '';
+let data: any = [];
 
 const StudentsYearSemesterProgrammeStatistics: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState<boolean>(false)
-  const [studentsYearSemesterProgrammeStatisticsArray, setStudentsYearSemesterProgrammeStatisticsArray] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(false);
+  const [studentsYearSemesterProgrammeStatisticsArray, setStudentsYearSemesterProgrammeStatisticsArray] = useState<any>([]);
 
   const getStudentsYearSemesterProgrammeStatistics = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/studentsStatistics/groupsCountByAcademicYearSemesterAndProgramme`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      setStudentsYearSemesterProgrammeStatisticsArray(responseData)
-      await dispatch(setStudentsYearSemesterProgrammeStatistics(responseData))
-      setLoading(false)
-      data = []
+      });
+      const responseData = await response.json();
+      setStudentsYearSemesterProgrammeStatisticsArray(responseData);
+      await dispatch(setStudentsYearSemesterProgrammeStatistics(responseData));
+      setLoading(false);
+      data = [];
       for (let i = 0; i < responseData.length; i++) {
         data = [...data,
           {
@@ -34,19 +34,19 @@ const StudentsYearSemesterProgrammeStatistics: React.FC = () => {
             groupsCount: responseData[i].groupsCount,
             subGroupsCount: responseData[i].subGroupsCount
           }
-        ]
+        ];
       }
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   useEffect(() => {
     getStudentsYearSemesterProgrammeStatistics().then(() => {
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <div>
@@ -59,7 +59,7 @@ const StudentsYearSemesterProgrammeStatistics: React.FC = () => {
                    style={{
                      textAlign: 'center',
                      marginLeft: '50%'
-                   }}/>
+                   }} />
         )
       }
       <div style={{
@@ -131,7 +131,7 @@ const StudentsYearSemesterProgrammeStatistics: React.FC = () => {
                     {studentsYearSemesterProgrammeStatisticsArrayElement.subGroupsCount}
                   </td>
                 </tr>
-              )
+              );
             })
           }
           </tbody>
@@ -152,7 +152,7 @@ const StudentsYearSemesterProgrammeStatistics: React.FC = () => {
         )
       }
     </div>
-  )
-}
+  );
+};
 
-export default StudentsYearSemesterProgrammeStatistics
+export default StudentsYearSemesterProgrammeStatistics;

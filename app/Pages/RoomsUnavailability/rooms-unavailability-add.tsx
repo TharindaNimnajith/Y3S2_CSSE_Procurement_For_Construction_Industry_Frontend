@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {Button, Form, Spinner} from 'react-bootstrap'
-import {FaPlusCircle} from 'react-icons/fa'
-import Select from 'react-select'
-import {proxy} from '../../conf'
-import {setExistingRoom, setRooms} from '../Rooms/rooms-slice'
-import {setRoomUnavailability, setUnavailableRoom} from './rooms-unavailability-slice'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Form, Spinner } from 'react-bootstrap';
+import { FaPlusCircle } from 'react-icons/fa';
+import Select from 'react-select';
+import { proxy } from '../../conf';
+import { setExistingRoom, setRooms } from '../Rooms/rooms-slice';
+import { setRoomUnavailability, setUnavailableRoom } from './rooms-unavailability-slice';
 
-let errors_: string = ''
-let data: any = []
+let errors_: string = '';
+let data: any = [];
 
 const days = [
   'Monday',
@@ -18,33 +18,33 @@ const days = [
   'Friday',
   'Saturday',
   'Sunday'
-]
+];
 
 const RoomsUnavailabilityAdd: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let roomList = useSelector(
     (state: {
       rooms: any
     }) => state.rooms.rooms
-  )
+  );
 
   const existingRoom = useSelector(
     (state: {
       rooms: any
       existingRoom: boolean
     }) => state.rooms.existingRoom
-  )
+  );
 
   let unavailableRoom = useSelector(
     (state: {
       roomsUnavailability: any
       unavailableRoom: any
     }) => state.roomsUnavailability.unavailableRoom
-  )
+  );
 
-  const [loading, setLoading] = useState<boolean>(false)
-  const [unavailableRoomObject, setUnavailableRoomObject] = useState<any>(null)
+  const [loading, setLoading] = useState<boolean>(false);
+  const [unavailableRoomObject, setUnavailableRoomObject] = useState<any>(null);
   const [room, setRoom] = useState<{
     roomName: string,
     day: string,
@@ -55,61 +55,61 @@ const RoomsUnavailabilityAdd: React.FC = () => {
     day: '',
     startTime: '',
     endTime: ''
-  })
+  });
 
   const getRooms = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/rooms/rooms`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      await dispatch(setRooms(responseData))
-      data = []
+      });
+      const responseData = await response.json();
+      await dispatch(setRooms(responseData));
+      data = [];
       for (let i = 0; i < responseData.length; i++) {
         data = [...data,
           {
             value: responseData[i].roomName,
             label: responseData[i].roomName
           }
-        ]
+        ];
       }
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   useEffect(() => {
     getRooms().then(() => {
-    })
-  }, [])
+    });
+  }, []);
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    setLoading(true)
-    await dispatch(setExistingRoom(false))
+    e.preventDefault();
+    setLoading(true);
+    await dispatch(setExistingRoom(false));
     if (room.roomName.trim() === '') {
-      errors_ = 'Please enter a value for the room name.'
-      await dispatch(setExistingRoom(true))
-      setLoading(false)
+      errors_ = 'Please enter a value for the room name.';
+      await dispatch(setExistingRoom(true));
+      setLoading(false);
     } else if (room.day.trim() === '') {
-      errors_ = 'Please enter a value for the unavailable day.'
-      await dispatch(setExistingRoom(true))
-      setLoading(false)
+      errors_ = 'Please enter a value for the unavailable day.';
+      await dispatch(setExistingRoom(true));
+      setLoading(false);
     } else if (room.startTime.trim() === '') {
-      errors_ = 'Please enter a value for the start time.'
-      await dispatch(setExistingRoom(true))
-      setLoading(false)
+      errors_ = 'Please enter a value for the start time.';
+      await dispatch(setExistingRoom(true));
+      setLoading(false);
     } else if (room.endTime.trim() === '') {
-      errors_ = 'Please enter a value for the end time.'
-      await dispatch(setExistingRoom(true))
-      setLoading(false)
+      errors_ = 'Please enter a value for the end time.';
+      await dispatch(setExistingRoom(true));
+      setLoading(false);
     }
     if (room.roomName.trim() !== '' && room.day.trim() !== '' &&
       room.startTime.trim() !== '' && room.endTime.trim() !== '') {
@@ -117,7 +117,7 @@ const RoomsUnavailabilityAdd: React.FC = () => {
         day: room.day,
         startTime: room.startTime,
         endTime: room.endTime
-      }
+      };
       try {
         const response = await fetch(`${proxy}/unavailableRooms/unavailableRooms/`
           + unavailableRoomObject._id, {
@@ -128,26 +128,26 @@ const RoomsUnavailabilityAdd: React.FC = () => {
           body: JSON.stringify({
             unavailability
           })
-        })
-        await response.json()
-        let unavailableTimes = []
-        unavailableTimes.push(...unavailableRoom.unavailability, unavailability)
-        let room = {...unavailableRoom, unavailability: unavailableTimes}
-        await dispatch(setUnavailableRoom(room))
-        roomList = roomList.map((room_: any) => room_._id === unavailableRoomObject._id ? room : room_)
-        await dispatch(setRooms(roomList))
-        await resetValues()
-        setLoading(false)
+        });
+        await response.json();
+        let unavailableTimes = [];
+        unavailableTimes.push(...unavailableRoom.unavailability, unavailability);
+        let room = { ...unavailableRoom, unavailability: unavailableTimes };
+        await dispatch(setUnavailableRoom(room));
+        roomList = roomList.map((room_: any) => room_._id === unavailableRoomObject._id ? room : room_);
+        await dispatch(setRooms(roomList));
+        await resetValues();
+        setLoading(false);
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
     }
-  }
+  };
 
   const getRoom = async (roomName: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/rooms/roomByRoomName`, {
         method: 'POST',
@@ -157,56 +157,56 @@ const RoomsUnavailabilityAdd: React.FC = () => {
         body: JSON.stringify({
           roomName
         })
-      })
-      const responseData = await response.json()
-      setUnavailableRoomObject(responseData[0])
-      await dispatch(setUnavailableRoom(responseData[0]))
-      await dispatch(setRoomUnavailability(true))
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setUnavailableRoomObject(responseData[0]);
+      await dispatch(setUnavailableRoom(responseData[0]));
+      await dispatch(setRoomUnavailability(true));
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const handleChangeRoomName = (e: any) => {
-    setLoading(true)
-    setRoom({...room, roomName: e.value})
+    setLoading(true);
+    setRoom({ ...room, roomName: e.value });
     getRoom(e.value).then(() => {
-    })
-    dispatch(setExistingRoom(false))
-    setLoading(false)
-  }
+    });
+    dispatch(setExistingRoom(false));
+    setLoading(false);
+  };
 
   const handleChangeDay = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    setRoom({...room, day: e.target.value})
-    dispatch(setExistingRoom(false))
-    setLoading(false)
-  }
+    setLoading(true);
+    setRoom({ ...room, day: e.target.value });
+    dispatch(setExistingRoom(false));
+    setLoading(false);
+  };
 
   const handleChangeStartTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    setRoom({...room, startTime: e.target.value})
-    dispatch(setExistingRoom(false))
-    setLoading(false)
-  }
+    setLoading(true);
+    setRoom({ ...room, startTime: e.target.value });
+    dispatch(setExistingRoom(false));
+    setLoading(false);
+  };
 
   const handleChangeEndTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    setRoom({...room, endTime: e.target.value})
-    dispatch(setExistingRoom(false))
-    setLoading(false)
-  }
+    setLoading(true);
+    setRoom({ ...room, endTime: e.target.value });
+    dispatch(setExistingRoom(false));
+    setLoading(false);
+  };
 
   const resetValues = async () => {
-    setLoading(true)
-    room.day = ''
-    room.startTime = ''
-    room.endTime = ''
-    setLoading(false)
-  }
+    setLoading(true);
+    room.day = '';
+    room.startTime = '';
+    room.endTime = '';
+    setLoading(false);
+  };
 
   return (
     <div style={{
@@ -235,7 +235,7 @@ const RoomsUnavailabilityAdd: React.FC = () => {
                       isSearchable={true}
                       name='roomName'
                       options={data}
-                      onChange={roomName => handleChangeRoomName(roomName)}/>
+                      onChange={roomName => handleChangeRoomName(roomName)} />
             </div>
           </Form.Group>
         </Form.Row>
@@ -256,7 +256,7 @@ const RoomsUnavailabilityAdd: React.FC = () => {
                             value={day}>
                       {day}
                     </option>
-                  )
+                  );
                 })
               }
             </Form.Control>
@@ -270,7 +270,7 @@ const RoomsUnavailabilityAdd: React.FC = () => {
                           onChange={handleChangeStartTime}
                           title='Please enter a start time.'
                           required
-                          size='lg'/>
+                          size='lg' />
           </Form.Group>
         </Form.Row>
         <Form.Row>
@@ -281,7 +281,7 @@ const RoomsUnavailabilityAdd: React.FC = () => {
                           onChange={handleChangeEndTime}
                           title='Please enter a end time.'
                           required
-                          size='lg'/>
+                          size='lg' />
           </Form.Group>
         </Form.Row>
         {
@@ -290,7 +290,7 @@ const RoomsUnavailabilityAdd: React.FC = () => {
                      style={{
                        textAlign: 'center',
                        marginLeft: '50%'
-                     }}/>
+                     }} />
           )
         }
         <Form.Row>
@@ -307,7 +307,7 @@ const RoomsUnavailabilityAdd: React.FC = () => {
               <FaPlusCircle style={{
                 marginRight: '4px',
                 marginBottom: '-2px'
-              }}/>
+              }} />
               Add
             </Button>
           </Form.Group>
@@ -328,7 +328,7 @@ const RoomsUnavailabilityAdd: React.FC = () => {
         }
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default RoomsUnavailabilityAdd
+export default RoomsUnavailabilityAdd;

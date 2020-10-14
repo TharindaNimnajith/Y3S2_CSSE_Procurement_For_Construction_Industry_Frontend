@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import {Redirect} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './programs.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setEditingProgram, setEditingProgramId, setEditProgram} from './programsSlice';
-import {proxy} from '../../conf'
+import { setEditingProgram, setEditingProgramId, setEditProgram } from './programsSlice';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 const ProgramsEdit: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -46,20 +46,20 @@ const ProgramsEdit: React.FC = () => {
   const handleSubmit = async () => {
 
     if (program.name.trim() === '' && program.programToken.trim() === '') {
-      errors_ = 'Please enter a value for the programme name and  token.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please enter a value for the programme name and  token.';
+      setError(true);
+      setLoading(false);
 
     } else {
       if (program.name.trim() === '') {
-        errors_ = 'Please enter a value for the programme  name.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please enter a value for the programme  name.';
+        setError(true);
+        setLoading(false);
 
       } else if (program.programToken.trim() === '') {
-        errors_ = 'Please enter a value for the programme  token.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please enter a value for the programme  token.';
+        setError(true);
+        setLoading(false);
 
       }
     }
@@ -75,7 +75,7 @@ const ProgramsEdit: React.FC = () => {
 
 
     if (program.name.trim() !== '' && program.programToken.trim() !== '') {
-      setError(false)
+      setError(false);
 
       try {
         const response = await fetch(
@@ -104,19 +104,19 @@ const ProgramsEdit: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.PROGRAMS_LIST_VIEW}/>;
+      return <Redirect to={routes.PROGRAMS_LIST_VIEW} />;
     }
     return null;
   };
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
-    setProgram({...program, name: e.target.value});
+    setError(false);
+    setProgram({ ...program, name: e.target.value });
   };
 
   const handleChangeProgramToken = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
-    setProgram({...program, programToken: e.target.value});
+    setError(false);
+    setProgram({ ...program, programToken: e.target.value });
   };
 
   return (
@@ -128,13 +128,13 @@ const ProgramsEdit: React.FC = () => {
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Edit Programme</h3>
         </Col>
@@ -160,7 +160,7 @@ const ProgramsEdit: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={program.name}
                     onChange={handleChangeName}
                     placeholder="ex:-Software Engineering"
@@ -170,7 +170,7 @@ const ProgramsEdit: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -183,7 +183,7 @@ const ProgramsEdit: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={program.programToken}
                     onChange={handleChangeProgramToken}
                     placeholder="ex:-SE"
@@ -194,16 +194,16 @@ const ProgramsEdit: React.FC = () => {
             <Col xs={3} md={3}></Col>
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
             <Col xs={3} md={10}>
               <Button
-                style={{width: '160px', fontSize: '1.3em'}}
+                style={{ width: '160px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Edit Programme
               </Button>
             </Col>
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
           </Row>
           {
             error && (

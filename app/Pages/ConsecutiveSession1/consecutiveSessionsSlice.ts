@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 
 const setConsecutiveSessionsSlice = createSlice({
@@ -25,10 +25,10 @@ const setConsecutiveSessionsSlice = createSlice({
   }
 });
 
-export const {setConsecutiveSessions} = setConsecutiveSessionsSlice.actions;
-export const {setEditConsecutiveSession} = setConsecutiveSessionsSlice.actions;
-export const {setEditingConsecutiveSessionId} = setConsecutiveSessionsSlice.actions;
-export const {setEditingConsecutiveSession} = setConsecutiveSessionsSlice.actions;
+export const { setConsecutiveSessions } = setConsecutiveSessionsSlice.actions;
+export const { setEditConsecutiveSession } = setConsecutiveSessionsSlice.actions;
+export const { setEditingConsecutiveSessionId } = setConsecutiveSessionsSlice.actions;
+export const { setEditingConsecutiveSession } = setConsecutiveSessionsSlice.actions;
 
 export default setConsecutiveSessionsSlice.reducer;
 

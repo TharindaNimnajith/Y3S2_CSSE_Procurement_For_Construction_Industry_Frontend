@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 
 const setTagsSlice = createSlice({
@@ -25,10 +25,10 @@ const setTagsSlice = createSlice({
   }
 });
 
-export const {setTags} = setTagsSlice.actions;
-export const {setEditTag} = setTagsSlice.actions;
-export const {setEditingTagId} = setTagsSlice.actions;
-export const {setEditingTag} = setTagsSlice.actions;
+export const { setTags } = setTagsSlice.actions;
+export const { setEditTag } = setTagsSlice.actions;
+export const { setEditingTagId } = setTagsSlice.actions;
+export const { setEditingTag } = setTagsSlice.actions;
 
 export default setTagsSlice.reducer;
 

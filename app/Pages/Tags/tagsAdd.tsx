@@ -1,21 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import routes from '../../constants/routes.json';
 import styles from './tags.css';
 import NavBar from '../../components/NavBar/NavBar';
-import {setTags} from './tagsSlice';
-import {proxy} from '../../conf'
+import { setTags } from './tagsSlice';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 
 const TagsAdd: React.FC = () => {
   const dispatch = useDispatch();
 
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
   const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
   const [tagToken, setTagToken] = useState<string>('');
   const [tagsObject, setTagsObject] = useState<any>(null);
@@ -50,20 +50,20 @@ const TagsAdd: React.FC = () => {
   const handleSubmit = async (e: any) => {
     // e.preventDefault()
     if (name.trim() === '' && tagToken.trim() === '') {
-      errors_ = 'Please enter a value for the tag name and tag token.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please enter a value for the tag name and tag token.';
+      setError(true);
+      setLoading(false);
 
     } else {
       if (name.trim() === '') {
-        errors_ = 'Please enter a value for the tag name.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please enter a value for the tag name.';
+        setError(true);
+        setLoading(false);
 
       } else if (tagToken.trim() === '') {
-        errors_ = 'Please enter a value for the tag token.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please enter a value for the tag token.';
+        setError(true);
+        setLoading(false);
 
       }
 
@@ -75,7 +75,7 @@ const TagsAdd: React.FC = () => {
       tagToken
     };
     if (name.trim() !== '' && tagToken.trim() !== '') {
-      setError(false)
+      setError(false);
       try {
         const response = await fetch(
           `${proxy}/tags/create`,
@@ -100,18 +100,18 @@ const TagsAdd: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.TAGS_LIST_VIEW}/>;
+      return <Redirect to={routes.TAGS_LIST_VIEW} />;
     }
     return null;
   };
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     setName(e.target.value);
   };
 
   const handleChangeTagToken = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     setTagToken(e.target.value);
   };
 
@@ -122,13 +122,13 @@ const TagsAdd: React.FC = () => {
         height: '100vh'
       }}>
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}>
+          style={{ backgroundColor: '#343a40', color: '#fff' }}>
           <h3>Add Tag</h3>
         </Col>
       </Row>
@@ -149,14 +149,14 @@ const TagsAdd: React.FC = () => {
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={name}
                     onChange={handleChangeName}
-                    placeholder="ex:- Lecture"/>
+                    placeholder="ex:- Lecture" />
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -167,25 +167,25 @@ const TagsAdd: React.FC = () => {
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={tagToken}
                     onChange={handleChangeTagToken}
-                    placeholder="ex:- Lec"/>
+                    placeholder="ex:- Lec" />
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
-            <Col xs={12} md={3}/>
+            <Col xs={12} md={3} />
             <Col xs={3} md={7}>
               <Button
-                style={{width: '160px', fontSize: '1.3em'}}
+                style={{ width: '160px', fontSize: '1.3em' }}
                 onClick={handleSubmit}>
                 Add Tag
               </Button>
             </Col>
-            <Col xs={12} md={2}/>
+            <Col xs={12} md={2} />
           </Row>
           {
             error && (

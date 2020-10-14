@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import {Redirect} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './groupNums.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setEditGroupNum, setEditingGroupNum, setEditingGroupNumId} from './groupNumsSlice';
-import {proxy} from '../../conf'
+import { setEditGroupNum, setEditingGroupNum, setEditingGroupNumId } from './groupNumsSlice';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 const GroupNumsEdit: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const GroupNumsEdit: React.FC = () => {
   });
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
   const [id, setId] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -52,12 +52,12 @@ const GroupNumsEdit: React.FC = () => {
 
     console.log(finalObjectWithID);
     if (isNaN(Number(groupNum.groupNum.trim()))) {
-      errors_ = 'Please enter a numerical value for the group number.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please enter a numerical value for the group number.';
+      setError(true);
+      setLoading(false);
     }
     if (!isNaN(Number(groupNum.groupNum.trim()))) {
-      setError(false)
+      setError(false);
 
       try {
         const response = await fetch(
@@ -86,15 +86,15 @@ const GroupNumsEdit: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.GROUPNUMS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPNUMS_LIST_VIEW} />;
     }
     return null;
   };
 
   const handleChangeGroupNum = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
 
-    setGroupNum({...groupNum, groupNum: e.target.value});
+    setGroupNum({ ...groupNum, groupNum: e.target.value });
   };
 
 
@@ -107,13 +107,13 @@ const GroupNumsEdit: React.FC = () => {
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Edit Group Number</h3>
         </Col>
@@ -139,7 +139,7 @@ const GroupNumsEdit: React.FC = () => {
 
                   <Form.Control
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupNum.groupNum}
                     onChange={handleChangeGroupNum}
                     placeholder="ex:- 1"
@@ -149,20 +149,20 @@ const GroupNumsEdit: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
             <Col xs={3} md={10}>
               <Button
-                style={{width: '220px', fontSize: '1.3em'}}
+                style={{ width: '220px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Edit Group Number
               </Button>
             </Col>
-            <Col xs={12} md={1}/>
+            <Col xs={12} md={1} />
           </Row>
 
           {

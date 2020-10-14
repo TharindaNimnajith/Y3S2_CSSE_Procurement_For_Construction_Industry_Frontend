@@ -1,30 +1,30 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux'
-import {Spinner} from 'react-bootstrap'
-import {Bar, BarChart, CartesianGrid, Cell, Legend, Tooltip, XAxis, YAxis} from 'recharts'
-import {proxy} from '../../conf'
-import {setStudentsYearSemesterStatistics} from './students-statistics-slice'
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
+import { Bar, BarChart, CartesianGrid, Cell, Legend, Tooltip, XAxis, YAxis } from 'recharts';
+import { proxy } from '../../conf';
+import { setStudentsYearSemesterStatistics } from './students-statistics-slice';
 
-let errors_: string = ''
-let data: any = []
+let errors_: string = '';
+let data: any = [];
 
 const StudentsYearSemesterStatistics: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getStudentsYearSemesterStatistics = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/studentsStatistics/groupsCountByAcademicYearAndSemester`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      await dispatch(setStudentsYearSemesterStatistics(responseData))
-      data = []
+      });
+      const responseData = await response.json();
+      await dispatch(setStudentsYearSemesterStatistics(responseData));
+      data = [];
       for (let i = 0; i < responseData.length; i++) {
         data = [...data,
           {
@@ -34,20 +34,20 @@ const StudentsYearSemesterStatistics: React.FC = () => {
             Groups: responseData[i].groupsCount,
             SubGroups: responseData[i].subGroupsCount
           }
-        ]
+        ];
       }
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   useEffect(() => {
     getStudentsYearSemesterStatistics().then(() => {
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <div>
@@ -63,7 +63,7 @@ const StudentsYearSemesterStatistics: React.FC = () => {
                    style={{
                      textAlign: 'center',
                      marginLeft: '50%'
-                   }}/>
+                   }} />
         )
       }
       <div style={{
@@ -72,11 +72,11 @@ const StudentsYearSemesterStatistics: React.FC = () => {
         <BarChart width={900}
                   height={320}
                   data={data}>
-          <CartesianGrid strokeDasharray='3 3'/>
-          <XAxis dataKey='academicYearAndSemester'/>
-          <YAxis/>
-          <Tooltip/>
-          <Legend/>
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis dataKey='academicYearAndSemester' />
+          <YAxis />
+          <Tooltip />
+          <Legend />
           <Bar dataKey='Groups'
                fill='#8884d8'
                label={{
@@ -85,7 +85,7 @@ const StudentsYearSemesterStatistics: React.FC = () => {
                }}>
             {
               data.map((_entry: any, index: number) => (
-                <Cell key={`cell-${index}`}/>
+                <Cell key={`cell-${index}`} />
               ))
             }
           </Bar>
@@ -97,15 +97,15 @@ const StudentsYearSemesterStatistics: React.FC = () => {
                }}>
             {
               data.map((_entry: any, index: number) => (
-                <Cell key={`cell-${index}`}/>
+                <Cell key={`cell-${index}`} />
               ))
             }
           </Bar>
         </BarChart>
-        <CartesianGrid strokeDasharray='3 3'/>
-        <XAxis dataKey='academicYearAndSemester'/>
-        <YAxis/>
-        <Tooltip/>
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='academicYearAndSemester' />
+        <YAxis />
+        <Tooltip />
       </div>
       {
         errors_ && (
@@ -122,7 +122,7 @@ const StudentsYearSemesterStatistics: React.FC = () => {
         )
       }
     </div>
-  )
-}
+  );
+};
 
-export default StudentsYearSemesterStatistics
+export default StudentsYearSemesterStatistics;

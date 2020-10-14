@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import {Redirect} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from './groups.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
@@ -17,14 +17,14 @@ const GroupsSingleView: React.FC = () => {
       groups: any
       showingGroupId: string
     }) => state.groups.showingGroupId
-  )
+  );
 
   const showingGroup = useSelector(
     (state: {
       groups: any
       showingGroupId: any
     }) => state.groups.showingGroup
-  )
+  );
 
 
   const [groupOne, setGroupOne] = useState<{
@@ -46,7 +46,7 @@ const GroupsSingleView: React.FC = () => {
     groupId: showingGroup.groupId,
     subGroups: showingGroup.subGroups,
     availableSubGroup: showingGroup.availableSubGroup
-  })
+  });
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
   const [id, setId] = useState<string>('');
   const [subGrouup, setSubGrouup] = useState<{ subGroup: Number, subGroupId: string }>({});
@@ -57,12 +57,12 @@ const GroupsSingleView: React.FC = () => {
 
 
   const handleSubmit = async () => {
-    setRenderRedirectTo(true)
-  }
+    setRenderRedirectTo(true);
+  };
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.GROUPS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPS_LIST_VIEW} />;
     }
     return null;
   };
@@ -78,13 +78,13 @@ const GroupsSingleView: React.FC = () => {
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>{groupOne.groupId} Group Details</h3>
         </Col>
@@ -112,7 +112,7 @@ const GroupsSingleView: React.FC = () => {
                     disabled
                     type="text"
 
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.academicYear}
 
                   >
@@ -121,7 +121,7 @@ const GroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4} className="mt-auto">
@@ -135,7 +135,7 @@ const GroupsSingleView: React.FC = () => {
                     disabled
                     type="text"
 
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.academicSemester}
 
                   >
@@ -144,7 +144,7 @@ const GroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4} className="mt-auto">
@@ -158,7 +158,7 @@ const GroupsSingleView: React.FC = () => {
                     disabled
                     type="text"
 
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.academicYearAndSemester}
 
                   >
@@ -167,7 +167,7 @@ const GroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -180,7 +180,7 @@ const GroupsSingleView: React.FC = () => {
                   <Form.Control
                     disabled
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.programme}
 
                   >
@@ -205,7 +205,7 @@ const GroupsSingleView: React.FC = () => {
                   <Form.Control
                     disabled
                     type="text"
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.group}
 
                   >
@@ -214,7 +214,7 @@ const GroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4} className="mt-auto">
@@ -228,7 +228,7 @@ const GroupsSingleView: React.FC = () => {
                     disabled
                     type="text"
 
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={groupOne.groupId}
 
                   >
@@ -237,7 +237,7 @@ const GroupsSingleView: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -271,11 +271,11 @@ const GroupsSingleView: React.FC = () => {
           </Row>
 
           <Row className="mt-2 mb-2 justify-content-md-center">
-            <Col xs={12} md={10}/>
+            <Col xs={12} md={10} />
             <Col xs={3} md={2}>
               <Button
                 className="pull-right"
-                style={{width: '80px', fontSize: '1.0em'}}
+                style={{ width: '80px', fontSize: '1.0em' }}
                 onClick={handleSubmit}
               >
                 OK

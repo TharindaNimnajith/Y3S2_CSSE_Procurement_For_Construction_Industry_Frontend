@@ -1,13 +1,13 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Row, Table} from 'react-bootstrap';
-import {NavLink} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import NavBar from '../../components/NavBar/NavBar';
 import styles from './working-days-hours.css';
 import routes from '../../constants/routes.json';
-import {setWorkingDaysHours} from './workingDaysHoursSlice';
-import {proxy} from '../../conf'
+import { setWorkingDaysHours } from './workingDaysHoursSlice';
+import { proxy } from '../../conf';
 
 // noinspection DuplicatedCode
 const WorkingDaysHoursView: React.FC = () => {
@@ -75,14 +75,14 @@ const WorkingDaysHoursView: React.FC = () => {
   };
 
   return (
-    <div style={{backgroundColor: '#37474F', height: '100vh'}}>
-      <NavBar/>
+    <div style={{ backgroundColor: '#37474F', height: '100vh' }}>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Working Days and Hours</h3>
         </Col>
@@ -162,10 +162,10 @@ const WorkingDaysHoursView: React.FC = () => {
                 </tbody>
               </Table>
 
-              <Button style={{width: '160px', fontSize: '1.3em'}}>
+              <Button style={{ width: '160px', fontSize: '1.3em' }}>
                 <NavLink
                   to={routes.WORKING_DAYS_AND_HOURS_Edit}
-                  style={{color: '#fff'}}
+                  style={{ color: '#fff' }}
                 >
                   Edit & Update
                 </NavLink>
@@ -182,7 +182,7 @@ const WorkingDaysHoursView: React.FC = () => {
               >
                 <NavLink
                   to={routes.WORKING_DAYS_AND_HOURS}
-                  style={{color: '#fff'}}
+                  style={{ color: '#fff' }}
                 >
                   Reset Data
                 </NavLink>

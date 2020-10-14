@@ -1,43 +1,43 @@
-import React from 'react'
-import {useDispatch} from 'react-redux'
-import {Col, Row} from 'react-bootstrap'
-import NavBar from '../../components/NavBar/NavBar'
-import LecturersLevelStatistics from './lecturers-level-statistics'
-import LecturersFacultyStatistics from './lecturers-faculty-statistics'
-import LecturersCenterStatistics from './lecturers-center-statistics'
-import {setRoomUnavailability, setUnavailableRoom} from '../RoomsUnavailability/rooms-unavailability-slice'
-import {setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom} from '../Rooms/rooms-slice'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Col, Row } from 'react-bootstrap';
+import NavBar from '../../components/NavBar/NavBar';
+import LecturersLevelStatistics from './lecturers-level-statistics';
+import LecturersFacultyStatistics from './lecturers-faculty-statistics';
+import LecturersCenterStatistics from './lecturers-center-statistics';
+import { setRoomUnavailability, setUnavailableRoom } from '../RoomsUnavailability/rooms-unavailability-slice';
+import { setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom } from '../Rooms/rooms-slice';
 import {
   setEditBuilding,
   setEditingBuilding,
   setEditingBuildingId,
   setExistingBuilding,
   setExistingRoomsForBuilding
-} from '../Buildings/buildings-slice'
+} from '../Buildings/buildings-slice';
 
 const LecturersStatisticsPage: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  dispatch(setEditRoom(false))
-  dispatch(setEditingRoomId(''))
-  dispatch(setEditingRoom(null))
-  dispatch(setExistingRoom(false))
+  dispatch(setEditRoom(false));
+  dispatch(setEditingRoomId(''));
+  dispatch(setEditingRoom(null));
+  dispatch(setExistingRoom(false));
 
-  dispatch(setEditBuilding(false))
-  dispatch(setEditingBuildingId(''))
-  dispatch(setEditingBuilding(null))
-  dispatch(setExistingBuilding(false))
-  dispatch(setExistingRoomsForBuilding(false))
+  dispatch(setEditBuilding(false));
+  dispatch(setEditingBuildingId(''));
+  dispatch(setEditingBuilding(null));
+  dispatch(setExistingBuilding(false));
+  dispatch(setExistingRoomsForBuilding(false));
 
-  dispatch(setRoomUnavailability(false))
-  dispatch(setUnavailableRoom(null))
+  dispatch(setRoomUnavailability(false));
+  dispatch(setUnavailableRoom(null));
 
   return (
     <div style={{
       minWidth: 'max-content',
       marginBottom: '3%'
     }}>
-      <NavBar/>
+      <NavBar />
       <Row className='text-center mb-5'>
         <Col xs={12}
              md={12}
@@ -56,23 +56,23 @@ const LecturersStatisticsPage: React.FC = () => {
         <Row>
           <Col sm='4'>
             <div>
-              <LecturersLevelStatistics/>
+              <LecturersLevelStatistics />
             </div>
           </Col>
           <Col sm='4'>
             <div>
-              <LecturersFacultyStatistics/>
+              <LecturersFacultyStatistics />
             </div>
           </Col>
           <Col sm='4'>
             <div>
-              <LecturersCenterStatistics/>
+              <LecturersCenterStatistics />
             </div>
           </Col>
         </Row>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LecturersStatisticsPage
+export default LecturersStatisticsPage;

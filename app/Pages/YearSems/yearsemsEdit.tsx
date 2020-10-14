@@ -1,18 +1,18 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './yearsems.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import {setEditingYearSem, setEditingYearSemId, setEditYearSem} from './yearsemsSlice';
-import {proxy} from '../../conf'
+import { setEditingYearSem, setEditingYearSemId, setEditYearSem } from './yearsemsSlice';
+import { proxy } from '../../conf';
 
 
 const yearList = [1, 2, 3, 4];
@@ -28,14 +28,14 @@ const YearSemsEdit: React.FC = () => {
       yearSems: any
       editingYearSemId: string
     }) => state.yearSems.editingYearSemId
-  )
+  );
 
   const editingYearSem = useSelector(
     (state: {
       yearSems: any
       editingYearSemId: any
     }) => state.yearSems.editingYearSem
-  )
+  );
 
   const [yearSem, setYearSem] = useState<{
     year: number,
@@ -47,7 +47,7 @@ const YearSemsEdit: React.FC = () => {
     yearSemToken: editingYearSem.yearSemToken
 
 
-  })
+  });
 
 
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
@@ -135,7 +135,7 @@ const YearSemsEdit: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.YEARSEMS_LIST_VIEW}/>;
+      return <Redirect to={routes.YEARSEMS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -145,7 +145,7 @@ const YearSemsEdit: React.FC = () => {
     const val = parseInt(e.target.value);
     //setYear(val);
 
-    setYearSem({...yearSem, year: val});
+    setYearSem({ ...yearSem, year: val });
   };
 
   const handleChangeSemester = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -157,7 +157,7 @@ const YearSemsEdit: React.FC = () => {
     var id = 'Y' + year1 + '.S' + semval;
 
 
-    setYearSem({...yearSem, semester: val, yearSemToken: id});
+    setYearSem({ ...yearSem, semester: val, yearSemToken: id });
     //setYearSemToken(id);
     //setSemester(val);
 
@@ -173,13 +173,13 @@ const YearSemsEdit: React.FC = () => {
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Edit Academic Year & Semester</h3>
         </Col>
@@ -208,7 +208,7 @@ const YearSemsEdit: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={yearSem.year}
                     onChange={handleChangeYear}
                   >
@@ -221,7 +221,7 @@ const YearSemsEdit: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={3}/>
+            <Col xs={3} md={3} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -234,7 +234,7 @@ const YearSemsEdit: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={yearSem.semester}
                     onChange={handleChangeSemester}
                   >
@@ -250,17 +250,17 @@ const YearSemsEdit: React.FC = () => {
             <Col xs={3} md={3}></Col>
           </Row>
           <Row className="mt-2 mb-2 justify-content-md-center">
-            <Col xs={12} md={2}/>
+            <Col xs={12} md={2} />
             <Col xs={3} md={8}>
               <Button
-                style={{width: '200px', fontSize: '1.3em'}}
+                style={{ width: '200px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Edit Year & Sem
               </Button>
             </Col>
           </Row>
-          <Col xs={12} md={2}/>
+          <Col xs={12} md={2} />
         </div>
 
       </Container>

@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux'
-import {Row, Spinner, Table} from 'react-bootstrap'
-import {Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, Tooltip, XAxis, YAxis} from 'recharts'
-import {proxy} from '../../conf'
-import {setLecturersLevelStatistics} from './lecturers-statistics-slice'
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Row, Spinner, Table } from 'react-bootstrap';
+import { Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { proxy } from '../../conf';
+import { setLecturersLevelStatistics } from './lecturers-statistics-slice';
 
-let errors_: string = ''
-let data: any = []
+let errors_: string = '';
+let data: any = [];
 
 const COLORS = [
   '#0088FE',
@@ -17,56 +17,56 @@ const COLORS = [
   '#8884D8',
   '#8DD1E1',
   '#50fa00'
-]
+];
 
 const LecturersLevelStatistics: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState<boolean>(false)
-  const [lecturersLevelStatisticsArray, setLecturersLevelStatisticsArray] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(false);
+  const [lecturersLevelStatisticsArray, setLecturersLevelStatisticsArray] = useState<any>([]);
 
   const getLecturersLevelStatistics = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/lecturersStatistics/lecturerCountByLevel`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      setLecturersLevelStatisticsArray(responseData)
-      await dispatch(setLecturersLevelStatistics(responseData))
-      data = []
-      let category: string = ''
+      });
+      const responseData = await response.json();
+      setLecturersLevelStatisticsArray(responseData);
+      await dispatch(setLecturersLevelStatistics(responseData));
+      data = [];
+      let category: string = '';
       for (let i = 0; i < responseData.length; i++) {
         switch (responseData[i]._id.level) {
           case 1:
-            category = 'Professor'
-            break
+            category = 'Professor';
+            break;
           case 2:
-            category = 'Assistant Professor'
-            break
+            category = 'Assistant Professor';
+            break;
           case 3:
-            category = 'Senior Lecturer (HG)'
-            break
+            category = 'Senior Lecturer (HG)';
+            break;
           case 4:
-            category = 'Senior Lecturer'
-            break
+            category = 'Senior Lecturer';
+            break;
           case 5:
-            category = 'Lecturer'
-            break
+            category = 'Lecturer';
+            break;
           case 6:
-            category = 'Assistant Lecturer'
-            break
+            category = 'Assistant Lecturer';
+            break;
           case 7:
-            category = 'Instructor'
-            break
+            category = 'Instructor';
+            break;
           default:
-            category = 'Other'
-            break
+            category = 'Other';
+            break;
         }
-        let categoryAndLevel: string = `${category} (${responseData[i]._id.level})`
+        let categoryAndLevel: string = `${category} (${responseData[i]._id.level})`;
         data = [...data,
           {
             name: categoryAndLevel,
@@ -74,20 +74,20 @@ const LecturersLevelStatistics: React.FC = () => {
             value: responseData[i].lecturersCount,
             count: responseData[i].lecturersCount
           }
-        ]
+        ];
       }
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   useEffect(() => {
     getLecturersLevelStatistics().then(() => {
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <div>
@@ -100,7 +100,7 @@ const LecturersLevelStatistics: React.FC = () => {
                    style={{
                      textAlign: 'center',
                      marginLeft: '50%'
-                   }}/>
+                   }} />
         )
       }
       <div>
@@ -142,34 +142,34 @@ const LecturersLevelStatistics: React.FC = () => {
           <tbody>
           {
             lecturersLevelStatisticsArray && lecturersLevelStatisticsArray.map((lecturersLevelStatisticsArrayElement: any) => {
-              let category: string
+              let category: string;
               switch (lecturersLevelStatisticsArrayElement._id.level) {
                 case 1:
-                  category = 'Professor'
-                  break
+                  category = 'Professor';
+                  break;
                 case 2:
-                  category = 'Assistant Professor'
-                  break
+                  category = 'Assistant Professor';
+                  break;
                 case 3:
-                  category = 'Senior Lecturer (HG)'
-                  break
+                  category = 'Senior Lecturer (HG)';
+                  break;
                 case 4:
-                  category = 'Senior Lecturer'
-                  break
+                  category = 'Senior Lecturer';
+                  break;
                 case 5:
-                  category = 'Lecturer'
-                  break
+                  category = 'Lecturer';
+                  break;
                 case 6:
-                  category = 'Assistant Lecturer'
-                  break
+                  category = 'Assistant Lecturer';
+                  break;
                 case 7:
-                  category = 'Instructor'
-                  break
+                  category = 'Instructor';
+                  break;
                 default:
-                  category = 'Other'
-                  break
+                  category = 'Other';
+                  break;
               }
-              let categoryAndLevel: string = `${category} (${lecturersLevelStatisticsArrayElement._id.level})`
+              let categoryAndLevel: string = `${category} (${lecturersLevelStatisticsArrayElement._id.level})`;
               return (
                 <tr key={lecturersLevelStatisticsArrayElement._id.level}>
                   <td style={{
@@ -183,7 +183,7 @@ const LecturersLevelStatistics: React.FC = () => {
                     {lecturersLevelStatisticsArrayElement.lecturersCount}
                   </td>
                 </tr>
-              )
+              );
             })
           }
           </tbody>
@@ -211,10 +211,10 @@ const LecturersLevelStatistics: React.FC = () => {
             <BarChart width={500}
                       height={300}
                       data={data}>
-              <CartesianGrid strokeDasharray='3 3'/>
-              <XAxis dataKey='level'/>
-              <YAxis/>
-              <Tooltip/>
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='level' />
+              <YAxis />
+              <Tooltip />
               <Bar dataKey='count'
                    fill='#8884d8'
                    label={{
@@ -224,7 +224,7 @@ const LecturersLevelStatistics: React.FC = () => {
                 {
                   data.map((_entry: any, index: number) => (
                     <Cell key={`cell-${index}`}
-                          fill={COLORS[index % COLORS.length]}/>
+                          fill={COLORS[index % COLORS.length]} />
                   ))
                 }
               </Bar>
@@ -247,17 +247,17 @@ const LecturersLevelStatistics: React.FC = () => {
                 {
                   data.map((_entry: any, index: number) => (
                     <Cell key={`cell-${index}`}
-                          fill={COLORS[index % COLORS.length]}/>
+                          fill={COLORS[index % COLORS.length]} />
                   ))
                 }
               </Pie>
-              <Tooltip/>
+              <Tooltip />
             </PieChart>
           </Row>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LecturersLevelStatistics
+export default LecturersLevelStatistics;

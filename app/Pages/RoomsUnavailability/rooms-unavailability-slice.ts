@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const setRoomsUnavailabilitySlice = createSlice({
   name: 'roomsUnavailability',
@@ -8,15 +8,15 @@ const setRoomsUnavailabilitySlice = createSlice({
   },
   reducers: {
     setUnavailableRoom: (state, action: any) => {
-      state.unavailableRoom = action.payload
+      state.unavailableRoom = action.payload;
     },
     setRoomUnavailability: (state, action: any) => {
-      state.roomUnavailability = action.payload
+      state.roomUnavailability = action.payload;
     }
   }
-})
+});
 
-export const {setUnavailableRoom} = setRoomsUnavailabilitySlice.actions
-export const {setRoomUnavailability} = setRoomsUnavailabilitySlice.actions
+export const { setUnavailableRoom } = setRoomsUnavailabilitySlice.actions;
+export const { setRoomUnavailability } = setRoomsUnavailabilitySlice.actions;
 
-export default setRoomsUnavailabilitySlice.reducer
+export default setRoomsUnavailabilitySlice.reducer;

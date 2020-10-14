@@ -1,76 +1,76 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {Button, Form, Spinner} from 'react-bootstrap'
-import {FaPlusCircle} from 'react-icons/fa'
-import {proxy} from '../../conf'
-import {setBuildings, setCenters, setExistingBuilding, setExistingRoomsForBuilding} from './buildings-slice'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Form, Spinner } from 'react-bootstrap';
+import { FaPlusCircle } from 'react-icons/fa';
+import { proxy } from '../../conf';
+import { setBuildings, setCenters, setExistingBuilding, setExistingRoomsForBuilding } from './buildings-slice';
 
-let errors_: string = ''
+let errors_: string = '';
 
 const BuildingsAdd: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let buildingList = useSelector(
     (state: {
       buildings: any
     }) => state.buildings.buildings
-  )
+  );
 
   const existingBuilding = useSelector(
     (state: {
       buildings: any
       existingBuilding: boolean
     }) => state.buildings.existingBuilding
-  )
+  );
 
-  const [loading, setLoading] = useState<boolean>(false)
-  const [centers, setCentersList] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(false);
+  const [centers, setCentersList] = useState<any>([]);
   const [building, setBuilding] = useState<{
     buildingName: string,
     centerName: string
   }>({
     buildingName: '',
     centerName: ''
-  })
+  });
 
   const getCenters = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${proxy}/centers/centers`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
-      setCentersList(responseData)
-      await dispatch(setCenters(responseData))
-      setLoading(false)
+      });
+      const responseData = await response.json();
+      setCentersList(responseData);
+      await dispatch(setCenters(responseData));
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   useEffect(() => {
     getCenters().then(() => {
-    })
-  }, [])
+    });
+  }, []);
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    setLoading(true)
-    await dispatch(setExistingBuilding(false))
-    await dispatch(setExistingRoomsForBuilding(false))
+    e.preventDefault();
+    setLoading(true);
+    await dispatch(setExistingBuilding(false));
+    await dispatch(setExistingRoomsForBuilding(false));
     if (building.buildingName.trim() === '') {
-      errors_ = 'Please enter a value for the building name.'
-      await dispatch(setExistingBuilding(true))
-      setLoading(false)
+      errors_ = 'Please enter a value for the building name.';
+      await dispatch(setExistingBuilding(true));
+      setLoading(false);
     } else if (building.centerName.trim() === '') {
-      errors_ = 'Please enter a value for the center.'
-      await dispatch(setExistingBuilding(true))
-      setLoading(false)
+      errors_ = 'Please enter a value for the center.';
+      await dispatch(setExistingBuilding(true));
+      setLoading(false);
     }
     if (building.buildingName.trim() !== '' && building.centerName.trim() !== '') {
       try {
@@ -80,44 +80,44 @@ const BuildingsAdd: React.FC = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(building)
-        })
-        const responseData = await response.json()
-        buildingList = {...buildingList, responseData}
-        await dispatch(setBuildings(buildingList))
+        });
+        const responseData = await response.json();
+        buildingList = { ...buildingList, responseData };
+        await dispatch(setBuildings(buildingList));
         if (responseData.exists) {
-          errors_ = responseData.message
-          await dispatch(setExistingBuilding(true))
+          errors_ = responseData.message;
+          await dispatch(setExistingBuilding(true));
         }
-        await resetValues()
-        setLoading(false)
+        await resetValues();
+        setLoading(false);
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
     }
-  }
+  };
 
   const handleChangeBuildingName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    setBuilding({...building, buildingName: e.target.value})
-    dispatch(setExistingBuilding(false))
-    setLoading(false)
-  }
+    setLoading(true);
+    setBuilding({ ...building, buildingName: e.target.value });
+    dispatch(setExistingBuilding(false));
+    setLoading(false);
+  };
 
   const handleChangeCenterName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    setBuilding({...building, centerName: e.target.value})
-    dispatch(setExistingBuilding(false))
-    setLoading(false)
-  }
+    setLoading(true);
+    setBuilding({ ...building, centerName: e.target.value });
+    dispatch(setExistingBuilding(false));
+    setLoading(false);
+  };
 
   const resetValues = async () => {
-    setLoading(true)
-    building.buildingName = ''
-    building.centerName = ''
-    setLoading(false)
-  }
+    setLoading(true);
+    building.buildingName = '';
+    building.centerName = '';
+    setLoading(false);
+  };
 
   return (
     <div style={{
@@ -139,7 +139,7 @@ const BuildingsAdd: React.FC = () => {
                           pattern='[A-Za-z]{2,32}'
                           title='Please enter a valid building name.'
                           required
-                          size='lg'/>
+                          size='lg' />
           </Form.Group>
         </Form.Row>
         <Form.Row>
@@ -159,7 +159,7 @@ const BuildingsAdd: React.FC = () => {
                             value={center.centerName}>
                       {center.centerName}
                     </option>
-                  )
+                  );
                 })
               }
             </Form.Control>
@@ -171,7 +171,7 @@ const BuildingsAdd: React.FC = () => {
                      style={{
                        textAlign: 'center',
                        marginLeft: '50%'
-                     }}/>
+                     }} />
           )
         }
         <Form.Row>
@@ -188,7 +188,7 @@ const BuildingsAdd: React.FC = () => {
               <FaPlusCircle style={{
                 marginRight: '4px',
                 marginBottom: '-2px'
-              }}/>
+              }} />
               Add Building
             </Button>
           </Form.Group>
@@ -209,7 +209,7 @@ const BuildingsAdd: React.FC = () => {
         }
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default BuildingsAdd
+export default BuildingsAdd;

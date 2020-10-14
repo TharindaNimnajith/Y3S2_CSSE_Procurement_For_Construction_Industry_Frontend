@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Modal, Row, Spinner} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Modal, Row, Spinner } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styles from './notAvailables.css';
 import routes from '../../constants/routes.json';
 
-import {proxy} from '../../conf';
+import { proxy } from '../../conf';
 
 
 let errors_: string = '';
@@ -23,7 +23,7 @@ const SessionsAddNA: React.FC = () => {
   const [session1List, setSession1List] = useState<any>([]);
 
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
@@ -121,7 +121,7 @@ const SessionsAddNA: React.FC = () => {
     if (exist === 1) {
       handleShow();
     }
-  }
+  };
 
   const handleSubmit = async () => {
     var emin1;
@@ -150,28 +150,28 @@ const SessionsAddNA: React.FC = () => {
     //  setUnavailability({day:day, startTime: stime , endTime : etime});
 
     if ((id1.trim() === '') && (day.trim() === '') && (stime.trim() === '00:00') && (etime.trim() === '00:00')) {
-      errors_ = 'Please select  values for all fields.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please select  values for all fields.';
+      setError(true);
+      setLoading(false);
     } else {
       if (id1.trim() === '') {
-        errors_ = 'Please select session .'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select session .';
+        setError(true);
+        setLoading(false);
       } else if (day.trim() === '') {
-        errors_ = 'Please select a day.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select a day.';
+        setError(true);
+        setLoading(false);
 
       } else if (stime.trim() === '00:00') {
-        errors_ = 'Please select a start time.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select a start time.';
+        setError(true);
+        setLoading(false);
 
       } else if (etime.trim() === '00:00') {
-        errors_ = 'Please select a end time.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select a end time.';
+        setError(true);
+        setLoading(false);
 
       }
     }
@@ -192,7 +192,7 @@ const SessionsAddNA: React.FC = () => {
 
     if ((id1.trim() != '') && (day.trim() != '') && (stime.trim() != '00:00') && (etime.trim() != '00:00')) {
       const finalObjectGroup = {
-        unavailability: {day: day, startTime: stime, endTime: etime}
+        unavailability: { day: day, startTime: stime, endTime: etime }
       };
 
 
@@ -204,15 +204,15 @@ const SessionsAddNA: React.FC = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(finalObjectGroup)
-        })
-        const responseData = await response.json()
-        console.log(responseData)
+        });
+        const responseData = await response.json();
+        console.log(responseData);
         setRenderRedirectTo(true);
 
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
 
 
@@ -224,7 +224,7 @@ const SessionsAddNA: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.HOME}/>;
+      return <Redirect to={routes.HOME} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -232,7 +232,7 @@ const SessionsAddNA: React.FC = () => {
 
   const renderRedirectGro = () => {
     if (renderRedirectToGro) {
-      return <Redirect to={routes.GROUPS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -272,7 +272,7 @@ const SessionsAddNA: React.FC = () => {
   //   setUnavailability({day:day, startTime: stime , endTime : etime});
   // }
   const handleSession1 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
 
     setId1(e.target.value);
     setExistUnavaialability(false);
@@ -284,7 +284,7 @@ const SessionsAddNA: React.FC = () => {
 
   const handleDay = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
+    setError(false);
     setDay(e.target.value);
 
   };
@@ -292,40 +292,40 @@ const SessionsAddNA: React.FC = () => {
 
   const handleChangeHour1 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
-    setWorkingTimePerDay1({...workingTimePerDay1, hours: e.target.value});
+    setError(false);
+    setWorkingTimePerDay1({ ...workingTimePerDay1, hours: e.target.value });
   };
 
   const handleChangeMinutes1 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
-    setWorkingTimePerDay1({...workingTimePerDay1, minutes: e.target.value});
+    setError(false);
+    setWorkingTimePerDay1({ ...workingTimePerDay1, minutes: e.target.value });
   };
 
   const handleChangeHour2 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
-    setWorkingTimePerDay2({...workingTimePerDay2, hours: e.target.value});
+    setError(false);
+    setWorkingTimePerDay2({ ...workingTimePerDay2, hours: e.target.value });
   };
 
   const handleChangeMinutes2 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
-    setWorkingTimePerDay2({...workingTimePerDay2, minutes: e.target.value});
+    setError(false);
+    setWorkingTimePerDay2({ ...workingTimePerDay2, minutes: e.target.value });
     //other();
   };
 
 
   const getSession1 = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/sessions/getSessions/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       console.log(responseData.unavailability[0].day);
 
       if (responseData.unavailability[0].day) {
@@ -333,13 +333,13 @@ const SessionsAddNA: React.FC = () => {
       }
 
 
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
 
   return (
@@ -376,7 +376,7 @@ const SessionsAddNA: React.FC = () => {
                      style={{
                        textAlign: 'center',
                        marginLeft: '50%'
-                     }}/>
+                     }} />
           )
         }
       </Modal>
@@ -403,7 +403,7 @@ const SessionsAddNA: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={id1}
                     onChange={handleSession1}
                   >
@@ -416,7 +416,7 @@ const SessionsAddNA: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={2}/>
+            <Col xs={3} md={2} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -429,7 +429,7 @@ const SessionsAddNA: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={day}
                     onChange={handleDay}
                   >
@@ -492,7 +492,7 @@ const SessionsAddNA: React.FC = () => {
                 </Col>
               </Row>
             </Col>
-            <Col xs={3} md={0}/>
+            <Col xs={3} md={0} />
           </Row>
 
 
@@ -542,15 +542,15 @@ const SessionsAddNA: React.FC = () => {
                 </Col>
               </Row>
             </Col>
-            <Col xs={3} md={0}/>
+            <Col xs={3} md={0} />
           </Row>
 
 
           <Row className="mt-2 mb-2 justify-content-md-center">
-            <Col xs={12} md={4}/>
+            <Col xs={12} md={4} />
             <Col xs={3} md={2}>
               <Button
-                style={{width: '150px', fontSize: '1.3em'}}
+                style={{ width: '150px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Add
@@ -560,17 +560,17 @@ const SessionsAddNA: React.FC = () => {
             <Col xs={3} md={2}>
 
             </Col>
-            <Col xs={3} md={4}/>
+            <Col xs={3} md={4} />
           </Row>
 
 
           <Row className="mt-2 mb-2 justify-content-md-center">
-            <Col xs={12} md={8}/>
-            <Col xs={3} md={2}/>
+            <Col xs={12} md={8} />
+            <Col xs={3} md={2} />
 
             <Col xs={3} md={2}>
               <a
-                style={{width: '150px', fontSize: '1.3em', color: 'red'}}
+                style={{ width: '150px', fontSize: '1.3em', color: 'red' }}
                 onClick={handleSubmit1}
               >
                 Exist One
@@ -597,7 +597,7 @@ const SessionsAddNA: React.FC = () => {
       </Container>
 
     </div>
-  )
-}
+  );
+};
 
-export default SessionsAddNA
+export default SessionsAddNA;

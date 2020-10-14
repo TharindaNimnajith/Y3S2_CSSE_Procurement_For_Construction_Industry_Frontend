@@ -1,18 +1,18 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
-import {RootState} from '../../store';
+import { RootState } from '../../store';
 
 const setLecturersSlice = createSlice({
   name: 'lecturers',
-  initialState: {lecturers: []},
+  initialState: { lecturers: [] },
   reducers: {
     setLecturers: (state, action: any) => {
       state.lecturers = action.payload;
-    },
-  },
+    }
+  }
 });
 
-export const {setLecturers} = setLecturersSlice.actions;
+export const { setLecturers } = setLecturersSlice.actions;
 
 export default setLecturersSlice.reducer;
 

@@ -1,13 +1,13 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Row, Table} from 'react-bootstrap';
-import {Link, NavLink, Redirect} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Link, NavLink, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../../components/NavBar/NavBar';
 import styles from './groups.css';
 import routes from '../../constants/routes.json';
-import {setEditGroup, setEditingGroup, setEditingGroupId, setGroups} from './groupsSlice';
-import {proxy} from '../../conf'
+import { setEditGroup, setEditingGroup, setEditingGroupId, setGroups } from './groupsSlice';
+import { proxy } from '../../conf';
 
 
 const Group = (props) => (
@@ -29,7 +29,7 @@ const Group = (props) => (
       >
         <NavLink
           to={routes.GROUPS_LIST_VIEW}
-          style={{color: '#fff'}}
+          style={{ color: '#fff' }}
         >
           delete
         </NavLink>
@@ -52,13 +52,13 @@ const Group = (props) => (
         >
           <NavLink
             to={routes.GROUPS_LIST_VIEW}
-            style={{color: '#fff'}}
+            style={{ color: '#fff' }}
           >
             delete
           </NavLink>
         </Button></div>
 
-      <br/>
+      <br />
       <div>{`${props.group.groupId}.2`}
         <Button
           className="ml-4"
@@ -74,19 +74,19 @@ const Group = (props) => (
         >
           <NavLink
             to={routes.GROUPS_LIST_VIEW}
-            style={{color: '#fff'}}
+            style={{ color: '#fff' }}
           >
             delete
           </NavLink>
         </Button></div>
 
-      <br/><br/>
+      <br /><br />
       <div>
 
-        <Button style={{width: '95px', fontSize: '0.9em'}}>
+        <Button style={{ width: '95px', fontSize: '0.9em' }}>
           <NavLink
             to={routes.GROUPS_EDIT}
-            style={{color: '#fff'}}
+            style={{ color: '#fff' }}
           >
             Add
           </NavLink>
@@ -170,7 +170,7 @@ const GroupsListViewEdit: React.FC = () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({id})
+          body: JSON.stringify({ id })
         }
       );
 
@@ -243,7 +243,7 @@ const GroupsListViewEdit: React.FC = () => {
 
   const singleViewTo = () => {
     if (renderSingle) {
-      return <Redirect to={routes.GROUPS_SINGLE_VIEW}/>;
+      return <Redirect to={routes.GROUPS_SINGLE_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -251,7 +251,7 @@ const GroupsListViewEdit: React.FC = () => {
 
   const renderEditTo = () => {
     if (renderEdit) {
-      return <Redirect to={routes.GROUPS_EDIT}/>;
+      return <Redirect to={routes.GROUPS_EDIT} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -260,22 +260,22 @@ const GroupsListViewEdit: React.FC = () => {
   const groupList = () => {
     return groupsObject.map(group => {
       return <Group group={group} handleDelete={handleDelete} handleEdit={handleEdit} singleView={singleView}
-                    key={group._id}/>;
+                    key={group._id} />;
     });
   };
 
   return (
-    <div style={{backgroundColor: '#37474F', height: '100vh'}}>
+    <div style={{ backgroundColor: '#37474F', height: '100vh' }}>
       {renderEditTo()}
       {singleViewTo()}
 
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Student Group Details</h3>
         </Col>
@@ -291,10 +291,10 @@ const GroupsListViewEdit: React.FC = () => {
         >
           <Row className="mt-3 mb-4 justify-content-md-left">
             <Col xs={12} md={12} className="mt-auto">
-              <Button style={{width: '160px', fontSize: '1.2em'}}>
+              <Button style={{ width: '160px', fontSize: '1.2em' }}>
                 <NavLink
                   to={routes.GROUPS_ADD}
-                  style={{color: '#fff'}}
+                  style={{ color: '#fff' }}
                 >
                   Add New Group
                 </NavLink>

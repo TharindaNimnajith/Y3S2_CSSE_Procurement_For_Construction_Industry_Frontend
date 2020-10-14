@@ -1,19 +1,19 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Form, Modal, Row, Spinner} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Form, Modal, Row, Spinner } from 'react-bootstrap';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './parallelSessions.css';
 import routes from '../../constants/routes.json';
-import {setParallelSessions} from './parallelSessionsSlice';
-import {proxy} from '../../conf';
+import { setParallelSessions } from './parallelSessionsSlice';
+import { proxy } from '../../conf';
 
-let errors_: string = ''
+let errors_: string = '';
 
 
 var exist = 0;
@@ -27,7 +27,7 @@ const TwoSessionAdd: React.FC = () => {
   const [session3List, setSession3List] = useState<any>([]);
 
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
@@ -140,37 +140,37 @@ const TwoSessionAdd: React.FC = () => {
     console.log(etime);
 
     if ((id1.trim() === '') && (id2.trim() === '') && (day.trim() === '') && (stime.trim() === '00:00') && (etime.trim() === '00:00') && (duration === null)) {
-      errors_ = 'Please select  values for all fields.'
-      setError(true)
-      setLoading(false)
+      errors_ = 'Please select  values for all fields.';
+      setError(true);
+      setLoading(false);
 
 
     } else {
       if (id1.trim() === '') {
-        errors_ = 'Please select session1 .'
-        setError(true)
-        setLoading(false)
-        console.log("1 ")
+        errors_ = 'Please select session1 .';
+        setError(true);
+        setLoading(false);
+        console.log('1 ');
 
       } else if (id2.trim() === '') {
-        errors_ = 'Please select session2.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select session2.';
+        setError(true);
+        setLoading(false);
 
       } else if (day.trim() === '') {
-        errors_ = 'Please select a day.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select a day.';
+        setError(true);
+        setLoading(false);
 
       } else if (stime.trim() === '') {
-        errors_ = 'Please select a start time.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select a start time.';
+        setError(true);
+        setLoading(false);
 
       } else if (duration === null) {
-        errors_ = 'Please select a duration.'
-        setError(true)
-        setLoading(false)
+        errors_ = 'Please select a duration.';
+        setError(true);
+        setLoading(false);
 
       }
     }
@@ -206,15 +206,15 @@ const TwoSessionAdd: React.FC = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(finalObjectGroup)
-        })
-        const responseData = await response.json()
-        console.log(responseData)
+        });
+        const responseData = await response.json();
+        console.log(responseData);
         setRenderRedirectTo(true);
 
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
 
       try {
@@ -225,15 +225,15 @@ const TwoSessionAdd: React.FC = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(finalObjectGroup)
-        })
-        const responseData = await response.json()
-        console.log(responseData)
+        });
+        const responseData = await response.json();
+        console.log(responseData);
         setRenderRedirectTo1(true);
 
       } catch (errors) {
-        errors_ = errors
-        setLoading(false)
-        console.log(errors)
+        errors_ = errors;
+        setLoading(false);
+        console.log(errors);
       }
 
 
@@ -245,7 +245,7 @@ const TwoSessionAdd: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo && renderRedirectTo1) {
-      return <Redirect to={routes.SESSIONS_LIST}/>;
+      return <Redirect to={routes.SESSIONS_LIST} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -253,13 +253,13 @@ const TwoSessionAdd: React.FC = () => {
 
   const renderRedirectGro = () => {
     if (renderRedirectToGro) {
-      return <Redirect to={routes.GROUPS_LIST_VIEW}/>;
+      return <Redirect to={routes.GROUPS_LIST_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
   };
   const handleSession1 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
 
     setId1(e.target.value);
     setParallelId1(false);
@@ -270,7 +270,7 @@ const TwoSessionAdd: React.FC = () => {
 
   const handleSession2 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
+    setError(false);
     setId2(e.target.value);
     setParallelId2(false);
     getSession2(e.target.value);
@@ -280,7 +280,7 @@ const TwoSessionAdd: React.FC = () => {
 
   const handleDay = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
+    setError(false);
     setDay(e.target.value);
 
   };
@@ -288,19 +288,19 @@ const TwoSessionAdd: React.FC = () => {
 
   const handleChangeHour1 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
-    setWorkingTimePerDay1({...workingTimePerDay1, hours: e.target.value});
+    setError(false);
+    setWorkingTimePerDay1({ ...workingTimePerDay1, hours: e.target.value });
   };
 
   const handleChangeMinutes1 = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setError(false)
-    setWorkingTimePerDay1({...workingTimePerDay1, minutes: e.target.value});
+    setError(false);
+    setWorkingTimePerDay1({ ...workingTimePerDay1, minutes: e.target.value });
   };
 
 
   const handleChangeDuration = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(false)
+    setError(false);
     const val = parseInt(e.target.value);
     //setDuration(val);
     setDuration(e.target.value);
@@ -308,15 +308,15 @@ const TwoSessionAdd: React.FC = () => {
   };
 
   const getSession1 = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/sessions/getSessions/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       setSessionId1(responseData.sessionId);
       console.log(responseData.sessionId);
 
@@ -325,43 +325,43 @@ const TwoSessionAdd: React.FC = () => {
       }
 
 
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
   const getSession2 = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(`${proxy}/sessions/getSessions/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      const responseData = await response.json()
+      });
+      const responseData = await response.json();
       setSessionId2(responseData.sessionId);
 
       if (responseData.parallelId) {
         setParallelId2(true);
       }
 
-      setLoading(false)
+      setLoading(false);
     } catch (errors) {
-      errors_ = errors
-      setLoading(false)
-      console.log(errors)
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
     }
-  }
+  };
 
 
   return (
     <div
       style={{
-        backgroundColor: '#37474F',
+        backgroundColor: '#37474F'
 
       }}
     >
@@ -392,7 +392,7 @@ const TwoSessionAdd: React.FC = () => {
                      style={{
                        textAlign: 'center',
                        marginLeft: '50%'
-                     }}/>
+                     }} />
           )
         }
       </Modal>
@@ -419,7 +419,7 @@ const TwoSessionAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={id1}
                     onChange={handleSession1}
                   >
@@ -432,7 +432,7 @@ const TwoSessionAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={2}/>
+            <Col xs={3} md={2} />
           </Row>
           <Row className="mt-3 mb-3 justify-content-md-center">
             <Col xs={12} md={4}>
@@ -445,7 +445,7 @@ const TwoSessionAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={id2}
                     onChange={handleSession2}
                   >
@@ -473,7 +473,7 @@ const TwoSessionAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={day}
                     onChange={handleDay}
                   >
@@ -536,7 +536,7 @@ const TwoSessionAdd: React.FC = () => {
                 </Col>
               </Row>
             </Col>
-            <Col xs={3} md={0}/>
+            <Col xs={3} md={0} />
           </Row>
 
           <Row className="mt-3 mb-3 justify-content-md-center">
@@ -551,7 +551,7 @@ const TwoSessionAdd: React.FC = () => {
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    style={{borderWidth: '2.5px'}}
+                    style={{ borderWidth: '2.5px' }}
                     value={duration}
                     onChange={handleChangeDuration}
                   >
@@ -564,22 +564,22 @@ const TwoSessionAdd: React.FC = () => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs={3} md={2}/>
+            <Col xs={3} md={2} />
           </Row>
 
 
           <Row className="mt-2 mb-2 justify-content-md-center">
-            <Col xs={12} md={2}/>
+            <Col xs={12} md={2} />
             <Col xs={3} md={6}>
               <Button
-                style={{width: '150px', fontSize: '1.3em'}}
+                style={{ width: '150px', fontSize: '1.3em' }}
                 onClick={handleSubmit}
               >
                 Add
               </Button>
             </Col>
 
-            <Col xs={12} md={4}/>
+            <Col xs={12} md={4} />
           </Row>
 
 

@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {Table} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Table } from 'react-bootstrap';
 import moment from 'moment';
-import {proxy} from '../../conf'
+import { proxy } from '../../conf';
 
 type TimetableGeneratorProps = {
   degree: string | null;
@@ -15,7 +15,7 @@ type TimetableGeneratorProps = {
 
 const TimetableGenerator: React.FC<TimetableGeneratorProps> = (props) => {
 
-  const {group, year, semester, degree, lecturer, isGenerate, room} = props;
+  const { group, year, semester, degree, lecturer, isGenerate, room } = props;
   const [columnsNo, setColumnsNo] = useState([1, 2, 3, 4, 5]);
   const [rowsNo, setRowsNo] = useState([]);
   const [startTime, setStartTime] = useState('08:30');
@@ -44,7 +44,7 @@ const TimetableGenerator: React.FC<TimetableGeneratorProps> = (props) => {
     var ss = Math.floor(timeDiff / 1000);
     ss = ('0' + ss).slice(-2);
 
-    return ({hours: hh, minutes: mm});
+    return ({ hours: hh, minutes: mm });
   };
 
   const generateNoOfTimeSlots = (timeSlotTime, startTime, endTime) => {
@@ -63,7 +63,7 @@ const TimetableGenerator: React.FC<TimetableGeneratorProps> = (props) => {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'
-            },
+            }
           }
         );
 
@@ -692,7 +692,7 @@ const TimetableGenerator: React.FC<TimetableGeneratorProps> = (props) => {
         </thead>
         <tbody>
 
-        <tr style={{display: 'table-cell', width: '13%'}}>
+        <tr style={{ display: 'table-cell', width: '13%' }}>
           {
             rowsNo.map((index) => {
               const regex1 = /^([^:]+)/g;
@@ -710,10 +710,10 @@ const TimetableGenerator: React.FC<TimetableGeneratorProps> = (props) => {
               if (!minutes) {
                 return;
               }
-              return (<td key={index} style={{display: 'block', textAlign: 'center'}}>
+              return (<td key={index} style={{ display: 'block', textAlign: 'center' }}>
                 <span
-                  style={{display: 'block'}}> - </span><span>{increasingHours - 1} : {minutes[0]}</span><span> - </span>
-                <span>{increasingHours} : {minutes[0]}</span> <span style={{display: 'block'}}> - </span></td>);
+                  style={{ display: 'block' }}> - </span><span>{increasingHours - 1} : {minutes[0]}</span><span> - </span>
+                <span>{increasingHours} : {minutes[0]}</span> <span style={{ display: 'block' }}> - </span></td>);
             })
           }
         </tr>
@@ -722,30 +722,30 @@ const TimetableGenerator: React.FC<TimetableGeneratorProps> = (props) => {
           columnsNo.map((index1) => {
             console.log(index1);
             return (
-              <tr style={{display: 'table-cell', width: '17%'}}>
+              <tr style={{ display: 'table-cell', width: '17%' }}>
                 {finalSessionsLecturer &&
                 finalSessionsLecturer[index1 - 1].map((data, index2) => {
                   if (!data) {
                     if (!finalSessionsLecturer[index1 - 1][index2 - 1]) {
-                      return (<td key={index2} style={{display: 'block', textAlign: 'center'}}> - <span
-                        style={{display: 'block'}}> - </span>
+                      return (<td key={index2} style={{ display: 'block', textAlign: 'center' }}> - <span
+                        style={{ display: 'block' }}> - </span>
                         <span
-                          style={{display: 'block'}}> - </span></td>);
+                          style={{ display: 'block' }}> - </span></td>);
                     }
                     if (finalSessionsLecturer[index1 - 1][index2 - 1].duration === '2') {
                       return (<td key={index2}
-                                  style={{display: 'block'}}>{finalSessionsLecturer[index1 - 1][index2 - 1].groupRef}
+                                  style={{ display: 'block' }}>{finalSessionsLecturer[index1 - 1][index2 - 1].groupRef}
                         <span
-                          style={{display: 'block'}}>{finalSessionsLecturer[index1 - 1][index2 - 1].subjectRef} </span>
+                          style={{ display: 'block' }}>{finalSessionsLecturer[index1 - 1][index2 - 1].subjectRef} </span>
                         <span
-                          style={{display: 'block'}}>{finalSessionsLecturer[index1 - 1][index2 - 1].roomRef} </span>
+                          style={{ display: 'block' }}>{finalSessionsLecturer[index1 - 1][index2 - 1].roomRef} </span>
                       </td>);
                     }
 
                   }
-                  return (<td key={index2} style={{display: 'block'}}>{data.groupRef} <span
-                    style={{display: 'block'}}>{data.subjectRef} </span> <span
-                    style={{display: 'block'}}>{data.roomRef} </span></td>);
+                  return (<td key={index2} style={{ display: 'block' }}>{data.groupRef} <span
+                    style={{ display: 'block' }}>{data.subjectRef} </span> <span
+                    style={{ display: 'block' }}>{data.roomRef} </span></td>);
                   //   return (<td key={index2} style={{ display: 'block' }}><span>{data.groupRef}<span><br><span>{data.subjectCodeRef}<span><br></td>
                   // );
                 })

@@ -1,13 +1,13 @@
 /* eslint-disable */
-import React, {useEffect, useState} from 'react';
-import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {Col, Container, Form, Row} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import styles from './parallelSessions.css';
-import {setRoomUnavailability, setUnavailableRoom} from '../RoomsUnavailability/rooms-unavailability-slice'
-import {setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom} from '../Rooms/rooms-slice'
+import { setRoomUnavailability, setUnavailableRoom } from '../RoomsUnavailability/rooms-unavailability-slice';
+import { setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom } from '../Rooms/rooms-slice';
 import {
   setEditBuilding,
   setEditingBuilding,
@@ -15,7 +15,7 @@ import {
   setExistingBuilding,
   setExistingRoomsForBuilding
 } from '../Buildings/buildings-slice';
-import {proxy} from '../../conf';
+import { proxy } from '../../conf';
 import TwoSessionAdd from './twoSessionAdd.tsx';
 import ThreeSessionAdd from './threeSessionAdd.tsx';
 
@@ -28,19 +28,19 @@ var catCount;
 const ParallelSessionsPage: React.FC = () => {
   const dispatch = useDispatch();
 
-  dispatch(setEditRoom(false))
-  dispatch(setEditingRoomId(''))
-  dispatch(setEditingRoom(null))
-  dispatch(setExistingRoom(false))
+  dispatch(setEditRoom(false));
+  dispatch(setEditingRoomId(''));
+  dispatch(setEditingRoom(null));
+  dispatch(setExistingRoom(false));
 
-  dispatch(setEditBuilding(false))
-  dispatch(setEditingBuildingId(''))
-  dispatch(setEditingBuilding(null))
-  dispatch(setExistingBuilding(false))
-  dispatch(setExistingRoomsForBuilding(false))
+  dispatch(setEditBuilding(false));
+  dispatch(setEditingBuildingId(''));
+  dispatch(setEditingBuilding(null));
+  dispatch(setExistingBuilding(false));
+  dispatch(setExistingRoomsForBuilding(false));
 
-  dispatch(setRoomUnavailability(false))
-  dispatch(setUnavailableRoom(null))
+  dispatch(setRoomUnavailability(false));
+  dispatch(setUnavailableRoom(null));
 
   const [lecturer, setLecturer] = useState<boolean | null>(false);
   const [session, setSession] = useState<boolean | null>(false);
@@ -123,7 +123,7 @@ const ParallelSessionsPage: React.FC = () => {
   };
 
   const getCategoryCount = async (cid) => {
-    console.log(category)
+    console.log(category);
     try {
 
       const response = await fetch(`${proxy}/parallelSessions/getCategoryCount`, {
@@ -131,9 +131,9 @@ const ParallelSessionsPage: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"category": cid})
-      })
-      const responseData = await response.json()
+        body: JSON.stringify({ 'category': cid })
+      });
+      const responseData = await response.json();
       console.log(responseData);
 
       var count = responseData.categoryCount;
@@ -149,9 +149,9 @@ const ParallelSessionsPage: React.FC = () => {
     } catch (errors) {
 
 
-      console.log(errors)
+      console.log(errors);
     }
-  }
+  };
 
 
   // const handleSubmit = async () => {
@@ -227,7 +227,7 @@ const ParallelSessionsPage: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.WORKING_DAYS_AND_HOURS_VIEW}/>;
+      return <Redirect to={routes.WORKING_DAYS_AND_HOURS_VIEW} />;
       //   props.history.push(loginState.redirectTo);s
     }
     return null;
@@ -243,13 +243,13 @@ const ParallelSessionsPage: React.FC = () => {
     >
 
       {renderRedirect()}
-      <NavBar/>
+      <NavBar />
       <Row className="text-center mb-5">
         <Col
           xs={12}
           md={12}
           className="p-3"
-          style={{backgroundColor: '#343a40', color: '#fff'}}
+          style={{ backgroundColor: '#343a40', color: '#fff' }}
         >
           <h3>Add Parallel Session</h3>
         </Col>
@@ -273,7 +273,7 @@ const ParallelSessionsPage: React.FC = () => {
                 <Form.Control
                   as="select"
                   defaultValue="Choose..."
-                  style={{borderWidth: '2.5px'}}
+                  style={{ borderWidth: '2.5px' }}
                   value={category}
                   onChange={handleCategory}
                 >
@@ -286,17 +286,17 @@ const ParallelSessionsPage: React.FC = () => {
               </Form.Group>
             </Form>
           </Col>
-          <Col xs={3} md={2}/>
+          <Col xs={3} md={2} />
         </Row>
 
 
         {two && (
-          <TwoSessionAdd/>
+          <TwoSessionAdd />
         )
         }
 
         {three && (
-          <ThreeSessionAdd/>
+          <ThreeSessionAdd />
         )
         }
 
