@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {Button, Form, Spinner} from 'react-bootstrap'
+import {Button, Form, Spinner,Col, Row } from 'react-bootstrap'
 import {FaArrowAltCircleLeft, FaEdit} from 'react-icons/fa'
 import {proxy} from '../../conf'
 import {setOrderDM,setExistingOrderDM,setEditOrderDM,setEditingOrderDMId,setEditingOrderDM} from './orderDM-slice'
-import { Redirect } from 'react-router-dom';
+import { NavLink,Redirect } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
+import routes from '../../constants/routes.json';
 
 let errors_: string = ''
 const methodList = ['Cash','Card'];
@@ -14,11 +15,11 @@ const MakePayment: React.FC = () => {
   const dispatch = useDispatch()
 
 
-  let orderDMList = useSelector(
-    (state: {
-      orderDM: any
-    }) => state.orderDM.orderDM
-  )
+  // let orderDMList = useSelector(
+  //   (state: {
+  //     orderDM: any
+  //   }) => state.orderDM.orderDM
+  // )
 
   const editingOrderDMId = useSelector(
     (state: {
@@ -127,6 +128,8 @@ const MakePayment: React.FC = () => {
       amount:order.supplierAmount,
     };
 
+    console.log(finalObject)
+
     if (paymentMethod.trim() !== '') {
 
       try {
@@ -185,7 +188,7 @@ const MakePayment: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo && renderRedirectTo1) {
-      return <Redirect to={routes.TAGS_LIST_VIEW} />;
+      return <Redirect to={routes.PAYMENT_LIST} />;
     }
     return null;
   };
@@ -202,20 +205,38 @@ const MakePayment: React.FC = () => {
 
   return (
     <div style={{
+      minWidth: 'max-content',
+      overflowX: 'hidden',
+      marginBottom: '3%'
+    }}>
+      <NavBar />
+      {renderRedirect()}
+      <Row className='text-center mb-5'>
+        <Col className='p-3'
+             style={{
+               backgroundColor: '#343a40',
+               color: '#fff'
+             }}>
+          <h1>Make Payment</h1>
+        </Col>
+      </Row>
+      <div className='container'>
+    <div style={{
       borderRadius: '8px',
       padding: '3% 9% 3% 9%',
       border: '2px solid #007bff',
       maxWidth: 'fit-content'
     }}>
-      {renderRedirect()}
-      <NavBar />
+
+
       <Form>
         <Form.Row style={{
           marginTop: '5%'
         }}>
           <Form.Group controlId='formRoomName'>
             <Form.Label>Invoice ID</Form.Label>
-            <Form.Control type='text'
+            <Form.Control disabled
+                    type="text"
                           value={order.invoiceId}
                   size='lg'/>
           </Form.Group>
@@ -223,7 +244,8 @@ const MakePayment: React.FC = () => {
         <Form.Row>
           <Form.Group controlId='formLocatedBuilding'>
             <Form.Label>Order ID</Form.Label>
-            <Form.Control type='text'
+            <Form.Control disabled
+                    type="text"
                           value={order.orderId}
 
                           size='lg'>
@@ -234,7 +256,8 @@ const MakePayment: React.FC = () => {
         <Form.Row>
           <Form.Group controlId='formRoomType'>
             <Form.Label>Supplier Name</Form.Label>
-            <Form.Control type='text'
+            <Form.Control disabled
+                    type="text"
                           value={order.supplierName}
 
                           size='lg'>
@@ -245,7 +268,8 @@ const MakePayment: React.FC = () => {
         <Form.Row>
           <Form.Group controlId='formRoomCapacity'>
             <Form.Label>Amount</Form.Label>
-            <Form.Control type='text'
+            <Form.Control disabled
+                    type="text"
                           value={order.supplierAmount}
 
                           size='lg'/>
@@ -279,22 +303,7 @@ const MakePayment: React.FC = () => {
         <Form.Row style={{
           marginTop: '10%'
         }}>
-          <Form.Group>
-            <Button variant='primary'
-                    type='button'
-                    onClick={handleBack}
-                    style={{
-                      marginLeft: '30%',
-                      fontSize: 'large',
-                      textTransform: 'uppercase'
-                    }}>
-              <FaArrowAltCircleLeft style={{
-                marginRight: '4px',
-                marginBottom: '-2px'
-              }}/>
-              Back
-            </Button>
-          </Form.Group>
+
           <Form.Group>
             <Button variant='success'
                     type='submit'
@@ -325,6 +334,8 @@ const MakePayment: React.FC = () => {
         }
       </Form>
 
+    </div>
+    </div>
     </div>
   )
 }
