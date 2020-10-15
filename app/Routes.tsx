@@ -6,6 +6,8 @@ import HomePage from './containers/HomePage';
 
 import InventoryPage from './Pages/Inventory/inventory-page';
 import PurchaseOrdersForApprovingPage from './Pages/PurchaseOrdersForApproving/purchase-orders-for-approving-page';
+import PurchaseOrdersApprovedList from './Pages/PurchaseOrdersForApproving/purchase-orders-approved-list';
+import PurchaseOrdersRejectedList from './Pages/PurchaseOrdersForApproving/purchase-orders-rejected-list';
 import DeliveryConfirmedOrdersList from './Pages/DeliveryManager/delivery-confirmed-orders-list';
 import DeliveryRejectedOrdersList from './Pages/DeliveryManager/delivery-rejected-orders-list';
 import OrdersForDeliveryConfirmedList from './Pages/DeliveryManager/orders-for-delivery-confirmed-list';
@@ -35,6 +37,10 @@ export default function Routes() {
                component={InventoryPage} />
         <Route path={routes.PURCHASE_ORDERS_FOR_APPROVING}
            component={PurchaseOrdersForApprovingPage} />
+           <Route path={routes.CONFIRMED_PS_LIST}
+               component={PurchaseOrdersApprovedList} />
+               <Route path={routes.REJECTED_PS_LIST}
+               component={PurchaseOrdersRejectedList} />
 
                <Route path={routes.PENDING_DM_LIST}
                component={OrdersForDeliveryConfirmedList} />
