@@ -5,6 +5,7 @@ import routes from './constants/routes.json';
 import HomePage from './containers/HomePage';
 
 import InventoryPage from './Pages/Inventory/inventory-page';
+import InventorysPage from './Pages/InventoryM/inventory-page';
 import PurchaseOrdersForApprovingPage from './Pages/PurchaseOrdersForApproving/purchase-orders-for-approving-page';
 import PurchaseOrdersApprovedList from './Pages/PurchaseOrdersForApproving/purchase-orders-approved-list';
 import PurchaseOrdersRejectedList from './Pages/PurchaseOrdersForApproving/purchase-orders-rejected-list';
@@ -35,6 +36,8 @@ export default function Routes() {
 
         <Route path={routes.INVENTORY}
                component={InventoryPage} />
+               <Route path={routes.INVENTORYS}
+               component={InventorysPage} />
         <Route path={routes.PURCHASE_ORDERS_FOR_APPROVING}
            component={PurchaseOrdersForApprovingPage} />
            <Route path={routes.CONFIRMED_PS_LIST}
