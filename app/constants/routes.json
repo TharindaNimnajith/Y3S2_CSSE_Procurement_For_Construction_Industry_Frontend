@@ -58,5 +58,7 @@
   "PENDING_SUP_LIST": "/pendingSup",
   "CONFIRMED_SUP_LIST": "/confirmedSup",
   "REJECTED_SUP_LIST": "/rejectedSup",
-  "GENERATE_INVOICE": "/generateInvoice/:id"
+  "GENERATE_INVOICE": "/generateInvoice/:id",
+  "CONFIRMED_PS_LIST": "/confirmedPS",
+  "REJECTED_PS_LIST": "/rejectedPS"
 }

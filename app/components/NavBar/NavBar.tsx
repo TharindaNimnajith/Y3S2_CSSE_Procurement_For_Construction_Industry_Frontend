@@ -245,11 +245,43 @@ const NavBar: React.FC = () => {
               Stock
             </Nav.Link>
           </NavLink>
-          <NavLink to={routes.PURCHASE_ORDERS_FOR_APPROVING}>
-            <Nav.Link href='#purchase_orders_for_approving'>
-              Purchase Orders for Approval
-            </Nav.Link>
-          </NavLink>
+
+          <NavDropdown title='Purchased Order Details'
+                       id='collasible-nav-dropdown'>
+            <NavDropdown.Item href='#batches/pendingPS'>
+              <NavLink to={routes.PURCHASE_ORDERS_FOR_APPROVING}>
+                <Nav.Link href='#pendingPS'
+                          style={{
+                            color: 'black'
+                          }}>
+                  Purchase Orders for Approval
+                </Nav.Link>
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item href='#batches/confirmedPS'>
+              <NavLink to={routes.CONFIRMED_PS_LIST}>
+                <Nav.Link href='#confirmedPS'
+                          style={{
+                            color: 'black'
+                          }}>
+                  Approved Orders
+                </Nav.Link>
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item href='#batches/rejectedPS'>
+              <NavLink to={routes.REJECTED_PS_LIST}>
+                <Nav.Link href='#rejectedPS'
+                          style={{
+                            color: 'black'
+                          }}>
+                  Rejected Orders
+                </Nav.Link>
+              </NavLink>
+            </NavDropdown.Item>
+
+          </NavDropdown>
           <NavDropdown title='Delivery Order Details'
                        id='collasible-nav-dropdown'>
             <NavDropdown.Item href='#batches/pendingDM'>
