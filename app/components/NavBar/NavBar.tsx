@@ -292,6 +292,45 @@ const NavBar: React.FC = () => {
               Payment Details
             </Nav.Link>
           </NavLink>
+
+        <NavDropdown title='Supplier Order Details'
+                       id='collasible-nav-dropdown'>
+            <NavDropdown.Item href='#batches/pendingSUP'>
+              <NavLink to={routes.PENDING_SUP_LIST}>
+                <Nav.Link href='#pendingSUP'
+                          style={{
+                            color: 'black'
+                          }}>
+                  Pending Orders
+                </Nav.Link>
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item href='#batches/confirmedSUP'>
+              <NavLink to={routes.CONFIRMED_SUP_LIST}>
+                <Nav.Link href='#confirmedSUP'
+                          style={{
+                            color: 'black'
+                          }}>
+                  Confirmed Orders
+                </Nav.Link>
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item href='#batches/rejectedSUP'>
+              <NavLink to={routes.REJECTED_SUP_LIST}>
+                <Nav.Link href='#rejectedSUP'
+                          style={{
+                            color: 'black'
+                          }}>
+                  Rejected Orders
+                </Nav.Link>
+              </NavLink>
+            </NavDropdown.Item>
+
+          </NavDropdown>
+
+
         </Nav>
       </Navbar.Collapse>
     </Navbar>
