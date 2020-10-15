@@ -245,6 +245,12 @@ const NavBar: React.FC = () => {
               Stock
             </Nav.Link>
           </NavLink>
+          <NavLink to={routes.INVENTORYS}>
+            <Nav.Link href='#inventorys'>
+              Inventory Details
+            </Nav.Link>
+          </NavLink>
+
 
           <NavDropdown title='Purchased Order Details'
                        id='collasible-nav-dropdown'>
