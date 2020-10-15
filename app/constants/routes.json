@@ -61,5 +61,6 @@
   "GENERATE_INVOICE": "/generateInvoice/:id",
   "CONFIRMED_PS_LIST": "/confirmedPS",
   "REJECTED_PS_LIST": "/rejectedPS",
-  "INVENTORYS": "/inventorys"
+  "INVENTORYS": "/inventorys",
+  "POLICY": "/policy"
 }

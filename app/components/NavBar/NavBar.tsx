@@ -224,7 +224,14 @@ Payment Details
                height: '100vh'
              }}>
           <br />
-
+          <NavLink to={routes.POLICY}>
+          <Nav.Link href='#policy'
+                    style={{
+                      color: 'black'
+                    }}>
+            Policy
+          </Nav.Link>
+        </NavLink>
 
 
 
