@@ -75,7 +75,7 @@ const UsersPage: React.FC = () => {
       </Row>
       <div className='container'>
         <Row>
-          <Col sm='4'
+          <Col sm='8' lg='12'
                style={{
                  marginTop: '115px'
                }}>
@@ -84,15 +84,7 @@ const UsersPage: React.FC = () => {
               <Login/>
             </div>
           </Col>
-          <Col sm='4'
-               style={{
-                 marginTop: '115px'
-               }}>
-            <div>
 
-              <Signup/>
-            </div>
-          </Col>
 
         </Row>
       </div>

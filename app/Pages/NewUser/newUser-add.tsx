@@ -3,27 +3,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { FaPlusCircle } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { setEditingUser, setEditingUserId, setEditUser, setExistingUser, setUsers ,setLogin,setUserType,setUserName} from './user-slice';
+import { setEditingUser, setEditingUserId, setEditUser, setExistingUser, setUsers ,setLogin,setUserType,setUserName} from './newUser-slice';
 import routes from '../../constants/routes.json';
 import { Redirect } from 'react-router-dom';
 let errors_: string = '';
 
 
+const usersList = ['Procurement Staff', 'Supplier','Delivery Manager','Site Manager'];
 
-const Signup: React.FC = () => {
+
+const NewUserAdd: React.FC = () => {
   const dispatch = useDispatch();
 
   let userList = useSelector(
     (state: {
-      users: any
-    }) => state.users.users
+      newusers: any
+    }) => state.newusers.users
   );
 
   const existingUser = useSelector(
     (state: {
-      users: any
+      newusers: any
       existingUser: boolean
-    }) => state.users.existingUser
+    }) => state.newusers.existingUser
   );
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -41,7 +43,7 @@ const Signup: React.FC = () => {
     address:'',
     email: '',
     password: '',
-    type:'Procurement Staff',
+    type:'',
     typeDefault:true
 
   });
@@ -76,10 +78,14 @@ const Signup: React.FC = () => {
       errors_ = 'Please enter a value for password.';
       await dispatch(setExistingUser(true));
       setLoading(false);
+    } else if (user.type.trim() === '') {
+      errors_ = 'Please select a type.';
+      await dispatch(setExistingUser(true));
+      setLoading(false);
     }
 
 
-    if (user.email.trim() !== '' && user.password.trim() !== ''  && user.email.trim() !== '' && user.password.trim() !== '' ) {
+    if (user.email.trim() !== '' && user.password.trim() !== ''  && user.email.trim() !== '' && user.password.trim() !== '' && user.type.trim() !== '' ) {
       try {
         const response = await fetch(`${proxy}/user/signup`, {
           method: 'POST',
@@ -100,7 +106,7 @@ const Signup: React.FC = () => {
           console.log(responseData.login);
           console.log(responseData.name);
           console.log(responseData.message);
-          setRenderRedirectTo(true);
+
 
         }
 
@@ -127,6 +133,7 @@ const Signup: React.FC = () => {
   };
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    errors_='';
     setLoading(true);
     setUser({ ...user, name: e.target.value });
     dispatch(setExistingUser(false));
@@ -134,6 +141,7 @@ const Signup: React.FC = () => {
   };
 
   const handleChangeAddress= (e: React.ChangeEvent<HTMLInputElement>) => {
+    errors_='';
     setLoading(true);
     setUser({ ...user, address: e.target.value });
     dispatch(setExistingUser(false));
@@ -142,6 +150,7 @@ const Signup: React.FC = () => {
 
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    errors_='';
     setLoading(true);
     setUser({ ...user, email: e.target.value });
     dispatch(setExistingUser(false));
@@ -149,12 +158,20 @@ const Signup: React.FC = () => {
   };
 
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    errors_='';
     setLoading(true);
     setUser({ ...user, password: e.target.value });
     dispatch(setExistingUser(false));
     setLoading(false);
   };
 
+  const handleChangeType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    errors_='';
+    setLoading(true);
+    setUser({ ...user, type: e.target.value });
+    dispatch(setExistingUser(false));
+    setLoading(false);
+  };
 
 
 
@@ -167,17 +184,12 @@ const Signup: React.FC = () => {
     user.address= '';
     user.email= '';
     user.password= '';
+    user.type='';
 
     setLoading(false);
   };
 
 
-  const renderRedirect = () => {
-    if (renderRedirectTo) {
-      return <Redirect to={routes.HOME} />;
-    }
-    return null;
-  };
 
   return (
 
@@ -187,7 +199,7 @@ const Signup: React.FC = () => {
       border: '2px solid #007bff',
       maxWidth: 'fit-content'
     }}>
-{renderRedirect()}
+
 
       <Form>
 
@@ -247,6 +259,23 @@ const Signup: React.FC = () => {
           </Form.Group>
         </Form.Row>
 
+        <Form.Row>
+          <Form.Group controlId='formRoomName'>
+            <Form.Label>User Category</Form.Label>
+            <Form.Control as='select'
+                              value={user.type}
+                              onChange={handleChangeType}
+                              title='Please select the type.'
+                              required
+                              size='lg'>
+                  <option>Select</option>
+                  {usersList?.map((user, index) => (
+                    <option>{user}</option>
+                  ))}
+                </Form.Control>
+          </Form.Group>
+        </Form.Row>
+
 
 
 
@@ -274,7 +303,7 @@ const Signup: React.FC = () => {
                 marginRight: '4px',
                 marginBottom: '-2px'
               }} />
-              Sign Up
+              Create User
             </Button>
           </Form.Group>
         </Form.Row>
@@ -297,4 +326,4 @@ const Signup: React.FC = () => {
   );
 };
 
-export default Signup;
+export default NewUserAdd;

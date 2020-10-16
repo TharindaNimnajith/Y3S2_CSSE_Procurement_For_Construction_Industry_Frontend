@@ -111,6 +111,7 @@ const Login: React.FC = () => {
   };
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    errors_='';
     setLoading(true);
     setUser({ ...user, email: e.target.value });
     dispatch(setExistingUser(false));
@@ -118,6 +119,7 @@ const Login: React.FC = () => {
   };
 
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    errors_='';
     setLoading(true);
     setUser({ ...user, password: e.target.value });
     dispatch(setExistingUser(false));
