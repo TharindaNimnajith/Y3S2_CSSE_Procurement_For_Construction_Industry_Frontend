@@ -8,7 +8,7 @@ import {
   setEditingInventoryId,
   setEditInventory,
   setExistingInventory,
-  setInventorys
+  setInventories
 } from './inventory-slice';
 
 let errors_: string = '';
@@ -18,34 +18,34 @@ const state = [
   'False'
 ];
 
-const InventorysEdit: React.FC = () => {
+const InventoriesEdit: React.FC = () => {
   const dispatch = useDispatch();
 
   let inventoryList = useSelector(
     (state: {
-      inventorys: any
-    }) => state.inventorys.inventorys
+      inventories: any
+    }) => state.inventories.inventories
   );
 
   const existingInventory = useSelector(
     (state: {
-      inventorys: any
+      inventories: any
       existingInventory: boolean
-    }) => state.inventorys.existingInventory
+    }) => state.inventories.existingInventory
   );
 
   const editingInventoryId = useSelector(
     (state: {
-      inventorys: any
+      inventories: any
       editingInventoryId: string
-    }) => state.inventorys.editingInventoryId
+    }) => state.inventories.editingInventoryId
   );
 
   const editingInventory = useSelector(
     (state: {
-      inventorys: any
+      inventories: any
       editingInventory: any
-    }) => state.inventorys.editingInventory
+    }) => state.inventories.editingInventory
   );
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -130,7 +130,7 @@ const InventorysEdit: React.FC = () => {
           await dispatch(setExistingInventory(true));
         } else {
           inventoryList = inventoryList.map((inventory_: any) => inventory_ === editingInventoryId ? inventory : inventory_);
-          await dispatch(setInventorys(inventoryList));
+          await dispatch(setInventories(inventoryList));
           await dispatch(setEditInventory(false));
           await dispatch(setEditingInventoryId(''));
           await dispatch(setEditingInventory(null));
@@ -370,4 +370,4 @@ const InventorysEdit: React.FC = () => {
   );
 };
 
-export default InventorysEdit;
+export default InventoriesEdit;

@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const setInventorysSlice = createSlice({
-  name: 'inventorys',
+const setInventoriesSlice = createSlice({
+  name: 'inventories',
   initialState: {
-    inventorys: {},
+    inventories: {},
     existingInventory: false,
     editInventory: false,
     editingInventoryId: '',
     editingInventory: null
   },
   reducers: {
-    setInventorys: (state, action: any) => {
-      state.inventorys = action.payload;
+    setInventories: (state, action: any) => {
+      state.inventories = action.payload;
     },
     setExistingInventory: (state, action: any) => {
       state.existingInventory = action.payload;
@@ -28,10 +28,10 @@ const setInventorysSlice = createSlice({
   }
 });
 
-export const { setInventorys } = setInventorysSlice.actions;
-export const { setExistingInventory } = setInventorysSlice.actions;
-export const { setEditInventory } = setInventorysSlice.actions;
-export const { setEditingInventoryId } = setInventorysSlice.actions;
-export const { setEditingInventory } = setInventorysSlice.actions;
+export const { setInventories } = setInventoriesSlice.actions;
+export const { setExistingInventory } = setInventoriesSlice.actions;
+export const { setEditInventory } = setInventoriesSlice.actions;
+export const { setEditingInventoryId } = setInventoriesSlice.actions;
+export const { setEditingInventory } = setInventoriesSlice.actions;
 
-export default setInventorysSlice.reducer;
+export default setInventoriesSlice.reducer;

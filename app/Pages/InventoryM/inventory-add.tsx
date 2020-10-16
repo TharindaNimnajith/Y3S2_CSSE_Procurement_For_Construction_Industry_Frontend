@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { FaPlusCircle } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { setExistingInventory, setInventorys } from './inventory-slice';
+import { setExistingInventory, setInventories } from './inventory-slice';
 
 let errors_: string = '';
 
@@ -12,20 +12,20 @@ const state = [
   'False'
 ];
 
-const InventorysAdd: React.FC = () => {
+const InventoriesAdd: React.FC = () => {
   const dispatch = useDispatch();
 
   let inventoryList = useSelector(
     (state: {
-      inventorys: any
-    }) => state.inventorys.inventorys
+      inventories: any
+    }) => state.inventories.inventories
   );
 
   const existingInventory = useSelector(
     (state: {
-      inventorys: any
+      inventories: any
       existingInventory: boolean
-    }) => state.inventorys.existingInventory
+    }) => state.inventories.existingInventory
   );
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -50,10 +50,7 @@ const InventorysAdd: React.FC = () => {
 
   const [isRestricted1, setIsRestricted1] = useState<string>('False');
 
-
   useEffect(() => {
-
-
   }, []);
 
   const handleSubmit = async (e: any) => {
@@ -93,7 +90,7 @@ const InventorysAdd: React.FC = () => {
         });
         const responseData = await response.json();
         inventoryList = { ...inventoryList, responseData };
-        await dispatch(setInventorys(inventoryList));
+        await dispatch(setInventories(inventoryList));
         if (responseData.exists) {
           errors_ = responseData.message;
           await dispatch(setExistingInventory(true));
@@ -143,25 +140,16 @@ const InventorysAdd: React.FC = () => {
     setLoading(false);
   };
 
-
   const handleChangeIsRestricted = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
-    var a;
-    if (e.target.value === 'True') {
-      a = true;
-    } else {
-      a = false;
-    }
-
-    setInventory({ ...inventory, isRestricted: a });
+    let isRestricted = e.target.value === 'True';
+    setInventory({ ...inventory, isRestricted: isRestricted });
     dispatch(setExistingInventory(false));
     setLoading(false);
   };
 
-
   const resetValues = async () => {
     setLoading(true);
-
     inventory.itemName = '';
     inventory.unitPrice = '';
     inventory.unitsInStock = '';
@@ -194,7 +182,6 @@ const InventorysAdd: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
         <Form.Row>
           <Form.Group controlId='formRoomName'>
             <Form.Label>Unit Price</Form.Label>
@@ -208,7 +195,6 @@ const InventorysAdd: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
         <Form.Row>
           <Form.Group controlId='formRoomName'>
             <Form.Label>Units In Stock</Form.Label>
@@ -222,7 +208,6 @@ const InventorysAdd: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
         <Form.Row>
           <Form.Group controlId='formRoomName'>
             <Form.Label>Threshold Units</Form.Label>
@@ -236,7 +221,6 @@ const InventorysAdd: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
         <Form.Row>
           <Form.Group controlId='formRoomName'>
             <Form.Label>Description</Form.Label>
@@ -250,7 +234,6 @@ const InventorysAdd: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
         <Form.Row>
           <Form.Group controlId='formRoomType'>
             <Form.Label>isRestricted</Form.Label>
@@ -273,7 +256,6 @@ const InventorysAdd: React.FC = () => {
             </Form.Control>
           </Form.Group>
         </Form.Row>
-
         {
           loading && (
             <Spinner animation='border'
@@ -298,7 +280,7 @@ const InventorysAdd: React.FC = () => {
                 marginRight: '4px',
                 marginBottom: '-2px'
               }} />
-              Add Inventory
+              Add
             </Button>
           </Form.Group>
         </Form.Row>
@@ -321,4 +303,4 @@ const InventorysAdd: React.FC = () => {
   );
 };
 
-export default InventorysAdd;
+export default InventoriesAdd;

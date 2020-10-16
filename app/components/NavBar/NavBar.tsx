@@ -218,7 +218,7 @@ const NavBar: React.FC = () => {
                 Policy
               </Nav.Link>
             </NavLink>
-            <NavLink to={routes.INVENTORYS}>
+            <NavLink to={routes.INVENTORIES}>
               <Nav.Link href='#inventorys'>
                 Inventory Details
               </Nav.Link>
@@ -250,8 +250,8 @@ const NavBar: React.FC = () => {
                 Stock
               </Nav.Link>
             </NavLink>
-            <NavLink to={routes.INVENTORYS}>
-              <Nav.Link href='#inventorys'>
+            <NavLink to={routes.INVENTORIES}>
+              <Nav.Link href='#inventories'>
                 Inventory Details
               </Nav.Link>
             </NavLink>

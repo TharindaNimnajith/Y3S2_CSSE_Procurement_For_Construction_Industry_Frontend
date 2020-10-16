@@ -1,48 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Button, Modal, Spinner, Table } from 'react-bootstrap';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { proxy } from '../../conf';
 import { setEditingInventory, setEditingInventoryId, setEditInventory, setExistingInventory } from './inventory-slice';
 
-
 let errors_: string = '';
 
-const InventorysList: React.FC = () => {
+const InventoriesList: React.FC = () => {
   const dispatch = useDispatch();
-
-  let inventoryList = useSelector(
-    (state: {
-      inventorys: any
-    }) => state.inventorys.inventorys
-  );
 
   const [loading, setLoading] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [deleteId, setDeleteId] = useState<string>('');
-
   const [inventories, setInventoryList] = useState<any>([]);
-  const [inventory, setInventory] = useState<{
-    itemId: string,
-    itemName: string,
-    unitPrice: string,
-    unitsInStock: string,
-    thresholdUnits: string,
-    description: string,
-    isRestricted: string
-  }>({
-    itemId: '',
-    itemName: '',
-    unitPrice: '',
-    unitsInStock: '',
-    thresholdUnits: '',
-    description: '',
-    isRestricted: ''
-  });
 
   const getInventory = async () => {
     try {
-      // setLoading(true);
       const response = await fetch(`${proxy}/inventory/getInventories`, {
         method: 'GET',
         headers: {
@@ -51,11 +25,8 @@ const InventorysList: React.FC = () => {
       });
       const responseData = await response.json();
       setInventoryList(responseData);
-      // await dispatch(setInventory(responseData));
-      // setLoading(false);
     } catch (errors) {
       errors_ = errors;
-      // setLoading(false);
       console.log(errors);
     }
   };
@@ -64,7 +35,6 @@ const InventorysList: React.FC = () => {
     getInventory().then(() => {
     });
   }, [inventories]);
-
 
   const handleClose = () => {
     setLoading(true);
@@ -120,8 +90,6 @@ const InventorysList: React.FC = () => {
         })
       });
       await response.json();
-      // inventoryList = inventoryList.filter((inventory: any) => inventory._id !== id);
-      // await dispatch(setInventory(inventoryList));
       await dispatch(setEditInventory(false));
       await dispatch(setExistingInventory(false));
       setLoading(false);
@@ -132,10 +100,8 @@ const InventorysList: React.FC = () => {
     }
   };
 
-
   return (
     <div>
-
       <div style={{
         marginTop: '4%'
       }}>
@@ -145,7 +111,7 @@ const InventorysList: React.FC = () => {
           <Modal.Header closeButton>
             <Modal.Title>Delete Inventory</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Are you sure you want to delete this inventory?</Modal.Body>
+          <Modal.Body>Are you sure you want to delete this item?</Modal.Body>
           <Modal.Footer>
             <Button variant='success'
                     onClick={handleClose}
@@ -255,15 +221,13 @@ const InventorysList: React.FC = () => {
           }}>
             Status
           </th>
-
           <th style={{
+            borderBottom: 'solid darkblue 1px',
+            borderTop: 'solid darkblue 1px',
             textAlign: 'center',
             fontSize: 'large',
             fontWeight: 'lighter',
-            color: 'white',
-            borderBottom: 'solid darkblue 1px',
-            borderRight: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px'
+            color: 'white'
           }}>
             Is Restricted
           </th>
@@ -390,4 +354,4 @@ const InventorysList: React.FC = () => {
   );
 };
 
-export default InventorysList;
+export default InventoriesList;

@@ -1,37 +1,25 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 import NavBar from '../../components/NavBar/NavBar';
-import InventorysList from './inventory-list';
-import InventorysEdit from './inventory-edit';
-import InventorysAdd from './inventory-add';
+import InventoriesList from './inventory-list';
+import InventoriesEdit from './inventory-edit';
+import InventoriesAdd from './inventory-add';
 
-
-const InventorysPage: React.FC = () => {
-  const dispatch = useDispatch();
-
-  // dispatch(setEditBuilding(false))
-  // dispatch(setEditingBuildingId(''))
-  // dispatch(setEditingBuilding(null))
-  // dispatch(setExistingBuilding(false))
-  // dispatch(setExistingRoomsForBuilding(false))
-  //
-  // dispatch(setRoomUnavailability(false))
-  // dispatch(setUnavailableRoom(null))
-
+const InventoriesPage: React.FC = () => {
   let route: any;
 
   const editInventory = useSelector(
     (state: {
-      inventorys: any
+      inventories: any
       editInventory: boolean
-    }) => state.inventorys.editInventory
+    }) => state.inventories.editInventory
   );
 
   if (editInventory)
-    route = (<InventorysEdit />);
+    route = (<InventoriesEdit />);
   else
-    route = (<InventorysAdd />);
+    route = (<InventoriesAdd />);
 
   return (
     <div style={{
@@ -51,19 +39,16 @@ const InventorysPage: React.FC = () => {
       </Row>
       <div className='container'>
         <Row>
-          <Col sm='4'
-               style={{
-                 marginTop: '115px'
-               }}>
+          <Col sm='3'>
             <div>
               {
                 route
               }
             </div>
           </Col>
-          <Col sm='8'>
+          <Col sm='9'>
             <div>
-              <InventorysList />
+              <InventoriesList />
             </div>
           </Col>
         </Row>
@@ -72,4 +57,4 @@ const InventorysPage: React.FC = () => {
   );
 };
 
-export default InventorysPage;
+export default InventoriesPage;
