@@ -18,6 +18,7 @@ import DeliveredOrdersSupList from './Pages/Supplier/delivered-orders-sup-list';
 import RejectedOrdersSupList from './Pages/Supplier/rejected-orders-sup-list';
 import GenerateInvoice from './Pages/Supplier/generateInvoice';
 import Policy from './Pages/Policies/policies';
+import UsersPage from './Pages/LoginSignup/user-page';
 
 const LazyCounterPage = React.lazy(() =>
   import('./containers/HomePage')
@@ -39,6 +40,8 @@ export default function Routes() {
                component={InventoryPage} />
         <Route path={routes.INVENTORIES}
                component={InventoriesPage} />
+                 <Route path={routes.USER}
+               component={UsersPage} />
         <Route path={routes.PURCHASE_ORDERS_FOR_APPROVING}
                component={PurchaseOrdersForApprovingPage} />
         <Route path={routes.CONFIRMED_PS_LIST}
