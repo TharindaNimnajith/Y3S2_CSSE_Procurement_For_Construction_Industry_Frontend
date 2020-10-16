@@ -365,6 +365,11 @@ const NavBar: React.FC = () => {
                 </NavLink>
               </NavDropdown.Item>
             </NavDropdown>
+            <NavLink to={routes.POLICY}>
+              <Nav.Link href='#policy'>
+                Policy
+              </Nav.Link>
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
