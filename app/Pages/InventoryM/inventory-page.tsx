@@ -37,16 +37,21 @@ const InventoriesPage: React.FC = () => {
           <h1>Stock Details</h1>
         </Col>
       </Row>
-      <div className='container'>
-        <Row>
-          <Col sm='3'>
-            <div>
+      <div>
+        <Row style={{
+          marginLeft: '15%',
+          marginRight: '15%'
+        }}>
+          <Col sm='4'>
+            <div style={{
+              marginTop: '7%'
+            }}>
               {
                 route
               }
             </div>
           </Col>
-          <Col sm='9'>
+          <Col sm='8'>
             <div>
               <InventoriesList />
             </div>

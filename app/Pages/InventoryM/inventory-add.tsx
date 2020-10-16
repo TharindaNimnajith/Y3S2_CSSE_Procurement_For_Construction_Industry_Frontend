@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { FaPlusCircle } from 'react-icons/fa';
@@ -6,11 +6,6 @@ import { proxy } from '../../conf';
 import { setExistingInventory, setInventories } from './inventory-slice';
 
 let errors_: string = '';
-
-const state = [
-  'True',
-  'False'
-];
 
 const InventoriesAdd: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,8 +23,8 @@ const InventoriesAdd: React.FC = () => {
     }) => state.inventories.existingInventory
   );
 
+  const [isRestricted, setIsRestricted] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-
   const [inventory, setInventory] = useState<{
     itemId: string,
     itemName: string,
@@ -47,11 +42,6 @@ const InventoriesAdd: React.FC = () => {
     description: '',
     isRestricted: false
   });
-
-  const [isRestricted1, setIsRestricted1] = useState<string>('False');
-
-  useEffect(() => {
-  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -73,10 +63,6 @@ const InventoriesAdd: React.FC = () => {
       errors_ = 'Please enter a value for the threshold units.';
       await dispatch(setExistingInventory(true));
       setLoading(false);
-    } else if ((inventory.description.trim() === '')) {
-      errors_ = 'Please enter a numerical value for the description.';
-      await dispatch(setExistingInventory(true));
-      setLoading(false);
     }
     if (inventory.itemName.trim() !== '' && inventory.unitPrice.trim() !== '' && inventory.unitsInStock.trim() !== ''
       && inventory.thresholdUnits.trim() !== '' && inventory.thresholdUnits.trim() !== '') {
@@ -95,6 +81,7 @@ const InventoriesAdd: React.FC = () => {
           errors_ = responseData.message;
           await dispatch(setExistingInventory(true));
         }
+        await dispatch(setExistingInventory(false));
         await resetValues();
         setLoading(false);
       } catch (errors) {
@@ -142,8 +129,9 @@ const InventoriesAdd: React.FC = () => {
 
   const handleChangeIsRestricted = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
-    let isRestricted = e.target.value === 'True';
-    setInventory({ ...inventory, isRestricted: isRestricted });
+    setIsRestricted(e.target.value);
+    let isRestrictedVar = e.target.value === 'True';
+    setInventory({ ...inventory, isRestricted: isRestrictedVar });
     dispatch(setExistingInventory(false));
     setLoading(false);
   };
@@ -156,6 +144,7 @@ const InventoriesAdd: React.FC = () => {
     inventory.thresholdUnits = '';
     inventory.description = '';
     inventory.isRestricted = false;
+    setIsRestricted('');
     setLoading(false);
   };
 
@@ -170,7 +159,7 @@ const InventoriesAdd: React.FC = () => {
         <Form.Row style={{
           marginTop: '5%'
         }}>
-          <Form.Group controlId='formRoomName'>
+          <Form.Group controlId='formItemName'>
             <Form.Label>Item Name</Form.Label>
             <Form.Control type='text'
                           value={inventory.itemName}
@@ -183,76 +172,68 @@ const InventoriesAdd: React.FC = () => {
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group controlId='formRoomName'>
+          <Form.Group controlId='formUnitPrice'>
             <Form.Label>Unit Price</Form.Label>
             <Form.Control type='text'
                           value={inventory.unitPrice}
                           onChange={handleChangeUnitPrice}
-                          placeholder='Enter Item Name'
+                          placeholder='Enter Unit Price'
                           pattern='[0-9]+'
-                          title='Please enter a valid item name.'
+                          title='Please enter a valid unit price.'
                           required
                           size='lg' />
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group controlId='formRoomName'>
+          <Form.Group controlId='formUnitsInStock'>
             <Form.Label>Units In Stock</Form.Label>
             <Form.Control type='text'
                           value={inventory.unitsInStock}
                           onChange={handleChangeUnitsInStock}
-                          placeholder='Enter Item Name'
+                          placeholder='Enter Units In Stock'
                           pattern='[0-9]+'
-                          title='Please enter a valid item name.'
+                          title='Please enter a valid units in stock count.'
                           required
                           size='lg' />
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group controlId='formRoomName'>
+          <Form.Group controlId='formThresholdUnits'>
             <Form.Label>Threshold Units</Form.Label>
             <Form.Control type='text'
                           value={inventory.thresholdUnits}
                           onChange={handleChangeThresholdUnit}
-                          placeholder='Enter Item Name'
+                          placeholder='Enter Threshold Units'
                           pattern='[0-9]+'
-                          title='Please enter a valid item name.'
+                          title='Please enter a valid threshold units count.'
                           required
                           size='lg' />
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group controlId='formRoomName'>
+          <Form.Group controlId='formDescription'>
             <Form.Label>Description</Form.Label>
             <Form.Control type='text'
                           value={inventory.description}
                           onChange={handleChangeDescription}
-                          placeholder='Enter Item Name'
+                          placeholder='Enter Description'
                           pattern='[A-Za-z]{2,32}'
-                          title='Please enter a valid item name.'
+                          title='Please enter a description.'
                           required
                           size='lg' />
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group controlId='formRoomType'>
-            <Form.Label>isRestricted</Form.Label>
+          <Form.Group controlId='formIsRestricted'>
+            <Form.Label>Is Restricted</Form.Label>
             <Form.Control as='select'
-                          value={isRestricted1}
+                          value={isRestricted}
                           onChange={handleChangeIsRestricted}
-                          title='Please select one option.'
+                          title='Please select if item is restricted.'
                           size='lg'>
               <option value="">Select Option</option>
-              {
-                state.map((state: any) => {
-                  return (
-                    <option key={state}
-                            value={state}>
-                      {state}
-                    </option>
-                  );
-                })
-              }
+              <option value='True'>True</option>
+              <option value='False'>False</option>
             </Form.Control>
           </Form.Group>
         </Form.Row>
@@ -271,8 +252,8 @@ const InventoriesAdd: React.FC = () => {
                     type='submit'
                     onClick={handleSubmit}
                     style={{
-                      marginLeft: '40%',
-                      marginTop: '10%',
+                      marginLeft: '100%',
+                      marginTop: '20%',
                       fontSize: 'large',
                       textTransform: 'uppercase'
                     }}>

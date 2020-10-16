@@ -109,7 +109,7 @@ const InventoriesList: React.FC = () => {
                onHide={handleClose}
                deleteId={deleteId}>
           <Modal.Header closeButton>
-            <Modal.Title>Delete Inventory</Modal.Title>
+            <Modal.Title>Delete Item</Modal.Title>
           </Modal.Header>
           <Modal.Body>Are you sure you want to delete this item?</Modal.Body>
           <Modal.Footer>
@@ -293,13 +293,15 @@ const InventoriesList: React.FC = () => {
                   {
                     inventory.isRestricted ? (
                       <td style={{
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        color: 'red'
                       }}>
                         True
                       </td>
                     ) : (
                       <td style={{
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        color: 'green'
                       }}>
                         False
                       </td>

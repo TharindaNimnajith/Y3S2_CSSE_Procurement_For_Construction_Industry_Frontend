@@ -179,21 +179,13 @@ const InventoriesEdit: React.FC = () => {
     setLoading(false);
   };
 
-
   const handleChangeIsRestricted = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
-    var a;
-    if (e.target.value === 'True') {
-      a = true;
-    } else {
-      a = false;
-    }
-
-    setInventory({ ...inventory, isRestricted: a });
+    let isRestricted = e.target.value === 'True';
+    setInventory({ ...inventory, isRestricted: isRestricted });
     dispatch(setExistingInventory(false));
     setLoading(false);
   };
-
 
   const handleBack = async () => {
     setLoading(true);

@@ -181,13 +181,15 @@ const InventoryList: React.FC = () => {
                   {
                     inventory.isRestricted ? (
                       <td style={{
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        color: 'red'
                       }}>
                         True
                       </td>
                     ) : (
                       <td style={{
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        color: 'green'
                       }}>
                         False
                       </td>
