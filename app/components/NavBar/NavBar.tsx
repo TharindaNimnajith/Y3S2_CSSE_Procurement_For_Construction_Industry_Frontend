@@ -6,7 +6,6 @@ import routes from '../../constants/routes.json';
 // let user = 'Procurement Staff';
 // let user = 'Delivery Manager';
 // let user = 'Manager';
-// let user = 'Admin';
 // let user = 'Supplier';
 let user = 'Test';
 
