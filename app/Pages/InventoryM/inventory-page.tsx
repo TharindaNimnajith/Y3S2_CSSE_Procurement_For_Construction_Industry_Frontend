@@ -1,15 +1,14 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 import NavBar from '../../components/NavBar/NavBar';
 import InventorysList from './inventory-list';
-import { setEditingInventory, setEditingInventoryId, setEditInventory, setExistingInventory, setInventorys } from './inventory-slice';
-import InventorysEdit from './inventory-edit'
-import InventorysAdd from './inventory-add'
+import InventorysEdit from './inventory-edit';
+import InventorysAdd from './inventory-add';
 
 
 const InventorysPage: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   // dispatch(setEditBuilding(false))
   // dispatch(setEditingBuildingId(''))
@@ -20,19 +19,19 @@ const InventorysPage: React.FC = () => {
   // dispatch(setRoomUnavailability(false))
   // dispatch(setUnavailableRoom(null))
 
-  let route: any
+  let route: any;
 
   const editInventory = useSelector(
     (state: {
       inventorys: any
       editInventory: boolean
     }) => state.inventorys.editInventory
-  )
+  );
 
   if (editInventory)
-    route = (<InventorysEdit/>)
+    route = (<InventorysEdit />);
   else
-    route = (<InventorysAdd/>)
+    route = (<InventorysAdd />);
 
   return (
     <div style={{
@@ -63,9 +62,9 @@ const InventorysPage: React.FC = () => {
             </div>
           </Col>
           <Col sm='8'>
-        <div>
-          <InventorysList />
-        </div>
+            <div>
+              <InventorysList />
+            </div>
           </Col>
         </Row>
       </div>

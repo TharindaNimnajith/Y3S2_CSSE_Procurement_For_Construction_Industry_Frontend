@@ -1,9 +1,8 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import NavBar from '../../components/NavBar/NavBar';
-import InventoryList from './inventory-list';
 
-const InventoryPage: React.FC = () => {
+const HomePage: React.FC = () => {
   return (
     <div style={{
       minWidth: 'max-content',
@@ -17,16 +16,16 @@ const InventoryPage: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Stock</h1>
+          <h1>Home</h1>
         </Col>
       </Row>
       <div className='container'>
         <div>
-          <InventoryList />
+          Home
         </div>
       </div>
     </div>
   );
 };
 
-export default InventoryPage;
+export default HomePage;

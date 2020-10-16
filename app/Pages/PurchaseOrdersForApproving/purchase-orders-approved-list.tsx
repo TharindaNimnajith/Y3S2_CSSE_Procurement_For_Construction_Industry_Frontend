@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Spinner, Table,Col, Row  } from 'react-bootstrap';
-import { FaBan, FaCheck } from 'react-icons/fa';
+import { Col, Row, Table } from 'react-bootstrap';
 import { proxy } from '../../conf';
 import NavBar from '../../components/NavBar/NavBar';
 
@@ -35,7 +34,6 @@ const PurchaseOrdersApprovedList: React.FC = () => {
   }, [orders]);
 
 
-
   return (
     <div style={{
       minWidth: 'max-content',
@@ -53,202 +51,202 @@ const PurchaseOrdersApprovedList: React.FC = () => {
         </Col>
       </Row>
       <div className='container'>
-    <div>
-      <div style={{
-        marginTop: '4%'
-      }}>
+        <div>
+          <div style={{
+            marginTop: '4%'
+          }}>
 
-        <Table responsive
-               striped
-               bordered
-               hover
-               size='sm'
-               style={{
-                 border: 'solid darkblue 1px'
-               }}>
-          <thead style={{
-            backgroundColor: '#0350a2'
-          }}>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderLeft: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Order ID
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Item Name
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Quantity
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Amount
-          </th>
+            <Table responsive
+                   striped
+                   bordered
+                   hover
+                   size='sm'
+                   style={{
+                     border: 'solid darkblue 1px'
+                   }}>
+              <thead style={{
+                backgroundColor: '#0350a2'
+              }}>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderLeft: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Order ID
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Item Name
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Quantity
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Amount
+              </th>
 
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Created Date
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Requested Date
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Site
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Site Manager
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Supplier
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Approved By
-          </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Created Date
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Requested Date
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Site
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Site Manager
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Supplier
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Approved By
+              </th>
 
-          </thead>
-          <tbody>
-          {
-            orders && orders.map((order: any) => {
-              return (
-                <tr key={order._id}>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.orderId}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.itemName}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.itemQuantity}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.totPrice}
-                  </td>
-
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.purchaseDate}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.requestedDate}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.siteName}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.siteManager}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.supplierName}
-                  </td>
-                  {
-                    order.status=== 'approved' ? (
+              </thead>
+              <tbody>
+              {
+                orders && orders.map((order: any) => {
+                  return (
+                    <tr key={order._id}>
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        Site Manager
+                        {order.orderId}
                       </td>
-                    ) : (
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        Procument Staff
+                        {order.itemName}
                       </td>
-                    )
-                  }
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.itemQuantity}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.totPrice}
+                      </td>
 
-                </tr>
-              );
-            })
-          }
-          </tbody>
-        </Table>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.purchaseDate}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.requestedDate}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.siteName}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.siteManager}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.supplierName}
+                      </td>
+                      {
+                        order.status === 'approved' ? (
+                          <td style={{
+                            textAlign: 'center'
+                          }}>
+                            Site Manager
+                          </td>
+                        ) : (
+                          <td style={{
+                            textAlign: 'center'
+                          }}>
+                            Procument Staff
+                          </td>
+                        )
+                      }
+
+                    </tr>
+                  );
+                })
+              }
+              </tbody>
+            </Table>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { FaPlusCircle } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { setEditingInventory, setEditingInventoryId, setEditInventory, setExistingInventory, setInventorys } from './inventory-slice';
+import { setExistingInventory, setInventorys } from './inventory-slice';
 
 let errors_: string = '';
 
@@ -48,11 +48,10 @@ const InventorysAdd: React.FC = () => {
     isRestricted: false
   });
 
-  const [isRestricted1 , setIsRestricted1] = useState<string>('False');
+  const [isRestricted1, setIsRestricted1] = useState<string>('False');
 
 
   useEffect(() => {
-
 
 
   }, []);
@@ -77,13 +76,13 @@ const InventorysAdd: React.FC = () => {
       errors_ = 'Please enter a value for the threshold units.';
       await dispatch(setExistingInventory(true));
       setLoading(false);
-    } else if ((inventory.description.trim()=== '')) {
+    } else if ((inventory.description.trim() === '')) {
       errors_ = 'Please enter a numerical value for the description.';
       await dispatch(setExistingInventory(true));
       setLoading(false);
     }
     if (inventory.itemName.trim() !== '' && inventory.unitPrice.trim() !== '' && inventory.unitsInStock.trim() !== ''
-      && inventory.thresholdUnits.trim() !== '' && inventory.thresholdUnits.trim() !== '' ) {
+      && inventory.thresholdUnits.trim() !== '' && inventory.thresholdUnits.trim() !== '') {
       try {
         const response = await fetch(`${proxy}/inventory/create`, {
           method: 'POST',
@@ -145,16 +144,14 @@ const InventorysAdd: React.FC = () => {
   };
 
 
-
   const handleChangeIsRestricted = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     var a;
-  if(e.target.value === 'True'){
+    if (e.target.value === 'True') {
       a = true;
-  }
-  else{
-     a = false;
-  }
+    } else {
+      a = false;
+    }
 
     setInventory({ ...inventory, isRestricted: a });
     dispatch(setExistingInventory(false));
@@ -162,15 +159,14 @@ const InventorysAdd: React.FC = () => {
   };
 
 
-
   const resetValues = async () => {
     setLoading(true);
 
-    inventory.itemName= '';
-    inventory.unitPrice= '';
-    inventory.unitsInStock= '';
-    inventory.thresholdUnits= '';
-    inventory.description= '';
+    inventory.itemName = '';
+    inventory.unitPrice = '';
+    inventory.unitsInStock = '';
+    inventory.thresholdUnits = '';
+    inventory.description = '';
     inventory.isRestricted = false;
     setLoading(false);
   };

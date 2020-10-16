@@ -8,8 +8,8 @@ const setPoliciesSlice = createSlice({
   reducers: {
     setPolicies: (state, action: any) => {
       state.policies = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const { setPolicies } = setPoliciesSlice.actions;

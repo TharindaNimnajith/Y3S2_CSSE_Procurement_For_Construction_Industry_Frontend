@@ -1,9 +1,7 @@
 {
   "HOME": "/",
   "COUNTER": "/counter",
-  "WORKING_DAYS_AND_HOURS_VIEW": "/working-days-hour-view",
-  "WORKING_DAYS_AND_HOURS": "/working-days-hour",
-  "WORKING_DAYS_AND_HOURS_Edit": "/working-days-hour-edit",
+  "HOMEPAGE": "/home",
   "INVENTORY": "/inventory",
   "PURCHASE_ORDERS_FOR_APPROVING": "/purchase_orders_for_approving",
   "PENDING_DM_LIST": "/pendingDM",

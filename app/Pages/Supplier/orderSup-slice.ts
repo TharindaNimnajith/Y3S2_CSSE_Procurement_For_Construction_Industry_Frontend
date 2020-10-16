@@ -11,7 +11,7 @@ const setOrderSupSlice = createSlice({
   },
   reducers: {
     setOrderSup: (state, action: any) => {
-      state.orderSup= action.payload;
+      state.orderSup = action.payload;
     },
     setExistingOrderSup: (state, action: any) => {
       state.existingOrderSup = action.payload;

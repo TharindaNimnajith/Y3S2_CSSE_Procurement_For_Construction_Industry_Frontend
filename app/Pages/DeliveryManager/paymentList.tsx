@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Spinner, Table,Col, Row } from 'react-bootstrap';
-import { FaBan, FaCheck,FaTrashAlt } from 'react-icons/fa';
-import {useDispatch, useSelector} from 'react-redux'
+import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
+import { FaTrashAlt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { proxy } from '../../conf';
-import { NavLink,Redirect } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
-import routes from '../../constants/routes.json';
-import {setOrderDM,setExistingOrderDM,setEditOrderDM,setEditingOrderDMId,setEditingOrderDM} from './orderDM-slice'
 
 const PaymentList: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [showApproved, setShowApproved] = useState<boolean>(false);
@@ -23,8 +20,6 @@ const PaymentList: React.FC = () => {
   const [renderRedirectTo1, setRenderRedirectTo1] = useState<boolean | null>(false);
 
 
-
-
   const getPayments = async () => {
     try {
       setLoading(true);
@@ -35,7 +30,7 @@ const PaymentList: React.FC = () => {
         }
       });
       const responseData = await response.json();
-      console.log(responseData)
+      console.log(responseData);
       setPaymentsList(responseData.payments);
 
       setLoading(false);
@@ -53,7 +48,7 @@ const PaymentList: React.FC = () => {
 
 
   const deletePayment = async () => {
-    console.log(id)
+    console.log(id);
     setLoading(true);
     try {
       const response = await fetch(`${proxy}/payment/deletePayments`, {
@@ -76,9 +71,6 @@ const PaymentList: React.FC = () => {
   };
 
 
-
-
-
   const handleClose = () => {
     setLoading(true);
     setShowApproved(false);
@@ -86,7 +78,7 @@ const PaymentList: React.FC = () => {
     setLoading(false);
   };
 
-  const handleShowApproved = (paymentId: string , id:string , payment:any) => {
+  const handleShowApproved = (paymentId: string, id: string, payment: any) => {
     setLoading(true);
     setPaymentId(paymentId);
     setId(id);
@@ -94,8 +86,6 @@ const PaymentList: React.FC = () => {
     setShowApproved(true);
     setLoading(false);
   };
-
-
 
 
   return (
@@ -116,185 +106,185 @@ const PaymentList: React.FC = () => {
         </Col>
       </Row>
       <div className='container'>
-    <div>
-      <div style={{
-        marginTop: '4%'
-      }}>
-        <Modal show={showApproved}
-               onHide={handleClose}
-               paymentId={paymentId}>
-          <Modal.Header closeButton>
-            <Modal.Title>Delete Record</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Are you sure you want to delete this record?</Modal.Body>
-          <Modal.Footer>
-            <Button variant='success'
-                    onClick={handleClose}
-                    style={{
-                      textTransform: 'uppercase'
-                    }}>
-              No
-            </Button>
-            <Button variant='primary'
-                    onClick={deletePayment}
-                    style={{
-                      textTransform: 'uppercase'
-                    }}>
-              Yes
-            </Button>
-          </Modal.Footer>
-          {
-            loading && (
-              <Spinner animation='border'
-                       style={{
-                         textAlign: 'center',
-                         marginLeft: '50%'
-                       }} />
-            )
-          }
-        </Modal>
+        <div>
+          <div style={{
+            marginTop: '4%'
+          }}>
+            <Modal show={showApproved}
+                   onHide={handleClose}
+                   paymentId={paymentId}>
+              <Modal.Header closeButton>
+                <Modal.Title>Delete Record</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Are you sure you want to delete this record?</Modal.Body>
+              <Modal.Footer>
+                <Button variant='success'
+                        onClick={handleClose}
+                        style={{
+                          textTransform: 'uppercase'
+                        }}>
+                  No
+                </Button>
+                <Button variant='primary'
+                        onClick={deletePayment}
+                        style={{
+                          textTransform: 'uppercase'
+                        }}>
+                  Yes
+                </Button>
+              </Modal.Footer>
+              {
+                loading && (
+                  <Spinner animation='border'
+                           style={{
+                             textAlign: 'center',
+                             marginLeft: '50%'
+                           }} />
+                )
+              }
+            </Modal>
 
-        <Table responsive
-               striped
-               bordered
-               hover
-               size='sm'
-               style={{
-                 border: 'solid darkblue 1px'
-               }}>
-          <thead style={{
-            backgroundColor: '#0350a2'
-          }}>
-             <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderLeft: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Payment ID
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderLeft: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Order ID
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Invoice ID
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Supplier
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Amount
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Payment Method
-          </th>
-
-          <th
-              style={{
+            <Table responsive
+                   striped
+                   bordered
+                   hover
+                   size='sm'
+                   style={{
+                     border: 'solid darkblue 1px'
+                   }}>
+              <thead style={{
+                backgroundColor: '#0350a2'
+              }}>
+              <th style={{
                 borderBottom: 'solid darkblue 1px',
-                borderRight: 'solid darkblue 1px',
-                borderTop: 'solid darkblue 1px'
-              }} />
-          </thead>
-          <tbody>
-          {
+                borderLeft: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Payment ID
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderLeft: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Order ID
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Invoice ID
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Supplier
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Amount
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Payment Method
+              </th>
 
-            payments && payments.map((payment: any) => {
+              <th
+                style={{
+                  borderBottom: 'solid darkblue 1px',
+                  borderRight: 'solid darkblue 1px',
+                  borderTop: 'solid darkblue 1px'
+                }} />
+              </thead>
+              <tbody>
+              {
 
-              return (
-                <tr key={payment._id}>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {payment.paymentId}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {payment.orderId}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {payment.invoiceId}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {payment.supplier}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {payment.amount}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {payment.paymentMethod}
-                  </td>
+                payments && payments.map((payment: any) => {
 
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    <button onClick={() => handleShowApproved(payment.paymentId , payment._id , payment)}
-                            style={{
-                              color: 'darkgreen',
-                              backgroundColor: 'transparent',
-                              border: 'none'
-                            }}>
-                     <FaTrashAlt size={20} />
-                    </button>
-                  </td>
+                  return (
+                    <tr key={payment._id}>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {payment.paymentId}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {payment.orderId}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {payment.invoiceId}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {payment.supplier}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {payment.amount}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {payment.paymentMethod}
+                      </td>
 
-                </tr>
-              );
-            })
-          }
-          </tbody>
-        </Table>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        <button onClick={() => handleShowApproved(payment.paymentId, payment._id, payment)}
+                                style={{
+                                  color: 'darkgreen',
+                                  backgroundColor: 'transparent',
+                                  border: 'none'
+                                }}>
+                          <FaTrashAlt size={20} />
+                        </button>
+                      </td>
+
+                    </tr>
+                  );
+                })
+              }
+              </tbody>
+            </Table>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };

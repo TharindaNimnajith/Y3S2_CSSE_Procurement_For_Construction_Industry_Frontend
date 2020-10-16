@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Spinner, Table,Col, Row } from 'react-bootstrap';
+import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
 import { FaBan, FaCheck } from 'react-icons/fa';
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { proxy } from '../../conf';
-import { NavLink,Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import routes from '../../constants/routes.json';
-import {setOrderDM,setExistingOrderDM,setEditOrderDM,setEditingOrderDMId,setEditingOrderDM} from './orderDM-slice'
+import { setEditingOrderDM, setEditingOrderDMId, setEditOrderDM, setExistingOrderDM } from './orderDM-slice';
 
 const OrdersForDeliveryConfirmedList: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [showApproved, setShowApproved] = useState<boolean>(false);
@@ -48,7 +48,7 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
   }, [orders]);
 
   const handleApproved = async () => {
-    console.log(order)
+    console.log(order);
     setLoading(true);
     try {
       const response = await fetch(`${proxy}/order/editOrderStatus`, {
@@ -105,7 +105,7 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
     setLoading(false);
   };
 
-  const handleShowApproved = (orderId: string , id:string , order:any) => {
+  const handleShowApproved = (orderId: string, id: string, order: any) => {
     setLoading(true);
     setOrderId(orderId);
     setId(id);
@@ -154,287 +154,287 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
         </Col>
       </Row>
       <div className='container'>
-    <div>
-      <div style={{
-        marginTop: '4%'
-      }}>
-        <Modal show={showApproved}
-               onHide={handleClose}
-               orderId={orderId}>
-          <Modal.Header closeButton>
-            <Modal.Title>Confirm Delivery</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Are you sure you want to confrim this order?</Modal.Body>
-          <Modal.Footer>
-            <Button variant='success'
-                    onClick={handleClose}
-                    style={{
-                      textTransform: 'uppercase'
-                    }}>
-              No
-            </Button>
-            <Button variant='primary'
-                    onClick={handleApproved}
-                    style={{
-                      textTransform: 'uppercase'
-                    }}>
-              Yes
-            </Button>
-          </Modal.Footer>
-          {
-            loading && (
-              <Spinner animation='border'
-                       style={{
-                         textAlign: 'center',
-                         marginLeft: '50%'
-                       }} />
-            )
-          }
-        </Modal>
-        <Modal show={showRejected}
-               onHide={handleClose}
-               orderId={orderId}>
-          <Modal.Header closeButton>
-            <Modal.Title>Reject Order</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Are you sure you want to reject this order?</Modal.Body>
-          <Modal.Footer>
-            <Button variant='success'
-                    onClick={handleClose}
-                    style={{
-                      textTransform: 'uppercase'
-                    }}>
-              No
-            </Button>
-            <Button variant='danger'
-                    onClick={handleRejected}
-                    style={{
-                      textTransform: 'uppercase'
-                    }}>
-              Yes
-            </Button>
-          </Modal.Footer>
-          {
-            loading && (
-              <Spinner animation='border'
-                       style={{
-                         textAlign: 'center',
-                         marginLeft: '50%'
-                       }} />
-            )
-          }
-        </Modal>
-        <Table responsive
-               striped
-               bordered
-               hover
-               size='sm'
-               style={{
-                 border: 'solid darkblue 1px'
-               }}>
-          <thead style={{
-            backgroundColor: '#0350a2'
+        <div>
+          <div style={{
+            marginTop: '4%'
           }}>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderLeft: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Order ID
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Item Name
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Quantity
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Estimated Amount
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Invoice Amount
-          </th>
-
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Created Date
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Requested Date
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Delivery Date
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Site
-          </th>
-
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
-            Supplier
-          </th>
-
-          <th colSpan={2}
-              style={{
+            <Modal show={showApproved}
+                   onHide={handleClose}
+                   orderId={orderId}>
+              <Modal.Header closeButton>
+                <Modal.Title>Confirm Delivery</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Are you sure you want to confrim this order?</Modal.Body>
+              <Modal.Footer>
+                <Button variant='success'
+                        onClick={handleClose}
+                        style={{
+                          textTransform: 'uppercase'
+                        }}>
+                  No
+                </Button>
+                <Button variant='primary'
+                        onClick={handleApproved}
+                        style={{
+                          textTransform: 'uppercase'
+                        }}>
+                  Yes
+                </Button>
+              </Modal.Footer>
+              {
+                loading && (
+                  <Spinner animation='border'
+                           style={{
+                             textAlign: 'center',
+                             marginLeft: '50%'
+                           }} />
+                )
+              }
+            </Modal>
+            <Modal show={showRejected}
+                   onHide={handleClose}
+                   orderId={orderId}>
+              <Modal.Header closeButton>
+                <Modal.Title>Reject Order</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Are you sure you want to reject this order?</Modal.Body>
+              <Modal.Footer>
+                <Button variant='success'
+                        onClick={handleClose}
+                        style={{
+                          textTransform: 'uppercase'
+                        }}>
+                  No
+                </Button>
+                <Button variant='danger'
+                        onClick={handleRejected}
+                        style={{
+                          textTransform: 'uppercase'
+                        }}>
+                  Yes
+                </Button>
+              </Modal.Footer>
+              {
+                loading && (
+                  <Spinner animation='border'
+                           style={{
+                             textAlign: 'center',
+                             marginLeft: '50%'
+                           }} />
+                )
+              }
+            </Modal>
+            <Table responsive
+                   striped
+                   bordered
+                   hover
+                   size='sm'
+                   style={{
+                     border: 'solid darkblue 1px'
+                   }}>
+              <thead style={{
+                backgroundColor: '#0350a2'
+              }}>
+              <th style={{
                 borderBottom: 'solid darkblue 1px',
-                borderRight: 'solid darkblue 1px',
-                borderTop: 'solid darkblue 1px'
-              }} />
-          </thead>
-          <tbody>
-          {
-            orders && orders.map((order: any) => {
-              return (
-                <tr key={order._id}>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.orderId}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.itemName}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.itemQuantity}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.totPrice}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.supplierAmount}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.purchaseDate}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.requestedDate}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.deliveryDate}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.siteName}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {order.supplierName}
-                  </td>
+                borderLeft: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Order ID
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Item Name
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Quantity
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Estimated Amount
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Invoice Amount
+              </th>
 
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    <button onClick={() => handleShowApproved(order.orderId , order._id , order)}
-                            style={{
-                              color: 'darkgreen',
-                              backgroundColor: 'transparent',
-                              border: 'none'
-                            }}>
-                      <FaCheck size={20} />
-                    </button>
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    <button onClick={() => handleShowRejected(order.orderId)}
-                            style={{
-                              color: 'red',
-                              backgroundColor: 'transparent',
-                              border: 'none'
-                            }}>
-                      <FaBan size={20} />
-                    </button>
-                  </td>
-                </tr>
-              );
-            })
-          }
-          </tbody>
-        </Table>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Created Date
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Requested Date
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Delivery Date
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Site
+              </th>
+
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Supplier
+              </th>
+
+              <th colSpan={2}
+                  style={{
+                    borderBottom: 'solid darkblue 1px',
+                    borderRight: 'solid darkblue 1px',
+                    borderTop: 'solid darkblue 1px'
+                  }} />
+              </thead>
+              <tbody>
+              {
+                orders && orders.map((order: any) => {
+                  return (
+                    <tr key={order._id}>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.orderId}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.itemName}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.itemQuantity}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.totPrice}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.supplierAmount}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.purchaseDate}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.requestedDate}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.deliveryDate}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.siteName}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.supplierName}
+                      </td>
+
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        <button onClick={() => handleShowApproved(order.orderId, order._id, order)}
+                                style={{
+                                  color: 'darkgreen',
+                                  backgroundColor: 'transparent',
+                                  border: 'none'
+                                }}>
+                          <FaCheck size={20} />
+                        </button>
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        <button onClick={() => handleShowRejected(order.orderId)}
+                                style={{
+                                  color: 'red',
+                                  backgroundColor: 'transparent',
+                                  border: 'none'
+                                }}>
+                          <FaBan size={20} />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              }
+              </tbody>
+            </Table>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };

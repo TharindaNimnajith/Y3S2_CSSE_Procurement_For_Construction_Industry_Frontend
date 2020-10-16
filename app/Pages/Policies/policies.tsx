@@ -5,7 +5,7 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 // @ts-ignore
 //import CheckboxGroup from 'react-checkbox-group';
 import { Redirect, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './policies.css';
@@ -98,7 +98,7 @@ const policies: React.FC = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
-        },
+        }
         // body: JSON.stringify({ finalObject, id: poli._id })
       });
 
@@ -123,7 +123,7 @@ const policies: React.FC = () => {
     return null;
   };
 
-  const handleChangeValue= (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
 
   };

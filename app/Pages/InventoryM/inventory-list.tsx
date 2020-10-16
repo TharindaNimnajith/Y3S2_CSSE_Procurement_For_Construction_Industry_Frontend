@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Modal, Spinner, Table } from 'react-bootstrap';
+import { Button, Modal, Spinner, Table } from 'react-bootstrap';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { setEditingInventory, setEditingInventoryId, setEditInventory, setExistingInventory, setInventorys } from './inventory-slice';
+import { setEditingInventory, setEditingInventoryId, setEditInventory, setExistingInventory } from './inventory-slice';
 
 
 let errors_: string = '';
@@ -66,73 +66,71 @@ const InventorysList: React.FC = () => {
   }, [inventories]);
 
 
+  const handleClose = () => {
+    setLoading(true);
+    setShow(false);
+    setLoading(false);
+  };
 
+  const handleDelete = () => {
+    setLoading(true);
+    deleteInventory(deleteId).then(() => setShow(false));
+    setLoading(false);
+  };
 
-    const handleClose = () => {
-      setLoading(true);
-      setShow(false);
+  const handleShow = (id: string) => {
+    setLoading(true);
+    setShow(true);
+    setDeleteId(id);
+    setLoading(false);
+  };
+
+  const editInventory = async (id: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${proxy}/inventory/getInventories/` + id, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const responseData = await response.json();
+      await dispatch(setExistingInventory(false));
+      await dispatch(setEditingInventoryId(id));
+      await dispatch(setEditingInventory(responseData));
+      await dispatch(setEditInventory(true));
       setLoading(false);
-    };
-
-    const handleDelete = () => {
-      setLoading(true);
-      deleteInventory(deleteId).then(() => setShow(false));
+    } catch (errors) {
+      errors_ = errors;
       setLoading(false);
-    };
+      console.log(errors);
+    }
+  };
 
-    const handleShow = (id: string) => {
-      setLoading(true);
-      setShow(true);
-      setDeleteId(id);
+  const deleteInventory = async (id: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${proxy}/inventory/deleteInventories`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id
+        })
+      });
+      await response.json();
+      // inventoryList = inventoryList.filter((inventory: any) => inventory._id !== id);
+      // await dispatch(setInventory(inventoryList));
+      await dispatch(setEditInventory(false));
+      await dispatch(setExistingInventory(false));
       setLoading(false);
-    };
-
-    const editInventory = async (id: string) => {
-      setLoading(true);
-      try {
-        const response = await fetch(`${proxy}/inventory/getInventories/` + id, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-        const responseData = await response.json();
-        await dispatch(setExistingInventory(false));
-        await dispatch(setEditingInventoryId(id));
-        await dispatch(setEditingInventory(responseData));
-        await dispatch(setEditInventory(true));
-        setLoading(false);
-      } catch (errors) {
-        errors_ = errors;
-        setLoading(false);
-        console.log(errors);
-      }
-    };
-
-    const deleteInventory = async (id: string) => {
-      setLoading(true);
-      try {
-        const response = await fetch(`${proxy}/inventory/deleteInventories`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            id
-          })
-        });
-        await response.json();
-        // inventoryList = inventoryList.filter((inventory: any) => inventory._id !== id);
-        // await dispatch(setInventory(inventoryList));
-        await dispatch(setEditInventory(false));
-        await dispatch(setExistingInventory(false));
-        setLoading(false);
-      } catch (errors) {
-        errors_ = errors;
-        setLoading(false);
-        console.log(errors);
-      }
-    };
+    } catch (errors) {
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
+    }
+  };
 
 
   return (
@@ -270,11 +268,11 @@ const InventorysList: React.FC = () => {
             Is Restricted
           </th>
           <th colSpan={2}
-            style={{
-              borderBottom: 'solid darkblue 1px',
-              borderRight: 'solid darkblue 1px',
-              borderTop: 'solid darkblue 1px'
-            }} />
+              style={{
+                borderBottom: 'solid darkblue 1px',
+                borderRight: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px'
+              }} />
           </thead>
           <tbody>
           {

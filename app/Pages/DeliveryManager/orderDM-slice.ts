@@ -11,7 +11,7 @@ const setOrderDMSlice = createSlice({
   },
   reducers: {
     setOrderDM: (state, action: any) => {
-      state.orderDM= action.payload;
+      state.orderDM = action.payload;
     },
     setExistingOrderDM: (state, action: any) => {
       state.existingOrderDM = action.payload;

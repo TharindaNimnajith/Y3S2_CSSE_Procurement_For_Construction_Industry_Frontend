@@ -1,10 +1,10 @@
 import React from 'react';
-import WorkingDaysHours from '../Pages/WorkingDaysHours/WorkingDaysHours';
+import HomePage from '../Pages/HomePage/HomePage';
 
 export default function Home(): JSX.Element {
   return (
     <div>
-      <WorkingDaysHours />
+      <HomePage />
     </div>
   );
 }
