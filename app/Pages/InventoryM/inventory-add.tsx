@@ -32,6 +32,7 @@ const InventoriesAdd: React.FC = () => {
     unitsInStock: string,
     thresholdUnits: string,
     description: string,
+    siteName: string,
     isRestricted: boolean
   }>({
     itemId: '',
@@ -40,6 +41,7 @@ const InventoriesAdd: React.FC = () => {
     unitsInStock: '',
     thresholdUnits: '',
     description: '',
+    siteName: '',
     isRestricted: false
   });
 
@@ -63,9 +65,14 @@ const InventoriesAdd: React.FC = () => {
       errors_ = 'Please enter a value for the threshold units.';
       await dispatch(setExistingInventory(true));
       setLoading(false);
+    } else if (inventory.siteName.trim() === '') {
+      errors_ = 'Please enter a value for the site name.';
+      await dispatch(setExistingInventory(true));
+      setLoading(false);
     }
-    if (inventory.itemName.trim() !== '' && inventory.unitPrice.trim() !== '' && inventory.unitsInStock.trim() !== ''
-      && inventory.thresholdUnits.trim() !== '' && inventory.thresholdUnits.trim() !== '') {
+    if (inventory.itemName.trim() !== '' && inventory.unitPrice.trim() !== ''
+      && inventory.unitsInStock.trim() !== '' && inventory.thresholdUnits.trim() !== ''
+      && inventory.thresholdUnits.trim() !== '' && inventory.siteName.trim() !== '') {
       try {
         const response = await fetch(`${proxy}/inventory/create`, {
           method: 'POST',
@@ -127,6 +134,13 @@ const InventoriesAdd: React.FC = () => {
     setLoading(false);
   };
 
+  const handleChangeSiteName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(true);
+    setInventory({ ...inventory, siteName: e.target.value });
+    dispatch(setExistingInventory(false));
+    setLoading(false);
+  };
+
   const handleChangeIsRestricted = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     setIsRestricted(e.target.value);
@@ -143,6 +157,7 @@ const InventoriesAdd: React.FC = () => {
     inventory.unitsInStock = '';
     inventory.thresholdUnits = '';
     inventory.description = '';
+    inventory.siteName = '';
     inventory.isRestricted = false;
     setIsRestricted('');
     setLoading(false);
@@ -219,6 +234,19 @@ const InventoriesAdd: React.FC = () => {
                           placeholder='Enter Description'
                           pattern='[A-Za-z]{2,32}'
                           title='Please enter a description.'
+                          required
+                          size='lg' />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group controlId='formSiteName'>
+            <Form.Label>Site Name</Form.Label>
+            <Form.Control type='text'
+                          value={inventory.siteName}
+                          onChange={handleChangeSiteName}
+                          placeholder='Enter Site Name'
+                          pattern='[A-Za-z]{2,32}'
+                          title='Please enter site name.'
                           required
                           size='lg' />
           </Form.Group>

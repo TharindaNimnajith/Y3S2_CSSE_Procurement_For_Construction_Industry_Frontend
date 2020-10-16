@@ -52,6 +52,7 @@ const InventoriesEdit: React.FC = () => {
     unitsInStock: string,
     thresholdUnits: string,
     description: string,
+    siteName: string,
     isRestricted: boolean
   }>({
     itemId: editingInventory.itemId,
@@ -60,6 +61,7 @@ const InventoriesEdit: React.FC = () => {
     unitsInStock: editingInventory.unitsInStock,
     thresholdUnits: editingInventory.thresholdUnits,
     description: editingInventory.description,
+    siteName: '',
     isRestricted: editingInventory.isRestricted
   });
 
@@ -92,9 +94,14 @@ const InventoriesEdit: React.FC = () => {
       errors_ = 'Please enter a value for the threshold units.';
       await dispatch(setExistingInventory(true));
       setLoading(false);
+    } else if (inventory.siteName.trim() === '') {
+      errors_ = 'Please enter a value for the site name.';
+      await dispatch(setExistingInventory(true));
+      setLoading(false);
     }
-    if (inventory.itemName.trim() !== '' && inventory.unitPrice.trim() !== '' && inventory.unitsInStock.trim() !== ''
-      && inventory.thresholdUnits.trim() !== '' && inventory.thresholdUnits.trim() !== '') {
+    if (inventory.itemName.trim() !== '' && inventory.unitPrice.trim() !== ''
+      && inventory.unitsInStock.trim() !== '' && inventory.thresholdUnits.trim() !== ''
+      && inventory.thresholdUnits.trim() !== '' && inventory.siteName.trim() !== '') {
       const finalObject = {
         inventories: inventory,
         id: editingInventoryId
@@ -162,6 +169,13 @@ const InventoriesEdit: React.FC = () => {
   const handleChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     setInventory({ ...inventory, description: e.target.value });
+    dispatch(setExistingInventory(false));
+    setLoading(false);
+  };
+
+  const handleChangeSiteName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(true);
+    setInventory({ ...inventory, siteName: e.target.value });
     dispatch(setExistingInventory(false));
     setLoading(false);
   };
@@ -255,6 +269,19 @@ const InventoriesEdit: React.FC = () => {
                           placeholder='Enter Description'
                           pattern='[A-Za-z]{2,32}'
                           title='Please enter a description.'
+                          required
+                          size='lg' />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group controlId='formSiteName'>
+            <Form.Label>Site Name</Form.Label>
+            <Form.Control type='text'
+                          value={inventory.siteName}
+                          onChange={handleChangeSiteName}
+                          placeholder='Enter Site Name'
+                          pattern='[A-Za-z]{2,32}'
+                          title='Please enter site name.'
                           required
                           size='lg' />
           </Form.Group>

@@ -102,9 +102,7 @@ const InventoriesList: React.FC = () => {
 
   return (
     <div>
-      <div style={{
-        marginTop: '4%'
-      }}>
+      <div>
         <Modal show={show}
                onHide={handleClose}
                deleteId={deleteId}>
@@ -219,6 +217,16 @@ const InventoriesList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
+            Site
+          </th>
+          <th style={{
+            borderBottom: 'solid darkblue 1px',
+            borderTop: 'solid darkblue 1px',
+            textAlign: 'center',
+            fontSize: 'large',
+            fontWeight: 'lighter',
+            color: 'white'
+          }}>
             Status
           </th>
           <th style={{
@@ -272,6 +280,11 @@ const InventoriesList: React.FC = () => {
                     textAlign: 'center'
                   }}>
                     {inventory.description}
+                  </td>
+                  <td style={{
+                    textAlign: 'center'
+                  }}>
+                    {inventory.siteName}
                   </td>
                   {
                     parseInt(inventory.unitsInStock) >= parseInt(inventory.thresholdUnits) ? (

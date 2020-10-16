@@ -43,9 +43,7 @@ const InventoriesPage: React.FC = () => {
           marginRight: '15%'
         }}>
           <Col sm='4'>
-            <div style={{
-              marginTop: '7%'
-            }}>
+            <div>
               {
                 route
               }

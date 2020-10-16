@@ -112,6 +112,16 @@ const InventoryList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
+            Site
+          </th>
+          <th style={{
+            borderBottom: 'solid darkblue 1px',
+            borderTop: 'solid darkblue 1px',
+            textAlign: 'center',
+            fontSize: 'large',
+            fontWeight: 'lighter',
+            color: 'white'
+          }}>
             Status
           </th>
           <th style={{
@@ -160,6 +170,11 @@ const InventoryList: React.FC = () => {
                     textAlign: 'center'
                   }}>
                     {inventory.description}
+                  </td>
+                  <td style={{
+                    textAlign: 'center'
+                  }}>
+                    {inventory.siteName}
                   </td>
                   {
                     parseInt(inventory.unitsInStock) >= parseInt(inventory.thresholdUnits) ? (
