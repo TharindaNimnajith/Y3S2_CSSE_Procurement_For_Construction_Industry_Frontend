@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { FaPlusCircle } from 'react-icons/fa';
@@ -25,6 +25,7 @@ const InventoriesAdd: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [isRestricted, setIsRestricted] = useState<string>('');
+  const [sites, setSites] = useState<any>('');
   const [inventory, setInventory] = useState<{
     itemId: string,
     itemName: string,
@@ -44,6 +45,29 @@ const InventoriesAdd: React.FC = () => {
     siteName: '',
     isRestricted: false
   });
+
+  const getSites = async () => {
+    try {
+      const response = await fetch(`${proxy}/site/getSites`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const responseData = await response.json();
+      await setSites(responseData);
+      setLoading(false);
+    } catch (errors) {
+      errors_ = errors;
+      setLoading(false);
+      console.log(errors);
+    }
+  };
+
+  useEffect(() => {
+    getSites().then(() => {
+    });
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -241,14 +265,24 @@ const InventoriesAdd: React.FC = () => {
         <Form.Row>
           <Form.Group controlId='formSiteName'>
             <Form.Label>Site Name</Form.Label>
-            <Form.Control type='text'
+            <Form.Control as='select'
                           value={inventory.siteName}
                           onChange={handleChangeSiteName}
-                          placeholder='Enter Site Name'
-                          pattern='[A-Za-z]{2,32}'
-                          title='Please enter site name.'
+                          title='Please select site name.'
                           required
-                          size='lg' />
+                          size='lg'>
+              <option value="">Select Option</option>
+              {
+                sites.sites && sites.sites.map((site: any) => {
+                  return (
+                    <option key={site._id}
+                            value={site.siteName}>
+                      {site.siteName}
+                    </option>
+                  );
+                })
+              }
+            </Form.Control>
           </Form.Group>
         </Form.Row>
         <Form.Row>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../constants/routes.json';
 import { proxy } from '../../conf';
 import NavBar from '../../components/NavBar/NavBar';
+import { Redirect } from 'react-router';
 
 const PaymentList: React.FC = () => {
   const dispatch = useDispatch();

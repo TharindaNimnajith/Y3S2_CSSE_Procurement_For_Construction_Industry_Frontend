@@ -4,6 +4,7 @@ import { proxy } from '../../conf';
 import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
+import { Redirect } from 'react-router';
 
 const DeliveryConfirmedOrdersList: React.FC = () => {
   var login = useSelector(

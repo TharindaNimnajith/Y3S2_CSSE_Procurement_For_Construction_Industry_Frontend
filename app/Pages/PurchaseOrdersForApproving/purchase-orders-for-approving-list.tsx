@@ -239,7 +239,7 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
-            Created Date
+            Requested Date
           </th>
           <th style={{
             borderBottom: 'solid darkblue 1px',
@@ -249,7 +249,7 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
-            Requested Date
+            Required Date
           </th>
           <th style={{
             borderBottom: 'solid darkblue 1px',
@@ -341,12 +341,12 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
                   <td style={{
                     textAlign: 'center'
                   }}>
-                    {order.purchaseDate}
+                    {order.requestedDate}
                   </td>
                   <td style={{
                     textAlign: 'center'
                   }}>
-                    {order.requestedDate}
+                    {order.requiredDate}
                   </td>
                   <td style={{
                     textAlign: 'center'
