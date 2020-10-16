@@ -1,5 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import routes from '../../constants/routes.json';
+import {Redirect} from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 import NavBar from '../../components/NavBar/NavBar';
 import InventoriesList from './inventory-list';
@@ -16,6 +18,31 @@ const InventoriesPage: React.FC = () => {
     }) => state.inventories.editInventory
   );
 
+
+ var login = useSelector(
+  (state: {
+    users: any
+    login: boolean
+  }) => state.users.login
+);
+
+const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
+
+useEffect(() => {
+  console.log(login);
+  if(!login){
+    setRenderRedirectToLogin(true);
+  }
+}, [login]);
+
+
+const renderRedirectLogin = () => {
+  if (renderRedirectToLogin) {
+    return <Redirect to={routes.USER}/>;
+  }
+  return null;
+};
+
   if (editInventory)
     route = (<InventoriesEdit />);
   else
@@ -28,6 +55,7 @@ const InventoriesPage: React.FC = () => {
       marginBottom: '3%'
     }}>
       <NavBar />
+      {renderRedirectLogin()}
       <Row className='text-center mb-5'>
         <Col className='p-3'
              style={{

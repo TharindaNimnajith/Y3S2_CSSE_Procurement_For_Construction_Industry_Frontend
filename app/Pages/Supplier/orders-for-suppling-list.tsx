@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
 import { FaBan, FaCheck } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
 import { proxy } from '../../conf';
 import { Redirect } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import routes from '../../constants/routes.json';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setEditingOrderSup,
   setEditingOrderSupId,
@@ -16,6 +16,15 @@ import {
 
 const OrdersForSupplingList: React.FC = () => {
   const dispatch = useDispatch();
+
+  var login = useSelector(
+    (state: {
+      users: any
+      login: boolean
+    }) => state.users.login
+  );
+
+  const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [showApproved, setShowApproved] = useState<boolean>(false);
@@ -53,7 +62,12 @@ const OrdersForSupplingList: React.FC = () => {
   useEffect(() => {
     getOrders().then(() => {
     });
-  }, [orders]);
+
+    console.log(login);
+    if(!login){
+      setRenderRedirectToLogin(true);
+    }
+  }, [orders,login]);
 
   const handleApproved = async () => {
     console.log(order);
@@ -144,6 +158,13 @@ const OrdersForSupplingList: React.FC = () => {
     return null;
   };
 
+  const renderRedirectLogin = () => {
+    if (renderRedirectToLogin) {
+      return <Redirect to={routes.USER}/>;
+    }
+    return null;
+  };
+
   return (
     <div style={{
       minWidth: 'max-content',
@@ -151,6 +172,7 @@ const OrdersForSupplingList: React.FC = () => {
       marginBottom: '3%'
     }}>
       <NavBar />
+      {renderRedirectLogin()}
       {renderRedirect()}
       {renderRedirect1()}
       <Row className='text-center mb-5'>
