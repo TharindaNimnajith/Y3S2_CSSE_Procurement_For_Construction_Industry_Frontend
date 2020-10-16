@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// eslint-disable-next-line import/no-cycle
-import { RootState } from '../../store';
 
 const setWorkingDaysHoursSlice = createSlice({
   name: 'workingDaysHours',
@@ -15,6 +13,3 @@ const setWorkingDaysHoursSlice = createSlice({
 export const { setWorkingDaysHours } = setWorkingDaysHoursSlice.actions;
 
 export default setWorkingDaysHoursSlice.reducer;
-
-export const selectCount = (state: RootState) =>
-  state.workingDaysHours.workingDaysHours;

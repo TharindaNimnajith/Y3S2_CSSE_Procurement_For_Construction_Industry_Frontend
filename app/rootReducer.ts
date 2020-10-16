@@ -13,10 +13,9 @@ export default function createRootReducer(history: History) {
     router: connectRouter(history),
     inventory: inventoryReducer,
     purchaseOrdersForApproving: purchaseOrdersForApprovingReducer,
-    orderDM:orderDMReducer,
-    orderSup:orderSupReducer,
-    inventorys:inventorysReducer,
-    policies : policyReducer
-
+    orderDM: orderDMReducer,
+    orderSup: orderSupReducer,
+    inventorys: inventorysReducer,
+    policies: policyReducer
   });
 }

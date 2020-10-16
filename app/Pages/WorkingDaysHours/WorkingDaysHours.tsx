@@ -9,15 +9,6 @@ import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import styles from './working-days-hours.css';
 import { setWorkingDaysHours } from './workingDaysHoursSlice';
-import { setRoomUnavailability, setUnavailableRoom } from '../RoomsUnavailability/rooms-unavailability-slice';
-import { setEditingRoom, setEditingRoomId, setEditRoom, setExistingRoom } from '../Rooms/rooms-slice';
-import {
-  setEditBuilding,
-  setEditingBuilding,
-  setEditingBuildingId,
-  setExistingBuilding,
-  setExistingRoomsForBuilding
-} from '../Buildings/buildings-slice';
 import { proxy } from '../../conf';
 
 const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
@@ -25,20 +16,6 @@ const weekends = ['Saturday', 'Sunday'];
 
 const WorkingDaysHours: React.FC = () => {
   const dispatch = useDispatch();
-
-  dispatch(setEditRoom(false));
-  dispatch(setEditingRoomId(''));
-  dispatch(setEditingRoom(null));
-  dispatch(setExistingRoom(false));
-
-  dispatch(setEditBuilding(false));
-  dispatch(setEditingBuildingId(''));
-  dispatch(setEditingBuilding(null));
-  dispatch(setExistingBuilding(false));
-  dispatch(setExistingRoomsForBuilding(false));
-
-  dispatch(setRoomUnavailability(false));
-  dispatch(setUnavailableRoom(null));
 
   const [days, setDays] = useState<string[] | null>(null);
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(
