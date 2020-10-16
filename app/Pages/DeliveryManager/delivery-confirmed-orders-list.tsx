@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
 import { proxy } from '../../conf';
-
+import { useDispatch, useSelector } from 'react-redux';
+import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 
 const DeliveryConfirmedOrdersList: React.FC = () => {
+  var login = useSelector(
+    (state: {
+      users: any
+      login: boolean
+    }) => state.users.login
+  );
+
+  const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [showApproved, setShowApproved] = useState<boolean>(false);
   const [showRejected, setShowRejected] = useState<boolean>(false);
@@ -33,7 +43,11 @@ const DeliveryConfirmedOrdersList: React.FC = () => {
   useEffect(() => {
     getOrders().then(() => {
     });
-  }, [orders]);
+    console.log(login);
+    if(!login){
+      setRenderRedirectToLogin(true);
+    }
+  }, [orders,login]);
 
   const handleApproved = async () => {
     setLoading(true);
@@ -100,13 +114,23 @@ const DeliveryConfirmedOrdersList: React.FC = () => {
     setLoading(false);
   };
 
+  const renderRedirectLogin = () => {
+    if (renderRedirectToLogin) {
+      return <Redirect to={routes.USER}/>;
+    }
+    return null;
+  };
+
+
   return (
     <div style={{
       minWidth: 'max-content',
       overflowX: 'hidden',
       marginBottom: '3%'
     }}>
+       {renderRedirectLogin()}
       <NavBar />
+
       <Row className='text-center mb-5'>
         <Col className='p-3'
              style={{

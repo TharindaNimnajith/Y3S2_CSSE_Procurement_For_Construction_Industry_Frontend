@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import routes from '../../constants/routes.json';
 import { useDispatch, useSelector } from 'react-redux';
-import UsersPage from '../../Pages/LoginSignup/user-page';
+
 import { setEditingUser, setEditingUserId, setEditUser, setExistingUser, setUsers ,setLogin,setUserType,setUserName} from '../../Pages/LoginSignup/user-slice';
-import {Redirect} from 'react-router-dom';
+
 //var user = "Procument Staff";
 // var user = "Delivery Manager";
  //var user = "Manager";
@@ -39,15 +39,16 @@ const NavBar: React.FC = () => {
   );
 
 
+
   var handleLogout =() =>{
       dispatch(setLogin(false));
       dispatch(setUserType(''));
       dispatch(setUserName(''));
 
-      return(
-     <UsersPage/>
-      )
+
+
   }
+
 
   if(login){
     console.log(user1);
@@ -100,6 +101,7 @@ const NavBar: React.FC = () => {
 
     if(user1 === "Procument Staff"){
       return (
+
         <Navbar collapseOnSelect
                 expand={false}
                 bg='dark'
@@ -174,6 +176,7 @@ const NavBar: React.FC = () => {
   </Nav>
         </Navbar.Collapse>
       </Navbar>
+
     );
     }
 

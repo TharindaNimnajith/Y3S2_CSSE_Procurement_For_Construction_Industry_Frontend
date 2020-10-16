@@ -19,6 +19,15 @@ const MakePayment: React.FC = () => {
   //     orderDM: any
   //   }) => state.orderDM.orderDM
   // )
+  var login = useSelector(
+    (state: {
+      users: any
+      login: boolean
+    }) => state.users.login
+  );
+
+
+
 
   const editingOrderDMId = useSelector(
     (state: {
@@ -34,6 +43,7 @@ const MakePayment: React.FC = () => {
     }) => state.orderDM.editingOrderDM
   );
 
+  const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const [order, setOrder] = useState<{
@@ -82,8 +92,12 @@ const MakePayment: React.FC = () => {
 
   useEffect(() => {
     setOrder(editingOrderDM);
+    console.log(login);
+    if(!login){
+      setRenderRedirectToLogin(true);
+    }
 
-  }, [editingOrderDM]);
+  }, [editingOrderDM,login]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -201,6 +215,13 @@ const MakePayment: React.FC = () => {
     setLoading(false);
   };
 
+  const renderRedirectLogin = () => {
+    if (renderRedirectToLogin) {
+      return <Redirect to={routes.USER}/>;
+    }
+    return null;
+  };
+
   return (
     <div style={{
       minWidth: 'max-content',
@@ -208,6 +229,7 @@ const MakePayment: React.FC = () => {
       marginBottom: '3%'
     }}>
       <NavBar />
+      {renderRedirectLogin()}
       {renderRedirect()}
       <Row className='text-center mb-5'>
         <Col className='p-3'
