@@ -23,8 +23,8 @@ const InventoriesAdd: React.FC = () => {
     }) => state.inventories.existingInventory
   );
 
-  const [isRestricted, setIsRestricted] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [isRestricted, setIsRestricted] = useState<string>('');
   const [inventory, setInventory] = useState<{
     itemId: string,
     itemName: string,
