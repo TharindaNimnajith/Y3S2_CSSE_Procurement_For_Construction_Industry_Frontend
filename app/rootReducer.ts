@@ -8,6 +8,7 @@ import purchaseOrdersForApprovingReducer from './Pages/PurchaseOrdersForApprovin
 import inventoriesReducer from './Pages/InventoryM/inventory-slice';
 import policyReducer from './Pages/Policies/policiesSlice';
 import usersReducer from './Pages/LoginSignup/user-slice';
+import newUsersReducer from './Pages/NewUser/newUser-slice';
 
 export default function createRootReducer(history: History) {
   return combineReducers({
@@ -18,6 +19,7 @@ export default function createRootReducer(history: History) {
     orderSup: orderSupReducer,
     inventories: inventoriesReducer,
     users:usersReducer,
+    newusers:newUsersReducer,
     policies: policyReducer
   });
 }

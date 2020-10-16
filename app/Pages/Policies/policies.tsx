@@ -8,7 +8,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import styles from './policies.css';
+//import styles from './policies.css';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import { setPolicies } from './policiesSlice';

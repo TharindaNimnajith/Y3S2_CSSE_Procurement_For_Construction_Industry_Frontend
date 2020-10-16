@@ -99,7 +99,7 @@ const NavBar: React.FC = () => {
       );
     }
 
-    if(user1 === "Procument Staff"){
+    if(user1 === "Procurement Staff"){
       return (
 
         <Navbar collapseOnSelect
@@ -354,19 +354,27 @@ const NavBar: React.FC = () => {
                  height: '100vh'
                }}>
             <br />
+            <NavLink to={routes.NEWUSERS}>
+             <Nav.Link href='#newusers'>
+               User Management
+             </Nav.Link>
+           </NavLink>
+
+           <NavLink to={routes.INVENTORIES}>
+             <Nav.Link href='#inventorys'>
+               Inventory Management
+             </Nav.Link>
+           </NavLink>
+
             <NavLink to={routes.POLICY}>
             <Nav.Link href='#policy'>
-              Policy Details
+              Policy Management
             </Nav.Link>
           </NavLink>
 
 
 
-             <NavLink to={routes.INVENTORYS}>
-             <Nav.Link href='#inventorys'>
-               Inventory Details
-             </Nav.Link>
-           </NavLink>
+
 
 
            <Nav.Link onClick={handleLogout}>
@@ -412,7 +420,7 @@ const NavBar: React.FC = () => {
 
              <NavLink to={routes.USER}>
              <Nav.Link href='#users'>
-               User Account
+               Login
              </Nav.Link>
            </NavLink>
 
