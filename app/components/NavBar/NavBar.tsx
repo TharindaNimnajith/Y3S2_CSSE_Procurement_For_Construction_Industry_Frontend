@@ -53,9 +53,9 @@ const NavBar: React.FC = () => {
                    height: '100vh'
                  }}>
               <br />
-              <NavLink to={routes.USER}>
-                <Nav.Link href='#users'>
-                  Sign In
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
                 </Nav.Link>
               </NavLink>
               <Nav.Link onClick={handleLogout}>
@@ -83,6 +83,11 @@ const NavBar: React.FC = () => {
                    height: '100vh'
                  }}>
               <br />
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
+                </Nav.Link>
+              </NavLink>
               <NavLink to={routes.INVENTORIES}>
                 <Nav.Link href='#inventorys'>
                   Inventory Management
@@ -128,6 +133,11 @@ const NavBar: React.FC = () => {
                    height: '100vh'
                  }}>
               <br />
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
+                </Nav.Link>
+              </NavLink>
               <NavLink to={routes.PENDING_SUP_LIST}>
                 <Nav.Link href='#pendingSUP'>
                   Pending Purchase Orders
@@ -178,6 +188,11 @@ const NavBar: React.FC = () => {
                    height: '100vh'
                  }}>
               <br />
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
+                </Nav.Link>
+              </NavLink>
               <NavLink to={routes.PENDING_DM_LIST}>
                 <Nav.Link href='#pendingDM'>
                   Pending Purchase Orders
@@ -228,6 +243,11 @@ const NavBar: React.FC = () => {
                    height: '100vh'
                  }}>
               <br />
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
+                </Nav.Link>
+              </NavLink>
               <NavLink to={routes.NEW_USERS}>
                 <Nav.Link href='#newusers'>
                   User Management
@@ -281,6 +301,11 @@ const NavBar: React.FC = () => {
               <NavLink to={routes.USER}>
                 <Nav.Link href='#users'>
                   Sign In
+                </Nav.Link>
+              </NavLink>
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
                 </Nav.Link>
               </NavLink>
               <Nav.Link onClick={handleLogout}>

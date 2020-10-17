@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import App from './containers/App';
 import routes from './constants/routes.json';
 import HomePage from './containers/HomePage';
+import WelcomePage from './Pages/HomePage/welcome-page';
 import InventoryPage from './Pages/Inventory/inventory-page';
 import InventoriesPage from './Pages/InventoryM/inventory-page';
 import PurchaseOrdersForApprovingPage from './Pages/PurchaseOrdersForApproving/purchase-orders-for-approving-page';
@@ -77,6 +78,8 @@ export default function Routes() {
                component={SitesPage} />
         <Route path={routes.ORDER}
                component={PurchaseOrdersPage} />
+        <Route path={routes.HOME_PAGE}
+               component={WelcomePage} />
         <Route path={routes.HOME}
                component={HomePage} />
       </Switch>

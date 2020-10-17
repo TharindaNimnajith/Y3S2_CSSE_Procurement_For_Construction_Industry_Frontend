@@ -4,18 +4,18 @@ import { useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import PoliciesList from './site-list';
-import PoliciesEdit from './site-edit';
-import PoliciesAdd from './site-add';
+import SitesList from './site-list';
+import SitesEdit from './site-edit';
+import SitesAdd from './site-add';
 
-const PoliciesPage: React.FC = () => {
+const SitesPage: React.FC = () => {
   let route: any;
 
-  const editPolicy = useSelector(
+  const editSite = useSelector(
     (state: {
-      policies: any
-      editPolicy: boolean
-    }) => state.policies.editPolicy
+      sites: any
+      editSite: boolean
+    }) => state.sites.editSite
   );
 
   let login = useSelector(
@@ -40,10 +40,10 @@ const PoliciesPage: React.FC = () => {
     return null;
   };
 
-  if (editPolicy)
-    route = (<PoliciesEdit />);
+  if (editSite)
+    route = (<SitesEdit />);
   else
-    route = (<PoliciesAdd />);
+    route = (<SitesAdd />);
 
   return (
     <div style={{
@@ -76,7 +76,7 @@ const PoliciesPage: React.FC = () => {
           </Col>
           <Col sm='8'>
             <div>
-              <PoliciesList />
+              <SitesList />
             </div>
           </Col>
         </Row>
@@ -85,4 +85,4 @@ const PoliciesPage: React.FC = () => {
   );
 };
 
-export default PoliciesPage;
+export default SitesPage;

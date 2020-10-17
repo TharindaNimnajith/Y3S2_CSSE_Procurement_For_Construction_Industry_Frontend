@@ -36,8 +36,8 @@ const SitesEdit: React.FC = () => {
     siteName: string,
     siteManager: string
   }>({
-    siteName: '',
-    siteManager: ''
+    siteName: editingSite.siteName,
+    siteManager: editingSite.siteManager
   });
 
   const getSiteManagers = async () => {
@@ -59,10 +59,10 @@ const SitesEdit: React.FC = () => {
   };
 
   useEffect(() => {
+    setSite(editingSite);
     getSiteManagers().then(() => {
     });
-    setSite(editingSite);
-  }, []);
+  }, [editingSite]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();

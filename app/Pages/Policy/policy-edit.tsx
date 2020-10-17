@@ -39,13 +39,13 @@ const PoliciesEdit: React.FC = () => {
     property: string,
     value: string
   }>({
-    property: '',
-    value: ''
+    property: editingPolicy.property,
+    value: editingPolicy.value
   });
 
   useEffect(() => {
     setPolicy(editingPolicy);
-  }, []);
+  }, [editingPolicy]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
