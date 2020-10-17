@@ -139,6 +139,16 @@ const DeliveryConfirmedOrdersList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
+                Invoice Id
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
                 Requested Date
               </th>
               <th style={{
@@ -211,6 +221,11 @@ const DeliveryConfirmedOrdersList: React.FC = () => {
                         textAlign: 'center'
                       }}>
                         {order.supplierAmount}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.invoiceId}
                       </td>
                       <td style={{
                         textAlign: 'center'

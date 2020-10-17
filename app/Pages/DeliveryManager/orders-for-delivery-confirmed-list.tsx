@@ -40,7 +40,6 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
       });
       const responseData = await response.json();
       setOrdersList(responseData);
-
       setLoading(false);
     } catch (errors) {
       setLoading(false);
@@ -57,7 +56,6 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
   }, [orders, login]);
 
   const handleApproved = async () => {
-    console.log(order);
     setLoading(true);
     try {
       const response = await fetch(`${proxy}/order/editOrderStatus`, {

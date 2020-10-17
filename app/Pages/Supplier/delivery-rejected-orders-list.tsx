@@ -6,7 +6,7 @@ import { proxy } from '../../conf';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 
-const DeliveryRejectedOrdersList: React.FC = () => {
+const DeliveryRejectedOrdersListSupplier: React.FC = () => {
   let login = useSelector(
     (state: {
       users: any
@@ -14,16 +14,24 @@ const DeliveryRejectedOrdersList: React.FC = () => {
     }) => state.users.login
   );
 
+  let supplier = useSelector(
+    (state: {
+      users: any
+      userName: string
+    }) => state.users.userName
+  );
+
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
   const [orders, setOrdersList] = useState<any>([]);
 
   const getOrders = async () => {
     try {
-      const response = await fetch(`${proxy}/orderLists/getDeliveryRejectedDManager`, {
-        method: 'GET',
+      const response = await fetch(`${proxy}/orderLists/getDRejectedOrdersSupplier`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({ 'supplierName': supplier })
       });
       const responseData = await response.json();
       setOrdersList(responseData);
@@ -189,16 +197,6 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Supplier
-              </th>
-              <th style={{
-                borderBottom: 'solid darkblue 1px',
-                borderTop: 'solid darkblue 1px',
-                textAlign: 'center',
-                fontSize: 'large',
-                fontWeight: 'lighter',
-                color: 'white'
-              }}>
                 Reason
               </th>
               </thead>
@@ -260,11 +258,6 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.supplierName}
-                      </td>
-                      <td style={{
-                        textAlign: 'center'
-                      }}>
                         {order.deliveryManagerRejectedReason}
                       </td>
                     </tr>
@@ -280,4 +273,4 @@ const DeliveryRejectedOrdersList: React.FC = () => {
   );
 };
 
-export default DeliveryRejectedOrdersList;
+export default DeliveryRejectedOrdersListSupplier;

@@ -153,16 +153,16 @@ const NavBar: React.FC = () => {
                   Rejected Purchase Orders
                 </Nav.Link>
               </NavLink>
-              {/*<NavLink to={routes.CONFIRMED_DM_LIST}>*/}
-              {/*  <Nav.Link href='#confirmedDM'>*/}
-              {/*    Completed Purchase Orders*/}
-              {/*  </Nav.Link>*/}
-              {/*</NavLink>*/}
-              {/*<NavLink to={routes.REJECTED_DM_LIST}>*/}
-              {/*  <Nav.Link href='#rejectedDM'>*/}
-              {/*    Returned Purchase Orders*/}
-              {/*  </Nav.Link>*/}
-              {/*</NavLink>*/}
+              <NavLink to={routes.CONFIRMED_DM_LIST_SUP}>
+                <Nav.Link href='#confirmedDMSupplier'>
+                  Completed Purchase Orders
+                </Nav.Link>
+              </NavLink>
+              <NavLink to={routes.REJECTED_DM_LIST_SUP}>
+                <Nav.Link href='#rejectedDMSupplier'>
+                  Returned Purchase Orders
+                </Nav.Link>
+              </NavLink>
               <Nav.Link onClick={handleLogout}>
                 Sign Out
               </Nav.Link>

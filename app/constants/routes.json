@@ -7,6 +7,8 @@
   "PENDING_DM_LIST": "/pendingDM",
   "CONFIRMED_DM_LIST": "/confirmedDM",
   "REJECTED_DM_LIST": "/rejectedDM",
+  "CONFIRMED_DM_LIST_SUP": "/confirmedDMSupplier",
+  "REJECTED_DM_LIST_SUP": "/rejectedDMSupplier",
   "MAKE_PAYMENT": "/makePayment/:id",
   "PAYMENT_LIST": "/paymentList",
   "PENDING_SUP_LIST": "/pendingSup",

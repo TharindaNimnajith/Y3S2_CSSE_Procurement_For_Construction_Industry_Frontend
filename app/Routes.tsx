@@ -23,6 +23,8 @@ import UsersPage from './Pages/LoginSignup/user-page';
 import NewUsersPage from './Pages/NewUser/newUser-page';
 import SitesPage from './Pages/Site/site-page';
 import PurchaseOrdersPage from './Pages/PurchaseOrdersForApproving/purchase-orders-page';
+import DeliveryConfirmedOrdersListSupplier from './Pages/Supplier/delivery-confirmed-orders-list';
+import DeliveryRejectedOrdersListSupplier from './Pages/Supplier/delivery-rejected-orders-list';
 
 const LazyCounterPage = React.lazy(() =>
   import('./containers/HomePage')
@@ -62,6 +64,10 @@ export default function Routes() {
                component={DeliveryConfirmedOrdersList} />
         <Route path={routes.REJECTED_DM_LIST}
                component={DeliveryRejectedOrdersList} />
+        <Route path={routes.CONFIRMED_DM_LIST_SUP}
+               component={DeliveryConfirmedOrdersListSupplier} />
+        <Route path={routes.REJECTED_DM_LIST_SUP}
+               component={DeliveryRejectedOrdersListSupplier} />
         <Route path={routes.MAKE_PAYMENT}
                component={MakePayment} />
         <Route path={routes.PAYMENT_LIST}
