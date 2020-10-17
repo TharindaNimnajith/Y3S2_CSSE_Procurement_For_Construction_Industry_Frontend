@@ -22,16 +22,17 @@ const NavBar: React.FC = () => {
     }) => state.users.login
   );
 
-  // for testing
-  dispatch(setLogin(true));
-  user = 'Test';
-  login = true;
-
   let handleLogout = () => {
     dispatch(setLogin(false));
     dispatch(setUserType(''));
     dispatch(setUserName(''));
   };
+
+  // for development and testing purposes only
+  // please comment out next 3 lines when building for production
+  dispatch(setLogin(true));
+  user = 'Test';
+  login = true;
 
   if (login) {
     if (user === 'Site Manager') {
