@@ -189,7 +189,7 @@ const OrdersForSupplyingList: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Orders for Supplying</h1>
+          <h1>Pending Purchase Orders</h1>
         </Col>
       </Row>
       <div className='container'>

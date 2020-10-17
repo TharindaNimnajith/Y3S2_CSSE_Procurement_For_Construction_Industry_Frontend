@@ -54,11 +54,11 @@ const NewUserEdit: React.FC = () => {
     type: string,
     typeDefault: boolean
   }>({
-    name: '',
-    address: '',
-    email: '',
-    password: '',
-    type: '',
+    name: editingUser.name,
+    address: editingUser.address,
+    email: editingUser.email,
+    password: editingUser.password,
+    type: editingUser.type,
     typeDefault: true
   });
 
@@ -78,21 +78,12 @@ const NewUserEdit: React.FC = () => {
       errors_ = 'Please enter a value for address.';
       await dispatch(setExistingUser(true));
       setLoading(false);
-    } else if (user.email.trim() === '') {
-      errors_ = 'Please enter a value for email.';
-      await dispatch(setExistingUser(true));
-      setLoading(false);
-    } else if (user.password.trim() === '') {
-      errors_ = 'Please enter a value for password.';
-      await dispatch(setExistingUser(true));
-      setLoading(false);
     } else if (user.type.trim() === '') {
       errors_ = 'Please select a type.';
       await dispatch(setExistingUser(true));
       setLoading(false);
     }
-    if (user.email.trim() !== '' && user.password.trim() !== '' && user.email.trim() !== ''
-      && user.password.trim() !== '' && user.type.trim() !== '') {
+    if (user.name.trim() !== '' && user.address.trim() !== '' && user.type.trim() !== '') {
       const finalObject = {
         users: user,
         id: editingUserId
@@ -149,13 +140,6 @@ const NewUserEdit: React.FC = () => {
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     setUser({ ...user, email: e.target.value });
-    dispatch(setExistingUser(false));
-    setLoading(false);
-  };
-
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true);
-    setUser({ ...user, password: e.target.value });
     dispatch(setExistingUser(false));
     setLoading(false);
   };
@@ -219,18 +203,6 @@ const NewUserEdit: React.FC = () => {
                           placeholder='Enter Email'
                           title='Please enter a valid email.'
                           disabled
-                          size='lg' />
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group controlId='formRoomName'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password"
-                          value={user.password}
-                          onChange={handleChangePassword}
-                          placeholder='Enter Password'
-                          title='Please enter a valid password.'
-                          required
                           size='lg' />
           </Form.Group>
         </Form.Row>

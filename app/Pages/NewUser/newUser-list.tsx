@@ -198,16 +198,6 @@ const NewUsersList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
-            Password
-          </th>
-          <th style={{
-            borderBottom: 'solid darkblue 1px',
-            borderTop: 'solid darkblue 1px',
-            textAlign: 'center',
-            fontSize: 'large',
-            fontWeight: 'lighter',
-            color: 'white'
-          }}>
             User Type
           </th>
           <th colSpan={2}
@@ -241,11 +231,6 @@ const NewUsersList: React.FC = () => {
                     textAlign: 'center'
                   }}>
                     {user.email}
-                  </td>
-                  <td style={{
-                    textAlign: 'center'
-                  }}>
-                    {user.password}
                   </td>
                   <td style={{
                     textAlign: 'center'
