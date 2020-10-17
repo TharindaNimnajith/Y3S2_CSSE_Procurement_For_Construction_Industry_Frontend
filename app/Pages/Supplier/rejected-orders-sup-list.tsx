@@ -14,6 +14,13 @@ const RejectedOrdersSupList: React.FC = () => {
     }) => state.users.login
   );
 
+  let supplier = useSelector(
+    (state: {
+      users: any
+      userName: string
+    }) => state.users.userName
+  );
+
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
   const [orders, setOrdersList] = useState<any>([]);
 
@@ -24,7 +31,7 @@ const RejectedOrdersSupList: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 'supplierName': 'Jagath' })
+        body: JSON.stringify({ 'supplierName': supplier })
       });
       const responseData = await response.json();
       setOrdersList(responseData);
@@ -62,7 +69,7 @@ const RejectedOrdersSupList: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Supplier Rejected Orders</h1>
+          <h1>Rejected Purchase Orders</h1>
         </Col>
       </Row>
       <div className='container'>

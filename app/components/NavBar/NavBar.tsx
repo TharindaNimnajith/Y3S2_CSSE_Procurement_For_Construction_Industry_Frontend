@@ -30,9 +30,9 @@ const NavBar: React.FC = () => {
 
   // for development and testing purposes only
   // please comment out next 3 lines when building for production
-  dispatch(setLogin(true));
-  user = 'Test';
-  login = true;
+  // dispatch(setLogin(true));
+  // user = 'Test';
+  // login = true;
 
   if (login) {
     if (user === 'Site Manager') {
@@ -153,16 +153,16 @@ const NavBar: React.FC = () => {
                   Rejected Purchase Orders
                 </Nav.Link>
               </NavLink>
-              <NavLink to={routes.REJECTED_SUP_LIST}>
-                <Nav.Link href='#rejectedSUP'>
-                  Returned Purchase Orders
-                </Nav.Link>
-              </NavLink>
-              <NavLink to={routes.REJECTED_SUP_LIST}>
-                <Nav.Link href='#rejectedSUP'>
-                  Payment Received Orders
-                </Nav.Link>
-              </NavLink>
+              {/*<NavLink to={routes.CONFIRMED_DM_LIST}>*/}
+              {/*  <Nav.Link href='#confirmedDM'>*/}
+              {/*    Completed Purchase Orders*/}
+              {/*  </Nav.Link>*/}
+              {/*</NavLink>*/}
+              {/*<NavLink to={routes.REJECTED_DM_LIST}>*/}
+              {/*  <Nav.Link href='#rejectedDM'>*/}
+              {/*    Returned Purchase Orders*/}
+              {/*  </Nav.Link>*/}
+              {/*</NavLink>*/}
               <Nav.Link onClick={handleLogout}>
                 Sign Out
               </Nav.Link>
@@ -200,12 +200,12 @@ const NavBar: React.FC = () => {
               </NavLink>
               <NavLink to={routes.CONFIRMED_DM_LIST}>
                 <Nav.Link href='#confirmedDM'>
-                  Confirmed Purchase Orders
+                  Completed Purchase Orders
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.REJECTED_DM_LIST}>
                 <Nav.Link href='#rejectedDM'>
-                  Rejected Purchase Orders
+                  Returned Purchase Orders
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.PAYMENT_LIST}>
@@ -261,6 +261,11 @@ const NavBar: React.FC = () => {
               <NavLink to={routes.POLICY}>
                 <Nav.Link href='#policy'>
                   Policy Management
+                </Nav.Link>
+              </NavLink>
+              <NavLink to={routes.PAYMENT_LIST}>
+                <Nav.Link href='#paymentList'>
+                  Payments Management
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.INVENTORY}>

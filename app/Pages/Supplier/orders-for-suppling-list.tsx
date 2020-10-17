@@ -24,6 +24,13 @@ const OrdersForSupplyingList: React.FC = () => {
     }) => state.users.login
   );
 
+  let supplier = useSelector(
+    (state: {
+      users: any
+      userName: string
+    }) => state.users.userName
+  );
+
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [showApproved, setShowApproved] = useState<boolean>(false);
@@ -43,7 +50,7 @@ const OrdersForSupplyingList: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 'supplierName': 'Jagath' })
+        body: JSON.stringify({ 'supplierName': supplier })
       });
       const responseData = await response.json();
       setOrdersList(responseData);
@@ -268,7 +275,7 @@ const OrdersForSupplyingList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Order ID
+                Order Id
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -308,7 +315,7 @@ const OrdersForSupplyingList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Created Date
+                Requested Date
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -318,7 +325,7 @@ const OrdersForSupplyingList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Requested Date
+                Required Date
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -338,7 +345,7 @@ const OrdersForSupplyingList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Vendor Name
+                Site Manager
               </th>
               <th colSpan={2}
                   style={{
@@ -375,12 +382,12 @@ const OrdersForSupplyingList: React.FC = () => {
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.purchaseDate}
+                        {order.requestedDate}
                       </td>
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.requestedDate}
+                        {order.requiredDate}
                       </td>
                       <td style={{
                         textAlign: 'center'

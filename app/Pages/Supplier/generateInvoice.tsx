@@ -161,9 +161,11 @@ const GenerateInvoice: React.FC = () => {
       <div className='container'>
         <div style={{
           borderRadius: '8px',
-          padding: '3% 9% 3% 9%',
+          padding: '3% 7% 3% 7%',
           border: '2px solid #007bff',
-          maxWidth: 'fit-content'
+          maxWidth: 'fit-content',
+          marginLeft: '31%',
+          marginTop: '6%'
         }}>
           <Form>
             <Form.Row style={{
@@ -236,7 +238,7 @@ const GenerateInvoice: React.FC = () => {
                         type='submit'
                         onClick={handleSubmit}
                         style={{
-                          marginLeft: '60%',
+                          marginLeft: '20%',
                           fontSize: 'large',
                           textTransform: 'uppercase'
                         }}>

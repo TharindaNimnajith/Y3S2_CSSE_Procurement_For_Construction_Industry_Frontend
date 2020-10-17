@@ -88,7 +88,7 @@ const PurchaseOrdersPage: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
-            Order ID
+            Order Id
           </th>
           <th style={{
             borderBottom: 'solid darkblue 1px',
@@ -371,7 +371,7 @@ const PurchaseOrdersPage: React.FC = () => {
                         textAlign: 'center',
                         color: 'green'
                       }}>
-                        Delivered
+                        Completed
                       </td>
                     ) : order.status === 'deliveryRejected' ? (
                       <td style={{

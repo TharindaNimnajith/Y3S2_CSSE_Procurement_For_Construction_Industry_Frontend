@@ -14,6 +14,13 @@ const DeliveredOrdersSupList: React.FC = () => {
     }) => state.users.login
   );
 
+  let supplier = useSelector(
+    (state: {
+      users: any
+      userName: string
+    }) => state.users.userName
+  );
+
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
   const [orders, setOrdersList] = useState<any>([]);
 
@@ -24,7 +31,7 @@ const DeliveredOrdersSupList: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 'supplierName': 'Jagath' })
+        body: JSON.stringify({ 'supplierName': supplier })
       });
       const responseData = await response.json();
       setOrdersList(responseData);
@@ -62,7 +69,7 @@ const DeliveredOrdersSupList: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Supplier Delivered Orders</h1>
+          <h1>Accepted Purchase Orders</h1>
         </Col>
       </Row>
       <div className='container'>
@@ -90,7 +97,7 @@ const DeliveredOrdersSupList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Order ID
+                Order Id
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -120,17 +127,7 @@ const DeliveredOrdersSupList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Amount
-              </th>
-              <th style={{
-                borderBottom: 'solid darkblue 1px',
-                borderTop: 'solid darkblue 1px',
-                textAlign: 'center',
-                fontSize: 'large',
-                fontWeight: 'lighter',
-                color: 'white'
-              }}>
-                Created Date
+                Estimated Amount
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -150,6 +147,16 @@ const DeliveredOrdersSupList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
+                Required Date
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
                 Site
               </th>
               <th style={{
@@ -160,7 +167,7 @@ const DeliveredOrdersSupList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Vendor Name
+                Site Manager
               </th>
               </thead>
               <tbody>
@@ -191,12 +198,12 @@ const DeliveredOrdersSupList: React.FC = () => {
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.purchaseDate}
+                        {order.requestedDate}
                       </td>
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.requestedDate}
+                        {order.requiredDate}
                       </td>
                       <td style={{
                         textAlign: 'center'

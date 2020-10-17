@@ -120,7 +120,7 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Delivery Confirmed Orders</h1>
+          <h1>Returned Purchase Orders</h1>
         </Col>
       </Row>
       <div className='container'>
