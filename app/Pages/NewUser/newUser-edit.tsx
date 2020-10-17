@@ -11,7 +11,8 @@ const usersList = [
   'Procurement Staff',
   'Supplier',
   'Delivery Manager',
-  'Site Manager'
+  'Site Manager',
+  'Manager'
 ];
 
 const NewUserEdit: React.FC = () => {
@@ -290,7 +291,7 @@ const NewUserEdit: React.FC = () => {
                 marginRight: '4px',
                 marginBottom: '-2px'
               }} />
-              Edit User
+              Edit
             </Button>
           </Form.Group>
         </Form.Row>

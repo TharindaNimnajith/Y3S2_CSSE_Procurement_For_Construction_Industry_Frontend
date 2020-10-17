@@ -11,7 +11,8 @@ const usersList = [
   'Procurement Staff',
   'Supplier',
   'Delivery Manager',
-  'Site Manager'
+  'Site Manager',
+  'Manager'
 ];
 
 const NewUserAdd: React.FC = () => {
@@ -231,8 +232,8 @@ const NewUserAdd: React.FC = () => {
                     type='submit'
                     onClick={handleSubmit}
                     style={{
-                      marginLeft: '40%',
-                      marginTop: '10%',
+                      marginLeft: '100%',
+                      marginTop: '20%',
                       fontSize: 'large',
                       textTransform: 'uppercase'
                     }}>
@@ -240,7 +241,7 @@ const NewUserAdd: React.FC = () => {
                 marginRight: '4px',
                 marginBottom: '-2px'
               }} />
-              Create User
+              Add
             </Button>
           </Form.Group>
         </Form.Row>
