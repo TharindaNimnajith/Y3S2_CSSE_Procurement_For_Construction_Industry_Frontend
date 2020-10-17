@@ -22,9 +22,10 @@ const NavBar: React.FC = () => {
     }) => state.users.login
   );
 
-  // dispatch(setLogin(true));
-  // user = 'Test';
-  // login = true;
+  // for testing
+  dispatch(setLogin(true));
+  user = 'Test';
+  login = true;
 
   let handleLogout = () => {
     dispatch(setLogin(false));
@@ -33,7 +34,7 @@ const NavBar: React.FC = () => {
   };
 
   if (login) {
-    if (user === '') {
+    if (user === 'Site Manager') {
       return (
         <Navbar collapseOnSelect
                 expand={false}
