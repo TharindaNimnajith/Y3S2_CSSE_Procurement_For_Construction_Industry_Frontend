@@ -1,14 +1,13 @@
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Col, Row, Table } from 'react-bootstrap';
-import React, {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import routes from '../../constants/routes.json';
-import {Redirect} from 'react-router-dom';
 import { proxy } from '../../conf';
+import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 
 const DeliveredOrdersSupList: React.FC = () => {
-  const dispatch = useDispatch();
-  var login = useSelector(
+  let login = useSelector(
     (state: {
       users: any
       login: boolean
@@ -16,22 +15,10 @@ const DeliveredOrdersSupList: React.FC = () => {
   );
 
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
-
-  const [loading, setLoading] = useState<boolean>(false);
-  const [showApproved, setShowApproved] = useState<boolean>(false);
-  const [showRejected, setShowRejected] = useState<boolean>(false);
-  const [orderId, setOrderId] = useState<string>('');
-  const [id, setId] = useState<string>('');
-  const [order, setOrder] = useState({});
-
   const [orders, setOrdersList] = useState<any>([]);
-  const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
-  const [renderRedirectTo1, setRenderRedirectTo1] = useState<boolean | null>(false);
-
 
   const getOrders = async () => {
     try {
-      setLoading(true);
       const response = await fetch(`${proxy}/orderLists/getDeliveredOrdersSupplier`, {
         method: 'POST',
         headers: {
@@ -41,10 +28,7 @@ const DeliveredOrdersSupList: React.FC = () => {
       });
       const responseData = await response.json();
       setOrdersList(responseData);
-
-      setLoading(false);
     } catch (errors) {
-      setLoading(false);
       console.log(errors);
     }
   };
@@ -52,15 +36,14 @@ const DeliveredOrdersSupList: React.FC = () => {
   useEffect(() => {
     getOrders().then(() => {
     });
-    console.log(login);
-    if(!login){
+    if (!login) {
       setRenderRedirectToLogin(true);
     }
-  }, [orders,login]);
+  }, [orders, login]);
 
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
-      return <Redirect to={routes.USER}/>;
+      return <Redirect to={routes.USER} />;
     }
     return null;
   };
@@ -87,7 +70,6 @@ const DeliveredOrdersSupList: React.FC = () => {
           <div style={{
             marginTop: '4%'
           }}>
-
             <Table responsive
                    striped
                    bordered
@@ -140,8 +122,6 @@ const DeliveredOrdersSupList: React.FC = () => {
               }}>
                 Amount
               </th>
-
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -162,7 +142,6 @@ const DeliveredOrdersSupList: React.FC = () => {
               }}>
                 Requested Date
               </th>
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -173,7 +152,6 @@ const DeliveredOrdersSupList: React.FC = () => {
               }}>
                 Site
               </th>
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -184,8 +162,6 @@ const DeliveredOrdersSupList: React.FC = () => {
               }}>
                 Vendor Name
               </th>
-
-
               </thead>
               <tbody>
               {
@@ -232,8 +208,6 @@ const DeliveredOrdersSupList: React.FC = () => {
                       }}>
                         {order.siteManager}
                       </td>
-
-
                     </tr>
                   );
                 })

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
+import { useSelector } from 'react-redux';
 import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
 import { proxy } from '../../conf';
-import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../constants/routes.json';
-
-
 import NavBar from '../../components/NavBar/NavBar';
-import { Redirect } from 'react-router';
 
 const DeliveryRejectedOrdersList: React.FC = () => {
-  var login = useSelector(
+  let login = useSelector(
     (state: {
       users: any
       login: boolean
@@ -45,11 +43,10 @@ const DeliveryRejectedOrdersList: React.FC = () => {
   useEffect(() => {
     getOrders().then(() => {
     });
-    console.log(login);
-    if(!login){
+    if (!login) {
       setRenderRedirectToLogin(true);
     }
-  }, [orders,login]);
+  }, [orders, login]);
 
   const handleApproved = async () => {
     setLoading(true);
@@ -102,27 +99,12 @@ const DeliveryRejectedOrdersList: React.FC = () => {
     setLoading(false);
   };
 
-  const handleShowApproved = (orderId: string) => {
-    setLoading(true);
-    setOrderId(orderId);
-    setShowApproved(true);
-    setLoading(false);
-  };
-
-  const handleShowRejected = (orderId: string) => {
-    setLoading(true);
-    setOrderId(orderId);
-    setShowRejected(true);
-    setLoading(false);
-  };
-
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
-      return <Redirect to={routes.USER}/>;
+      return <Redirect to={routes.USER} />;
     }
     return null;
   };
-
 
   return (
     <div style={{
@@ -130,7 +112,7 @@ const DeliveryRejectedOrdersList: React.FC = () => {
       overflowX: 'hidden',
       marginBottom: '3%'
     }}>
-       {renderRedirectLogin()}
+      {renderRedirectLogin()}
       <NavBar />
       <Row className='text-center mb-5'>
         <Col className='p-3'
@@ -152,7 +134,7 @@ const DeliveryRejectedOrdersList: React.FC = () => {
               <Modal.Header closeButton>
                 <Modal.Title>Confirm Delivery</Modal.Title>
               </Modal.Header>
-              <Modal.Body>Are you sure you want to confrim this order?</Modal.Body>
+              <Modal.Body>Are you sure you want to confirm this order?</Modal.Body>
               <Modal.Footer>
                 <Button variant='success'
                         onClick={handleClose}
@@ -274,7 +256,6 @@ const DeliveryRejectedOrdersList: React.FC = () => {
               }}>
                 Invoice Amount
               </th>
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -315,7 +296,6 @@ const DeliveryRejectedOrdersList: React.FC = () => {
               }}>
                 Site
               </th>
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -326,8 +306,6 @@ const DeliveryRejectedOrdersList: React.FC = () => {
               }}>
                 Supplier
               </th>
-
-
               </thead>
               <tbody>
               {
@@ -384,8 +362,6 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                       }}>
                         {order.supplierName}
                       </td>
-
-
                     </tr>
                   );
                 })

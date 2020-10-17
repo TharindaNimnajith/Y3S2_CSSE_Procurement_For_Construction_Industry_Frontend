@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import routes from '../../constants/routes.json';
-import {Redirect} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
+import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import PurchaseOrdersForApprovingList from './purchase-orders-for-approving-list';
 
 const PurchaseOrdersForApprovingPage: React.FC = () => {
-
-  var login = useSelector(
+  let login = useSelector(
     (state: {
       users: any
       login: boolean
@@ -18,16 +17,14 @@ const PurchaseOrdersForApprovingPage: React.FC = () => {
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
 
   useEffect(() => {
-    console.log(login);
-    if(!login){
+    if (!login) {
       setRenderRedirectToLogin(true);
     }
   }, [login]);
 
-
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
-      return <Redirect to={routes.USER}/>;
+      return <Redirect to={routes.USER} />;
     }
     return null;
   };

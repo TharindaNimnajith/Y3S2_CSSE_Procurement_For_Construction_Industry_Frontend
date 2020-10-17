@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { FaArrowAltCircleLeft, FaEdit } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { setEditingPolicy, setEditingPolicyId, setEditPolicy, setExistingPolicy,setPolicies } from './policy-slice';
+import { setEditingPolicy, setEditingPolicyId, setEditPolicy, setExistingPolicy, setPolicies } from './policy-slice';
 
 let errors_: string = '';
-const methodList = ['Approval Amount'];
+
+const methodList = [
+  'Approval Amount'
+];
+
 const PoliciesEdit: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -14,13 +18,6 @@ const PoliciesEdit: React.FC = () => {
     (state: {
       policies: any
     }) => state.policies.policies
-  );
-
-  const existingPolicy = useSelector(
-    (state: {
-      policies: any
-      existingPolicy: boolean
-    }) => state.policies.existingPolicy
   );
 
   const editingPolicyId = useSelector(
@@ -38,20 +35,16 @@ const PoliciesEdit: React.FC = () => {
   );
 
   const [loading, setLoading] = useState<boolean>(false);
-
   const [policy, setPolicy] = useState<{
     property: string,
     value: string
-
   }>({
     property: '',
     value: ''
   });
 
-
   useEffect(() => {
     setPolicy(editingPolicy);
-
   }, []);
 
   const handleSubmit = async (e: any) => {
@@ -103,8 +96,9 @@ const PoliciesEdit: React.FC = () => {
       }
     }
   };
+
   const handleChangeProperty = (e: React.ChangeEvent<HTMLInputElement>) => {
-    errors_ ='';
+    errors_ = '';
     setLoading(true);
     setPolicy({ ...policy, property: e.target.value });
     dispatch(setExistingPolicy(false));
@@ -112,12 +106,13 @@ const PoliciesEdit: React.FC = () => {
   };
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    errors_ ='';
+    errors_ = '';
     setLoading(true);
     setPolicy({ ...policy, value: e.target.value });
     dispatch(setExistingPolicy(false));
     setLoading(false);
   };
+
   const handleBack = async () => {
     setLoading(true);
     await dispatch(setEditPolicy(false));
@@ -141,16 +136,22 @@ const PoliciesEdit: React.FC = () => {
           <Form.Group controlId='formItemName'>
             <Form.Label>Property</Form.Label>
             <Form.Control as='select'
-                              value={policy.property}
-                              onChange={handleChangeProperty}
-                              title='Please select the payment method.'
-                              required
-                              size='lg'>
-                  <option>Select</option>
-                  {methodList?.map((method, index) => (
-                    <option>{method}</option>
-                  ))}
-                </Form.Control>
+                          value={policy.property}
+                          onChange={handleChangeProperty}
+                          title='Please select the payment method.'
+                          required
+                          size='lg'>
+              <option>Select</option>
+              {
+                methodList?.map((method) => (
+                  <option>
+                    {
+                      method
+                    }
+                  </option>
+                ))
+              }
+            </Form.Control>
           </Form.Group>
         </Form.Row>
         <Form.Row>
@@ -166,7 +167,6 @@ const PoliciesEdit: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
         {
           loading && (
             <Spinner animation='border'

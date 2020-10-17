@@ -16,7 +16,7 @@
   "CONFIRMED_PS_LIST": "/confirmedPS",
   "REJECTED_PS_LIST": "/rejectedPS",
   "INVENTORIES": "/inventories",
-  "NEWUSERS": "/newusers",
+  "NEW_USERS": "/newUsers",
   "POLICY": "/policy",
   "USER": "/user"
 }

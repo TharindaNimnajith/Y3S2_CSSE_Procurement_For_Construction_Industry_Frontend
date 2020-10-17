@@ -1,33 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Form, Row, Spinner } from 'react-bootstrap';
 import { proxy } from '../../conf';
-import { setEditingOrderDM, setEditingOrderDMId, setEditOrderDM, setExistingOrderDM } from './orderDM-slice';
-import { Redirect } from 'react-router-dom';
-import NavBar from '../../components/NavBar/NavBar';
 import routes from '../../constants/routes.json';
+import NavBar from '../../components/NavBar/NavBar';
+import { setEditOrderDM, setExistingOrderDM } from './orderDM-slice';
 
 let errors_: string = '';
-const methodList = ['Cash', 'Card'];
+
+const methodList = [
+  'Cash',
+  'Cheque'
+];
 
 const MakePayment: React.FC = () => {
   const dispatch = useDispatch();
 
-
-  // let orderDMList = useSelector(
-  //   (state: {
-  //     orderDM: any
-  //   }) => state.orderDM.orderDM
-  // )
-  var login = useSelector(
+  let login = useSelector(
     (state: {
       users: any
       login: boolean
     }) => state.users.login
   );
-
-
-
 
   const editingOrderDMId = useSelector(
     (state: {
@@ -45,7 +40,9 @@ const MakePayment: React.FC = () => {
 
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
+  const [renderRedirectTo1, setRenderRedirectTo1] = useState<boolean | null>(false);
+  const [paymentMethod, setPaymentMethod] = useState<string>('');
   const [order, setOrder] = useState<{
     orderId: number,
     purchaseDate: string,
@@ -80,24 +77,14 @@ const MakePayment: React.FC = () => {
     status: editingOrderDM.status,
     invoiceId: editingOrderDM.invoiceId,
     supplierAmount: editingOrderDM.supplierAmount
-
   });
-
-
-  const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
-  const [renderRedirectTo1, setRenderRedirectTo1] = useState<boolean | null>(false);
-
-
-  const [paymentMethod, setPaymentMethod] = useState<string>('');
 
   useEffect(() => {
     setOrder(editingOrderDM);
-    console.log(login);
-    if(!login){
+    if (!login) {
       setRenderRedirectToLogin(true);
     }
-
-  }, [editingOrderDM,login]);
+  }, [editingOrderDM, login]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -108,7 +95,6 @@ const MakePayment: React.FC = () => {
       await dispatch(setExistingOrderDM(true));
       setLoading(false);
     }
-
     const finalObjectGroup = {
       orderId: order.orderId,
       purchaseDate: order.purchaseDate,
@@ -127,12 +113,10 @@ const MakePayment: React.FC = () => {
       invoiceId: order.invoiceId,
       supplierAmount: order.supplierAmount
     };
-
     const finalObjectWithID = {
       orders: finalObjectGroup,
       id: editingOrderDMId
     };
-
     const finalObject = {
       invoiceId: order.invoiceId,
       orderId: order.orderId,
@@ -140,11 +124,7 @@ const MakePayment: React.FC = () => {
       supplier: order.supplierName,
       amount: order.supplierAmount
     };
-
-    console.log(finalObject);
-
     if (paymentMethod.trim() !== '') {
-
       try {
         await dispatch(setEditOrderDM(true));
         const response = await fetch(`${proxy}/order/editOrders`, {
@@ -166,10 +146,7 @@ const MakePayment: React.FC = () => {
         setLoading(false);
         console.log(errors);
       }
-
-
       try {
-
         const response = await fetch(`${proxy}/payment/create`, {
           method: 'POST',
           headers: {
@@ -189,14 +166,12 @@ const MakePayment: React.FC = () => {
     }
   };
 
-
   const handleChangePaymentMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     setPaymentMethod(e.target.value);
     dispatch(setExistingOrderDM(false));
     setLoading(false);
   };
-
 
   const renderRedirect = () => {
     if (renderRedirectTo && renderRedirectTo1) {
@@ -205,19 +180,9 @@ const MakePayment: React.FC = () => {
     return null;
   };
 
-
-  const handleBack = async () => {
-    setLoading(true);
-    await dispatch(setEditOrderDM(false));
-    await dispatch(setEditingOrderDMId(''));
-    await dispatch(setEditingOrderDM(null));
-    await dispatch(setExistingOrderDM(false));
-    setLoading(false);
-  };
-
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
-      return <Redirect to={routes.USER}/>;
+      return <Redirect to={routes.USER} />;
     }
     return null;
   };
@@ -247,8 +212,6 @@ const MakePayment: React.FC = () => {
           border: '2px solid #007bff',
           maxWidth: 'fit-content'
         }}>
-
-
           <Form>
             <Form.Row style={{
               marginTop: '5%'
@@ -267,9 +230,7 @@ const MakePayment: React.FC = () => {
                 <Form.Control disabled
                               type="text"
                               value={order.orderId}
-
                               size='lg'>
-
                 </Form.Control>
               </Form.Group>
             </Form.Row>
@@ -279,9 +240,7 @@ const MakePayment: React.FC = () => {
                 <Form.Control disabled
                               type="text"
                               value={order.supplierName}
-
                               size='lg'>
-
                 </Form.Control>
               </Form.Group>
             </Form.Row>
@@ -291,7 +250,6 @@ const MakePayment: React.FC = () => {
                 <Form.Control disabled
                               type="text"
                               value={order.supplierAmount}
-
                               size='lg' />
               </Form.Group>
             </Form.Row>
@@ -305,7 +263,7 @@ const MakePayment: React.FC = () => {
                               required
                               size='lg'>
                   <option>Select</option>
-                  {methodList?.map((method, index) => (
+                  {methodList?.map((method) => (
                     <option>{method}</option>
                   ))}
                 </Form.Control>
@@ -323,7 +281,6 @@ const MakePayment: React.FC = () => {
             <Form.Row style={{
               marginTop: '10%'
             }}>
-
               <Form.Group>
                 <Button variant='success'
                         type='submit'
@@ -333,7 +290,6 @@ const MakePayment: React.FC = () => {
                           fontSize: 'large',
                           textTransform: 'uppercase'
                         }}>
-
                   Make Payment
                 </Button>
               </Form.Group>
@@ -353,7 +309,6 @@ const MakePayment: React.FC = () => {
               )
             }
           </Form>
-
         </div>
       </div>
     </div>

@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import routes from '../../constants/routes.json';
-import {Redirect} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Col, Row, Table } from 'react-bootstrap';
 import { proxy } from '../../conf';
+import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 
 const PurchaseOrdersApprovedList: React.FC = () => {
-  var login = useSelector(
+  let login = useSelector(
     (state: {
       users: any
       login: boolean
@@ -15,16 +15,10 @@ const PurchaseOrdersApprovedList: React.FC = () => {
   );
 
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
-
-  const [loading, setLoading] = useState<boolean>(false);
-  const [showApproved, setShowApproved] = useState<boolean>(false);
-  const [showRejected, setShowRejected] = useState<boolean>(false);
-  const [orderId, setOrderId] = useState<string>('');
   const [orders, setOrdersList] = useState<any>([]);
 
   const getOrders = async () => {
     try {
-      setLoading(true);
       const response = await fetch(`${proxy}/orderLists/getApprovedPurchasedOrders`, {
         method: 'GET',
         headers: {
@@ -33,9 +27,7 @@ const PurchaseOrdersApprovedList: React.FC = () => {
       });
       const responseData = await response.json();
       setOrdersList(responseData);
-      setLoading(false);
     } catch (errors) {
-      setLoading(false);
       console.log(errors);
     }
   };
@@ -43,19 +35,18 @@ const PurchaseOrdersApprovedList: React.FC = () => {
   useEffect(() => {
     getOrders().then(() => {
     });
-
-    console.log(login);
-    if(!login){
+    if (!login) {
       setRenderRedirectToLogin(true);
     }
-  }, [orders,login]);
+  }, [orders, login]);
 
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
-      return <Redirect to={routes.USER}/>;
+      return <Redirect to={routes.USER} />;
     }
     return null;
   };
+
   return (
     <div style={{
       minWidth: 'max-content',
@@ -78,7 +69,6 @@ const PurchaseOrdersApprovedList: React.FC = () => {
           <div style={{
             marginTop: '4%'
           }}>
-
             <Table responsive
                    striped
                    bordered
@@ -131,7 +121,6 @@ const PurchaseOrdersApprovedList: React.FC = () => {
               }}>
                 Amount
               </th>
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -192,7 +181,6 @@ const PurchaseOrdersApprovedList: React.FC = () => {
               }}>
                 Approved By
               </th>
-
               </thead>
               <tbody>
               {
@@ -219,7 +207,6 @@ const PurchaseOrdersApprovedList: React.FC = () => {
                       }}>
                         {order.totPrice}
                       </td>
-
                       <td style={{
                         textAlign: 'center'
                       }}>
@@ -256,11 +243,10 @@ const PurchaseOrdersApprovedList: React.FC = () => {
                           <td style={{
                             textAlign: 'center'
                           }}>
-                            Procument Staff
+                            Procurement Staff
                           </td>
                         )
                       }
-
                     </tr>
                   );
                 })

@@ -1,49 +1,44 @@
-import React, {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import routes from '../../constants/routes.json';
-import {Redirect} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
+import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import NewUsersList from './newUser-list';
 import NewUserEdit from './newUser-edit';
 import NewUserAdd from './newUser-add';
-import { setEditingUser, setEditingUserId, setEditUser, setExistingUser, setUsers ,setLogin,setUserType,setUserName} from './newUser-slice';
-
 
 const NewUsersPage: React.FC = () => {
   let route: any;
 
   const editUser = useSelector(
     (state: {
-      newusers: any
+      newUsers: any
       editUser: boolean
-    }) => state.newusers.editUser
+    }) => state.newUsers.editUser
   );
 
+  let login = useSelector(
+    (state: {
+      users: any
+      login: boolean
+    }) => state.users.login
+  );
 
- var login = useSelector(
-  (state: {
-    users: any
-    login: boolean
-  }) => state.users.login
-);
+  const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
 
-const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
+  useEffect(() => {
+    if (!login) {
+      setRenderRedirectToLogin(true);
+    }
+  }, [login]);
 
-useEffect(() => {
-  console.log(login);
-  if(!login){
-    setRenderRedirectToLogin(true);
-  }
-}, [login]);
-
-
-const renderRedirectLogin = () => {
-  if (renderRedirectToLogin) {
-    return <Redirect to={routes.USER}/>;
-  }
-  return null;
-};
+  const renderRedirectLogin = () => {
+    if (renderRedirectToLogin) {
+      return <Redirect to={routes.USER} />;
+    }
+    return null;
+  };
 
   if (editUser)
     route = (<NewUserEdit />);

@@ -192,8 +192,6 @@ const PoliciesList: React.FC = () => {
                   }}>
                     {policy.value}
                   </td>
-
-
                   <td style={{
                     textAlign: 'center'
                   }}>

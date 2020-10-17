@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Form, Row, Spinner } from 'react-bootstrap';
 import { proxy } from '../../conf';
-import { setExistingOrderSup } from './orderSup-slice';
-import { Redirect } from 'react-router-dom';
-import NavBar from '../../components/NavBar/NavBar';
 import routes from '../../constants/routes.json';
+import NavBar from '../../components/NavBar/NavBar';
+import { setExistingOrderSup } from './orderSup-slice';
 
 let errors_: string = '';
 
-
 const GenerateInvoice: React.FC = () => {
   const dispatch = useDispatch();
-
-
-  let orderSupList = useSelector(
-    (state: {
-      orderSup: any
-    }) => state.orderSup.orderSup
-  );
 
   const editingOrderSupId = useSelector(
     (state: {
@@ -34,7 +26,7 @@ const GenerateInvoice: React.FC = () => {
     }) => state.orderSup.editingOrderSup
   );
 
-  var login = useSelector(
+  let login = useSelector(
     (state: {
       users: any
       login: boolean
@@ -42,9 +34,7 @@ const GenerateInvoice: React.FC = () => {
   );
 
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
-
   const [loading, setLoading] = useState<boolean>(false);
-
   const [order, setOrder] = useState<{
     orderId: number,
     purchaseDate: string,
@@ -79,38 +69,24 @@ const GenerateInvoice: React.FC = () => {
     status: editingOrderSup.status,
     invoiceId: editingOrderSup.invoiceId,
     supplierAmount: editingOrderSup.supplierAmount
-
   });
 
-
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
-  const [renderRedirectTo1, setRenderRedirectTo1] = useState<boolean | null>(false);
-
-
   const [invoiceId, setInvoiceId] = useState<string>('');
   const [supplierAmount, setSupplierAmount] = useState<string>('');
 
   useEffect(() => {
     setOrder(editingOrderSup);
-    let a = order.orderId * 100;
-
-    setInvoiceId(a);
-
-    console.log(login);
-    if(!login){
+    let invoiceId = order.orderId * 100;
+    setInvoiceId(invoiceId.toString());
+    if (!login) {
       setRenderRedirectToLogin(true);
     }
-
-  }, [editingOrderSup,login]);
+  }, [editingOrderSup, login]);
 
   const handleSubmit = async (e: any) => {
-
-
-    var today = new Date();
-
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    console.log(date);
-
+    let today = new Date();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     e.preventDefault();
     setLoading(true);
     await dispatch(setExistingOrderSup(false));
@@ -119,19 +95,13 @@ const GenerateInvoice: React.FC = () => {
       await dispatch(setExistingOrderSup(true));
       setLoading(false);
     }
-
-
     const finalObject = {
       deliveryDate: date,
       invoiceId,
       supplierAmount
     };
-
-    console.log(finalObject);
-
     if (supplierAmount.trim() !== '') {
       try {
-
         const response = await fetch(`${proxy}/order/addInvoiceOrder/` + editingOrderSupId, {
           method: 'POST',
           headers: {
@@ -139,28 +109,15 @@ const GenerateInvoice: React.FC = () => {
           },
           body: JSON.stringify(finalObject)
         });
-        const responseData = await response.json();
-        console.log(responseData);
+        await response.json();
         setRenderRedirectTo(true);
-
       } catch (errors) {
         errors_ = errors;
         setLoading(false);
         console.log(errors);
       }
-
-
     }
   };
-
-
-  const handleChangeInvoiceId = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true);
-    setInvoiceId(e.target.value);
-    dispatch(setExistingOrderSup(false));
-    setLoading(false);
-  };
-
 
   const handleChangeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
@@ -169,7 +126,6 @@ const GenerateInvoice: React.FC = () => {
     setLoading(false);
   };
 
-
   const renderRedirect = () => {
     if (renderRedirectTo) {
       return <Redirect to={routes.PENDING_SUP_LIST} />;
@@ -177,10 +133,9 @@ const GenerateInvoice: React.FC = () => {
     return null;
   };
 
-
-const renderRedirectLogin = () => {
+  const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
-      return <Redirect to={routes.USER}/>;
+      return <Redirect to={routes.USER} />;
     }
     return null;
   };
@@ -210,8 +165,6 @@ const renderRedirectLogin = () => {
           border: '2px solid #007bff',
           maxWidth: 'fit-content'
         }}>
-
-
           <Form>
             <Form.Row style={{
               marginTop: '5%'
@@ -230,9 +183,7 @@ const renderRedirectLogin = () => {
                 <Form.Control disabled
                               type="text"
                               value={order.siteManager}
-
                               size='lg'>
-
                 </Form.Control>
               </Form.Group>
             </Form.Row>
@@ -242,9 +193,7 @@ const renderRedirectLogin = () => {
                 <Form.Control disabled
                               type="text"
                               value={order.supplierName}
-
                               size='lg'>
-
                 </Form.Control>
               </Form.Group>
             </Form.Row>
@@ -282,7 +231,6 @@ const renderRedirectLogin = () => {
             <Form.Row style={{
               marginTop: '10%'
             }}>
-
               <Form.Group>
                 <Button variant='success'
                         type='submit'
@@ -292,7 +240,6 @@ const renderRedirectLogin = () => {
                           fontSize: 'large',
                           textTransform: 'uppercase'
                         }}>
-
                   Generate Invoice
                 </Button>
               </Form.Group>
@@ -312,7 +259,6 @@ const renderRedirectLogin = () => {
               )
             }
           </Form>
-
         </div>
       </div>
     </div>

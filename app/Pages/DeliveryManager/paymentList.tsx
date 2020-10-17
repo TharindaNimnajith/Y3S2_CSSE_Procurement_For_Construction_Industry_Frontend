@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
 import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
 import { FaTrashAlt } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import routes from '../../constants/routes.json';
+import { useSelector } from 'react-redux';
 import { proxy } from '../../conf';
+import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import { Redirect } from 'react-router';
 
 const PaymentList: React.FC = () => {
-  const dispatch = useDispatch();
-
-  var login = useSelector(
+  let login = useSelector(
     (state: {
       users: any
       login: boolean
@@ -18,18 +16,13 @@ const PaymentList: React.FC = () => {
   );
 
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
-
   const [loading, setLoading] = useState<boolean>(false);
   const [showApproved, setShowApproved] = useState<boolean>(false);
   const [showRejected, setShowRejected] = useState<boolean>(false);
   const [paymentId, setPaymentId] = useState<string>('');
   const [id, setId] = useState<string>('');
   const [pay, setPayment] = useState({});
-
   const [payments, setPaymentsList] = useState<any>([]);
-  const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
-  const [renderRedirectTo1, setRenderRedirectTo1] = useState<boolean | null>(false);
-
 
   const getPayments = async () => {
     try {
@@ -43,7 +36,6 @@ const PaymentList: React.FC = () => {
       const responseData = await response.json();
       console.log(responseData);
       setPaymentsList(responseData.payments);
-
       setLoading(false);
     } catch (errors) {
       setLoading(false);
@@ -54,17 +46,12 @@ const PaymentList: React.FC = () => {
   useEffect(() => {
     getPayments().then(() => {
     });
-
-    console.log(login);
-    if(!login){
+    if (!login) {
       setRenderRedirectToLogin(true);
     }
-
   });
 
-
   const deletePayment = async () => {
-    console.log(id);
     setLoading(true);
     try {
       const response = await fetch(`${proxy}/payment/deletePayments`, {
@@ -75,17 +62,13 @@ const PaymentList: React.FC = () => {
         body: JSON.stringify({ id })
       });
       await response.json();
-
-
       setLoading(false);
     } catch (errors) {
-
       setLoading(false);
       console.log(errors);
     }
     setShowApproved(false);
   };
-
 
   const handleClose = () => {
     setLoading(true);
@@ -105,12 +88,10 @@ const PaymentList: React.FC = () => {
 
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
-      return <Redirect to={routes.USER}/>;
+      return <Redirect to={routes.USER} />;
     }
     return null;
   };
-
-
 
   return (
     <div style={{
@@ -167,7 +148,6 @@ const PaymentList: React.FC = () => {
                 )
               }
             </Modal>
-
             <Table responsive
                    striped
                    bordered
@@ -251,9 +231,7 @@ const PaymentList: React.FC = () => {
               </thead>
               <tbody>
               {
-
                 payments && payments.map((payment: any) => {
-
                   return (
                     <tr key={payment._id}>
                       <td style={{
@@ -286,7 +264,6 @@ const PaymentList: React.FC = () => {
                       }}>
                         {payment.paymentMethod}
                       </td>
-
                       <td style={{
                         textAlign: 'center'
                       }}>
@@ -299,7 +276,6 @@ const PaymentList: React.FC = () => {
                           <FaTrashAlt size={20} />
                         </button>
                       </td>
-
                     </tr>
                   );
                 })

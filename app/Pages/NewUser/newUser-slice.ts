@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const setNewUsersSlice = createSlice({
-  name: 'newusers',
+  name: 'newUsers',
   initialState: {
     users: {},
     existingUser: false,
     editUser: false,
     editingUserId: '',
     editingUser: null,
-    login:false,
-    userType:'',
-    userName:''
+    login: false,
+    userType: '',
+    userName: ''
   },
   reducers: {
     setUsers: (state, action: any) => {
@@ -45,8 +45,8 @@ export const { setExistingUser } = setNewUsersSlice.actions;
 export const { setEditUser } = setNewUsersSlice.actions;
 export const { setEditingUserId } = setNewUsersSlice.actions;
 export const { setEditingUser } = setNewUsersSlice.actions;
-export const {setLogin } = setNewUsersSlice.actions;
-export const {setUserType } = setNewUsersSlice.actions;
-export const { setUserName} = setNewUsersSlice.actions;
+export const { setLogin } = setNewUsersSlice.actions;
+export const { setUserType } = setNewUsersSlice.actions;
+export const { setUserName } = setNewUsersSlice.actions;
 
 export default setNewUsersSlice.reducer;

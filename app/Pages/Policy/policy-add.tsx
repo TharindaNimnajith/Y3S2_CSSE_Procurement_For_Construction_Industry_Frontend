@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { FaPlusCircle } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { setEditingPolicy, setEditingPolicyId, setEditPolicy, setExistingPolicy , setPolicies } from './policy-slice';
+import { setExistingPolicy, setPolicies } from './policy-slice';
 
 let errors_: string = '';
 
@@ -25,21 +25,13 @@ const PoliciesAdd: React.FC = () => {
   );
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [isRestricted, setIsRestricted] = useState<string>('');
-  const [sites, setSites] = useState<any>('');
   const [policy, setPolicy] = useState<{
     property: string,
     value: string
-
   }>({
     property: '',
     value: ''
   });
-
-
-  useEffect(() => {
-
-  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -82,7 +74,7 @@ const PoliciesAdd: React.FC = () => {
   };
 
   const handleChangeProperty = (e: React.ChangeEvent<HTMLInputElement>) => {
-    errors_ ='';
+    errors_ = '';
     setLoading(true);
     setPolicy({ ...policy, property: e.target.value });
     dispatch(setExistingPolicy(false));
@@ -90,7 +82,7 @@ const PoliciesAdd: React.FC = () => {
   };
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    errors_ ='';
+    errors_ = '';
     setLoading(true);
     setPolicy({ ...policy, value: e.target.value });
     dispatch(setExistingPolicy(false));
@@ -100,7 +92,7 @@ const PoliciesAdd: React.FC = () => {
   const resetValues = async () => {
     setLoading(true);
     policy.property = '';
-    policy.value= '';
+    policy.value = '';
     setLoading(false);
   };
 
@@ -118,16 +110,22 @@ const PoliciesAdd: React.FC = () => {
           <Form.Group controlId='formItemName'>
             <Form.Label>Property</Form.Label>
             <Form.Control as='select'
-                              value={policy.property}
-                              onChange={handleChangeProperty}
-                              title='Please select the payment method.'
-                              required
-                              size='lg'>
-                  <option>Select</option>
-                  {methodList?.map((method, index) => (
-                    <option>{method}</option>
-                  ))}
-                </Form.Control>
+                          value={policy.property}
+                          onChange={handleChangeProperty}
+                          title='Please select the payment method.'
+                          required
+                          size='lg'>
+              <option>Select</option>
+              {
+                methodList?.map((method) => (
+                  <option>
+                    {
+                      method
+                    }
+                  </option>
+                ))
+              }
+            </Form.Control>
           </Form.Group>
         </Form.Row>
         <Form.Row>
@@ -143,7 +141,6 @@ const PoliciesAdd: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
         {
           loading && (
             <Spinner animation='border'

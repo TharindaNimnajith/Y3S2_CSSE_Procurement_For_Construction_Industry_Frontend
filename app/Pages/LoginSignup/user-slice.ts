@@ -8,9 +8,9 @@ const setUsersSlice = createSlice({
     editUser: false,
     editingUserId: '',
     editingUser: null,
-    login:false,
-    userType:'',
-    userName:''
+    login: false,
+    userType: '',
+    userName: ''
   },
   reducers: {
     setUsers: (state, action: any) => {
@@ -45,8 +45,8 @@ export const { setExistingUser } = setUsersSlice.actions;
 export const { setEditUser } = setUsersSlice.actions;
 export const { setEditingUserId } = setUsersSlice.actions;
 export const { setEditingUser } = setUsersSlice.actions;
-export const {setLogin } = setUsersSlice.actions;
-export const {setUserType } = setUsersSlice.actions;
-export const { setUserName} = setUsersSlice.actions;
+export const { setLogin } = setUsersSlice.actions;
+export const { setUserType } = setUsersSlice.actions;
+export const { setUserName } = setUsersSlice.actions;
 
 export default setUsersSlice.reducer;

@@ -41,11 +41,11 @@ export default function Routes() {
                component={InventoryPage} />
         <Route path={routes.INVENTORIES}
                component={InventoriesPage} />
-               <Route path={routes.NEWUSERS}
+        <Route path={routes.NEW_USERS}
                component={NewUsersPage} />
-                 <Route path={routes.USER}
+        <Route path={routes.USER}
                component={UsersPage} />
-                <Route path={routes.POLICY}
+        <Route path={routes.POLICY}
                component={PoliciesPage} />
         <Route path={routes.PURCHASE_ORDERS_FOR_APPROVING}
                component={PurchaseOrdersForApprovingPage} />
@@ -71,7 +71,6 @@ export default function Routes() {
                component={RejectedOrdersSupList} />
         <Route path={routes.GENERATE_INVOICE}
                component={GenerateInvoice} />
-
         <Route path={routes.HOME}
                component={HomePage} />
       </Switch>

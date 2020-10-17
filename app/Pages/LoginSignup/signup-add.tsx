@@ -1,65 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { FaPlusCircle } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { setEditingUser, setEditingUserId, setEditUser, setExistingUser, setUsers ,setLogin,setUserType,setUserName} from './user-slice';
 import routes from '../../constants/routes.json';
-import { Redirect } from 'react-router-dom';
+import { setExistingUser, setLogin, setUserName, setUserType } from './user-slice';
+
 let errors_: string = '';
-
-
 
 const Signup: React.FC = () => {
   const dispatch = useDispatch();
 
-  let userList = useSelector(
-    (state: {
-      users: any
-    }) => state.users.users
-  );
-
-  const existingUser = useSelector(
-    (state: {
-      users: any
-      existingUser: boolean
-    }) => state.users.existingUser
-  );
-
   const [loading, setLoading] = useState<boolean>(false);
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
   const [user, setUser] = useState<{
-    name:string,
-    address:string,
+    name: string,
+    address: string,
     email: string,
     password: string,
-    type:string,
-    typeDefault:boolean
-
+    type: string,
+    typeDefault: boolean
   }>({
-    name:'',
-    address:'',
+    name: '',
+    address: '',
     email: '',
     password: '',
-    type:'Procurement Staff',
-    typeDefault:true
-
+    type: 'Procurement Staff',
+    typeDefault: true
   });
-
-  const [isRestricted1 , setIsRestricted1] = useState<string>('False');
-
-
-  useEffect(() => {
-
-
-
-  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     await dispatch(setExistingUser(false));
-     if (user.name.trim() === '') {
+    if (user.name.trim() === '') {
       errors_ = 'Please enter a value for name.';
       await dispatch(setExistingUser(true));
       setLoading(false);
@@ -67,8 +42,7 @@ const Signup: React.FC = () => {
       errors_ = 'Please enter a value for address.';
       await dispatch(setExistingUser(true));
       setLoading(false);
-    }
-    else if (user.email.trim() === '') {
+    } else if (user.email.trim() === '') {
       errors_ = 'Please enter a value for email.';
       await dispatch(setExistingUser(true));
       setLoading(false);
@@ -78,8 +52,8 @@ const Signup: React.FC = () => {
       setLoading(false);
     }
 
-
-    if (user.email.trim() !== '' && user.password.trim() !== ''  && user.email.trim() !== '' && user.password.trim() !== '' ) {
+    if (user.email.trim() !== '' && user.password.trim() !== ''
+      && user.email.trim() !== '' && user.password.trim() !== '') {
       try {
         const response = await fetch(`${proxy}/user/signup`, {
           method: 'POST',
@@ -89,33 +63,18 @@ const Signup: React.FC = () => {
           body: JSON.stringify(user)
         });
         const responseData = await response.json();
-
-
-         console.log(responseData)
-
-        if(responseData.login === 1){
+        if (responseData.login === 1) {
           await dispatch(setLogin(true));
           await dispatch(setUserType(responseData.type));
           await dispatch(setUserName(responseData.name));
-          console.log(responseData.login);
-          console.log(responseData.name);
-          console.log(responseData.message);
           setRenderRedirectTo(true);
-
         }
-
-        if(responseData.login === 0){
+        if (responseData.login === 0) {
           errors_ = responseData.message;
           await dispatch(setLogin(false));
           await dispatch(setUserType(''));
           await dispatch(setUserName(''));
-          console.log(responseData.login);
-          console.log(responseData.message);
-
         }
-
-
-
         await resetValues();
         setLoading(false);
       } catch (errors) {
@@ -133,13 +92,12 @@ const Signup: React.FC = () => {
     setLoading(false);
   };
 
-  const handleChangeAddress= (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     setUser({ ...user, address: e.target.value });
     dispatch(setExistingUser(false));
     setLoading(false);
   };
-
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
@@ -155,22 +113,14 @@ const Signup: React.FC = () => {
     setLoading(false);
   };
 
-
-
-
-
-
   const resetValues = async () => {
     setLoading(true);
-
-    user.name= '';
-    user.address= '';
-    user.email= '';
-    user.password= '';
-
+    user.name = '';
+    user.address = '';
+    user.email = '';
+    user.password = '';
     setLoading(false);
   };
-
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
@@ -180,21 +130,17 @@ const Signup: React.FC = () => {
   };
 
   return (
-
     <div style={{
       borderRadius: '8px',
       padding: '3% 9% 3% 9%',
       border: '2px solid #007bff',
       maxWidth: 'fit-content'
     }}>
-{renderRedirect()}
-
+      {renderRedirect()}
       <Form>
-
         <Form.Row style={{
           marginTop: '5%'
         }}>
-
           <Form.Group controlId='formRoomName'>
             <Form.Label>Name</Form.Label>
             <Form.Control type="text"
@@ -206,9 +152,8 @@ const Signup: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
         <Form.Row>
-        <Form.Group controlId='formRoomName'>
+          <Form.Group controlId='formRoomName'>
             <Form.Label>Address</Form.Label>
             <Form.Control type="text"
                           value={user.address}
@@ -219,9 +164,8 @@ const Signup: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
         <Form.Row>
-        <Form.Group controlId='formRoomName'>
+          <Form.Group controlId='formRoomName'>
             <Form.Label>Email</Form.Label>
             <Form.Control type="email"
                           value={user.email}
@@ -232,8 +176,6 @@ const Signup: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
-
         <Form.Row>
           <Form.Group controlId='formRoomName'>
             <Form.Label>Password</Form.Label>
@@ -246,10 +188,6 @@ const Signup: React.FC = () => {
                           size='lg' />
           </Form.Group>
         </Form.Row>
-
-
-
-
         {
           loading && (
             <Spinner animation='border'

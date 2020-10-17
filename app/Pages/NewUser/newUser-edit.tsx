@@ -1,84 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
-import { FaPlusCircle } from 'react-icons/fa';
-import { proxy } from '../../conf';
-import { setEditingUser, setEditingUserId, setEditUser, setExistingUser, setUsers ,setLogin,setUserType,setUserName} from './newUser-slice';
-import routes from '../../constants/routes.json';
-import { Redirect } from 'react-router-dom';
 import { FaArrowAltCircleLeft, FaEdit } from 'react-icons/fa';
+import { proxy } from '../../conf';
+import { setEditingUser, setEditingUserId, setEditUser, setExistingUser, setUsers } from './newUser-slice';
+
 let errors_: string = '';
 
-const usersList = ['Procurement Staff', 'Supplier','Delivery Manager','Site Manager'];
+const usersList = [
+  'Procurement Staff',
+  'Supplier',
+  'Delivery Manager',
+  'Site Manager'
+];
 
 const NewUserEdit: React.FC = () => {
   const dispatch = useDispatch();
 
-
-
   let userList = useSelector(
     (state: {
-      newusers: any
-    }) => state.newusers.users
+      newUsers: any
+    }) => state.newUsers.users
   );
 
   const existingUser = useSelector(
     (state: {
-      newusers: any
+      newUsers: any
       existingUser: boolean
-    }) => state.newusers.existingUser
+    }) => state.newUsers.existingUser
   );
-
-
-
 
   const editingUserId = useSelector(
     (state: {
-      newusers: any
+      newUsers: any
       editingUserId: string
-    }) => state.newusers.editingUserId
+    }) => state.newUsers.editingUserId
   );
 
   const editingUser = useSelector(
     (state: {
-      newusers: any
+      newUsers: any
       editingUser: any
-    }) => state.newusers.editingUser
+    }) => state.newUsers.editingUser
   );
+
   const [loading, setLoading] = useState<boolean>(false);
-  const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
   const [user, setUser] = useState<{
-    name:string,
-    address:string,
+    name: string,
+    address: string,
     email: string,
     password: string,
-    type:string,
-    typeDefault:boolean
-
+    type: string,
+    typeDefault: boolean
   }>({
-    name:'',
-    address:'',
+    name: '',
+    address: '',
     email: '',
     password: '',
-    type:'',
-    typeDefault:true
-
+    type: '',
+    typeDefault: true
   });
-
-  const [isRestricted1 , setIsRestricted1] = useState<string>('False');
-
 
   useEffect(() => {
     setUser(editingUser);
-
   }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-
     await dispatch(setExistingUser(false));
-     if (user.name.trim() === '') {
+    if (user.name.trim() === '') {
       errors_ = 'Please enter a value for name.';
       await dispatch(setExistingUser(true));
       setLoading(false);
@@ -86,8 +77,7 @@ const NewUserEdit: React.FC = () => {
       errors_ = 'Please enter a value for address.';
       await dispatch(setExistingUser(true));
       setLoading(false);
-    }
-    else if (user.email.trim() === '') {
+    } else if (user.email.trim() === '') {
       errors_ = 'Please enter a value for email.';
       await dispatch(setExistingUser(true));
       setLoading(false);
@@ -100,10 +90,8 @@ const NewUserEdit: React.FC = () => {
       await dispatch(setExistingUser(true));
       setLoading(false);
     }
-
-
-    if (user.email.trim() !== '' && user.password.trim() !== ''  && user.email.trim() !== '' && user.password.trim() !== '' && user.type.trim() !== '' ) {
-
+    if (user.email.trim() !== '' && user.password.trim() !== '' && user.email.trim() !== ''
+      && user.password.trim() !== '' && user.type.trim() !== '') {
       const finalObject = {
         users: user,
         id: editingUserId
@@ -131,12 +119,9 @@ const NewUserEdit: React.FC = () => {
           await dispatch(setEditingUserId(''));
           await dispatch(setEditingUser(null));
         }
-
-        if(responseData.login === 0){
+        if (responseData.login === 0) {
           errors_ = responseData.message;
-
         }
-
         setLoading(false);
       } catch (errors) {
         errors_ = errors;
@@ -153,13 +138,12 @@ const NewUserEdit: React.FC = () => {
     setLoading(false);
   };
 
-  const handleChangeAddress= (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     setUser({ ...user, address: e.target.value });
     dispatch(setExistingUser(false));
     setLoading(false);
   };
-
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
@@ -182,7 +166,6 @@ const NewUserEdit: React.FC = () => {
     setLoading(false);
   };
 
-
   const handleBack = async () => {
     setLoading(true);
     await dispatch(setEditUser(false));
@@ -200,81 +183,72 @@ const NewUserEdit: React.FC = () => {
       maxWidth: 'fit-content'
     }}>
       <Form>
-
-<Form.Row style={{
-  marginTop: '5%'
-}}>
-
-  <Form.Group controlId='formRoomName'>
-    <Form.Label>Name</Form.Label>
-    <Form.Control type="text"
-                  value={user.name}
-                  onChange={handleChangeName}
-                  placeholder='Enter Your Name'
-                  title='Please enter a valid name.'
-                  required
-                  size='lg' />
-  </Form.Group>
-</Form.Row>
-
-<Form.Row>
-<Form.Group controlId='formRoomName'>
-    <Form.Label>Address</Form.Label>
-    <Form.Control type="text"
-                  value={user.address}
-                  onChange={handleChangeAddress}
-                  placeholder='Enter Your Address'
-                  title='Please enter a valid address.'
-                  required
-                  size='lg' />
-  </Form.Group>
-</Form.Row>
-
-<Form.Row>
-<Form.Group controlId='formRoomName'>
-    <Form.Label>Email</Form.Label>
-    <Form.Control type="email"
-                  value={user.email}
-                  onChange={handleChangeEmail}
-                  placeholder='Enter Your Email'
-                  title='Please enter a valid email.'
-                  disabled
-                  size='lg' />
-  </Form.Group>
-</Form.Row>
-
-
-<Form.Row>
-  <Form.Group controlId='formRoomName'>
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password"
-                  value={user.password}
-                  onChange={handleChangePassword}
-                  placeholder='Enter Your Password'
-                  title='Please enter a valid password.'
-                  required
-                  size='lg' />
-  </Form.Group>
-</Form.Row>
-
-<Form.Row>
-  <Form.Group controlId='formRoomName'>
-    <Form.Label>User Category</Form.Label>
-    <Form.Control as='select'
-                      value={user.type}
-                      onChange={handleChangeType}
-                      title='Please select the type.'
-                      required
-                      size='lg'>
-          <option>Select</option>
-          {usersList?.map((user, index) => (
-            <option>{user}</option>
-          ))}
-        </Form.Control>
-  </Form.Group>
-</Form.Row>
-
-
+        <Form.Row style={{
+          marginTop: '5%'
+        }}>
+          <Form.Group controlId='formRoomName'>
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="text"
+                          value={user.name}
+                          onChange={handleChangeName}
+                          placeholder='Enter Your Name'
+                          title='Please enter a valid name.'
+                          required
+                          size='lg' />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group controlId='formRoomName'>
+            <Form.Label>Address</Form.Label>
+            <Form.Control type="text"
+                          value={user.address}
+                          onChange={handleChangeAddress}
+                          placeholder='Enter Your Address'
+                          title='Please enter a valid address.'
+                          required
+                          size='lg' />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group controlId='formRoomName'>
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email"
+                          value={user.email}
+                          onChange={handleChangeEmail}
+                          placeholder='Enter Your Email'
+                          title='Please enter a valid email.'
+                          disabled
+                          size='lg' />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group controlId='formRoomName'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password"
+                          value={user.password}
+                          onChange={handleChangePassword}
+                          placeholder='Enter Your Password'
+                          title='Please enter a valid password.'
+                          required
+                          size='lg' />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group controlId='formRoomName'>
+            <Form.Label>User Category</Form.Label>
+            <Form.Control as='select'
+                          value={user.type}
+                          onChange={handleChangeType}
+                          title='Please select the type.'
+                          required
+                          size='lg'>
+              <option>Select</option>
+              {usersList?.map((user) => (
+                <option>{user}</option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+        </Form.Row>
         {
           loading && (
             <Spinner animation='border'
@@ -321,7 +295,7 @@ const NewUserEdit: React.FC = () => {
           </Form.Group>
         </Form.Row>
         {
-         existingUser && errors_ && (
+          existingUser && errors_ && (
             <div style={{
               color: 'red',
               fontSize: '18px',

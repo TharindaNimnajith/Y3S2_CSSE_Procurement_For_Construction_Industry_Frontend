@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
 import { FaBan, FaCheck } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { Redirect } from 'react-router-dom';
-import NavBar from '../../components/NavBar/NavBar';
 import routes from '../../constants/routes.json';
-import { useDispatch, useSelector } from 'react-redux';
+import NavBar from '../../components/NavBar/NavBar';
 import {
   setEditingOrderSup,
   setEditingOrderSupId,
@@ -14,10 +14,10 @@ import {
   setOrderSup
 } from './orderSup-slice';
 
-const OrdersForSupplingList: React.FC = () => {
+const OrdersForSupplyingList: React.FC = () => {
   const dispatch = useDispatch();
 
-  var login = useSelector(
+  let login = useSelector(
     (state: {
       users: any
       login: boolean
@@ -25,18 +25,15 @@ const OrdersForSupplingList: React.FC = () => {
   );
 
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
-
   const [loading, setLoading] = useState<boolean>(false);
   const [showApproved, setShowApproved] = useState<boolean>(false);
   const [showRejected, setShowRejected] = useState<boolean>(false);
   const [orderId, setOrderId] = useState<string>('');
   const [id, setId] = useState<string>('');
   const [order, setOrder] = useState({});
-
   const [orders, setOrdersList] = useState<any>([]);
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
   const [renderRedirectTo1, setRenderRedirectTo1] = useState<boolean | null>(false);
-
 
   const getOrders = async () => {
     try {
@@ -50,8 +47,6 @@ const OrdersForSupplingList: React.FC = () => {
       });
       const responseData = await response.json();
       setOrdersList(responseData);
-
-
       setLoading(false);
     } catch (errors) {
       setLoading(false);
@@ -62,12 +57,10 @@ const OrdersForSupplingList: React.FC = () => {
   useEffect(() => {
     getOrders().then(() => {
     });
-
-    console.log(login);
-    if(!login){
+    if (!login) {
       setRenderRedirectToLogin(true);
     }
-  }, [orders,login]);
+  }, [orders, login]);
 
   const handleApproved = async () => {
     console.log(order);
@@ -160,7 +153,7 @@ const OrdersForSupplingList: React.FC = () => {
 
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
-      return <Redirect to={routes.USER}/>;
+      return <Redirect to={routes.USER} />;
     }
     return null;
   };
@@ -181,7 +174,7 @@ const OrdersForSupplingList: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Orders for Suppling</h1>
+          <h1>Orders for Supplying</h1>
         </Col>
       </Row>
       <div className='container'>
@@ -195,7 +188,7 @@ const OrdersForSupplingList: React.FC = () => {
               <Modal.Header closeButton>
                 <Modal.Title>Confirm Delivery</Modal.Title>
               </Modal.Header>
-              <Modal.Body>Are you sure you want to confrim this order?</Modal.Body>
+              <Modal.Body>Are you sure you want to confirm this order?</Modal.Body>
               <Modal.Footer>
                 <Button variant='success'
                         onClick={handleClose}
@@ -307,8 +300,6 @@ const OrdersForSupplingList: React.FC = () => {
               }}>
                 Amount
               </th>
-
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -329,7 +320,6 @@ const OrdersForSupplingList: React.FC = () => {
               }}>
                 Requested Date
               </th>
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -340,7 +330,6 @@ const OrdersForSupplingList: React.FC = () => {
               }}>
                 Site
               </th>
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -351,7 +340,6 @@ const OrdersForSupplingList: React.FC = () => {
               }}>
                 Vendor Name
               </th>
-
               <th colSpan={2}
                   style={{
                     borderBottom: 'solid darkblue 1px',
@@ -404,8 +392,6 @@ const OrdersForSupplingList: React.FC = () => {
                       }}>
                         {order.siteManager}
                       </td>
-
-
                       <td style={{
                         textAlign: 'center'
                       }}>
@@ -443,4 +429,4 @@ const OrdersForSupplingList: React.FC = () => {
   );
 };
 
-export default OrdersForSupplingList;
+export default OrdersForSupplyingList;

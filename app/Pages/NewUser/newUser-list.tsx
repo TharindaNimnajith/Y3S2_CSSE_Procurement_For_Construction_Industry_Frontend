@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Modal, Spinner, Table } from 'react-bootstrap';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { setEditingUser, setEditingUserId, setEditUser, setExistingUser, setUsers ,setLogin,setUserType,setUserName} from './newUser-slice';
+import { setEditingUser, setEditingUserId, setEditUser, setExistingUser } from './newUser-slice';
 
 let errors_: string = '';
 
@@ -210,7 +210,6 @@ const NewUsersList: React.FC = () => {
           }}>
             User Type
           </th>
-
           <th colSpan={2}
               style={{
                 borderBottom: 'solid darkblue 1px',
@@ -253,7 +252,6 @@ const NewUsersList: React.FC = () => {
                   }}>
                     {user.type}
                   </td>
-
                   <td style={{
                     textAlign: 'center'
                   }}>

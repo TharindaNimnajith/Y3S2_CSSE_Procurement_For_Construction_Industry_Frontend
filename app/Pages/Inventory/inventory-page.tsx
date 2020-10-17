@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
+import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
 import InventoryList from './inventory-list';
-import { useDispatch, useSelector } from 'react-redux';
-import routes from '../../constants/routes.json';
-import {Redirect} from 'react-router-dom';
 
 const InventoryPage: React.FC = () => {
-  var login = useSelector(
+  let login = useSelector(
     (state: {
       users: any
       login: boolean
@@ -17,15 +17,14 @@ const InventoryPage: React.FC = () => {
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
 
   useEffect(() => {
-    console.log(login);
-    if(!login){
+    if (!login) {
       setRenderRedirectToLogin(true);
     }
   }, [login]);
 
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
-      return <Redirect to={routes.USER}/>;
+      return <Redirect to={routes.USER} />;
     }
     return null;
   };
@@ -36,7 +35,7 @@ const InventoryPage: React.FC = () => {
       overflowX: 'hidden',
       marginBottom: '3%'
     }}>
-            {renderRedirectLogin()}
+      {renderRedirectLogin()}
       <NavBar />
       <Row className='text-center mb-5'>
         <Col className='p-3'
