@@ -20,6 +20,8 @@ import GenerateInvoice from './Pages/Supplier/generateInvoice';
 import PoliciesPage from './Pages/Policy/policy-page';
 import UsersPage from './Pages/LoginSignup/user-page';
 import NewUsersPage from './Pages/NewUser/newUser-page';
+import SitesPage from './Pages/Site/site-page';
+import PurchaseOrdersPage from './Pages/PurchaseOrdersForApproving/purchase-orders-page';
 
 const LazyCounterPage = React.lazy(() =>
   import('./containers/HomePage')
@@ -71,6 +73,10 @@ export default function Routes() {
                component={RejectedOrdersSupList} />
         <Route path={routes.GENERATE_INVOICE}
                component={GenerateInvoice} />
+        <Route path={routes.SITE}
+               component={SitesPage} />
+        <Route path={routes.ORDER}
+               component={PurchaseOrdersPage} />
         <Route path={routes.HOME}
                component={HomePage} />
       </Switch>

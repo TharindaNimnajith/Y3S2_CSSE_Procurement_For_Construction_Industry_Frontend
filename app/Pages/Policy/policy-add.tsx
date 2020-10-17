@@ -7,7 +7,10 @@ import { setExistingPolicy, setPolicies } from './policy-slice';
 
 let errors_: string = '';
 
-const methodList = ['Approval Amount'];
+const methodList = [
+  'Approval Amount'
+];
+
 const PoliciesAdd: React.FC = () => {
   const dispatch = useDispatch();
 

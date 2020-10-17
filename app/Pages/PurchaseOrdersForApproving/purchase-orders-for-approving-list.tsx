@@ -289,7 +289,7 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
-            Notes
+            Site Manager Notes
           </th>
           <th colSpan={2}
               style={{

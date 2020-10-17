@@ -228,8 +228,8 @@ const NavBar: React.FC = () => {
                   User Management
                 </Nav.Link>
               </NavLink>
-              <NavLink to={routes.INVENTORY}>
-                <Nav.Link href='#inventory'>
+              <NavLink to={routes.SITE}>
+                <Nav.Link href='#site'>
                   Site Management
                 </Nav.Link>
               </NavLink>
@@ -243,8 +243,8 @@ const NavBar: React.FC = () => {
                   Inventories
                 </Nav.Link>
               </NavLink>
-              <NavLink to={routes.INVENTORY}>
-                <Nav.Link href='#inventory'>
+              <NavLink to={routes.ORDER}>
+                <Nav.Link href='#order'>
                   Purchase Orders
                 </Nav.Link>
               </NavLink>
@@ -351,8 +351,8 @@ const NavBar: React.FC = () => {
                   User Management
                 </Nav.Link>
               </NavLink>
-              <NavLink to={routes.INVENTORY}>
-                <Nav.Link href='#inventory'>
+              <NavLink to={routes.SITE}>
+                <Nav.Link href='#site'>
                   Site Management
                 </Nav.Link>
               </NavLink>
@@ -366,8 +366,8 @@ const NavBar: React.FC = () => {
                   Inventories
                 </Nav.Link>
               </NavLink>
-              <NavLink to={routes.INVENTORY}>
-                <Nav.Link href='#inventory'>
+              <NavLink to={routes.ORDER}>
+                <Nav.Link href='#order'>
                   Purchase Orders
                 </Nav.Link>
               </NavLink>

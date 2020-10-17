@@ -18,5 +18,7 @@
   "INVENTORIES": "/inventories",
   "NEW_USERS": "/newUsers",
   "POLICY": "/policy",
-  "USER": "/user"
+  "USER": "/user",
+  "SITE": "/site",
+  "ORDER": "/order"
 }

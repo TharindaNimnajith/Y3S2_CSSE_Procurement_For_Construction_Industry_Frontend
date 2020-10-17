@@ -3,28 +3,28 @@ import { useDispatch } from 'react-redux';
 import { Button, Modal, Spinner, Table } from 'react-bootstrap';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { proxy } from '../../conf';
-import { setEditingPolicy, setEditingPolicyId, setEditPolicy, setExistingPolicy } from './policy-slice';
+import { setEditingSite, setEditingSiteId, setEditSite, setExistingSite } from './site-slice';
 
 let errors_: string = '';
 
-const PoliciesList: React.FC = () => {
+const SitesList: React.FC = () => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [deleteId, setDeleteId] = useState<string>('');
-  const [policies, setPolicyList] = useState<any>([]);
+  const [sites, setSiteList] = useState<any>([]);
 
-  const getPolicy = async () => {
+  const getSite = async () => {
     try {
-      const response = await fetch(`${proxy}/policy/getPolicies`, {
+      const response = await fetch(`${proxy}/site/getSites`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
       });
       const responseData = await response.json();
-      setPolicyList(responseData);
+      setSiteList(responseData);
     } catch (errors) {
       errors_ = errors;
       console.log(errors);
@@ -32,9 +32,9 @@ const PoliciesList: React.FC = () => {
   };
 
   useEffect(() => {
-    getPolicy().then(() => {
+    getSite().then(() => {
     });
-  }, [policies]);
+  }, [sites]);
 
   const handleClose = () => {
     setLoading(true);
@@ -44,7 +44,7 @@ const PoliciesList: React.FC = () => {
 
   const handleDelete = () => {
     setLoading(true);
-    deletePolicy(deleteId).then(() => setShow(false));
+    deleteSite(deleteId).then(() => setShow(false));
     setLoading(false);
   };
 
@@ -55,20 +55,20 @@ const PoliciesList: React.FC = () => {
     setLoading(false);
   };
 
-  const editPolicy = async (id: string) => {
+  const editSite = async (id: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`${proxy}/policy/getPolicies/` + id, {
+      const response = await fetch(`${proxy}/site/getSites/` + id, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
       });
       const responseData = await response.json();
-      await dispatch(setExistingPolicy(false));
-      await dispatch(setEditingPolicyId(id));
-      await dispatch(setEditingPolicy(responseData));
-      await dispatch(setEditPolicy(true));
+      await dispatch(setExistingSite(false));
+      await dispatch(setEditingSiteId(id));
+      await dispatch(setEditingSite(responseData));
+      await dispatch(setEditSite(true));
       setLoading(false);
     } catch (errors) {
       errors_ = errors;
@@ -77,10 +77,10 @@ const PoliciesList: React.FC = () => {
     }
   };
 
-  const deletePolicy = async (id: string) => {
+  const deleteSite = async (id: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`${proxy}/policy/deletePolicies`, {
+      const response = await fetch(`${proxy}/site/deleteSites`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -90,8 +90,8 @@ const PoliciesList: React.FC = () => {
         })
       });
       await response.json();
-      await dispatch(setEditPolicy(false));
-      await dispatch(setExistingPolicy(false));
+      await dispatch(setEditSite(false));
+      await dispatch(setExistingSite(false));
       setLoading(false);
     } catch (errors) {
       errors_ = errors;
@@ -107,9 +107,9 @@ const PoliciesList: React.FC = () => {
                onHide={handleClose}
                deleteId={deleteId}>
           <Modal.Header closeButton>
-            <Modal.Title>Delete Policy</Modal.Title>
+            <Modal.Title>Delete Site</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Are you sure you want to delete this policy?</Modal.Body>
+          <Modal.Body>Are you sure you want to delete this site?</Modal.Body>
           <Modal.Footer>
             <Button variant='success'
                     onClick={handleClose}
@@ -156,7 +156,7 @@ const PoliciesList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
-            Policy Id
+            Site Id
           </th>
           <th style={{
             borderBottom: 'solid darkblue 1px',
@@ -167,7 +167,7 @@ const PoliciesList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
-            Property
+            Site Name
           </th>
           <th style={{
             borderBottom: 'solid darkblue 1px',
@@ -178,7 +178,7 @@ const PoliciesList: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
-            Value
+            Site Manager
           </th>
           <th colSpan={2}
               style={{
@@ -189,28 +189,28 @@ const PoliciesList: React.FC = () => {
           </thead>
           <tbody>
           {
-            policies.policies && policies.policies.map((policy: any) => {
+            sites.sites && sites.sites.map((site: any) => {
               return (
-                <tr key={policy._id}>
+                <tr key={site._id}>
                   <td style={{
                     textAlign: 'center'
                   }}>
-                    {policy.policyId}
+                    {site.siteId}
                   </td>
                   <td style={{
                     textAlign: 'center'
                   }}>
-                    {policy.property}
+                    {site.siteName}
                   </td>
                   <td style={{
                     textAlign: 'center'
                   }}>
-                    {policy.value}
+                    {site.siteManager}
                   </td>
                   <td style={{
                     textAlign: 'center'
                   }}>
-                    <button onClick={() => editPolicy(policy._id)}
+                    <button onClick={() => editSite(site._id)}
                             style={{
                               color: 'darkgreen',
                               backgroundColor: 'transparent',
@@ -222,7 +222,7 @@ const PoliciesList: React.FC = () => {
                   <td style={{
                     textAlign: 'center'
                   }}>
-                    <button onClick={() => handleShow(policy._id)}
+                    <button onClick={() => handleShow(site._id)}
                             style={{
                               color: 'indianred',
                               backgroundColor: 'transparent',
@@ -256,4 +256,4 @@ const PoliciesList: React.FC = () => {
   );
 };
 
-export default PoliciesList;
+export default SitesList;

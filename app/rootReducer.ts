@@ -7,6 +7,7 @@ import inventoriesReducer from './Pages/InventoryM/inventory-slice';
 import policiesReducer from './Pages/Policy/policy-slice';
 import usersReducer from './Pages/LoginSignup/user-slice';
 import newUsersReducer from './Pages/NewUser/newUser-slice';
+import siteReducer from './Pages/Site/site-slice';
 
 export default function createRootReducer(history: History) {
   return combineReducers({
@@ -16,6 +17,7 @@ export default function createRootReducer(history: History) {
     inventories: inventoriesReducer,
     policies: policiesReducer,
     users: usersReducer,
-    newUsers: newUsersReducer
+    newUsers: newUsersReducer,
+    sites: siteReducer
   });
 }
