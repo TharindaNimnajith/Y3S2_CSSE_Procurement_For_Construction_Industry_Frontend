@@ -28,8 +28,8 @@ const NavBar: React.FC = () => {
     dispatch(setUserName(''));
   };
 
-  // for development and testing purposes only
-  // please comment out next 3 lines when building for production
+  // Next 3 lines are for development and testing purposes only.
+  // Comment them out when building for production environments.
   // dispatch(setLogin(true));
   // user = 'Test';
   // login = true;
@@ -300,14 +300,9 @@ const NavBar: React.FC = () => {
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='mr-auto float-left'
                  style={{
-                   height: '100vh'
+                   height: '130vh'
                  }}>
               <br />
-              <NavLink to={routes.USER}>
-                <Nav.Link href='#users'>
-                  Sign In
-                </Nav.Link>
-              </NavLink>
               <NavLink to={routes.HOME_PAGE}>
                 <Nav.Link href='#home'>
                   Home
@@ -316,6 +311,11 @@ const NavBar: React.FC = () => {
               <Nav.Link onClick={handleLogout}>
                 Sign Out
               </Nav.Link>
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
+                </Nav.Link>
+              </NavLink>
               <NavLink to={routes.INVENTORIES}>
                 <Nav.Link href='#inventorys'>
                   Inventory Management
@@ -336,6 +336,14 @@ const NavBar: React.FC = () => {
                   Rejected Purchase Orders
                 </Nav.Link>
               </NavLink>
+              <Nav.Link onClick={handleLogout}>
+                Sign Out
+              </Nav.Link>
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
+                </Nav.Link>
+              </NavLink>
               <NavLink to={routes.PENDING_SUP_LIST}>
                 <Nav.Link href='#pendingSUP'>
                   Pending Purchase Orders
@@ -351,14 +359,22 @@ const NavBar: React.FC = () => {
                   Rejected Purchase Orders
                 </Nav.Link>
               </NavLink>
-              <NavLink to={routes.REJECTED_SUP_LIST}>
-                <Nav.Link href='#rejectedSUP'>
+              <NavLink to={routes.CONFIRMED_DM_LIST_SUP}>
+                <Nav.Link href='#confirmedDMSupplier'>
+                  Completed Purchase Orders
+                </Nav.Link>
+              </NavLink>
+              <NavLink to={routes.REJECTED_DM_LIST_SUP}>
+                <Nav.Link href='#rejectedDMSupplier'>
                   Returned Purchase Orders
                 </Nav.Link>
               </NavLink>
-              <NavLink to={routes.REJECTED_SUP_LIST}>
-                <Nav.Link href='#rejectedSUP'>
-                  Payment Received Orders
+              <Nav.Link onClick={handleLogout}>
+                Sign Out
+              </Nav.Link>
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.PENDING_DM_LIST}>
@@ -368,22 +384,30 @@ const NavBar: React.FC = () => {
               </NavLink>
               <NavLink to={routes.CONFIRMED_DM_LIST}>
                 <Nav.Link href='#confirmedDM'>
-                  Confirmed Purchase Orders
+                  Completed Purchase Orders
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.REJECTED_DM_LIST}>
                 <Nav.Link href='#rejectedDM'>
-                  Rejected Purchase Orders
+                  Returned Purchase Orders
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.PAYMENT_LIST}>
                 <Nav.Link href='#paymentList'>
-                  Payments Management
+                  Payments
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.INVENTORY}>
                 <Nav.Link href='#inventory'>
                   Inventories
+                </Nav.Link>
+              </NavLink>
+              <Nav.Link onClick={handleLogout}>
+                Sign Out
+              </Nav.Link>
+              <NavLink to={routes.HOME_PAGE}>
+                <Nav.Link href='#home'>
+                  Home
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.NEW_USERS}>
@@ -401,6 +425,11 @@ const NavBar: React.FC = () => {
                   Policy Management
                 </Nav.Link>
               </NavLink>
+              <NavLink to={routes.PAYMENT_LIST}>
+                <Nav.Link href='#paymentList'>
+                  Payments Management
+                </Nav.Link>
+              </NavLink>
               <NavLink to={routes.INVENTORY}>
                 <Nav.Link href='#inventory'>
                   Inventories
@@ -409,6 +438,14 @@ const NavBar: React.FC = () => {
               <NavLink to={routes.ORDER}>
                 <Nav.Link href='#order'>
                   Purchase Orders
+                </Nav.Link>
+              </NavLink>
+              <Nav.Link onClick={handleLogout}>
+                Sign Out
+              </Nav.Link>
+              <NavLink to={routes.USER}>
+                <Nav.Link href='#users'>
+                  Sign In
                 </Nav.Link>
               </NavLink>
             </Nav>
