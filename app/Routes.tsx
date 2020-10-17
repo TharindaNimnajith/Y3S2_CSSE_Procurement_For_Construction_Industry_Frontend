@@ -17,7 +17,7 @@ import OrdersForSupplyingList from './Pages/Supplier/orders-for-suppling-list';
 import DeliveredOrdersSupList from './Pages/Supplier/delivered-orders-sup-list';
 import RejectedOrdersSupList from './Pages/Supplier/rejected-orders-sup-list';
 import GenerateInvoice from './Pages/Supplier/generateInvoice';
-import Policy from './Pages/Policies/policies';
+import PoliciesPage from './Pages/Policy/policy-page';
 import UsersPage from './Pages/LoginSignup/user-page';
 import NewUsersPage from './Pages/NewUser/newUser-page';
 
@@ -45,6 +45,8 @@ export default function Routes() {
                component={NewUsersPage} />
                  <Route path={routes.USER}
                component={UsersPage} />
+                <Route path={routes.POLICY}
+               component={PoliciesPage} />
         <Route path={routes.PURCHASE_ORDERS_FOR_APPROVING}
                component={PurchaseOrdersForApprovingPage} />
         <Route path={routes.CONFIRMED_PS_LIST}
@@ -69,8 +71,7 @@ export default function Routes() {
                component={RejectedOrdersSupList} />
         <Route path={routes.GENERATE_INVOICE}
                component={GenerateInvoice} />
-        <Route path={routes.POLICY}
-               component={Policy} />
+
         <Route path={routes.HOME}
                component={HomePage} />
       </Switch>
