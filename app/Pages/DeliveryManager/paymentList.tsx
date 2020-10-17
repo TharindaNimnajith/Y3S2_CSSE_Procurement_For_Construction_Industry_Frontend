@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
-import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
-import { FaTrashAlt } from 'react-icons/fa';
+import { Col, Row, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { proxy } from '../../conf';
 import routes from '../../constants/routes.json';
@@ -16,17 +15,10 @@ const PaymentList: React.FC = () => {
   );
 
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [showApproved, setShowApproved] = useState<boolean>(false);
-  const [showRejected, setShowRejected] = useState<boolean>(false);
-  const [paymentId, setPaymentId] = useState<string>('');
-  const [id, setId] = useState<string>('');
-  const [pay, setPayment] = useState({});
   const [payments, setPaymentsList] = useState<any>([]);
 
   const getPayments = async () => {
     try {
-      setLoading(true);
       const response = await fetch(`${proxy}/payment/getPayments`, {
         method: 'GET',
         headers: {
@@ -36,9 +28,7 @@ const PaymentList: React.FC = () => {
       const responseData = await response.json();
       console.log(responseData);
       setPaymentsList(responseData.payments);
-      setLoading(false);
     } catch (errors) {
-      setLoading(false);
       console.log(errors);
     }
   };
@@ -50,41 +40,6 @@ const PaymentList: React.FC = () => {
       setRenderRedirectToLogin(true);
     }
   });
-
-  const deletePayment = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${proxy}/payment/deletePayments`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id })
-      });
-      await response.json();
-      setLoading(false);
-    } catch (errors) {
-      setLoading(false);
-      console.log(errors);
-    }
-    setShowApproved(false);
-  };
-
-  const handleClose = () => {
-    setLoading(true);
-    setShowApproved(false);
-    setShowRejected(false);
-    setLoading(false);
-  };
-
-  const handleShowApproved = (paymentId: string, id: string, payment: any) => {
-    setLoading(true);
-    setPaymentId(paymentId);
-    setId(id);
-    setPayment(payment);
-    setShowApproved(true);
-    setLoading(false);
-  };
 
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
@@ -107,7 +62,7 @@ const PaymentList: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Payment Details</h1>
+          <h1>Payments</h1>
         </Col>
       </Row>
       <div className='container'>
@@ -115,39 +70,6 @@ const PaymentList: React.FC = () => {
           <div style={{
             marginTop: '4%'
           }}>
-            <Modal show={showApproved}
-                   onHide={handleClose}
-                   paymentId={paymentId}>
-              <Modal.Header closeButton>
-                <Modal.Title>Delete Record</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>Are you sure you want to delete this record?</Modal.Body>
-              <Modal.Footer>
-                <Button variant='success'
-                        onClick={handleClose}
-                        style={{
-                          textTransform: 'uppercase'
-                        }}>
-                  No
-                </Button>
-                <Button variant='primary'
-                        onClick={deletePayment}
-                        style={{
-                          textTransform: 'uppercase'
-                        }}>
-                  Yes
-                </Button>
-              </Modal.Footer>
-              {
-                loading && (
-                  <Spinner animation='border'
-                           style={{
-                             textAlign: 'center',
-                             marginLeft: '50%'
-                           }} />
-                )
-              }
-            </Modal>
             <Table responsive
                    striped
                    bordered
@@ -168,7 +90,7 @@ const PaymentList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Payment ID
+                Payment Id
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -179,7 +101,7 @@ const PaymentList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Order ID
+                Order Id
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -189,7 +111,7 @@ const PaymentList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Invoice ID
+                Invoice Id
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -213,6 +135,7 @@ const PaymentList: React.FC = () => {
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
+                borderRight: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
                 textAlign: 'center',
                 fontSize: 'large',
@@ -221,13 +144,6 @@ const PaymentList: React.FC = () => {
               }}>
                 Payment Method
               </th>
-
-              <th
-                style={{
-                  borderBottom: 'solid darkblue 1px',
-                  borderRight: 'solid darkblue 1px',
-                  borderTop: 'solid darkblue 1px'
-                }} />
               </thead>
               <tbody>
               {
@@ -263,18 +179,6 @@ const PaymentList: React.FC = () => {
                         textAlign: 'center'
                       }}>
                         {payment.paymentMethod}
-                      </td>
-                      <td style={{
-                        textAlign: 'center'
-                      }}>
-                        <button onClick={() => handleShowApproved(payment.paymentId, payment._id, payment)}
-                                style={{
-                                  color: 'darkgreen',
-                                  backgroundColor: 'transparent',
-                                  border: 'none'
-                                }}>
-                          <FaTrashAlt size={20} />
-                        </button>
                       </td>
                     </tr>
                   );

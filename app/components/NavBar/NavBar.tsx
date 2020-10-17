@@ -210,7 +210,7 @@ const NavBar: React.FC = () => {
               </NavLink>
               <NavLink to={routes.PAYMENT_LIST}>
                 <Nav.Link href='#paymentList'>
-                  Payments Management
+                  Payments
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.INVENTORY}>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
-import { FaPlusCircle } from 'react-icons/fa';
 import { proxy } from '../../conf';
 import routes from '../../constants/routes.json';
 import { setExistingUser, setLogin, setUserName, setUserType } from './user-slice';
@@ -147,15 +146,11 @@ const Login: React.FC = () => {
                     type='submit'
                     onClick={handleSubmit}
                     style={{
-                      marginLeft: '65%',
-                      marginTop: '25%',
+                      marginLeft: '95%',
+                      marginTop: '30%',
                       fontSize: 'large',
                       textTransform: 'uppercase'
                     }}>
-              <FaPlusCircle style={{
-                marginRight: '4px',
-                marginBottom: '-2px'
-              }} />
               Sign In
             </Button>
           </Form.Group>

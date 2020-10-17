@@ -5,7 +5,7 @@ import { Button, Col, Form, Row, Spinner } from 'react-bootstrap';
 import { proxy } from '../../conf';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
-import { setEditOrderDM, setExistingOrderDM } from './orderDM-slice';
+import { setExistingOrderDM } from './orderDM-slice';
 
 let errors_: string = '';
 
@@ -24,13 +24,6 @@ const MakePayment: React.FC = () => {
     }) => state.users.login
   );
 
-  const editingOrderDMId = useSelector(
-    (state: {
-      orderDM: any
-      editingOrderDMId: string
-    }) => state.orderDM.editingOrderDMId
-  );
-
   const editingOrderDM = useSelector(
     (state: {
       orderDM: any
@@ -41,7 +34,6 @@ const MakePayment: React.FC = () => {
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
-  const [renderRedirectTo1, setRenderRedirectTo1] = useState<boolean | null>(false);
   const [paymentMethod, setPaymentMethod] = useState<string>('');
   const [order, setOrder] = useState<{
     orderId: number,
@@ -91,32 +83,10 @@ const MakePayment: React.FC = () => {
     setLoading(true);
     await dispatch(setExistingOrderDM(false));
     if (paymentMethod.trim() === '') {
-      errors_ = 'Please select a value for payment method';
+      errors_ = 'Please select a value for payment method.';
       await dispatch(setExistingOrderDM(true));
       setLoading(false);
     }
-    const finalObjectGroup = {
-      orderId: order.orderId,
-      purchaseDate: order.purchaseDate,
-      requestedDate: order.requestedDate,
-      deliveryDate: order.deliveryDate,
-      siteName: order.siteName,
-      siteManager: order.siteManager,
-      supplierName: order.supplierName,
-      itemId: order.itemId,
-      itemName: order.itemName,
-      itemQuantity: order.itemQuantity,
-      totPrice: order.totPrice,
-      isRestricted: order.isRestricted,
-      deliveryNote: order.deliveryNote,
-      status: 'paid',
-      invoiceId: order.invoiceId,
-      supplierAmount: order.supplierAmount
-    };
-    const finalObjectWithID = {
-      orders: finalObjectGroup,
-      id: editingOrderDMId
-    };
     const finalObject = {
       invoiceId: order.invoiceId,
       orderId: order.orderId,
@@ -126,27 +96,6 @@ const MakePayment: React.FC = () => {
     };
     if (paymentMethod.trim() !== '') {
       try {
-        await dispatch(setEditOrderDM(true));
-        const response = await fetch(`${proxy}/order/editOrders`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(finalObjectWithID)
-        });
-        const responseData = await response.json();
-        if (responseData.exists) {
-          errors_ = responseData.message;
-          await dispatch(setExistingOrderDM(true));
-        }
-        setRenderRedirectTo(true);
-        setLoading(false);
-      } catch (errors) {
-        errors_ = errors;
-        setLoading(false);
-        console.log(errors);
-      }
-      try {
         const response = await fetch(`${proxy}/payment/create`, {
           method: 'POST',
           headers: {
@@ -154,9 +103,8 @@ const MakePayment: React.FC = () => {
           },
           body: JSON.stringify(finalObject)
         });
-        const responseData = await response.json();
-        console.log(responseData);
-        setRenderRedirectTo1(true);
+        await response.json();
+        setRenderRedirectTo(true);
         setLoading(false);
       } catch (errors) {
         errors_ = errors;
@@ -174,7 +122,7 @@ const MakePayment: React.FC = () => {
   };
 
   const renderRedirect = () => {
-    if (renderRedirectTo && renderRedirectTo1) {
+    if (renderRedirectTo) {
       return <Redirect to={routes.PAYMENT_LIST} />;
     }
     return null;
@@ -202,22 +150,24 @@ const MakePayment: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Make Payment</h1>
+          <h1>Payment</h1>
         </Col>
       </Row>
       <div className='container'>
         <div style={{
           borderRadius: '8px',
-          padding: '3% 9% 3% 9%',
+          padding: '3% 7% 3% 7%',
           border: '2px solid #007bff',
-          maxWidth: 'fit-content'
+          maxWidth: 'fit-content',
+          marginLeft: '30%',
+          marginTop: '7%'
         }}>
           <Form>
             <Form.Row style={{
               marginTop: '5%'
             }}>
               <Form.Group controlId='formRoomName'>
-                <Form.Label>Invoice ID</Form.Label>
+                <Form.Label>Invoice Id</Form.Label>
                 <Form.Control disabled
                               type="text"
                               value={order.invoiceId}
@@ -226,7 +176,7 @@ const MakePayment: React.FC = () => {
             </Form.Row>
             <Form.Row>
               <Form.Group controlId='formLocatedBuilding'>
-                <Form.Label>Order ID</Form.Label>
+                <Form.Label>Order Id</Form.Label>
                 <Form.Control disabled
                               type="text"
                               value={order.orderId}
@@ -262,7 +212,7 @@ const MakePayment: React.FC = () => {
                               title='Please select the payment method.'
                               required
                               size='lg'>
-                  <option>Select</option>
+                  <option>Select Option</option>
                   {methodList?.map((method) => (
                     <option>{method}</option>
                   ))}
@@ -286,11 +236,11 @@ const MakePayment: React.FC = () => {
                         type='submit'
                         onClick={handleSubmit}
                         style={{
-                          marginLeft: '60%',
+                          marginLeft: '100%',
                           fontSize: 'large',
                           textTransform: 'uppercase'
                         }}>
-                  Make Payment
+                  Submit
                 </Button>
               </Form.Group>
             </Form.Row>

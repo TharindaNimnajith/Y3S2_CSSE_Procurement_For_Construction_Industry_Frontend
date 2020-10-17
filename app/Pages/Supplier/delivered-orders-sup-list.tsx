@@ -137,6 +137,26 @@ const DeliveredOrdersSupList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
+                Invoice Id
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Invoice Amount
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
                 Requested Date
               </th>
               <th style={{
@@ -148,6 +168,16 @@ const DeliveredOrdersSupList: React.FC = () => {
                 color: 'white'
               }}>
                 Required Date
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Supplied Date
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -198,12 +228,27 @@ const DeliveredOrdersSupList: React.FC = () => {
                       <td style={{
                         textAlign: 'center'
                       }}>
+                        {order.invoiceId}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.supplierAmount}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
                         {order.requestedDate}
                       </td>
                       <td style={{
                         textAlign: 'center'
                       }}>
                         {order.requiredDate}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.deliveryDate}
                       </td>
                       <td style={{
                         textAlign: 'center'

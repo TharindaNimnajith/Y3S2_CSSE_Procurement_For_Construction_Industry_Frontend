@@ -167,7 +167,7 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Orders for Delivery Confirmed</h1>
+          <h1>Pending Purchase Orders</h1>
         </Col>
       </Row>
       <div className='container'>
@@ -181,7 +181,7 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
               <Modal.Header closeButton>
                 <Modal.Title>Confirm Delivery</Modal.Title>
               </Modal.Header>
-              <Modal.Body>Are you sure you want to confirm this order?</Modal.Body>
+              <Modal.Body>Are you sure you want to confirm this delivery?</Modal.Body>
               <Modal.Footer>
                 <Button variant='success'
                         onClick={handleClose}
@@ -212,9 +212,9 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
                    onHide={handleClose}
                    orderId={orderId}>
               <Modal.Header closeButton>
-                <Modal.Title>Reject Order</Modal.Title>
+                <Modal.Title>Reject Delivery</Modal.Title>
               </Modal.Header>
-              <Modal.Body>Are you sure you want to reject this order?</Modal.Body>
+              <Modal.Body>Are you sure you want to reject this delivery?</Modal.Body>
               <Modal.Footer>
                 <Button variant='success'
                         onClick={handleClose}
@@ -261,7 +261,7 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Order ID
+                Order Id
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -303,7 +303,6 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
               }}>
                 Invoice Amount
               </th>
-
               <th style={{
                 borderBottom: 'solid darkblue 1px',
                 borderTop: 'solid darkblue 1px',
@@ -312,7 +311,7 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Created Date
+                Invoice Id
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -323,6 +322,16 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
                 color: 'white'
               }}>
                 Requested Date
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Required Date
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -394,12 +403,17 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.purchaseDate}
+                        {order.invoiceId}
                       </td>
                       <td style={{
                         textAlign: 'center'
                       }}>
                         {order.requestedDate}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.requiredDate}
                       </td>
                       <td style={{
                         textAlign: 'center'

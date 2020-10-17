@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import { useSelector } from 'react-redux';
-import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
+import { Col, Row, Table } from 'react-bootstrap';
 import { proxy } from '../../conf';
 import routes from '../../constants/routes.json';
 import NavBar from '../../components/NavBar/NavBar';
@@ -15,16 +15,10 @@ const DeliveryRejectedOrdersList: React.FC = () => {
   );
 
   const [renderRedirectToLogin, setRenderRedirectToLogin] = useState<boolean | null>(false);
-
-  const [loading, setLoading] = useState<boolean>(false);
-  const [showApproved, setShowApproved] = useState<boolean>(false);
-  const [showRejected, setShowRejected] = useState<boolean>(false);
-  const [orderId, setOrderId] = useState<string>('');
   const [orders, setOrdersList] = useState<any>([]);
 
   const getOrders = async () => {
     try {
-      setLoading(true);
       const response = await fetch(`${proxy}/orderLists/getDeliveryRejectedDManager`, {
         method: 'GET',
         headers: {
@@ -33,9 +27,7 @@ const DeliveryRejectedOrdersList: React.FC = () => {
       });
       const responseData = await response.json();
       setOrdersList(responseData);
-      setLoading(false);
     } catch (errors) {
-      setLoading(false);
       console.log(errors);
     }
   };
@@ -47,57 +39,6 @@ const DeliveryRejectedOrdersList: React.FC = () => {
       setRenderRedirectToLogin(true);
     }
   }, [orders, login]);
-
-  const handleApproved = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${proxy}/order/editOrderStatus`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          orderId: orderId,
-          status: 'deliveryConfirmed'
-        })
-      });
-      await response.json();
-      setLoading(false);
-    } catch (errors) {
-      setLoading(false);
-      console.log(errors);
-    }
-    setShowApproved(false);
-  };
-
-  const handleRejected = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${proxy}/order/editOrderStatus`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          orderId: orderId,
-          status: 'deliveryRejected'
-        })
-      });
-      await response.json();
-      setLoading(false);
-    } catch (errors) {
-      setLoading(false);
-      console.log(errors);
-    }
-    setShowRejected(false);
-  };
-
-  const handleClose = () => {
-    setLoading(true);
-    setShowApproved(false);
-    setShowRejected(false);
-    setLoading(false);
-  };
 
   const renderRedirectLogin = () => {
     if (renderRedirectToLogin) {
@@ -128,72 +69,6 @@ const DeliveryRejectedOrdersList: React.FC = () => {
           <div style={{
             marginTop: '4%'
           }}>
-            <Modal show={showApproved}
-                   onHide={handleClose}
-                   orderId={orderId}>
-              <Modal.Header closeButton>
-                <Modal.Title>Confirm Delivery</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>Are you sure you want to confirm this order?</Modal.Body>
-              <Modal.Footer>
-                <Button variant='success'
-                        onClick={handleClose}
-                        style={{
-                          textTransform: 'uppercase'
-                        }}>
-                  No
-                </Button>
-                <Button variant='primary'
-                        onClick={handleApproved}
-                        style={{
-                          textTransform: 'uppercase'
-                        }}>
-                  Yes
-                </Button>
-              </Modal.Footer>
-              {
-                loading && (
-                  <Spinner animation='border'
-                           style={{
-                             textAlign: 'center',
-                             marginLeft: '50%'
-                           }} />
-                )
-              }
-            </Modal>
-            <Modal show={showRejected}
-                   onHide={handleClose}
-                   orderId={orderId}>
-              <Modal.Header closeButton>
-                <Modal.Title>Reject Order</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>Are you sure you want to reject this order?</Modal.Body>
-              <Modal.Footer>
-                <Button variant='success'
-                        onClick={handleClose}
-                        style={{
-                          textTransform: 'uppercase'
-                        }}>
-                  No
-                </Button>
-                <Button variant='danger'
-                        onClick={handleRejected}
-                        style={{
-                          textTransform: 'uppercase'
-                        }}>
-                  Yes
-                </Button>
-              </Modal.Footer>
-              {
-                loading && (
-                  <Spinner animation='border'
-                           style={{
-                             textAlign: 'center',
-                             marginLeft: '50%'
-                           }} />
-                )
-              }
-            </Modal>
             <Table responsive
                    striped
                    bordered
@@ -214,7 +89,7 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Order ID
+                Order Id
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -264,7 +139,7 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Created Date
+                Requested Date
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -274,7 +149,7 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Requested Date
+                Required Date
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -305,6 +180,16 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                 color: 'white'
               }}>
                 Supplier
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Reason
               </th>
               </thead>
               <tbody>
@@ -340,12 +225,12 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.purchaseDate}
+                        {order.requestedDate}
                       </td>
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.requestedDate}
+                        {order.requiredDate}
                       </td>
                       <td style={{
                         textAlign: 'center'
@@ -361,6 +246,11 @@ const DeliveryRejectedOrdersList: React.FC = () => {
                         textAlign: 'center'
                       }}>
                         {order.supplierName}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.deliveryManagerRejectedReason}
                       </td>
                     </tr>
                   );

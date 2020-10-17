@@ -128,7 +128,7 @@ const GenerateInvoice: React.FC = () => {
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
-      return <Redirect to={routes.PENDING_SUP_LIST} />;
+      return <Redirect to={routes.CONFIRMED_SUP_LIST} />;
     }
     return null;
   };

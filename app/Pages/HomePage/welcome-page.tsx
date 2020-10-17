@@ -41,7 +41,7 @@ const WelcomePage: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Welcome Page</h1>
+          <h1>Home</h1>
         </Col>
       </Row>
       <div style={{

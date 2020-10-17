@@ -305,7 +305,7 @@ const OrdersForSupplyingList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Amount
+                Estimated Amount
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',

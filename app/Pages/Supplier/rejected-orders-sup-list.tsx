@@ -97,7 +97,7 @@ const RejectedOrdersSupList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Order ID
+                Order Id
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -127,17 +127,7 @@ const RejectedOrdersSupList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Amount
-              </th>
-              <th style={{
-                borderBottom: 'solid darkblue 1px',
-                borderTop: 'solid darkblue 1px',
-                textAlign: 'center',
-                fontSize: 'large',
-                fontWeight: 'lighter',
-                color: 'white'
-              }}>
-                Created Date
+                Estimated Amount
               </th>
               <th style={{
                 borderBottom: 'solid darkblue 1px',
@@ -157,6 +147,16 @@ const RejectedOrdersSupList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
+                Required Date
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
                 Site
               </th>
               <th style={{
@@ -167,7 +167,17 @@ const RejectedOrdersSupList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Vendor Name
+                Site Manager
+              </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Reason
               </th>
               </thead>
               <tbody>
@@ -198,12 +208,12 @@ const RejectedOrdersSupList: React.FC = () => {
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.purchaseDate}
+                        {order.requestedDate}
                       </td>
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.requestedDate}
+                        {order.requiredDate}
                       </td>
                       <td style={{
                         textAlign: 'center'
@@ -214,6 +224,11 @@ const RejectedOrdersSupList: React.FC = () => {
                         textAlign: 'center'
                       }}>
                         {order.siteManager}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.supplierRejectedReason}
                       </td>
                     </tr>
                   );
