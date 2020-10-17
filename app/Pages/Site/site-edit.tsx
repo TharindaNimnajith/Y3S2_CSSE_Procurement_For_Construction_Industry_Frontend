@@ -16,6 +16,13 @@ const SitesEdit: React.FC = () => {
     }) => state.sites.sites
   );
 
+  const existingSite = useSelector(
+    (state: {
+      sites: any
+      existingSite: boolean
+    }) => state.sites.existingSite
+  );
+
   const editingSiteId = useSelector(
     (state: {
       sites: any
@@ -59,9 +66,9 @@ const SitesEdit: React.FC = () => {
   };
 
   useEffect(() => {
-    setSite(editingSite);
     getSiteManagers().then(() => {
     });
+    setSite(editingSite);
   }, [editingSite]);
 
   const handleSubmit = async (e: any) => {
@@ -231,7 +238,7 @@ const SitesEdit: React.FC = () => {
           </Form.Group>
         </Form.Row>
         {
-          setExistingSite && errors_ && (
+          existingSite && errors_ && (
             <div style={{
               color: 'red',
               fontSize: '18px',

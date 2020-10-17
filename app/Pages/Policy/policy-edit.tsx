@@ -20,6 +20,13 @@ const PoliciesEdit: React.FC = () => {
     }) => state.policies.policies
   );
 
+  const existingPolicy = useSelector(
+    (state: {
+      policies: any
+      existingPolicy: boolean
+    }) => state.policies.existingPolicy
+  );
+
   const editingPolicyId = useSelector(
     (state: {
       policies: any
@@ -213,7 +220,7 @@ const PoliciesEdit: React.FC = () => {
           </Form.Group>
         </Form.Row>
         {
-          setExistingPolicy && errors_ && (
+          existingPolicy && errors_ && (
             <div style={{
               color: 'red',
               fontSize: '18px',
