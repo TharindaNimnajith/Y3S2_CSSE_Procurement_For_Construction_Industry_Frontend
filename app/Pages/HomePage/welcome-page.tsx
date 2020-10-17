@@ -46,16 +46,7 @@ const WelcomePage: React.FC = () => {
         </Col>
       </Row>
       <div className='container'>
-        <Row>
-          <Col sm='12'
-               style={{
-                 marginTop: '115px'
-               }}>
-            <div>
-              Welcome to the system
-            </div>
-          </Col>
-        </Row>
+        Welcome
       </div>
     </div>
   );

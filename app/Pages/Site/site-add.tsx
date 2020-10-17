@@ -43,6 +43,7 @@ const SitesAdd: React.FC = () => {
       });
       const responseData = await response.json();
       await setSiteManagers(responseData);
+      console.log(responseData);
       setLoading(false);
     } catch (errors) {
       errors_ = errors;
@@ -151,10 +152,11 @@ const SitesAdd: React.FC = () => {
                           title='Please select site manager.'
                           required
                           size='lg'>
-              <option>Select</option>
+              <option>Select Option</option>
               {
-                siteManagers?.map((siteManager: any) => (
-                  <option>
+                siteManagers && siteManagers.map((siteManager: any) => (
+                  <option key={siteManager._id}
+                          value={siteManager.name}>
                     {
                       siteManager.name
                     }

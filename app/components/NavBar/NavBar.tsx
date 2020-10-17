@@ -198,6 +198,11 @@ const NavBar: React.FC = () => {
                   Payments Management
                 </Nav.Link>
               </NavLink>
+              <NavLink to={routes.INVENTORY}>
+                <Nav.Link href='#inventory'>
+                  Inventories
+                </Nav.Link>
+              </NavLink>
               <Nav.Link onClick={handleLogout}>
                 Sign Out
               </Nav.Link>
@@ -344,6 +349,11 @@ const NavBar: React.FC = () => {
               <NavLink to={routes.PAYMENT_LIST}>
                 <Nav.Link href='#paymentList'>
                   Payments Management
+                </Nav.Link>
+              </NavLink>
+              <NavLink to={routes.INVENTORY}>
+                <Nav.Link href='#inventory'>
+                  Inventories
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.NEW_USERS}>

@@ -59,7 +59,7 @@ const PoliciesPage: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Manage Policies</h1>
+          <h1>Policy Management</h1>
         </Col>
       </Row>
       <div>

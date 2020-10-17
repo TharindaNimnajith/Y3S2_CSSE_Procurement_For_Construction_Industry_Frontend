@@ -1,7 +1,6 @@
 {
   "HOME": "/",
   "COUNTER": "/counter",
-  "HOMEPAGE": "/home",
   "INVENTORY": "/inventory",
   "PURCHASE_ORDERS_FOR_APPROVING": "/purchase_orders_for_approving",
   "PENDING_DM_LIST": "/pendingDM",

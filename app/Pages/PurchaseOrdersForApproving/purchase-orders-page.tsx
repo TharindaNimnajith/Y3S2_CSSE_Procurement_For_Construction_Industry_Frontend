@@ -61,7 +61,7 @@ const PurchaseOrdersPage: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Purchased Orders</h1>
+          <h1>Purchase Orders</h1>
         </Col>
       </Row>
       <div className='container'>

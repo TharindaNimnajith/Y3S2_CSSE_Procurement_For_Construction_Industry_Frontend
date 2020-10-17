@@ -118,7 +118,7 @@ const PoliciesAdd: React.FC = () => {
                           title='Please select the payment method.'
                           required
                           size='lg'>
-              <option>Select</option>
+              <option>Select Option</option>
               {
                 methodList?.map((method) => (
                   <option>
