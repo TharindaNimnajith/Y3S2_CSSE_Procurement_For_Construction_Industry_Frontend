@@ -159,7 +159,7 @@ const NewUserAdd: React.FC = () => {
             <Form.Control type="text"
                           value={user.name}
                           onChange={handleChangeName}
-                          placeholder='Enter Your Name'
+                          placeholder='Enter Name'
                           title='Please enter a valid name.'
                           required
                           size='lg' />
@@ -171,7 +171,7 @@ const NewUserAdd: React.FC = () => {
             <Form.Control type="text"
                           value={user.address}
                           onChange={handleChangeAddress}
-                          placeholder='Enter Your Address'
+                          placeholder='Enter Address'
                           title='Please enter a valid address.'
                           required
                           size='lg' />
@@ -183,7 +183,7 @@ const NewUserAdd: React.FC = () => {
             <Form.Control type="email"
                           value={user.email}
                           onChange={handleChangeEmail}
-                          placeholder='Enter Your Email'
+                          placeholder='Enter Email'
                           title='Please enter a valid email.'
                           required
                           size='lg' />
@@ -195,7 +195,7 @@ const NewUserAdd: React.FC = () => {
             <Form.Control type="password"
                           value={user.password}
                           onChange={handleChangePassword}
-                          placeholder='Enter Your Password'
+                          placeholder='Enter Password'
                           title='Please enter a valid password.'
                           required
                           size='lg' />
@@ -203,17 +203,23 @@ const NewUserAdd: React.FC = () => {
         </Form.Row>
         <Form.Row>
           <Form.Group controlId='formRoomName'>
-            <Form.Label>User Category</Form.Label>
+            <Form.Label>User Type</Form.Label>
             <Form.Control as='select'
                           value={user.type}
                           onChange={handleChangeType}
                           title='Please select the type.'
                           required
                           size='lg'>
-              <option>Select</option>
-              {usersList?.map((user) => (
-                <option>{user}</option>
-              ))}
+              <option>Select Option</option>
+              {
+                usersList?.map((user) => (
+                  <option>
+                    {
+                      user
+                    }
+                  </option>
+                ))
+              }
             </Form.Control>
           </Form.Group>
         </Form.Row>
