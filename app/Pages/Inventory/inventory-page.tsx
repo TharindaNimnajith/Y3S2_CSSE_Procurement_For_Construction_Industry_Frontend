@@ -43,7 +43,7 @@ const InventoryPage: React.FC = () => {
                backgroundColor: '#343a40',
                color: '#fff'
              }}>
-          <h1>Stock</h1>
+          <h1>Inventories</h1>
         </Col>
       </Row>
       <div className='container'>

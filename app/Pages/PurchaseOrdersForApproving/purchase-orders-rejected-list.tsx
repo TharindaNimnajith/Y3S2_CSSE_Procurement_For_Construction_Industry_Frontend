@@ -129,16 +129,6 @@ const PurchaseOrdersRejectedList: React.FC = () => {
                 fontWeight: 'lighter',
                 color: 'white'
               }}>
-                Created Date
-              </th>
-              <th style={{
-                borderBottom: 'solid darkblue 1px',
-                borderTop: 'solid darkblue 1px',
-                textAlign: 'center',
-                fontSize: 'large',
-                fontWeight: 'lighter',
-                color: 'white'
-              }}>
                 Requested Date
               </th>
               <th style={{
@@ -171,6 +161,16 @@ const PurchaseOrdersRejectedList: React.FC = () => {
               }}>
                 Supplier
               </th>
+              <th style={{
+                borderBottom: 'solid darkblue 1px',
+                borderTop: 'solid darkblue 1px',
+                textAlign: 'center',
+                fontSize: 'large',
+                fontWeight: 'lighter',
+                color: 'white'
+              }}>
+                Reason
+              </th>
               </thead>
               <tbody>
               {
@@ -200,11 +200,6 @@ const PurchaseOrdersRejectedList: React.FC = () => {
                       <td style={{
                         textAlign: 'center'
                       }}>
-                        {order.purchaseDate}
-                      </td>
-                      <td style={{
-                        textAlign: 'center'
-                      }}>
                         {order.requestedDate}
                       </td>
                       <td style={{
@@ -221,6 +216,11 @@ const PurchaseOrdersRejectedList: React.FC = () => {
                         textAlign: 'center'
                       }}>
                         {order.supplierName}
+                      </td>
+                      <td style={{
+                        textAlign: 'center'
+                      }}>
+                        {order.procurementStaffRejectedReason}
                       </td>
                     </tr>
                   );
