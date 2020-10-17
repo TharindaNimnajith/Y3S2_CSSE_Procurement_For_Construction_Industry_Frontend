@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Spinner, Table } from 'react-bootstrap';
+import { Button, Form, Modal, Spinner, Table } from 'react-bootstrap';
 import { FaBan, FaCheck } from 'react-icons/fa';
 import { proxy } from '../../conf';
 
@@ -8,6 +8,7 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
   const [showApproved, setShowApproved] = useState<boolean>(false);
   const [showRejected, setShowRejected] = useState<boolean>(false);
   const [orderId, setOrderId] = useState<string>('');
+  const [reason, setReason] = useState<string>('');
   const [orders, setOrdersList] = useState<any>([]);
 
   const getOrders = async () => {
@@ -58,14 +59,15 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
   const handleRejected = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${proxy}/order/editOrderStatus`, {
-        method: 'PUT',
+      const response = await fetch(`${proxy}/order/editOrderRejectReasonPS`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           orderId: orderId,
-          status: 'pRejected'
+          status: 'pRejected',
+          reason: reason
         })
       });
       await response.json();
@@ -95,6 +97,12 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
     setLoading(true);
     setOrderId(orderId);
     setShowRejected(true);
+    setLoading(false);
+  };
+
+  const handleChangeReason = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(true);
+    setReason(e.target.value);
     setLoading(false);
   };
 
@@ -142,7 +150,26 @@ const PurchaseOrdersForApprovingList: React.FC = () => {
           <Modal.Header closeButton>
             <Modal.Title>Reject Order</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Are you sure you want to reject this order?</Modal.Body>
+          <Modal.Body>
+            Are you sure you want to reject this order?
+            <Form style={{
+              marginLeft: '1%'
+            }}>
+              <Form.Row style={{
+                marginTop: '3%'
+              }}>
+                <Form.Group controlId='formSessionId'>
+                  <Form.Label>Reject Reason</Form.Label>
+                  <Form.Control type='text'
+                                value={reason}
+                                onChange={handleChangeReason}
+                                title='Please select the room.'
+                                required
+                                size='lg' />
+                </Form.Group>
+              </Form.Row>
+            </Form>
+          </Modal.Body>
           <Modal.Footer>
             <Button variant='success'
                     onClick={handleClose}

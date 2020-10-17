@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Col, Modal, Row, Spinner, Table } from 'react-bootstrap';
+import { Button, Col, Form, Modal, Row, Spinner, Table } from 'react-bootstrap';
 import { FaBan, FaCheck } from 'react-icons/fa';
 import { proxy } from '../../conf';
 import routes from '../../constants/routes.json';
@@ -26,6 +26,7 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
   const [id, setId] = useState<string>('');
   const [order, setOrder] = useState({});
   const [orders, setOrdersList] = useState<any>([]);
+  const [reason, setReason] = useState<string>('');
   const [renderRedirectTo, setRenderRedirectTo] = useState<boolean | null>(false);
   const [renderRedirectTo1, setRenderRedirectTo1] = useState<boolean | null>(false);
 
@@ -85,14 +86,15 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
   const handleRejected = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${proxy}/order/editOrderStatus`, {
-        method: 'PUT',
+      const response = await fetch(`${proxy}/order/editOrderRejectReasonDM`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           orderId: orderId,
-          status: 'deliveryRejected'
+          status: 'deliveryRejected',
+          reason: reason
         })
       });
       await response.json();
@@ -127,6 +129,12 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
     setShowRejected(true);
     setLoading(false);
   };
+
+  const handleChangeReason = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(true)
+    setReason(e.target.value)
+    setLoading(false)
+  }
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
@@ -210,9 +218,28 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
                    onHide={handleClose}
                    orderId={orderId}>
               <Modal.Header closeButton>
-                <Modal.Title>Reject Delivery</Modal.Title>
+                <Modal.Title>Reject Order</Modal.Title>
               </Modal.Header>
-              <Modal.Body>Are you sure you want to reject this delivery?</Modal.Body>
+              <Modal.Body>
+                Are you sure you want to reject this order?
+                <Form style={{
+                  marginLeft: '1%'
+                }}>
+                  <Form.Row style={{
+                    marginTop: '3%'
+                  }}>
+                    <Form.Group controlId='formSessionId'>
+                      <Form.Label>Reject Reason</Form.Label>
+                      <Form.Control type='text'
+                                    value={reason}
+                                    onChange={handleChangeReason}
+                                    title='Please select the room.'
+                                    required
+                                    size='lg' />
+                    </Form.Group>
+                  </Form.Row>
+                </Form>
+              </Modal.Body>
               <Modal.Footer>
                 <Button variant='success'
                         onClick={handleClose}
