@@ -131,10 +131,10 @@ const OrdersForDeliveryConfirmedList: React.FC = () => {
   };
 
   const handleChangeReason = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    setReason(e.target.value)
-    setLoading(false)
-  }
+    setLoading(true);
+    setReason(e.target.value);
+    setLoading(false);
+  };
 
   const renderRedirect = () => {
     if (renderRedirectTo) {
