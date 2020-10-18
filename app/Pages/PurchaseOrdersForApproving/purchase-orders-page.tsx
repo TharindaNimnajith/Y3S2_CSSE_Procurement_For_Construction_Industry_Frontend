@@ -98,6 +98,16 @@ const PurchaseOrdersPage: React.FC = () => {
             fontWeight: 'lighter',
             color: 'white'
           }}>
+            Item Id
+          </th>
+          <th style={{
+            borderBottom: 'solid darkblue 1px',
+            borderTop: 'solid darkblue 1px',
+            textAlign: 'center',
+            fontSize: 'large',
+            fontWeight: 'lighter',
+            color: 'white'
+          }}>
             Item Name
           </th>
           <th style={{
@@ -284,6 +294,11 @@ const PurchaseOrdersPage: React.FC = () => {
                   <td style={{
                     textAlign: 'center'
                   }}>
+                    {order.itemId}
+                  </td>
+                  <td style={{
+                    textAlign: 'center'
+                  }}>
                     {order.itemName}
                   </td>
                   {
@@ -430,12 +445,14 @@ const PurchaseOrdersPage: React.FC = () => {
                       }}>
                         Site Manager
                       </td>
-                    ) : (
+                    ) : order.status === 'pApproved' ? (
                       <td style={{
                         textAlign: 'center'
                       }}>
                         Procurement Staff
                       </td>
+                    ) : (
+                      <td/>
                     )
                   }
                   <td style={{
