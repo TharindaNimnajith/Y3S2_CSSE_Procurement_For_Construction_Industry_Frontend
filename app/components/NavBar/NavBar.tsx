@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Nav, Navbar } from 'react-bootstrap';
+import {NavLink} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {Nav, Navbar} from 'react-bootstrap';
 import routes from '../../constants/routes.json';
-import { setLogin, setUserName, setUserType } from '../../Pages/LoginSignup/user-slice';
+import {setLogin, setUserName, setUserType} from '../../Pages/LoginSignup/user-slice';
 
 const NavBar: React.FC = () => {
   const dispatch = useDispatch();
@@ -46,13 +46,13 @@ const NavBar: React.FC = () => {
                   zIndex: 2,
                   top: '7px'
                 }}>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='mr-auto float-left'
                  style={{
                    height: '100vh'
                  }}>
-              <br />
+              <br/>
               <NavLink to={routes.HOME_PAGE}>
                 <Nav.Link href='#home'>
                   Home
@@ -76,21 +76,21 @@ const NavBar: React.FC = () => {
                   zIndex: 2,
                   top: '7px'
                 }}>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='mr-auto float-left'
                  style={{
                    height: '100vh'
                  }}>
-              <br />
+              <br/>
               <NavLink to={routes.HOME_PAGE}>
                 <Nav.Link href='#home'>
                   Home
                 </Nav.Link>
               </NavLink>
-              <NavLink to={routes.INVENTORIES}>
-                <Nav.Link href='#inventorys'>
-                  Inventory Management
+              <NavLink to={routes.INVENTORY}>
+                <Nav.Link href='#inventory'>
+                  Inventories
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.PURCHASE_ORDERS_FOR_APPROVING}>
@@ -126,13 +126,13 @@ const NavBar: React.FC = () => {
                   zIndex: 2,
                   top: '7px'
                 }}>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='mr-auto float-left'
                  style={{
                    height: '100vh'
                  }}>
-              <br />
+              <br/>
               <NavLink to={routes.HOME_PAGE}>
                 <Nav.Link href='#home'>
                   Home
@@ -181,13 +181,13 @@ const NavBar: React.FC = () => {
                   zIndex: 2,
                   top: '7px'
                 }}>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='mr-auto float-left'
                  style={{
                    height: '100vh'
                  }}>
-              <br />
+              <br/>
               <NavLink to={routes.HOME_PAGE}>
                 <Nav.Link href='#home'>
                   Home
@@ -236,13 +236,13 @@ const NavBar: React.FC = () => {
                   zIndex: 2,
                   top: '7px'
                 }}>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='mr-auto float-left'
                  style={{
                    height: '100vh'
                  }}>
-              <br />
+              <br/>
               <NavLink to={routes.HOME_PAGE}>
                 <Nav.Link href='#home'>
                   Home
@@ -263,14 +263,14 @@ const NavBar: React.FC = () => {
                   Policy Management
                 </Nav.Link>
               </NavLink>
+              <NavLink to={routes.INVENTORIES}>
+                <Nav.Link href='#inventorys'>
+                  Inventory Management
+                </Nav.Link>
+              </NavLink>
               <NavLink to={routes.PAYMENT_LIST}>
                 <Nav.Link href='#paymentList'>
                   Payments
-                </Nav.Link>
-              </NavLink>
-              <NavLink to={routes.INVENTORY}>
-                <Nav.Link href='#inventory'>
-                  Inventories
                 </Nav.Link>
               </NavLink>
               <NavLink to={routes.ORDER}>
@@ -296,13 +296,13 @@ const NavBar: React.FC = () => {
                   zIndex: 2,
                   top: '7px'
                 }}>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='mr-auto float-left'
                  style={{
                    height: '130vh'
                  }}>
-              <br />
+              <br/>
               <NavLink to={routes.HOME_PAGE}>
                 <Nav.Link href='#home'>
                   Home
@@ -464,13 +464,13 @@ const NavBar: React.FC = () => {
                 zIndex: 2,
                 top: '7px'
               }}>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='mr-auto float-left'
                style={{
                  height: '100vh'
                }}>
-            <br />
+            <br/>
             <NavLink to={routes.USER}>
               <Nav.Link href='#users'>
                 Sign In
